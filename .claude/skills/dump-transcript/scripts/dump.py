@@ -1,6 +1,10 @@
 """Render a Claude Code session transcript (.jsonl) to Markdown in transcripts/.
 
-Usage: dump.py SESSION_ID [TITLE]
+Usage: dump.py SESSION_ID [--keep-prompt] [TITLE]
+
+By default the take-home prompt is redacted: tool results that read it are
+replaced, and any verbatim run of PROMPT_NGRAM words from it is scrubbed
+wherever it appears. --keep-prompt disables this.
 """
 
 import json
@@ -10,6 +14,7 @@ import subprocess
 import sys
 
 REPO = pathlib.Path(__file__).resolve().parents[4]
+SKILL_DIR = pathlib.Path(__file__).resolve().parents[1]
 PROJECT_DIR = pathlib.Path.home() / ".claude/projects" / re.sub(r"[^A-Za-z0-9]", "-", str(REPO))
 OUT_DIR = REPO / "transcripts"
 MAX_RESULT_CHARS = 2000
@@ -18,7 +23,17 @@ EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
 ALLOWED_EMAILS = {"noreply@anthropic.com"}
 IDENTIFIER_KEYS = ("ownerAccountUuid", "ownerOrganizationUuid", "bridgeSessionId")
 # Gitignored, one value per line: identifiers that aren't in the session log or git config.
-DENYLIST = pathlib.Path(__file__).resolve().parents[1] / "redact.local"
+DENYLIST = SKILL_DIR / "redact.local"
+
+# A tool call whose input mentions this string is treated as reading the prompt.
+PROMPT_MARKER = "take-home.md"
+# Gitignored copy of the prompt, for sessions that quote it without reading it.
+PROMPT_FILE = SKILL_DIR / "prompt.local"
+PROMPT_NGRAM = 10
+# Word tokens, skipping JSON escape sequences so quoted text matches inside tool args.
+WORD = re.compile(r"\\[nrt\"\\/]|[A-Za-z0-9]+")
+PROMPT_RESULT = "[take-home prompt redacted]"
+PROMPT_EXCERPT = "[prompt excerpt redacted]"
 
 
 def sensitive_values(records) -> list[str]:
@@ -53,6 +68,71 @@ def redact(text: str, values: list[str]) -> str:
     return text.replace(str(pathlib.Path.home()), "~")
 
 
+def words(text: str) -> list[re.Match]:
+    return [m for m in WORD.finditer(text) if not m.group().startswith("\\")]
+
+
+def ngrams(tokens: list[str]) -> set[tuple[str, ...]]:
+    return {tuple(tokens[i : i + PROMPT_NGRAM]) for i in range(len(tokens) - PROMPT_NGRAM + 1)}
+
+
+def reads_prompt(tool_input: dict) -> bool:
+    """True when a path-like input names the prompt file; mentions inside commands or file bodies don't count."""
+    return any(isinstance(v, str) and v.rstrip().endswith(PROMPT_MARKER) for v in tool_input.values())
+
+
+def prompt_reads(records) -> tuple[set[str], list[str]]:
+    """Return tool_use ids that read the prompt, and the prompt text they returned."""
+    ids = {
+        b["id"]
+        for rec in records
+        if rec.get("type") == "assistant" and isinstance(rec["message"]["content"], list)
+        for b in rec["message"]["content"]
+        if b["type"] == "tool_use" and reads_prompt(b["input"])
+    }
+    texts = [
+        document_body(result_text(b.get("content", "")))
+        for rec in records
+        if rec.get("type") == "user" and isinstance(rec["message"]["content"], list)
+        for b in rec["message"]["content"]
+        if b["type"] == "tool_result" and b.get("tool_use_id") in ids
+    ]
+    return ids, texts
+
+
+def document_body(raw: str) -> str:
+    """Unwrap JSON read results (e.g. a vault read) to their content field, so metadata like the file path isn't treated as prompt text."""
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        return raw
+    return parsed.get("content", raw) if isinstance(parsed, dict) else raw
+
+
+def scrub_prompt(text: str, grams: set[tuple[str, ...]]) -> str:
+    """Replace every run of words that shares a PROMPT_NGRAM-word window with the prompt."""
+    matches = words(text)
+    tokens = [m.group().lower() for m in matches]
+    covered = [False] * len(tokens)
+    for i in range(len(tokens) - PROMPT_NGRAM + 1):
+        if tuple(tokens[i : i + PROMPT_NGRAM]) in grams:
+            covered[i : i + PROMPT_NGRAM] = [True] * PROMPT_NGRAM
+
+    spans, i = [], 0
+    while i < len(covered):
+        if covered[i]:
+            j = i
+            while j + 1 < len(covered) and covered[j + 1]:
+                j += 1
+            spans.append((matches[i].start(), matches[j].end()))
+            i = j + 1
+        else:
+            i += 1
+    for start, end in reversed(spans):
+        text = text[:start] + PROMPT_EXCERPT + text[end:]
+    return text
+
+
 def strip_reminders(text: str) -> str:
     return re.sub(r"<system-reminder>.*?</system-reminder>", "", text, flags=re.S).strip()
 
@@ -74,7 +154,7 @@ def result_text(content) -> str:
     return "\n".join(b.get("text", f"[{b.get('type')}]") for b in content)
 
 
-def render(records) -> tuple[str, int]:
+def render(records, hidden_results: set[str]) -> tuple[str, int]:
     out, count = [], 0
     for rec in records:
         if rec.get("type") not in ("user", "assistant") or rec.get("isSidechain"):
@@ -95,17 +175,23 @@ def render(records) -> tuple[str, int]:
                 args = json.dumps(b["input"], indent=2, ensure_ascii=False)
                 out.append(f"**Tool call — `{b['name']}`**\n\n{fence(args, 'json')}")
             elif kind == "tool_result":
-                text = strip_reminders(result_text(b.get("content", "")))
+                if b.get("tool_use_id") in hidden_results:
+                    text = PROMPT_RESULT
+                else:
+                    text = truncate(strip_reminders(result_text(b.get("content", ""))))
                 label = "Tool error" if b.get("is_error") else "Tool result"
-                out.append(f"<details><summary>{label}</summary>\n\n{fence(truncate(text))}\n\n</details>")
+                out.append(f"<details><summary>{label}</summary>\n\n{fence(text)}\n\n</details>")
             # thinking blocks are redacted in the log; skip them.
     return "\n\n".join(out), count
 
 
 def main() -> None:
-    if len(sys.argv) < 2 or not sys.argv[1]:
-        sys.exit("usage: dump.py SESSION_ID [TITLE]")
-    session_id, title = sys.argv[1], " ".join(sys.argv[2:]).strip()
+    args = sys.argv[1:]
+    keep_prompt = "--keep-prompt" in args
+    args = [a for a in args if a != "--keep-prompt"]
+    if not args or not args[0]:
+        sys.exit("usage: dump.py SESSION_ID [--keep-prompt] [TITLE]")
+    session_id, title = args[0], " ".join(args[1:]).strip()
 
     src = PROJECT_DIR / f"{session_id}.jsonl"
     if not src.exists():
@@ -115,21 +201,32 @@ def main() -> None:
     stamps = [r["timestamp"] for r in records if "timestamp" in r]
     date = stamps[0][:10] if stamps else "undated"
 
-    body, count = render(records)
+    hidden, grams = set(), set()
+    if not keep_prompt:
+        hidden, prompt_texts = prompt_reads(records)
+        if PROMPT_FILE.exists():
+            prompt_texts.append(PROMPT_FILE.read_text())
+        for text in prompt_texts:
+            grams |= ngrams([m.group().lower() for m in words(text)])
+
+    body, count = render(records, hidden)
     heading = title or f"Session {session_id[:8]}"
     header = f"# {heading}\n\n- Session: `{session_id}`\n- Started: {stamps[0] if stamps else 'unknown'}\n- Last activity: {stamps[-1] if stamps else 'unknown'}\n"
 
     values = sensitive_values(records)
-    output = redact(f"{header}\n{body}\n", values)
+    output = redact(scrub_prompt(f"{header}\n{body}\n", grams), values)
 
     leaks = [v for v in values if v in output]
     if leaks:
         sys.exit(f"refusing to write: {len(leaks)} identifier(s) survived redaction")
+    if grams and ngrams([m.group().lower() for m in words(output)]) & grams:
+        sys.exit("refusing to write: take-home prompt text survived redaction")
 
     OUT_DIR.mkdir(exist_ok=True)
     dest = OUT_DIR / f"{date}-{session_id[:8]}.md"
     dest.write_text(output)
-    print(f"wrote {dest.relative_to(REPO)} ({count} messages, {len(values)} identifiers scrubbed)")
+    prompt_note = "prompt kept" if keep_prompt else f"{len(hidden)} prompt read(s) redacted"
+    print(f"wrote {dest.relative_to(REPO)} ({count} messages, {len(values)} identifiers scrubbed, {prompt_note})")
 
 
 if __name__ == "__main__":

@@ -11,4 +11,4 @@ Run:
 python3 .claude/skills/dump-transcript/scripts/dump.py ${CLAUDE_SESSION_ID} $ARGUMENTS
 ```
 
-The script renders the session to `transcripts/<date>-<session-id-prefix>.md`, overwriting any earlier dump of the same session. Report the output path and message count it prints. Do not commit unless asked.
+The script renders the session to `transcripts/<date>-<session-id-prefix>.md`, overwriting any earlier dump of the same session. The take-home prompt is redacted by default; pass `--keep-prompt` in the arguments to include it. Report the output path and counts it prints. Do not commit unless asked.
