@@ -1,0 +1,142 @@
+{
+  "task_id": "T-023",
+  "task": "set connector tool policies for members",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "label": "Enable the Microsoft 365 connector's write actions for the organization (Entra consent, then connector configuration)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Approve the write permission set in Entra, then turn write actions on in the connector configuration",
+          "actor": "admin",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "the Microsoft 365 connector is already added for the organization",
+            "the tenant's existing consent covers only read permissions",
+            "Microsoft Entra Global Administrator or Application Administrator role for the consent stage"
+          ],
+          "steps": [
+            "Stage 1 (Entra admin center, one-time per tenant): open Enterprise applications",
+            "Approve the updated permission set covering mail, calendar, mailbox settings, and file writes",
+            "Stage 2: open the Microsoft 365 connector configuration",
+            "Turn write actions on for all users",
+            "Alternatively, enable write actions only for specific users with role-based access control (beta)"
+          ],
+          "sources": [
+            {
+              "unit_id": "connectors--microsoft--365",
+              "anchor": "## Write actions"
+            },
+            {
+              "unit_id": "connectors--microsoft--365",
+              "anchor": "## Write actions"
+            }
+          ],
+          "notes": "Two extraction records merged as sequential stages of one path: the page says write actions are controlled in exactly these two places. Read and search tools work the same whether or not write actions are enabled. The page does not name where the connector configuration screen lives."
+        }
+      ]
+    },
+    {
+      "family_id": "P2",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "label": "Set the managedMcpServers entry's scope list (and toolPolicy) for the local Microsoft 365 connector",
+      "variants": [
+        {
+          "variant_id": "P2a",
+          "label": "List the exact delegated Graph scopes in the entry's scope field and keep the Entra app registration consent in sync",
+          "actor": "admin",
+          "products": [
+            "claude-desktop-3p"
+          ],
+          "preconditions": [
+            "an existing Microsoft 365 managedMcpServers entry for the local connector",
+            "every scope listed must also be consented on the app registration from step 1",
+            "write tools need Claude Desktop 1.19367.0 or later; Teams write tools 1.24012.0 or later"
+          ],
+          "steps": [
+            "List the delegated scopes you want in the entry's scope field; with no scope field the connector requests the standard read set",
+            "Narrow the read surface, or add any of the six optional read scopes, to change which read and search tools appear",
+            "Add the desired write scopes (Mail.Send, Mail.ReadWrite, Calendars.ReadWrite, Files.ReadWrite.All, MailboxSettings.ReadWrite, ChatMessage.Send, ChannelMessage.Send, Chat.Create) to expose a matching subset of write tools",
+            "Consent the same list on the app registration in Entra and keep the two lists in sync",
+            "Optionally set per-tool approval with toolPolicy, noting that allow resolves to ask for the send tools",
+            "Sign in again so the connector requests the new set"
+          ],
+          "sources": [
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part03",
+              "anchor": "### Configure scopes"
+            },
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part03",
+              "anchor": "### Grant write scopes"
+            }
+          ],
+          "notes": "Two extraction records merged: both edit the same scope field of the same entry (one narrowing or extending reads, one adding writes) and the write section says to do it 'the same as any other scope', so a reader follows one path. User.Read and offline_access are always included; an unrecognized scope name rejects the whole entry at configuration load and the connector does not appear. Narrowing scope does not revoke tokens already consented; that needs consent removal in Entra."
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "surface-differs",
+        "mechanism-differs",
+        "steps-differ"
+      ],
+      "note": "Admin flips a coarse read/write split in a UI (after one-time Entra consent); no per-tool selection beyond per-user RBAC."
+    },
+    "claude-desktop-3p": {
+      "status": "documented",
+      "variants": [
+        "P2a"
+      ],
+      "diff": [
+        "surface-differs",
+        "mechanism-differs",
+        "steps-differ",
+        "precondition-differs"
+      ],
+      "note": "Policy is set in the managed configuration file at scope granularity, with per-tool toolPolicy on top; gated on Claude Desktop versions and on matching Entra app-registration consent."
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "connectors--microsoft--365 ## Write actions (plus surrounding text from '### Phase 1: Administrator setup' through '## Permissions')",
+    "third-party--claude-desktop--connectors-m365--part03 ### Configure scopes",
+    "third-party--claude-desktop--connectors-m365--part03 ### Grant write scopes"
+  ],
+  "summary": "Only the Microsoft 365 connector documents tool policy: an admin write-actions toggle on claude, managed-config scope and toolPolicy lists on third-party Desktop.",
+  "open_questions": [
+    "P1a's Entra consent stage overlaps T-019 (set up the Microsoft 365 connector), whose outcome also covers tenant consent. Kept here because the text frames it as changing which tools members can invoke on an already-added connector rather than as initial setup, but a reviewer may prefer T-019.",
+    "connectors--microsoft--365 never says where the 'Microsoft 365 connector configuration' screen lives, so P1a's surface (admin-settings) is inferred from the actor and the 'Organization settings > Connectors' path used earlier on the same page.",
+    "The same page's Phase 1 step 5, 'Restrict user access or revoke specific permission scopes', reads like a third T-023 path but carries no steps and produced no record; unresolved whether it is a distinct family.",
+    "No records for claude-web, claude-desktop, claude-gov, claude-tag, or cowork; the corpus does not say whether tool policies are merely undocumented there or unsupported."
+  ]
+}

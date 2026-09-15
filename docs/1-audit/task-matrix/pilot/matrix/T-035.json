@@ -1,0 +1,96 @@
+{
+  "task_id": "T-035",
+  "task": "configure an installed plugin's components",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "label": "Open the installed plugin under Customize > Plugins and toggle its components",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Open the installed plugin, review its components, turn them on or off (Cowork mode in the Cowork guide)",
+          "actor": [
+            "end-user"
+          ],
+          "products": [
+            "claude",
+            "claude-gov"
+          ],
+          "preconditions": [
+            "the plugin is already installed"
+          ],
+          "steps": [
+            "Open Customize in the sidebar, then Plugins",
+            "Open the installed plugin to see the components it provides (skills, connectors/slash commands, agents or sub-agents, hooks)",
+            "Enable or disable individual components as needed"
+          ],
+          "sources": [
+            {
+              "unit_id": "cowork--guide--plugins",
+              "anchor": "## Install a plugin"
+            },
+            {
+              "unit_id": "government--desktop--plugins",
+              "anchor": "## Manage installed plugins"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "same"
+      ],
+      "note": "Cowork mode. Skills and agents appear as tabs; connectors and hooks have their own pages. Written as the third step of the install sequence."
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "terminology-only"
+      ],
+      "note": "Components listed as skills, slash commands, sub-agents, hooks; connectors declared by a self-added plugin are never added, so there are no connector components to toggle."
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "cowork--guide--plugins ## Install a plugin",
+    "cowork--guide--plugins ## What a plugin can contain",
+    "cowork--guide--plugins ## Update and remove plugins",
+    "government--desktop--plugins ## Manage installed plugins",
+    "government--desktop--plugins ## Find and install plugins",
+    "government--desktop--plugins ## What plugins add in Claude for Government"
+  ],
+  "summary": "One click-through path: open the installed plugin under Customize > Plugins and toggle components. Documented only for claude and claude-gov.",
+  "open_questions": [
+    "Whether the differing component lists (Cowork names connectors, Government names slash commands) are wording or a real capability gap; Government omits connectors because self-added plugin connectors never load.",
+    "Neither page names the control used to toggle a component, so the final step cannot be verified at step granularity."
+  ]
+}

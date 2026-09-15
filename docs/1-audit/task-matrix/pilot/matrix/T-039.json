@@ -1,0 +1,123 @@
+{
+  "task_id": "T-039",
+  "task": "package a plugin archive",
+  "view": "builder",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "label": "Lay out .claude-plugin/plugin.json plus skills/ by hand and zip it",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Hand-assembled plugin zip for admin portal upload",
+          "actor": [
+            "admin"
+          ],
+          "products": [
+            "claude-gov"
+          ],
+          "preconditions": [
+            "a written skill folder containing SKILL.md",
+            "skill holds only text files (.md, .txt, .json, .yaml, .yml, .csv) or the portal upload is rejected"
+          ],
+          "steps": [
+            "Create .claude-plugin/plugin.json with name and version, plus a description",
+            "Place each skill folder under skills/, one folder per skill",
+            "Zip the plugin contents, or the wrapping plugin folder itself"
+          ],
+          "sources": [
+            {
+              "unit_id": "government--desktop--skills",
+              "anchor": "## Building and deploying your own skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "P2",
+      "surface": "chat",
+      "mechanism": "prompt-claude",
+      "label": "Ask Claude to assemble and zip the plugin",
+      "variants": [
+        {
+          "variant_id": "P2a",
+          "label": "Assembly in a Cowork mode task, layout pasted into the request",
+          "actor": [
+            "admin"
+          ],
+          "products": [
+            "claude-gov"
+          ],
+          "preconditions": [
+            "Cowork tasks available in your deployment",
+            "the layout and the full Plugin archive formats rules must be pasted in, since Claude Desktop in Claude for Government has no packaging skill"
+          ],
+          "steps": [
+            "Open a Cowork task",
+            "Give Claude the plugin layout",
+            "Paste in the full rules from Plugin archive formats",
+            "Ask Claude to arrange the files and produce the zip"
+          ],
+          "sources": [
+            {
+              "unit_id": "government--desktop--skills",
+              "anchor": "## Building and deploying your own skills"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": "no generic claude.ai, Claude Desktop, or Cowork page in this task's records documents packaging an archive"
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "documented",
+      "variants": [
+        "P1a",
+        "P2a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": "only product documenting the layout; adds a text-files-only rule for portal upload"
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "government--desktop--skills ## Building and deploying your own skills (whole section: Write the skill, Mind the text-only rule, Package it as a plugin, Upload it, Check it on a device)",
+    "government--desktop--skills ## Skills for administrators",
+    "government--desktop--skills ## Create and manage skills",
+    "taxonomy.yaml products (claude, claude-gov) and tasks T-035 through T-042"
+  ],
+  "summary": "Only Claude for Government documents plugin packaging: a hand-built zip, or the same layout assembled by Claude in a Cowork task.",
+  "open_questions": [
+    "Reversed the record's product override from claude back to claude-gov. The Cowork sentence sits inside the Claude for Government page and is scoped to that deployment: skills can be drafted in a Cowork task 'where those are available in your deployment', and the packaging paragraph ends 'Claude Desktop in Claude for Government does not include a packaging skill, so put the layout in your request'. Cowork here names a mode inside the Gov deployment, not a generic Claude page. If the pilot rule is that any Cowork mention means product claude regardless of host deployment, P2a moves to the claude cell and claude-gov loses only-here.",
+    "Whether generic Claude or plugin-authoring docs elsewhere in the corpus document a packaging path that was not extracted into this task; that would change claude from absent."
+  ]
+}

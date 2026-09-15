@@ -1,0 +1,79 @@
+{
+  "task_id": "T-041",
+  "task": "submit a plugin to the plugin directory",
+  "definition": "Prepare and submit a plugin for community or Anthropic Verified listing in the plugin directory.",
+  "outcome": "the plugin has been filed for directory listing with the directory terms accepted, and awaits a listing decision",
+  "view": "builder",
+  "artifact": "plugin",
+  "stage": "submit",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-041",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "outcome": "the plugin's public GitHub repo has been filed through the claude.ai in-app submission form and awaits a directory listing decision",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the plugin repo is public on GitHub; closed-source plugins are not accepted",
+        "signed in to a claude.ai Team or Enterprise organization with directory management access (Organization Owners have it by default; on Enterprise an Owner can delegate it through a custom role)",
+        "the plugin complies with the Anthropic Software Directory Terms and Policy"
+      ],
+      "steps": [
+        "Run `claude plugin validate` to check formatting and structure",
+        "Sign in to claude.ai with directory management access",
+        "Open https://claude.ai/admin-settings/directory/submissions/plugins/new",
+        "Share the GitHub link to your plugin in the submission form",
+        "Submit the form and wait for review"
+      ],
+      "evidence": {
+        "anchor": "### Before you start",
+        "quote": "requires a Team or Enterprise organization and directory management access. Organization Owners have this by default"
+      },
+      "notes": "client: claude-web; The validate step and the public-repo requirement are stated just above under '## Submitting your plugin'. Review times vary with queue volume; updates pushed to the repo after publication do not require re-submission.",
+      "_unit_id": "plugins--submit",
+      "_page": "plugins/submit.md"
+    },
+    {
+      "task_id": "T-041",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "the plugin's public GitHub repo has been filed through the Console submission form and awaits a directory listing decision",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the plugin repo is public on GitHub; closed-source plugins are not accepted",
+        "a Developer, Admin, or Owner role on a Console organization",
+        "the plugin complies with the Anthropic Software Directory Terms and Policy"
+      ],
+      "steps": [
+        "Run `claude plugin validate` to check formatting and structure",
+        "Sign up for Console at platform.claude.com if you are not part of a claude.ai Team or Enterprise organization",
+        "Open https://platform.claude.com/plugins/submit",
+        "Share the GitHub link to your plugin in the submission form",
+        "Submit the form and wait for review"
+      ],
+      "evidence": {
+        "anchor": "### Before you start",
+        "quote": "requires a Developer, Admin, or Owner role on a Console organization."
+      },
+      "notes": "Documented as the path for individual authors outside a claude.ai Team or Enterprise organization.",
+      "_unit_id": "plugins--submit",
+      "_page": "plugins/submit.md"
+    }
+  ]
+}

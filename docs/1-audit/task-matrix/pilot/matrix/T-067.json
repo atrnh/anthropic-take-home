@@ -1,0 +1,81 @@
+{
+  "task_id": "T-067",
+  "task": "allowlist external link destinations for an MCP App",
+  "view": "builder",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "label": "Allowed link URIs field in the submission portal (web-portal, click-through)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "List each owned HTTPS origin or custom URI scheme with the submission",
+          "actor": "developer",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "the connector uses the ui/open-link capability",
+            "every origin or scheme listed is owned by the submitting organization"
+          ],
+          "steps": [
+            "List with your submission every link target your server will request",
+            "Give each as an HTTPS origin such as https://example.com, listing each subdomain separately",
+            "Or give a custom URI scheme such as myapp: for deep links into a native app you own",
+            "Leave out any third-party domain or URI scheme you do not publish"
+          ],
+          "sources": [
+            {
+              "unit_id": "connectors--building--submission",
+              "anchor": "## Allowed link URIs"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "connectors--building--submission ## Allowed link URIs"
+  ],
+  "summary": "Only the generic connector submission page documents declaring link targets to suppress the external-link confirmation prompt.",
+  "open_questions": []
+}

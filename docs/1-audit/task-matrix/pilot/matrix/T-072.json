@@ -1,0 +1,78 @@
+{
+  "task_id": "T-072",
+  "task": "package a skill for distribution",
+  "view": "builder",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "label": "Zip the skill folder on disk (filesystem, edit-file)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Match the directory name to the skill name and zip the directory itself",
+          "actor": "developer",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "a skill directory with SKILL.md exists"
+          ],
+          "steps": [
+            "Ensure the directory name matches the skill's name field",
+            "Create a ZIP file containing the skill directory, not its files at the ZIP root"
+          ],
+          "sources": [
+            {
+              "unit_id": "skills--how-to",
+              "anchor": "## Packaging your skill"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "skills--how-to ## Packaging your skill"
+  ],
+  "summary": "Only the generic skill authoring guide documents zipping a skill folder, with the directory inside the ZIP root.",
+  "open_questions": []
+}

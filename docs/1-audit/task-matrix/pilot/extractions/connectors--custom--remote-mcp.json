@@ -1,0 +1,229 @@
+{
+  "unit_id": "connectors--custom--remote-mcp",
+  "page": "connectors/custom/remote-mcp.md",
+  "product_default": "claude",
+  "records": [
+    {
+      "task_id": "T-003",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "outcome": "on a Team or Enterprise plan, the owner has added the remote MCP server URL as a Custom connector in organization settings, so members can find and connect it",
+      "partial": true,
+      "stage_of": "T-003",
+      "preconditions": ["Team or Enterprise plan", "organization owner"],
+      "steps": [
+        "Navigate to Organization settings > Connectors",
+        "Select Add, then Custom",
+        "If asked for the connector type, choose Web",
+        "Enter the remote MCP server URL",
+        "Optionally configure OAuth Client ID/Secret in Advanced settings",
+        "Click Add"
+      ],
+      "evidence": {
+        "anchor": "### For Team and Enterprise plans",
+        "quote": "Select **Add**, then **Custom**. If Claude asks for the connector type, choose **Web**."
+      },
+      "notes": "Owner stage of the two-actor Team/Enterprise path; the member stage is the next record. Could alternatively be read as T-022, since no member connector is connected by this step."
+    },
+    {
+      "task_id": "T-003",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the member is authenticated to the owner-added Custom connector and can use it",
+      "partial": true,
+      "stage_of": "T-003",
+      "preconditions": ["Team or Enterprise plan", "an owner has already added the custom connector"],
+      "steps": [
+        "Go to Customize > Connectors",
+        "Find the connector with the \"Custom\" label",
+        "Click Connect to authenticate"
+      ],
+      "evidence": {
+        "anchor": "### For Team and Enterprise plans",
+        "quote": "Find the connector with \"Custom\" label"
+      },
+      "notes": "Member stage of the Team/Enterprise path."
+    },
+    {
+      "task_id": "T-003",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a remote MCP server supplied by URL is listed as a custom connector on the user's own account",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["Free, Pro, or Max plan", "the remote MCP server URL"],
+      "steps": [
+        "Navigate to Customize > Connectors",
+        "Click Add custom connector",
+        "Enter the remote MCP server URL",
+        "Optionally configure OAuth credentials",
+        "Click Add"
+      ],
+      "evidence": {
+        "anchor": "### For Free, Pro, and Max plans",
+        "quote": "Click \"Add custom connector\""
+      },
+      "notes": "A two-step version of the dialog is rolling out; its fields are described under \"The Add custom connector dialog, field by field\", which is descriptive rather than a procedure."
+    },
+    {
+      "task_id": "T-007",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "chat",
+      "mechanism": "click-through",
+      "outcome": "the chosen connectors are switched on or off for this conversation",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["the connector is already added"],
+      "steps": [
+        "Click the \"+\" button in the chat interface",
+        "Open Connectors",
+        "Enable or disable connectors for this conversation"
+      ],
+      "evidence": {
+        "anchor": "### Enabling connectors in chat",
+        "quote": "Use the \"+\" button in your chat interface to access \"Connectors,\" where you can enable/disable connectors per conversation."
+      },
+      "notes": "The security guidance restates this as turning off connectors you aren't using with the toggles in the chat \"+\" menu's Connectors item."
+    },
+    {
+      "task_id": "T-006",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the custom connector stores the fixed credential and sends it as a request header on every request to the server",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "request header authentication is in beta and available to a limited set of organizations",
+        "a custom header name must be approved by Anthropic before Claude will send it"
+      ],
+      "steps": [
+        "In the Add custom connector dialog, open Request headers",
+        "Select a header name from the list, or choose Custom header to enter a different name",
+        "Enter the header value exactly as the server expects it, including any scheme such as Bearer and its trailing space",
+        "Choose whether the header is Required",
+        "Repeat for any additional headers, up to four",
+        "Click Add"
+      ],
+      "evidence": {
+        "anchor": "### Adding a request header",
+        "quote": "In the Add custom connector dialog, open **Request headers**."
+      },
+      "notes": "The dialog section says that for an API key server you choose No sign-in and add the key under Request headers; headers may also accompany OAuth, except Authorization. Unapproved custom header names are rejected on save; approval is requested from Claude support."
+    },
+    {
+      "task_id": "T-010",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the connector's name or URL is changed, or the connector is removed from the account",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["the connector is already added"],
+      "steps": [
+        "Go to Customize > Connectors",
+        "Click Remove or select the three-dot menu",
+        "Follow the prompts"
+      ],
+      "evidence": {
+        "anchor": "## Managing connectors",
+        "quote": "Click \"Remove\" or select the three-dot menu"
+      },
+      "notes": "Authentication settings cannot be changed after adding; the text says to remove the connector and add it again with the new details, after which members must reconnect."
+    },
+    {
+      "task_id": "T-010",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "outcome": "the organization's connector has its name or URL changed, or is removed",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["Team or Enterprise owner"],
+      "steps": [
+        "Go to Admin settings > Connectors",
+        "Click Remove or select the three-dot menu",
+        "Follow the prompts"
+      ],
+      "evidence": {
+        "anchor": "## Managing connectors",
+        "quote": "(Team and Enterprise owners: **Admin settings > Connectors**)"
+      },
+      "notes": "Same steps as the member path on a different surface, per the parenthetical in step 1."
+    },
+    {
+      "task_id": "NEW",
+      "new_task": {
+        "label": "block a connector's individual tools for yourself",
+        "outcome": "a specific tool on a connected connector is set to Blocked in the user's own connector settings, so Claude can no longer invoke it",
+        "why": "T-023 covers an admin restricting tools for members and T-008 covers responding to the in-chat permission card; neither outcome covers an end user setting a tool's permission to Blocked in their own Customize > Connectors."
+      },
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the selected tool's permission is set to Blocked so Claude cannot invoke it",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["the connector is already connected"],
+      "steps": [
+        "Go to Customize > Connectors",
+        "Select the connector",
+        "Set the tool's permission to Blocked"
+      ],
+      "evidence": {
+        "anchor": "### Tool actions",
+        "quote": "Block individual tools you don't need under **Customize > Connectors** by selecting the connector and setting the tool's permission to **Blocked**"
+      },
+      "notes": "Appears as a usage-guideline bullet but states concrete navigation and a control setting."
+    },
+    {
+      "task_id": "T-012",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "a malicious MCP server has been reported to Anthropic through the Bug Bounty Program",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "Report the malicious MCP server to Anthropic's Bug Bounty Program"
+      ],
+      "evidence": {
+        "anchor": "## Reporting issues",
+        "quote": "Report malicious MCP servers to [Anthropic's Bug Bounty Program](https://www.anthropic.com/responsible-disclosure-policy)."
+      },
+      "notes": "Single-sentence procedure; the page gives no reference-ID collection step."
+    }
+  ],
+  "no_procedures": false,
+  "coverage_notes": "Nine procedures extracted: the Team/Enterprise owner and member stages and the Free/Pro/Max path for adding a custom connector by URL, chat enablement, request-header authentication, connector management on both the member and owner surfaces, per-tool blocking, and reporting a malicious server. The field-by-field dialog section, the security best-practices list, the header-value table, and the Related topics cards are descriptive or cross-references; \"Browse the Connectors Directory\" was treated as a pointer rather than a T-001 procedure."
+}

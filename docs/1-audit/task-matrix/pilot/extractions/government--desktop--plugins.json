@@ -1,0 +1,152 @@
+{
+  "unit_id": "government--desktop--plugins",
+  "page": "government/desktop/plugins.md",
+  "product_default": "claude-gov",
+  "records": [
+    {
+      "task_id": "T-070",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the user has seen which organization plugins are already installed and which ones administrators have made available; nothing is installed by these steps",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["administrators have added plugins for the organization"],
+      "steps": [
+        "Open Customize in the sidebar",
+        "Open Plugins",
+        "Review installed plugins under Organization plugins",
+        "Select Browse plugins",
+        "Open the Organization tab to see every plugin administrators made available"
+      ],
+      "evidence": {
+        "anchor": "## Find and install plugins",
+        "quote": "select **Browse plugins** and open the **Organization** tab, which lists every plugin your administrators have made available to you."
+      },
+      "notes": "Claude for Government has no public plugin marketplace; the Organization tab is the catalog."
+    },
+    {
+      "task_id": "T-033",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a plugin from a local .zip file is installed in Claude Desktop, on this device only",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["you have a plugin .zip file"],
+      "steps": [
+        "Open Customize > Plugins",
+        "Select Add plugin",
+        "Select Upload plugin",
+        "Choose the plugin's .zip file",
+        "Acknowledge the notice to install only plugins you trust"
+      ],
+      "evidence": {
+        "anchor": "## Find and install plugins",
+        "quote": "To install a plugin from a file, select **Add plugin**, then **Upload plugin**, and choose the plugin's `.zip` file."
+      },
+      "notes": "A plugin you upload is added only on the device you are using."
+    },
+    {
+      "task_id": "T-038",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "prompt-claude",
+      "outcome": "Claude has built a plugin from the user's description and the user has installed the result, on this device only",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "Open Customize > Plugins",
+        "Select Add plugin",
+        "Select Create with Claude",
+        "Describe the plugin you want",
+        "Install the plugin Claude builds"
+      ],
+      "evidence": {
+        "anchor": "## Find and install plugins",
+        "quote": "select **Add plugin**, then **Create with Claude**, and describe the plugin you want. Claude builds it for you, and you install the result."
+      },
+      "notes": "A plugin you create is added only on the device you are using."
+    },
+    {
+      "task_id": "T-034",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a marketplace of the user's own is registered from Browse plugins so its plugins can be installed, if network controls allow it to be downloaded",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["the deployment's network controls allow the marketplace to be downloaded"],
+      "steps": [
+        "Open Customize > Plugins",
+        "Select Browse plugins",
+        "Add a plugin marketplace of your own"
+      ],
+      "evidence": {
+        "anchor": "## Where plugins come from",
+        "quote": "You can also add a plugin marketplace of your own from **Browse plugins**."
+      },
+      "notes": "The page names the entry point but not the fields; steps kept to what the text states."
+    },
+    {
+      "task_id": "T-035",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the chosen components of an installed plugin are switched on or off, changing what the plugin contributes",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["the plugin is already installed"],
+      "steps": [
+        "Open an installed plugin",
+        "Review the skills, slash commands, sub-agents, and hooks it provides",
+        "Turn individual components on or off"
+      ],
+      "evidence": {
+        "anchor": "## Manage installed plugins",
+        "quote": "Open an installed plugin to see the skills, slash commands, sub-agents, and hooks it provides, and turn individual components on or off."
+      },
+      "notes": "Connectors declared by a self-added plugin are not added, and a local MCP server it declares never runs."
+    },
+    {
+      "task_id": "T-037",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the plugin is uninstalled and stays removed for the user, including ones administrators set to install automatically",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["the plugin is not one your organization requires"],
+      "steps": [
+        "Open the installed plugin",
+        "Click Uninstall"
+      ],
+      "evidence": {
+        "anchor": "## Manage installed plugins",
+        "quote": "To remove a plugin, open it and click **Uninstall**."
+      },
+      "notes": "A required plugin cannot be removed; Claude Desktop says it is required by your organization."
+    }
+  ],
+  "no_procedures": false,
+  "coverage_notes": "Six procedures extracted from the install, marketplace, and manage sections. The intro, the 'Where plugins come from' list, and 'What plugins add in Claude for Government' are concept text with no actions, apart from the one marketplace sentence."
+}

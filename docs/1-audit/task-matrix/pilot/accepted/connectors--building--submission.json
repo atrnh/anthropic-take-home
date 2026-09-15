@@ -1,0 +1,243 @@
+{
+  "unit_id": "connectors--building--submission",
+  "page": "connectors/building/submission.md",
+  "records": [
+    {
+      "task_id": "NEW",
+      "new_task": {
+        "label": "delegate directory management access",
+        "outcome": "a member who is not an Owner holds a custom role carrying the Directory or Libraries permission, so they may submit and manage directory listings",
+        "why": "No taxonomy task covers granting another member permission to submit; it is a precondition of T-058, not its outcome, since nothing is filed after the last step."
+      },
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "outcome": "a member other than an Owner can submit and manage directory listings through the custom role assigned to them",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "Enterprise plan (Team plans do not have custom roles)",
+        "performed by an organization Owner"
+      ],
+      "steps": [
+        "Open Organization settings > Roles",
+        "Create a custom role",
+        "Give it the Directory permission for directory submissions only, or the Libraries permission for broader access",
+        "Assign that role to the member"
+      ],
+      "evidence": {
+        "anchor": "## Before you start",
+        "quote": "an Owner can delegate this to other members by creating a custom role in **Organization settings > Roles**"
+      },
+      "notes": "On Team plans this stays with Owners.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-057",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the local connector carries the privacy policy disclosures the review requires, so it will not be rejected on that ground; nothing has been filed",
+      "partial": true,
+      "stage_of": "T-057",
+      "preconditions": [
+        "local connector",
+        "manifest_version 0.2+"
+      ],
+      "steps": [
+        "Add a \"Privacy Policy\" section to README.md",
+        "Add a privacy_policies array to manifest.json",
+        "Point the entries at HTTPS privacy policy URLs",
+        "Cover data collection, usage and storage, third-party sharing, retention, and contact information"
+      ],
+      "evidence": {
+        "anchor": "## Privacy policy requirements",
+        "quote": "\"Privacy Policy\" section in README.md"
+      },
+      "notes": "Missing or incomplete privacy policies result in immediate rejection.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-057",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "filesystem",
+      "mechanism": "other",
+      "outcome": "carousel screenshots and their paired prompt text meet the directory asset specifications and are ready to attach to an MCP App submission",
+      "partial": true,
+      "stage_of": "T-057",
+      "preconditions": [
+        "submitting an MCP App"
+      ],
+      "steps": [
+        "Capture three to five PNG screenshots at least 1000px wide",
+        "Crop each to the app response only, leaving out the prompt",
+        "Provide the prompt text separately for each screenshot",
+        "Optionally start from the Anthropic MCP Apps Figma community carousel template"
+      ],
+      "evidence": {
+        "anchor": "### Carousel screenshots (MCP Apps)",
+        "quote": "**Crop:** to the app response only—**do not include the prompt** in the image"
+      },
+      "notes": "Video and GIF are not accepted; no separate mobile assets are required. Mechanism is 'other' because the text does not say where the screenshots are produced.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-057",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "terminal",
+      "mechanism": "command",
+      "outcome": "the connector has been run against the pre-submission checklist and, for a plugin, validated, before anything is filed",
+      "partial": true,
+      "stage_of": "T-057",
+      "preconditions": [],
+      "steps": [
+        "Run the pre-submission checklist from the review criteria page",
+        "For plugins, run claude plugin validate",
+        "Submit only after both pass"
+      ],
+      "evidence": {
+        "anchor": "## Review process",
+        "quote": "for plugins, `claude plugin validate` before you submit"
+      },
+      "notes": "",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-067",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "the destinations declared at submission open without the \"Open external link\" confirmation prompt; other destinations still prompt",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the connector uses the ui/open-link capability",
+        "every origin or scheme listed is owned by the submitting organization"
+      ],
+      "steps": [
+        "List with your submission every link target your server will request",
+        "Give each as an HTTPS origin such as https://example.com, listing each subdomain separately",
+        "Or give a custom URI scheme such as myapp: for deep links into a native app you own",
+        "Leave out any third-party domain or URI scheme you do not publish"
+      ],
+      "evidence": {
+        "anchor": "## Allowed link URIs",
+        "quote": "provide the list of link targets your server will request. Claude uses this list to suppress the \"Open external link\" confirmation prompt for destinations you've declared."
+      },
+      "notes": "The field is optional; entries you do not own are removed during review.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-058",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "a remote MCP server, including an MCP App, has been filed through the submission portal with all seven policy acknowledgments given, and is queued for review",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a Team or Enterprise organization",
+        "directory management access: Owner, or a custom role with the Directory or Libraries permission",
+        "documentation URL, privacy policy URL, icon, and test account credentials ready",
+        "carousel screenshots if submitting an MCP App"
+      ],
+      "steps": [
+        "Open the submission portal in your organization's settings on Claude.ai",
+        "Read the Introduction step on what a directory listing does and does not do",
+        "In Connection, confirm the https:// server URL, the transport, and whether users reach the server by Universal URL, Multiple URLs, or a URL pattern",
+        "In Tools, let tools, prompts, and resources sync, and fix any tools flagged for missing titles or annotations on your server",
+        "In Listing, enter server name, tagline, description, one to five categories, documentation and privacy policy URLs, support contact, icon, and URL slug",
+        "In Use cases, describe the primary use cases, what users need before connecting, and whether the connector reads, writes, or both",
+        "In Company, give company name and website plus a primary contact for review updates",
+        "In Authentication, choose OAuth, a custom connection, or no authentication, within the limits your Connection choice imposes",
+        "In Data handling, state whether the API is your own, proxied with permission, or a third party's, and whether health data or sponsored content is involved",
+        "In Test & launch, give test-account setup and access instructions and confirm you have run every tool via MCP Inspector or as a custom connector in Claude",
+        "In Compliance, give all seven policy acknowledgments",
+        "Read through the Review step and submit"
+      ],
+      "evidence": {
+        "anchor": "### What to expect in the portal",
+        "quote": "The portal walks you through the following steps. Your progress saves automatically in your browser as you move between steps"
+      },
+      "notes": "The portal accepts remote MCP servers only; the URL slug is permanent once published.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-058",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "a desktop extension (MCPB) has been filed for directory listing through the separate submission form, without using the organization portal",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the local MCP server is packaged as an MCPB",
+        "no portal or organization access required"
+      ],
+      "steps": [
+        "Open the desktop extension submission form at clau.de/desktop-extention-submission",
+        "File the desktop extension through that form"
+      ],
+      "evidence": {
+        "anchor": "## Submit your connector",
+        "quote": "**Desktop extensions (MCPB)**: use the [desktop extension submission form](https://clau.de/desktop-extention-submission)."
+      },
+      "notes": "client: claude-desktop; Same instruction also appears under 'Before you start'.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-059",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "the developer has seen where the submission stands in review and read the reviewer's feedback, with an email escalation path",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a submission has been filed"
+      ],
+      "steps": [
+        "Open the submissions dashboard at claude.ai/admin-settings/directory/submissions",
+        "Read the submission's status and any reviewer feedback",
+        "Email mcp-review@anthropic.com for escalations"
+      ],
+      "evidence": {
+        "anchor": "## Review process",
+        "quote": "track your submission's status and read reviewer feedback in the [submissions dashboard](https://claude.ai/admin-settings/directory/submissions)"
+      },
+      "notes": "Post-publication health and usage metrics are on the Managing your listing page, not here.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "task_id": "T-044",
+  "task": "upload or import a skill",
+  "definition": "Add an existing skill to your account by uploading the file or importing it from a GitHub repository.",
+  "outcome": "a skill authored elsewhere now appears in the user's skill list in this product, from an uploaded file or a connected repository",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-044",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a skill file the user already had appears in their skill list in Claude Desktop",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a skill file the user already has"
+      ],
+      "steps": [
+        "Open Customize > Skills",
+        "Select Add skill",
+        "Choose Upload a skill",
+        "Add the skill file you have"
+      ],
+      "evidence": {
+        "anchor": "## Create and manage skills",
+        "quote": "**Upload a skill** to add a skill file you have"
+      },
+      "notes": "",
+      "_unit_id": "government--desktop--skills",
+      "_page": "government/desktop/skills.md"
+    }
+  ]
+}

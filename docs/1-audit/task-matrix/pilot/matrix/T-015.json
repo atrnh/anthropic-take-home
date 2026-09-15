@@ -1,0 +1,79 @@
+{
+  "task_id": "T-015",
+  "task": "troubleshoot a connector tool call failure",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "label": "Entra app registration and connector scope list (third-party-admin, click-through)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Add the missing Graph scope in both places and grant admin consent",
+          "actor": "admin",
+          "products": [
+            "claude-desktop-3p"
+          ],
+          "preconditions": [],
+          "steps": [
+            "For a tool permission error or Graph 403, identify the scope the tool needs",
+            "Add the scope on the app registration and in the entry's scope list",
+            "Grant admin consent for the scope",
+            "For missing or failing write tools, add the matching write scope to the entry and consent it on the app registration",
+            "Upgrade Claude Desktop if the installed version predates write support"
+          ],
+          "sources": [
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part04",
+              "anchor": "### Troubleshoot the local connector"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "third-party--claude-desktop--connectors-m365--part04 ### Troubleshoot the local connector"
+  ],
+  "summary": "Only third-party-inference Claude Desktop documents fixing M365 tool failures by adding and consenting missing Graph scopes.",
+  "open_questions": []
+}

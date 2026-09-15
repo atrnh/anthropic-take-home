@@ -1,0 +1,166 @@
+{
+  "unit_id": "cowork--guide--plugins",
+  "page": "cowork/guide/plugins.md",
+  "records": [
+    {
+      "task_id": "T-033",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a plugin chosen from a marketplace catalog is installed in Cowork, with any connector it bundles signed in to",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "Open Customize in the sidebar, then Plugins",
+        "Select Browse plugins to see available plugins",
+        "Select a plugin and click Install",
+        "Sign in if the plugin includes a connector that needs authentication"
+      ],
+      "evidence": {
+        "anchor": "## Install a plugin",
+        "quote": "Select a plugin and click **Install**. If the plugin includes a connector that needs authentication, you're prompted to sign in."
+      },
+      "notes": "mode: cowork; Default marketplace is Anthropic's official catalog.",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-033",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a plugin supplied as a package file is installed in Cowork",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a plugin package file"
+      ],
+      "steps": [
+        "Open Customize in the sidebar, then Plugins",
+        "Select the upload option on the Plugins page",
+        "Select the plugin package"
+      ],
+      "evidence": {
+        "anchor": "## Install a plugin",
+        "quote": "To install from a file instead, select the upload option on the Plugins page and select the plugin package."
+      },
+      "notes": "mode: cowork; Separate path from browsing the marketplace.",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-035",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "individual components of an installed plugin are enabled or disabled",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the plugin is already installed"
+      ],
+      "steps": [
+        "Open the installed plugin",
+        "Review its skills, connectors, agents, and hooks",
+        "Enable or disable individual components as needed"
+      ],
+      "evidence": {
+        "anchor": "## Install a plugin",
+        "quote": "Open the installed plugin to see its skills, connectors, agents, and hooks. Enable or disable individual components as needed."
+      },
+      "notes": "mode: cowork; Written as the third step of the install sequence, but its outcome is component configuration, not installation. Skills and agents appear as tabs; connectors and hooks have their own pages.",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-034",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a Git repository is registered as a marketplace and its plugins appear alongside plugins from other marketplaces for installation",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a Git repository containing plugin packages",
+        "GitHub or GitHub Enterprise, or a public GitLab or Bitbucket repository"
+      ],
+      "steps": [
+        "Open the Plugins page",
+        "Select Add marketplace",
+        "Enter the repository's URL, as https://github.com/owner/repo or the owner/repo shorthand",
+        "Install plugins from the repository the same way as other marketplace plugins"
+      ],
+      "evidence": {
+        "anchor": "## Use a Git repository as a marketplace",
+        "quote": "On the Plugins page, select **Add marketplace** and enter the repository's URL."
+      },
+      "notes": "mode: cowork;",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-034",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the registered marketplace offers the latest plugins from its repository",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the marketplace is already added"
+      ],
+      "steps": [
+        "Click Update on a marketplace to pull the latest plugins from its repository"
+      ],
+      "evidence": {
+        "anchor": "## Use a Git repository as a marketplace",
+        "quote": "Click **Update** on a marketplace to pull the latest plugins from its repository."
+      },
+      "notes": "mode: cowork; Refreshes the marketplace listing, not an installed plugin; matches the T-034 alias 'update a marketplace'.",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-037",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a plugin the user installed is uninstalled from Cowork",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the plugin was installed by the user; organization-managed plugins can only be removed by an administrator"
+      ],
+      "steps": [
+        "Open the plugin under Customize > Plugins",
+        "Click Uninstall"
+      ],
+      "evidence": {
+        "anchor": "## Update and remove plugins",
+        "quote": "To remove a plugin you installed, open it under **Customize → Plugins** and click **Uninstall**."
+      },
+      "notes": "mode: cowork;",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    }
+  ]
+}

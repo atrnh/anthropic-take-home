@@ -1,0 +1,79 @@
+{
+  "task_id": "T-059",
+  "task": "use the submissions dashboard",
+  "view": "builder",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "label": "Submissions dashboard in claude.ai org settings (web-portal, click-through)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Open the submissions dashboard, read status and reviewer feedback",
+          "actor": "developer",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "a submission has been filed"
+          ],
+          "steps": [
+            "Open the submissions dashboard at claude.ai/admin-settings/directory/submissions",
+            "Read the submission's status and any reviewer feedback",
+            "Email mcp-review@anthropic.com for escalations"
+          ],
+          "sources": [
+            {
+              "unit_id": "connectors--building--submission",
+              "anchor": "## Review process"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "connectors--building--submission ## Review process"
+  ],
+  "summary": "Only the generic connector submission page documents tracking review status; post-publication metrics live on the listing page.",
+  "open_questions": []
+}

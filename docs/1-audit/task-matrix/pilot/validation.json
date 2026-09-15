@@ -1,0 +1,86 @@
+{
+  "claude-tag--admins--skills-repo": {
+    "status": "ok",
+    "accepted": 3,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "connectors--building--submission": {
+    "status": "ok",
+    "accepted": 8,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "connectors--custom--remote-mcp": {
+    "status": "ok",
+    "accepted": 9,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "connectors--microsoft--365": {
+    "status": "ok",
+    "accepted": 8,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "cowork--guide--plugins": {
+    "status": "ok",
+    "accepted": 6,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "government--desktop--plugins": {
+    "status": "ok",
+    "accepted": 6,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "government--desktop--skills": {
+    "status": "ok",
+    "accepted": 11,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "plugins--overview": {
+    "status": "ok",
+    "accepted": 1,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "plugins--submit": {
+    "status": "ok",
+    "accepted": 3,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "skills--how-to": {
+    "status": "ok",
+    "accepted": 4,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "third-party--claude-desktop--connectors-m365--part01": {
+    "status": "ok",
+    "accepted": 0,
+    "rejected": [],
+    "no_procedures": true
+  },
+  "third-party--claude-desktop--connectors-m365--part02": {
+    "status": "ok",
+    "accepted": 5,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "third-party--claude-desktop--connectors-m365--part03": {
+    "status": "ok",
+    "accepted": 6,
+    "rejected": [],
+    "no_procedures": false
+  },
+  "third-party--claude-desktop--connectors-m365--part04": {
+    "status": "ok",
+    "accepted": 9,
+    "rejected": [],
+    "no_procedures": false
+  }
+}

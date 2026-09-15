@@ -1,0 +1,83 @@
+{
+  "task_id": "T-006",
+  "task": "authenticate a connector with request headers",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "label": "Request headers in the Add custom connector dialog (app-settings, click-through)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Open Request headers, pick a name, enter the exact value, mark Required, Add",
+          "actor": "end-user",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "request header authentication is in beta and available to a limited set of organizations",
+            "a custom header name must be approved by Anthropic before Claude will send it"
+          ],
+          "steps": [
+            "In the Add custom connector dialog, open Request headers",
+            "Select a header name from the list, or choose Custom header to enter a different name",
+            "Enter the header value exactly as the server expects it, including any scheme such as Bearer and its trailing space",
+            "Choose whether the header is Required",
+            "Repeat for any additional headers, up to four",
+            "Click Add"
+          ],
+          "sources": [
+            {
+              "unit_id": "connectors--custom--remote-mcp",
+              "anchor": "### Adding a request header"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "connectors--custom--remote-mcp ### Adding a request header"
+  ],
+  "summary": "Only claude.ai/Desktop documents adding up to four approved request headers in the Add custom connector dialog.",
+  "open_questions": []
+}

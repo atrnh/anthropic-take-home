@@ -1,0 +1,185 @@
+{
+  "unit_id": "third-party--claude-desktop--connectors-m365--part03",
+  "page": "third-party/claude-desktop/connectors-m365.md",
+  "records": [
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "a dedicated public client app for local mode exists in Microsoft Entra with a loopback redirect URI, public client flows allowed, and admin-consented delegated Graph scopes, and its client and tenant IDs are noted",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "Microsoft Entra admin center access",
+        "do not reuse the desktop client app registered for the remote connector"
+      ],
+      "steps": [
+        "In Entra admin center go to App registrations > New registration",
+        "Set Name and set Supported account types to accounts in this organizational directory only",
+        "Under Authentication open Redirect URI configuration and select Add redirect URI",
+        "Choose the Mobile and desktop applications card (Windows, UWP, Console)",
+        "Leave suggested URIs unchecked, enter http://localhost in Custom redirect URIs, and select Configure",
+        "For brokered sign-in on managed devices, add the per-platform broker redirect URI to the same platform via Edit, then Save",
+        "Set Allow public client flows to Yes and select Save",
+        "Under API permissions > Add a permission > Microsoft Graph > Delegated permissions, add the scopes the connector will request",
+        "Select Grant admin consent for your organization",
+        "Note the Application (client) ID and Directory (tenant) ID from the overview page"
+      ],
+      "evidence": {
+        "anchor": "### Set up the local connector",
+        "quote": "Note the **Application (client) ID** and **Directory (tenant) ID** from the overview page."
+      },
+      "notes": "Admin stage of the local-connector path; the user still signs in afterwards. A Conditional Access policy blocking device-code flow is recommended, scoped to All resources.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the built-in Microsoft 365 local connector is configured in Claude Desktop with the tenant and client IDs, its connection tested, and saved",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "the local-mode app registration from step 1, with its Application (client) ID and Directory (tenant) ID"
+      ],
+      "steps": [
+        "Open the Claude Desktop in-app configuration window",
+        "Open Connectors and select Add server",
+        "Choose Microsoft 365 under the Built-in group",
+        "Enter the Tenant ID and the Client ID from step 1",
+        "Choose the Azure cloud (global, us-gov-high, or us-gov-dod)",
+        "Leave Access empty for standard read access, or list scopes explicitly",
+        "Select Test connection to verify the server starts and lists its tools",
+        "Select Save"
+      ],
+      "evidence": {
+        "anchor": "### Set up the local connector",
+        "quote": "open **Connectors**, select **Add server**, and choose **Microsoft 365** under the **Built-in** group."
+      },
+      "notes": "The server ships inside the app; it activates only from managed configuration and users cannot add it themselves.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the Microsoft 365 local connector is declared as a managedMcpServers entry in the JSON or plist configuration and deployed to devices",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "configuration managed through JSON or a plist directly",
+        "the local-mode app registration from step 1"
+      ],
+      "steps": [
+        "Open the managed JSON or plist configuration",
+        "Add a managedMcpServers entry with the server field set to microsoft365",
+        "Set name, clientId, and tenantId",
+        "Optionally set azureCloud, continuousAccessEvaluation, scope, and toolPolicy",
+        "Deploy the configuration through your device-management tool"
+      ],
+      "evidence": {
+        "anchor": "### Set up the local connector",
+        "quote": "If you manage configuration through JSON or a plist directly, add an entry to"
+      },
+      "notes": "Built-in entries use server instead of url, transport, or command; an entry mixing them is rejected.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-023",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the local connector requests exactly the listed delegated Graph scopes at the next sign-in, changing which read and search tools are exposed to users",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "an existing Microsoft 365 managedMcpServers entry",
+        "whatever is listed must also be consented on the app registration from step 1"
+      ],
+      "steps": [
+        "List the delegated scopes you want in the entry's scope field",
+        "Add any of the optional read scopes needed for the extra tools",
+        "Consent the same scopes on the app registration in Entra and keep the two lists in sync"
+      ],
+      "evidence": {
+        "anchor": "### Configure scopes",
+        "quote": "To request a different set, list scopes in the entry's `scope` field."
+      },
+      "notes": "User.Read and offline_access are always included. An unrecognized scope name rejects the whole entry at configuration load and the connector does not appear.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-023",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the write tools matching the granted scopes appear on the local connector so Claude can act in Microsoft 365, each still requiring user approval on every call",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "Claude Desktop 1.19367.0 or later; 1.24012.0 or later for the Teams write tools"
+      ],
+      "steps": [
+        "Add the desired write scopes to the entry's scope field",
+        "Consent the same write scopes on the app registration from step 1",
+        "Optionally adjust per-tool approval with toolPolicy, noting that allow resolves to ask for the send tools"
+      ],
+      "evidence": {
+        "anchor": "### Grant write scopes",
+        "quote": "grant write scopes: add them to the entry's `scope` field and consent them on the app registration from step 1"
+      },
+      "notes": "Granting a subset of the write scopes exposes a matching subset of the tools; removing them returns the connector to read-only.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-010",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "the previously granted consent is removed in Entra, so tokens carrying those scopes can no longer be obtained for the app",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "Microsoft Entra admin access to the local-mode app registration"
+      ],
+      "steps": [
+        "In Entra open Enterprise applications and select your app",
+        "Open Permissions",
+        "Remove the consent"
+      ],
+      "evidence": {
+        "anchor": "### Configure scopes",
+        "quote": "To revoke access, remove the consent in Entra under **Enterprise applications → your app → Permissions**."
+      },
+      "notes": "Narrowing or removing the scope field alone does not narrow tokens already obtainable for the registration.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    }
+  ]
+}

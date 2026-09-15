@@ -6,7 +6,7 @@ Connectors**.
 ## Part 1 — Audit
 
 - [x] Fetch a pinned corpus snapshot of the slice — `corpus/`
-- [ ] Build the page inventory table — `docs/1-audit/inventory.md`
+- [ ] Build the page inventory as a task–procedure–difference matrix — `docs/1-audit/inventory.md`, produced by the `task-matrix` skill (`.claude/skills/task-matrix/`); pilot run and findings in `docs/1-audit/task-matrix/pilot/`
 - [ ] Write the audit memo — `docs/1-audit/audit-memo.md`
 - [ ] Diagram the proposed IA and URL mapping — `docs/1-audit/proposed-ia.md`
 

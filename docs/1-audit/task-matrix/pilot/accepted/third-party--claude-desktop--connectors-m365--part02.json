@@ -1,0 +1,160 @@
+{
+  "unit_id": "third-party--claude-desktop--connectors-m365--part02",
+  "page": "third-party/claude-desktop/connectors-m365.md",
+  "records": [
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "Anthropic's connector app has a consented service principal in the tenant, a desktop client app registration exists with access_as_user granted, and its tenant and client IDs have been sent to Anthropic for allowlisting",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "Global Administrator or Cloud Application Administrator in the Entra tenant",
+        "Claude Desktop deployed on third-party inference"
+      ],
+      "steps": [
+        "Copy the Directory (tenant) ID from Entra admin center > Overview",
+        "Open the adminconsent URL for that tenant with the Anthropic connector client_id",
+        "Review the delegated Graph permissions and select Accept",
+        "In Entra admin center > App registrations > New registration, name it Claude Desktop, set account types to this directory only, and add redirect URI http://127.0.0.1/callback under Mobile and desktop applications",
+        "Select Register and note the Application (client) ID and Directory (tenant) ID",
+        "Under API permissions > Add a permission > APIs my organization uses, search Anthropic, select Delegated permissions > access_as_user, then Add permissions",
+        "Select Grant admin consent for your organization",
+        "Email your Anthropic representative or open a support ticket with the Directory (tenant) ID and Application (client) ID",
+        "Wait two to three business days for allowlist confirmation"
+      ],
+      "evidence": {
+        "anchor": "### Set up the remote connector",
+        "quote": "A tenant administrator must consent to Anthropic's multi-tenant connector app once for the organization."
+      },
+      "notes": "FedRAMP and GovCloud deployments use a different connector app ID and hostname, obtained from an Anthropic representative.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part02",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the Microsoft 365 remote connector is configured in Claude Desktop with the tenant's client ID, tenant ID, and scope, and the configuration is deployed to devices",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "Desktop client app registered and IDs allowlisted by Anthropic"
+      ],
+      "steps": [
+        "Open the Claude Desktop in-app configuration window",
+        "Open Connectors",
+        "Select Add server > Microsoft 365",
+        "Enter the Application (client) ID as Client ID",
+        "Enter the Directory (tenant) ID as Tenant ID",
+        "Enter the access_as_user offline_access scope string",
+        "Select Save",
+        "Deploy the configuration through your device-management tool"
+      ],
+      "evidence": {
+        "anchor": "### Set up the remote connector",
+        "quote": "Select **Save**, then deploy the configuration through your device-management tool as usual."
+      },
+      "notes": "",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part02",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the m365 remote connector is declared in managedMcpServers with its URL, transport, and OAuth client, tenant, and scope values",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "Configuration managed through JSON or a plist instead of the in-app configuration window"
+      ],
+      "steps": [
+        "Open the managed configuration JSON or plist",
+        "Add a managedMcpServers entry named m365 with the connector service URL and transport http",
+        "Set oauth.clientId to the Application (client) ID from step 2",
+        "Set oauth.tenantId to the Directory (tenant) ID",
+        "Set oauth.scope to the access_as_user offline_access scope string",
+        "Deploy the configuration through your device-management tool"
+      ],
+      "evidence": {
+        "anchor": "### Set up the remote connector",
+        "quote": "If you manage configuration through JSON or a plist directly instead of the in-app configuration window, add the following entry to"
+      },
+      "notes": "Alternative to the in-app configuration window path.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part02",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the user has signed in to the tenant and consented, and the Microsoft 365 connector is ready to use in their conversations",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "The remote connector configuration has been deployed by an admin"
+      ],
+      "steps": [
+        "Open Customize > Connectors in Claude Desktop",
+        "Select Connect next to Microsoft 365",
+        "Sign in on the tenant's sign-in page in the browser",
+        "Consent to the request"
+      ],
+      "evidence": {
+        "anchor": "### Sign in as a user",
+        "quote": "each user opens **Customize → Connectors** in Claude Desktop and selects **Connect** next to Microsoft 365."
+      },
+      "notes": "",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part02",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-013",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "the setup step that caused the Entra sign-in error is identified and corrected, or the reader knows to wait for Anthropic's allowlist",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "A sign-in error appeared during remote connector setup"
+      ],
+      "steps": [
+        "Read the error code returned at sign-in",
+        "For a redirect mismatch, re-check that the redirect URI is exactly http://127.0.0.1/callback under Mobile and desktop applications",
+        "For a multi-tenant required error, add the Tenant ID to the configuration",
+        "For an admin consent required error, complete admin consent",
+        "For 'Client application is not authorized for this resource', wait for Anthropic's allowlist confirmation",
+        "For a duplicate prompt parameter error, upgrade Claude Desktop to the current release"
+      ],
+      "evidence": {
+        "anchor": "### Troubleshoot sign-in errors",
+        "quote": "The errors below are the ones most commonly seen during setup. Each maps to a specific step that was missed or misconfigured."
+      },
+      "notes": "Stated as an error/cause/fix table; each fix names a concrete corrective action.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part02",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    }
+  ]
+}

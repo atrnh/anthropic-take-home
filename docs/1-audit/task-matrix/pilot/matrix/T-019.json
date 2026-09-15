@@ -1,0 +1,307 @@
+{
+  "task_id": "T-019",
+  "task": "set up the Microsoft 365 connector",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "label": "Configure through the product's own connector settings, then each user connects from Customize > Connectors",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Team/Enterprise: owner adds M365 org-wide, then members connect",
+          "actor": "admin, end-user",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "Owner or Primary Owner role on a Team or Enterprise plan",
+            "Global Administrator access to the Microsoft Entra tenant",
+            "work or school Microsoft account on an Entra tenant (personal accounts unsupported)",
+            "active Microsoft 365 accounts for all users"
+          ],
+          "steps": [
+            "Admin: navigate to Organization settings > Connectors",
+            "Select Add, then All available",
+            "Find Microsoft 365 and select \"Add to your team\"",
+            "Connect individually and grant organization-wide permissions",
+            "Optionally restrict user access or revoke specific permission scopes",
+            "Member: navigate to Customize > Connectors",
+            "Find Microsoft 365 and click \"Connect\"",
+            "Authenticate with Microsoft 365 credentials"
+          ],
+          "sources": [
+            {
+              "unit_id": "connectors--microsoft--365",
+              "anchor": "### Phase 1: Administrator setup"
+            },
+            {
+              "unit_id": "connectors--microsoft--365",
+              "anchor": "### Phase 2: User enablement"
+            }
+          ],
+          "notes": "The page labels these Phase 1 (admin) and Phase 2 (user) of one setup; merged as sequential stages of a single path."
+        },
+        {
+          "variant_id": "P1b",
+          "label": "Free/Pro/Max: user connects directly, no organization-level setup",
+          "actor": "end-user",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "Free, Pro, or Max plan",
+            "a Microsoft Entra Global Administrator has granted the one-time tenant consent for the Microsoft organization"
+          ],
+          "steps": [
+            "Navigate to Customize > Connectors in claude.ai",
+            "Find Microsoft 365 and click \"Connect\"",
+            "Authenticate with Microsoft 365 credentials"
+          ],
+          "sources": [
+            {
+              "unit_id": "connectors--microsoft--365",
+              "anchor": "## Setup requirements"
+            },
+            {
+              "unit_id": "connectors--microsoft--365",
+              "anchor": "### Phase 2: User enablement"
+            }
+          ],
+          "notes": "Same user steps as P1a with the admin phase skipped; stated in the Setup requirements prose and in the Phase 2 record's notes rather than as its own numbered procedure."
+        },
+        {
+          "variant_id": "P1c",
+          "label": "Remote connector: Entra consent, desktop app registration and Anthropic allowlisting, configured in the in-app configuration window",
+          "actor": "admin, end-user",
+          "products": [
+            "claude-desktop-3p"
+          ],
+          "preconditions": [
+            "Global Administrator or Cloud Application Administrator in the Entra tenant",
+            "Claude Desktop deployed on third-party inference",
+            "Anthropic allowlists the tenant and client IDs (two to three business days)",
+            "FedRAMP/GovCloud deployments need a different connector app ID and hostname from an Anthropic representative"
+          ],
+          "steps": [
+            "Copy the Directory (tenant) ID from Entra admin center > Overview",
+            "Open the adminconsent URL for that tenant with Anthropic's connector client_id, review the delegated read-only Graph permissions, and select Accept",
+            "In App registrations > New registration, register a desktop client app (this directory only) with redirect URI http://127.0.0.1/callback under Mobile and desktop applications",
+            "Select Register and note the Application (client) ID and Directory (tenant) ID",
+            "Under API permissions, add the Anthropic API delegated permission access_as_user and select Grant admin consent for your organization",
+            "Email the Directory (tenant) ID and Application (client) ID to your Anthropic representative or support and wait for allowlist confirmation",
+            "Open the Claude Desktop in-app configuration window and open Connectors",
+            "Select Add server > Microsoft 365 and enter the Client ID, Tenant ID, and the access_as_user offline_access scope string",
+            "Select Save and deploy the configuration through your device-management tool",
+            "Each user opens Customize > Connectors in Claude Desktop and selects Connect next to Microsoft 365",
+            "The user signs in on the tenant's sign-in page in the browser and consents"
+          ],
+          "sources": [
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part02",
+              "anchor": "### Set up the remote connector"
+            },
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part02",
+              "anchor": "### Sign in as a user"
+            }
+          ],
+          "notes": "Entra consent, app registration, allowlisting, desktop configuration, and user sign-in merged into one path; the reader chooses between this in-app configuration and the managed file of P2a."
+        },
+        {
+          "variant_id": "P1d",
+          "label": "Local connector: dedicated public client app in Entra, built-in M365 server configured in the in-app configuration window",
+          "actor": "admin, end-user",
+          "products": [
+            "claude-desktop-3p"
+          ],
+          "preconditions": [
+            "Microsoft Entra admin center access",
+            "a separate app registration dedicated to local mode (do not reuse the remote connector's desktop client app)",
+            "brokered sign-in needs Claude Desktop 1.13576.0 or later on Windows, 1.19367.0 or later on macOS",
+            "the built-in server activates only from managed configuration; users cannot add it themselves"
+          ],
+          "steps": [
+            "In Entra admin center > App registrations > New registration, register a public client app for local mode with Supported account types set to this directory only",
+            "Under Authentication > Redirect URI configuration, add http://localhost under the Mobile and desktop applications card",
+            "For brokered sign-in on managed devices, add the per-platform broker redirect URI to the same platform via Edit and Save",
+            "Set Allow public client flows to Yes and Save; block the device-code flow with a Conditional Access policy scoped to All resources",
+            "Under API permissions > Microsoft Graph > Delegated permissions, add the scopes the connector will request and select Grant admin consent",
+            "Note the Application (client) ID and Directory (tenant) ID from the overview page",
+            "In the Claude Desktop in-app configuration window, open Connectors, select Add server, and choose Microsoft 365 under the Built-in group",
+            "Enter the Tenant ID and Client ID, choose the Azure cloud (global, us-gov-high, or us-gov-dod), and leave Access empty or list scopes explicitly",
+            "Select Test connection to verify the server starts and lists its tools, then Save and deploy the configuration",
+            "For brokered sign-in, meet the platform device requirements: Entra join or registration and compliance on Windows; MDM enrollment, Intune Company Portal, and an Extensible SSO Redirect profile on macOS",
+            "Each user opens Customize > Connectors in Claude Desktop and selects Connect on Microsoft 365",
+            "The user completes sign-in in the broker's system account-picker dialog, or in the system browser when the broker is unavailable"
+          ],
+          "sources": [
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part03",
+              "anchor": "### Set up the local connector"
+            },
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part04",
+              "anchor": "### How users sign in"
+            }
+          ],
+          "notes": "The Windows and macOS brokered sign-in requirement accordions are folded in as one optional step of the sign-in stage rather than kept as separate procedures."
+        }
+      ]
+    },
+    {
+      "family_id": "P2",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "label": "Declare the connector in managedMcpServers in the managed JSON or plist and deploy it",
+      "variants": [
+        {
+          "variant_id": "P2a",
+          "label": "Remote connector declared in managedMcpServers by URL and transport",
+          "actor": "admin, end-user",
+          "products": [
+            "claude-desktop-3p"
+          ],
+          "preconditions": [
+            "Global Administrator or Cloud Application Administrator in the Entra tenant",
+            "configuration managed through JSON or a plist instead of the in-app configuration window",
+            "tenant and client IDs allowlisted by Anthropic"
+          ],
+          "steps": [
+            "Copy the Directory (tenant) ID from Entra admin center > Overview",
+            "Open the adminconsent URL for that tenant with Anthropic's connector client_id, review the delegated Graph permissions, and select Accept",
+            "In App registrations > New registration, register a desktop client app (this directory only) with redirect URI http://127.0.0.1/callback under Mobile and desktop applications, and note its Application (client) ID",
+            "Under API permissions, add the Anthropic delegated permission access_as_user and select Grant admin consent for your organization",
+            "Email the Directory (tenant) ID and Application (client) ID to Anthropic and wait for allowlist confirmation",
+            "Open the managed configuration JSON or plist",
+            "Add a managedMcpServers entry named m365 with the connector service URL and transport http",
+            "Set oauth.clientId to the Application (client) ID and oauth.tenantId to the Directory (tenant) ID",
+            "Set oauth.scope to the access_as_user offline_access scope string",
+            "Deploy the configuration through your device-management tool",
+            "Each user opens Customize > Connectors in Claude Desktop, selects Connect next to Microsoft 365, signs in on the tenant page, and consents"
+          ],
+          "sources": [
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part02",
+              "anchor": "### Set up the remote connector"
+            },
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part02",
+              "anchor": "### Sign in as a user"
+            }
+          ],
+          "notes": "Same Entra stages and user sign-in as P1c; it differs at the configuration stage, which is the stage the reader chooses on, so it is a separate family."
+        },
+        {
+          "variant_id": "P2b",
+          "label": "Local built-in connector declared in managedMcpServers with server set to microsoft365",
+          "actor": "admin, end-user",
+          "products": [
+            "claude-desktop-3p"
+          ],
+          "preconditions": [
+            "configuration managed through JSON or a plist directly",
+            "a local-mode app registration with its Application (client) ID and Directory (tenant) ID",
+            "microsoftAuthBroker required only where every device runs Claude Desktop 1.49585.0 or later; required is unsupported on Linux"
+          ],
+          "steps": [
+            "Register a separate public client app for local mode in Entra (this directory only); do not reuse the remote connector's desktop client app",
+            "Under Authentication, add http://localhost, plus the per-platform broker redirect URI for brokered sign-in, under Mobile and desktop applications",
+            "Set Allow public client flows to Yes and Save",
+            "Add the Microsoft Graph delegated scopes under API permissions, select Grant admin consent, and note the Application (client) ID and Directory (tenant) ID",
+            "Open the managed JSON or plist configuration",
+            "Add a managedMcpServers entry with server set to microsoft365 and set name, clientId, and tenantId",
+            "Optionally set azureCloud, continuousAccessEvaluation, scope, and toolPolicy; do not mix url, transport, or command into a built-in entry",
+            "Set microsoftAuthBroker to auto, disabled, or required to choose between the device broker and the system browser",
+            "Deploy the configuration through your device-management tool",
+            "For brokered sign-in, meet the Windows or macOS device requirements (Entra join or MDM enrollment and compliance, Intune Company Portal and an Extensible SSO Redirect profile on macOS)",
+            "Each user opens Customize > Connectors in Claude Desktop and selects Connect on Microsoft 365",
+            "The user completes sign-in in the broker's account-picker dialog, or in the system browser when the broker is unavailable"
+          ],
+          "sources": [
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part03",
+              "anchor": "### Set up the local connector"
+            },
+            {
+              "unit_id": "third-party--claude-desktop--connectors-m365--part04",
+              "anchor": "### How users sign in"
+            }
+          ],
+          "notes": "The microsoftAuthBroker record and the Windows/macOS brokered sign-in requirement records are sub-options of this path's configuration and sign-in stages, folded in rather than split out."
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a",
+        "P1b"
+      ],
+      "diff": [
+        "steps-differ",
+        "precondition-differs"
+      ],
+      "note": "Only the product's own settings are involved: an owner adds the connector org-wide on Team/Enterprise, or the user connects directly on Free/Pro/Max; the Entra tenant consent is assumed rather than walked through."
+    },
+    "claude-desktop-3p": {
+      "status": "documented",
+      "variants": [
+        "P1c",
+        "P1d",
+        "P2a",
+        "P2b"
+      ],
+      "diff": [
+        "steps-differ",
+        "surface-differs",
+        "mechanism-differs",
+        "precondition-differs"
+      ],
+      "note": "Adds an Entra app-registration stage in third-party-admin, a choice of remote vs local connector, a managed-file alternative to in-app configuration, and Anthropic allowlisting on the remote path."
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": "Referenced only indirectly: FedRAMP/GovCloud use a different connector app ID and hostname, and the local connector takes azureCloud us-gov-high or us-gov-dod, but no Gov-specific procedure is documented."
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "connectors--microsoft--365 ## Setup requirements",
+    "connectors--microsoft--365 ### Prerequisites",
+    "connectors--microsoft--365 ### Phase 1: Administrator setup",
+    "connectors--microsoft--365 ### Phase 2: User enablement",
+    "connectors--microsoft--365 ## Write actions",
+    "third-party--claude-desktop--connectors-m365--part02 ## Choose a connector",
+    "third-party--claude-desktop--connectors-m365--part02 ## Remote connector",
+    "third-party--claude-desktop--connectors-m365--part02 ### Set up the remote connector",
+    "third-party--claude-desktop--connectors-m365--part03 ### Set up the local connector",
+    "third-party--claude-desktop--connectors-m365--part04 ### How users sign in",
+    "third-party--claude-desktop--connectors-m365--part04 ### Token storage and sign-out",
+    "third-party--claude-desktop--connectors-m365--part04 ### Troubleshoot the local connector"
+  ],
+  "summary": "Two products document M365 setup: claude.ai admin-then-user connect, and third-party-inference Desktop with Entra registration plus in-app or managed-file configuration.",
+  "open_questions": [
+    "The microsoftAuthBroker record and the two brokered sign-in requirement records do not meet the task outcome on their own; they were folded into the local-connector variants as sub-options of the configuration and sign-in stages rather than misfiled, because the page presents them inside the same local-connector path. A stricter reading would drop the microsoftAuthBroker record as a configuration-key reference rather than a procedure.",
+    "The local connector's optional toolPolicy field and explicit scope list restrict which tools members can invoke, which is T-023's outcome; that was kept as one optional step inside P2b instead of being split out as a T-023 record.",
+    "The Phase 1 admin record's own outcome (connector added for the team with organization-wide permissions) also matches T-022; it is retained here because the page frames it as Phase 1 of this two-phase setup and the task outcome is only reached with Phase 2.",
+    "P1b (Free/Pro/Max direct connect) rests on the Setup requirements prose and the Phase 2 record's notes, not a separately numbered procedure; it could instead be treated as a precondition note on P1a.",
+    "No record says whether claude-web or claude-desktop differ from the undistinguished claude path, or whether claude-gov follows the same procedure with a different connector app ID."
+  ]
+}

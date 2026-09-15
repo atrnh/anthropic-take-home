@@ -1,0 +1,8 @@
+{
+  "unit_id": "third-party--claude-desktop--connectors-m365--part01",
+  "page": "third-party/claude-desktop/connectors-m365.md",
+  "product_default": "claude-desktop-3p",
+  "records": [],
+  "no_procedures": true,
+  "coverage_notes": "Part 1 is the page intro only: a data-residency Info note and a conceptual overview naming the two available Microsoft 365 connectors (remote, hosted by Anthropic; local, built into the desktop app). It states no ordered actions, only cross-references to the remote-connector and local-connector sections that fall in later parts."
+}

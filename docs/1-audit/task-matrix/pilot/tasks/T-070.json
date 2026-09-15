@@ -1,0 +1,70 @@
+{
+  "task_id": "T-070",
+  "task": "browse the plugin directory",
+  "definition": "Look through the plugin directory or a marketplace catalog to see which plugins exist and what they contain.",
+  "outcome": "the reader has seen which plugins are listed and what each one bundles; nothing is installed and no marketplace is registered",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-070",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the user has seen which organization plugins are already installed and which ones administrators have made available; nothing is installed by these steps",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "administrators have added plugins for the organization"
+      ],
+      "steps": [
+        "Open Customize in the sidebar",
+        "Open Plugins",
+        "Review installed plugins under Organization plugins",
+        "Select Browse plugins",
+        "Open the Organization tab to see every plugin administrators made available"
+      ],
+      "evidence": {
+        "anchor": "## Find and install plugins",
+        "quote": "select **Browse plugins** and open the **Organization** tab, which lists every plugin your administrators have made available to you."
+      },
+      "notes": "Claude for Government has no public plugin marketplace; the Organization tab is the catalog.",
+      "_unit_id": "government--desktop--plugins",
+      "_page": "government/desktop/plugins.md"
+    },
+    {
+      "task_id": "T-070",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "the reader has seen the full collection of open-sourced plugins and what each one does; nothing is installed and no marketplace is registered",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "Open claude.com/plugins",
+        "Browse the full plugin collection"
+      ],
+      "evidence": {
+        "anchor": "## Plugin directory",
+        "quote": "Browse the full collection at [claude.com/plugins](https://claude.com/plugins-for/cowork)"
+      },
+      "notes": "Single-action pointer to the directory site; the accompanying table of 11 open-sourced plugins is a concept table, not part of the steps.",
+      "_unit_id": "plugins--overview",
+      "_page": "plugins/overview.md"
+    }
+  ]
+}

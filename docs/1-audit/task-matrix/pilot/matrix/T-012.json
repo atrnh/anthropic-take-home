@@ -1,0 +1,77 @@
+{
+  "task_id": "T-012",
+  "task": "report a problem with a connector",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "label": "Bug Bounty Program report (web-portal, click-through)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Report a malicious MCP server through the responsible-disclosure page",
+          "actor": "end-user",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [],
+          "steps": [
+            "Report the malicious MCP server to Anthropic's Bug Bounty Program"
+          ],
+          "sources": [
+            {
+              "unit_id": "connectors--custom--remote-mcp",
+              "anchor": "## Reporting issues"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "connectors--custom--remote-mcp ## Reporting issues"
+  ],
+  "summary": "Only the generic Claude connector page documents reporting, and only malicious servers to the Bug Bounty Program.",
+  "open_questions": [
+    "The source gives no reference-ID collection step, so the task outcome's 'carrying the reference ID' clause is unevidenced."
+  ]
+}

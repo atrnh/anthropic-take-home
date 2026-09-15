@@ -1,0 +1,151 @@
+{
+  "task_id": "T-034",
+  "task": "add a plugin marketplace",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "label": "Register a marketplace from the Plugins page",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Add marketplace by Git repository URL (Cowork mode)",
+          "actor": [
+            "end-user"
+          ],
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "a Git repository containing plugin packages",
+            "GitHub or GitHub Enterprise, or a public GitLab or Bitbucket repository"
+          ],
+          "steps": [
+            "Open Customize > Plugins",
+            "Select Add marketplace",
+            "Enter the repository URL as https://github.com/owner/repo or the owner/repo shorthand",
+            "Plugins defined in the repository appear alongside other marketplaces' plugins and install the same way"
+          ],
+          "sources": [
+            {
+              "unit_id": "cowork--guide--plugins",
+              "anchor": "## Use a Git repository as a marketplace"
+            }
+          ]
+        },
+        {
+          "variant_id": "P1b",
+          "label": "Add your own marketplace from Browse plugins, subject to network controls",
+          "actor": [
+            "end-user"
+          ],
+          "products": [
+            "claude-gov"
+          ],
+          "preconditions": [
+            "the deployment's network controls allow the marketplace to be downloaded",
+            "no public plugin marketplace exists in this deployment"
+          ],
+          "steps": [
+            "Open Customize > Plugins",
+            "Select Browse plugins",
+            "Add a plugin marketplace of your own"
+          ],
+          "sources": [
+            {
+              "unit_id": "government--desktop--plugins",
+              "anchor": "## Where plugins come from"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "P2",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "label": "Refresh an already-registered marketplace",
+      "variants": [
+        {
+          "variant_id": "P2a",
+          "label": "Click Update on a marketplace to pull its latest plugins (Cowork mode)",
+          "actor": [
+            "end-user"
+          ],
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "the marketplace is already added"
+          ],
+          "steps": [
+            "Open the Plugins page",
+            "Click Update on the marketplace to pull the latest plugins from its repository"
+          ],
+          "sources": [
+            {
+              "unit_id": "cowork--guide--plugins",
+              "anchor": "## Use a Git repository as a marketplace"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a",
+        "P2a"
+      ],
+      "diff": [
+        "same",
+        "only-here"
+      ],
+      "note": "Only product documenting the URL and shorthand forms and the marketplace Update action; source names Cowork mode."
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "documented",
+      "variants": [
+        "P1b"
+      ],
+      "diff": [
+        "steps-differ",
+        "precondition-differs"
+      ],
+      "note": "Entry point is Browse plugins; no public marketplace, and network controls decide whether a marketplace can be downloaded."
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "cowork--guide--plugins ## Use a Git repository as a marketplace",
+    "cowork--guide--plugins ## Install a plugin",
+    "cowork--guide--plugins ## Limits",
+    "government--desktop--plugins ## Where plugins come from",
+    "government--desktop--plugins ## Find and install plugins"
+  ],
+  "summary": "Both documented products register marketplaces from the Plugins page; only Claude documents repository URL forms and marketplace Update.",
+  "open_questions": [
+    "Government names Browse plugins as the entry point but no fields; unclear whether it accepts the same repository URL forms as Cowork.",
+    "Whether the marketplace limits and the Update action apply in Claude for Government is not stated."
+  ]
+}

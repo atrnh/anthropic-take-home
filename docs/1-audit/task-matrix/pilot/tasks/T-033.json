@@ -1,0 +1,99 @@
+{
+  "task_id": "T-033",
+  "task": "install a plugin",
+  "definition": "Install a plugin from a marketplace listing or from a package file into the product.",
+  "outcome": "the plugin is installed in this product and its components are available to the user",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-033",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a plugin chosen from a marketplace catalog is installed in Cowork, with any connector it bundles signed in to",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "Open Customize in the sidebar, then Plugins",
+        "Select Browse plugins to see available plugins",
+        "Select a plugin and click Install",
+        "Sign in if the plugin includes a connector that needs authentication"
+      ],
+      "evidence": {
+        "anchor": "## Install a plugin",
+        "quote": "Select a plugin and click **Install**. If the plugin includes a connector that needs authentication, you're prompted to sign in."
+      },
+      "notes": "mode: cowork; Default marketplace is Anthropic's official catalog.",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-033",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a plugin supplied as a package file is installed in Cowork",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a plugin package file"
+      ],
+      "steps": [
+        "Open Customize in the sidebar, then Plugins",
+        "Select the upload option on the Plugins page",
+        "Select the plugin package"
+      ],
+      "evidence": {
+        "anchor": "## Install a plugin",
+        "quote": "To install from a file instead, select the upload option on the Plugins page and select the plugin package."
+      },
+      "notes": "mode: cowork; Separate path from browsing the marketplace.",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-033",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a plugin from a local .zip file is installed in Claude Desktop, on this device only",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "you have a plugin .zip file"
+      ],
+      "steps": [
+        "Open Customize > Plugins",
+        "Select Add plugin",
+        "Select Upload plugin",
+        "Choose the plugin's .zip file",
+        "Acknowledge the notice to install only plugins you trust"
+      ],
+      "evidence": {
+        "anchor": "## Find and install plugins",
+        "quote": "To install a plugin from a file, select **Add plugin**, then **Upload plugin**, and choose the plugin's `.zip` file."
+      },
+      "notes": "A plugin you upload is added only on the device you are using.",
+      "_unit_id": "government--desktop--plugins",
+      "_page": "government/desktop/plugins.md"
+    }
+  ]
+}

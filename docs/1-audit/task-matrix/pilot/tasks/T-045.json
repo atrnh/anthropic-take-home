@@ -1,0 +1,45 @@
+{
+  "task_id": "T-045",
+  "task": "test a skill before distributing it",
+  "definition": "Exercise a skill package you authored against a task it should match, before uploading or handing it to anyone.",
+  "outcome": "the author has given Claude a task the skill should match and confirmed the skill triggers and behaves as intended, before it is uploaded or distributed",
+  "view": "builder",
+  "artifact": "skill",
+  "stage": "test",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-045",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "terminal",
+      "mechanism": "command",
+      "outcome": "the skill package has been reviewed and validated with the skills-ref tool before upload, with its description and referenced files confirmed",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a skill directory on disk"
+      ],
+      "steps": [
+        "Review SKILL.md for clarity",
+        "Verify the description reflects when Claude should use the skill",
+        "Check that all referenced files exist",
+        "Run skills-ref validate ./my-skill"
+      ],
+      "evidence": {
+        "anchor": "### Before uploading",
+        "quote": "Validate using `skills-ref validate ./my-skill`"
+      },
+      "notes": "Pre-upload checks; the validation tool run is the command, the first three steps are file reviews.",
+      "_unit_id": "skills--how-to",
+      "_page": "skills/how-to.md"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "task_id": "T-058",
+  "task": "submit a connector to the directory",
+  "definition": "File the connector through the submission portal and accept the directory terms.",
+  "outcome": "the submission has been filed through the portal with the directory terms accepted, and the connector is queued for review",
+  "view": "builder",
+  "artifact": "connector",
+  "stage": "submit",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-058",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "a remote MCP server, including an MCP App, has been filed through the submission portal with all seven policy acknowledgments given, and is queued for review",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a Team or Enterprise organization",
+        "directory management access: Owner, or a custom role with the Directory or Libraries permission",
+        "documentation URL, privacy policy URL, icon, and test account credentials ready",
+        "carousel screenshots if submitting an MCP App"
+      ],
+      "steps": [
+        "Open the submission portal in your organization's settings on Claude.ai",
+        "Read the Introduction step on what a directory listing does and does not do",
+        "In Connection, confirm the https:// server URL, the transport, and whether users reach the server by Universal URL, Multiple URLs, or a URL pattern",
+        "In Tools, let tools, prompts, and resources sync, and fix any tools flagged for missing titles or annotations on your server",
+        "In Listing, enter server name, tagline, description, one to five categories, documentation and privacy policy URLs, support contact, icon, and URL slug",
+        "In Use cases, describe the primary use cases, what users need before connecting, and whether the connector reads, writes, or both",
+        "In Company, give company name and website plus a primary contact for review updates",
+        "In Authentication, choose OAuth, a custom connection, or no authentication, within the limits your Connection choice imposes",
+        "In Data handling, state whether the API is your own, proxied with permission, or a third party's, and whether health data or sponsored content is involved",
+        "In Test & launch, give test-account setup and access instructions and confirm you have run every tool via MCP Inspector or as a custom connector in Claude",
+        "In Compliance, give all seven policy acknowledgments",
+        "Read through the Review step and submit"
+      ],
+      "evidence": {
+        "anchor": "### What to expect in the portal",
+        "quote": "The portal walks you through the following steps. Your progress saves automatically in your browser as you move between steps"
+      },
+      "notes": "The portal accepts remote MCP servers only; the URL slug is permanent once published.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    },
+    {
+      "task_id": "T-058",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "a desktop extension (MCPB) has been filed for directory listing through the separate submission form, without using the organization portal",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the local MCP server is packaged as an MCPB",
+        "no portal or organization access required"
+      ],
+      "steps": [
+        "Open the desktop extension submission form at clau.de/desktop-extention-submission",
+        "File the desktop extension through that form"
+      ],
+      "evidence": {
+        "anchor": "## Submit your connector",
+        "quote": "**Desktop extensions (MCPB)**: use the [desktop extension submission form](https://clau.de/desktop-extention-submission)."
+      },
+      "notes": "client: claude-desktop; Same instruction also appears under 'Before you start'.",
+      "_unit_id": "connectors--building--submission",
+      "_page": "connectors/building/submission.md"
+    }
+  ]
+}

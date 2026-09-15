@@ -1,0 +1,40 @@
+{
+  "task_id": "T-012",
+  "task": "report a problem with a connector",
+  "definition": "Collect the reference ID and report a failing or misbehaving connector to Anthropic or the provider.",
+  "outcome": "a report carrying the reference ID and failure details has been filed with Anthropic or the connector's provider",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-012",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "web-portal",
+      "mechanism": "click-through",
+      "outcome": "a malicious MCP server has been reported to Anthropic through the Bug Bounty Program",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "Report the malicious MCP server to Anthropic's Bug Bounty Program"
+      ],
+      "evidence": {
+        "anchor": "## Reporting issues",
+        "quote": "Report malicious MCP servers to [Anthropic's Bug Bounty Program](https://www.anthropic.com/responsible-disclosure-policy)."
+      },
+      "notes": "Single-sentence procedure; the page gives no reference-ID collection step.",
+      "_unit_id": "connectors--custom--remote-mcp",
+      "_page": "connectors/custom/remote-mcp.md"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "task_id": "T-038",
+  "task": "create a plugin with Claude",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "app-settings",
+      "mechanism": "prompt-claude",
+      "label": "Customize > Plugins, Create with Claude (app-settings, prompt-claude)",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Add plugin > Create with Claude, describe it, install the result",
+          "actor": "end-user",
+          "products": [
+            "claude-gov"
+          ],
+          "preconditions": [],
+          "steps": [
+            "Open Customize > Plugins",
+            "Select Add plugin",
+            "Select Create with Claude",
+            "Describe the plugin you want",
+            "Install the plugin Claude builds"
+          ],
+          "sources": [
+            {
+              "unit_id": "government--desktop--plugins",
+              "anchor": "## Find and install plugins"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "only-here"
+      ],
+      "note": ""
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "government--desktop--plugins ## Find and install plugins"
+  ],
+  "summary": "Only Claude for Government documents Create with Claude; the plugin lands on that device only.",
+  "open_questions": []
+}

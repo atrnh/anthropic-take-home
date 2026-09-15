@@ -1,0 +1,126 @@
+{
+  "task_id": "T-023",
+  "task": "set connector tool policies for members",
+  "definition": "As an admin, restrict which tools on an allowed connector members can invoke.",
+  "outcome": "an already-allowed connector exposes only the admin-selected subset of its tools to members, and tools outside the policy cannot be invoked",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-023",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "the tenant's consent for the connector covers the write permission set (mail, calendar, mailbox settings, file writes), so write tools can be used",
+      "partial": true,
+      "stage_of": "T-023",
+      "preconditions": [
+        "The tenant's existing consent covers only read permissions",
+        "Microsoft Entra Global Administrator or Application Administrator role"
+      ],
+      "steps": [
+        "Open Enterprise applications in the Microsoft Entra admin center",
+        "Approve the updated permission set covering mail, calendar, mailbox settings, and file writes"
+      ],
+      "evidence": {
+        "anchor": "## Write actions",
+        "quote": "If your tenant's consent for the connector covers only read permissions, a Microsoft Entra Global Administrator or Application Administrator approves the updated permission set"
+      },
+      "notes": "One-time action per tenant; first of the two places write actions are controlled.",
+      "_unit_id": "connectors--microsoft--365",
+      "_page": "connectors/microsoft/365.md"
+    },
+    {
+      "task_id": "T-023",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "outcome": "write actions are on for all users, or for specific users via role-based access control, so members can invoke the connector's write tools",
+      "partial": true,
+      "stage_of": "T-023",
+      "preconditions": [
+        "Write actions are currently off for the organization"
+      ],
+      "steps": [
+        "Open the Microsoft 365 connector configuration",
+        "Turn write actions on for all users",
+        "Alternatively, enable write actions for specific users with role-based access control (beta)"
+      ],
+      "evidence": {
+        "anchor": "## Write actions",
+        "quote": "administrators turn them on for all users in the Microsoft 365 connector configuration, or enable them for specific users with role-based access control (beta)"
+      },
+      "notes": "Second of the two places write actions are controlled; the page does not name the configuration screen's location.",
+      "_unit_id": "connectors--microsoft--365",
+      "_page": "connectors/microsoft/365.md"
+    },
+    {
+      "task_id": "T-023",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the local connector requests exactly the listed delegated Graph scopes at the next sign-in, changing which read and search tools are exposed to users",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "an existing Microsoft 365 managedMcpServers entry",
+        "whatever is listed must also be consented on the app registration from step 1"
+      ],
+      "steps": [
+        "List the delegated scopes you want in the entry's scope field",
+        "Add any of the optional read scopes needed for the extra tools",
+        "Consent the same scopes on the app registration in Entra and keep the two lists in sync"
+      ],
+      "evidence": {
+        "anchor": "### Configure scopes",
+        "quote": "To request a different set, list scopes in the entry's `scope` field."
+      },
+      "notes": "User.Read and offline_access are always included. An unrecognized scope name rejects the whole entry at configuration load and the connector does not appear.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    },
+    {
+      "task_id": "T-023",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the write tools matching the granted scopes appear on the local connector so Claude can act in Microsoft 365, each still requiring user approval on every call",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "Claude Desktop 1.19367.0 or later; 1.24012.0 or later for the Teams write tools"
+      ],
+      "steps": [
+        "Add the desired write scopes to the entry's scope field",
+        "Consent the same write scopes on the app registration from step 1",
+        "Optionally adjust per-tool approval with toolPolicy, noting that allow resolves to ask for the send tools"
+      ],
+      "evidence": {
+        "anchor": "### Grant write scopes",
+        "quote": "grant write scopes: add them to the entry's `scope` field and consent them on the app registration from step 1"
+      },
+      "notes": "Granting a subset of the write scopes exposes a matching subset of the tools; removing them returns the connector to read-only.",
+      "_unit_id": "third-party--claude-desktop--connectors-m365--part03",
+      "_page": "third-party/claude-desktop/connectors-m365.md"
+    }
+  ]
+}

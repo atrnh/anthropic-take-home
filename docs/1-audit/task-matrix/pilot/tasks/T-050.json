@@ -1,0 +1,45 @@
+{
+  "task_id": "T-050",
+  "task": "prompt Claude to propose skill updates",
+  "definition": "Ask Claude to open a pull request improving its own skills from what it learned in channels.",
+  "outcome": "Claude has opened a pull request against the skills repository proposing changes, which a person still has to review and merge",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-050",
+      "new_task": null,
+      "product": "claude-tag",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "chat",
+      "mechanism": "prompt-claude",
+      "outcome": "Claude opens a pull request against the skills repository proposing a skill change, which a human still reviews and merges before it reaches channels",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the skills repository is set up and Claude has write access to it"
+      ],
+      "steps": [
+        "In the channel, mention @Claude and ask it to open a PR to the skills repo so the skill includes what it just learned",
+        "Or ask @Claude to set a recurring routine that reviews the channel's corrections and opens one PR with the fixes",
+        "Review, edit, or close the pull request like any contributor's",
+        "Merge the PR so the updated plugin syncs to the organization"
+      ],
+      "evidence": {
+        "anchor": "## Prompt Claude to propose updates",
+        "quote": "Claude won't open skill PRs unprompted. Ask in the channel when something it learned should stick:"
+      },
+      "notes": "The review/merge/propagate steps are stated in the 'How updates propagate' table, which is otherwise a concept table.",
+      "_unit_id": "claude-tag--admins--skills-repo",
+      "_page": "claude-tag/admins/skills-repo.md"
+    }
+  ]
+}

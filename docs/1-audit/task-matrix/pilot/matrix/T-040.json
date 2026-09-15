@@ -1,0 +1,118 @@
+{
+  "task_id": "T-040",
+  "task": "add a plugin for an organization",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "label": "Admin uploads a plugin archive on the Plugins card/page",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Config > Plugins card: drop the zip, then choose Auto-install or Members choose",
+          "actor": "admin",
+          "products": [
+            "claude-gov"
+          ],
+          "preconditions": [
+            "a plugin zip (a .claude-plugin/plugin.json manifest plus the skill folders under skills/)",
+            "a skill distributed this way must contain only text files (.md, .txt, .json, .yaml, .yml, .csv)"
+          ],
+          "steps": [
+            "Open the Config page in the admin portal",
+            "Open the Plugins card",
+            "Click Add plugins",
+            "Drop the zip",
+            "Check the preview showing the plugin's name, version, and description (a skills-only package is not marked Runs code)",
+            "Choose Auto-install to deliver it to every member, or Members choose to let members install it themselves",
+            "Optionally verify on a device: open Claude Desktop as a member, install it if you chose Members choose, and give Claude a task the skill should match"
+          ],
+          "sources": [
+            {
+              "unit_id": "government--desktop--skills",
+              "anchor": "## Building and deploying your own skills"
+            }
+          ]
+        },
+        {
+          "variant_id": "P1b",
+          "label": "claude.ai/admin-settings/plugins: Add plugins > Upload a file, then attach to a bundle or scope",
+          "actor": "admin",
+          "products": [
+            "claude-tag"
+          ],
+          "preconditions": [
+            "a .zip or .plugin archive of up to 200 MB laid out as a Claude Code plugin: a .claude-plugin/plugin.json manifest at the archive root with skills at skills/<name>/SKILL.md, the same layout inside one top-level folder, or a single top-level SKILL.md"
+          ],
+          "steps": [
+            "Go to the Plugins page at claude.ai/admin-settings/plugins",
+            "Click Add plugins and choose Upload a file",
+            "Upload the .zip or .plugin archive (an archive with no manifest, more than one plugin.json, or a misplaced manifest is rejected at upload)",
+            "After upload the plugin is in the organization's catalog but attached nowhere",
+            "Toggle the plugin on in a bundle's Plugins tab, or add it directly on a scope, to make it available in channels"
+          ],
+          "sources": [
+            {
+              "unit_id": "claude-tag--admins--skills-repo",
+              "anchor": "## Upload a plugin as a zip file"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "steps-differ"
+      ],
+      "note": "Delivery is settled at upload time by an explicit install-behavior choice: Auto-install or Members choose. Distributed skills must be text-only."
+    },
+    "claude-tag": {
+      "status": "documented",
+      "variants": [
+        "P1b"
+      ],
+      "diff": [
+        "steps-differ",
+        "precondition-differs"
+      ],
+      "note": "Upload only puts the plugin in the org catalog; a second gate (toggle on in a bundle's Plugins tab, or add on a scope) is what makes it reach channels. 200 MB archive cap."
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "government--desktop--skills ## Building and deploying your own skills",
+    "government--desktop--skills ## Skills for administrators",
+    "claude-tag--admins--skills-repo ## Upload a plugin as a zip file",
+    "claude-tag--admins--skills-repo ## Set up the skills repository"
+  ],
+  "summary": "Both documented products upload a plugin zip in an admin console; Government picks an install behavior, Claude Tag must attach the plugin to a bundle.",
+  "open_questions": [
+    "Claude Tag's Sync from GitHub path sits in the same Add plugins menu and also ends with toggling plugins on in a bundle; whether that path should be a second variant here or stays under T-034/T-049 is unsettled by these records.",
+    "Claude Tag documents no equivalent of Auto-install vs Members choose, so whether a Tag admin can force a plugin on members is unknown.",
+    "No records for claude, claude-web, claude-desktop, claude-desktop-3p, or cowork; the absences may reflect pilot unit coverage rather than the products lacking the capability."
+  ]
+}

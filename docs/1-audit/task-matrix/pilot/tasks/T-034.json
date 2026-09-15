@@ -1,0 +1,98 @@
+{
+  "task_id": "T-034",
+  "task": "add a plugin marketplace",
+  "definition": "Register another marketplace, such as a Git repository, so its plugins can be installed.",
+  "outcome": "the marketplace is registered in this product and its plugins are offered for installation; no plugin is installed by this step",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-034",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a Git repository is registered as a marketplace and its plugins appear alongside plugins from other marketplaces for installation",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a Git repository containing plugin packages",
+        "GitHub or GitHub Enterprise, or a public GitLab or Bitbucket repository"
+      ],
+      "steps": [
+        "Open the Plugins page",
+        "Select Add marketplace",
+        "Enter the repository's URL, as https://github.com/owner/repo or the owner/repo shorthand",
+        "Install plugins from the repository the same way as other marketplace plugins"
+      ],
+      "evidence": {
+        "anchor": "## Use a Git repository as a marketplace",
+        "quote": "On the Plugins page, select **Add marketplace** and enter the repository's URL."
+      },
+      "notes": "mode: cowork;",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-034",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the registered marketplace offers the latest plugins from its repository",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the marketplace is already added"
+      ],
+      "steps": [
+        "Click Update on a marketplace to pull the latest plugins from its repository"
+      ],
+      "evidence": {
+        "anchor": "## Use a Git repository as a marketplace",
+        "quote": "Click **Update** on a marketplace to pull the latest plugins from its repository."
+      },
+      "notes": "mode: cowork; Refreshes the marketplace listing, not an installed plugin; matches the T-034 alias 'update a marketplace'.",
+      "_unit_id": "cowork--guide--plugins",
+      "_page": "cowork/guide/plugins.md"
+    },
+    {
+      "task_id": "T-034",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "a marketplace of the user's own is registered from Browse plugins so its plugins can be installed, if network controls allow it to be downloaded",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "the deployment's network controls allow the marketplace to be downloaded"
+      ],
+      "steps": [
+        "Open Customize > Plugins",
+        "Select Browse plugins",
+        "Add a plugin marketplace of your own"
+      ],
+      "evidence": {
+        "anchor": "## Where plugins come from",
+        "quote": "You can also add a plugin marketplace of your own from **Browse plugins**."
+      },
+      "notes": "The page names the entry point but not the fields; steps kept to what the text states.",
+      "_unit_id": "government--desktop--plugins",
+      "_page": "government/desktop/plugins.md"
+    }
+  ]
+}

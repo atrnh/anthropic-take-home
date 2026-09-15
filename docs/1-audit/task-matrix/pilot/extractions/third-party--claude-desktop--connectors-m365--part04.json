@@ -1,0 +1,234 @@
+{
+  "unit_id": "third-party--claude-desktop--connectors-m365--part04",
+  "page": "third-party/claude-desktop/connectors-m365.md",
+  "product_default": "claude-desktop-3p",
+  "records": [
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the user is signed in to Entra through the M365 local connector, via the device broker or the system browser, so the connector can be used",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": ["the managed configuration has been deployed to the device"],
+      "steps": [
+        "Open Customize → Connectors in Claude Desktop",
+        "Select Connect on the Microsoft 365 connector",
+        "Complete sign-in in the system account-picker dialog shown by the native authentication broker",
+        "If the broker is unavailable, complete sign-in in the system browser that opens instead"
+      ],
+      "evidence": {
+        "anchor": "### How users sign in",
+        "quote": "the connector appears in **Customize → Connectors** in Claude Desktop. Sign-in starts when the user selects **Connect**."
+      },
+      "notes": "User half of the M365 connector setup; the admin stages (app registration, consent, config deployment) are in earlier parts of this page."
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the deployed configuration determines whether the connector's sign-in uses the device authentication broker or the system browser",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": [
+        "`required` only where every device runs Claude Desktop 1.49585.0 or later",
+        "`required` is not supported on Linux"
+      ],
+      "steps": [
+        "Set the microsoftAuthBroker key in the managed configuration",
+        "Leave it at auto to use the broker where available and the browser otherwise",
+        "Set disabled to always use the browser",
+        "Set required to make sign-in fail rather than fall back to the browser",
+        "Set required only after every device that receives the configuration is on Claude Desktop 1.49585.0 or later"
+      ],
+      "evidence": {
+        "anchor": "### How users sign in",
+        "quote": "Set `required` only after every device that receives the configuration is on Claude Desktop 1.49585.0 or later"
+      },
+      "notes": ""
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "Windows devices meet the requirements for brokered sign-in, so tokens carry the device identity claim that device-based Conditional Access evaluates",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": ["Claude Desktop version 1.13576.0 or later", "Windows 10 or later (desktop editions)"],
+      "steps": [
+        "Confirm devices run Claude Desktop 1.13576.0 or later on Windows 10 or later",
+        "Join or register the device to Entra ID (Entra joined, hybrid joined, or registered)",
+        "Mark the device compliant in Intune or hybrid-joined as the Conditional Access policy requires",
+        "On the local-mode app registration, open Mobile and desktop applications",
+        "Register ms-appx-web://Microsoft.AAD.BrokerPlugin/APPLICATION_CLIENT_ID, replacing APPLICATION_CLIENT_ID with the Application (client) ID from step 1"
+      ],
+      "evidence": {
+        "anchor": "### How users sign in",
+        "quote": "The broker redirect URI is registered on the local-mode app under **Mobile and desktop applications**, with `APPLICATION_CLIENT_ID` replaced by the Application (client) ID from step 1"
+      },
+      "notes": "Windows broker is Web Account Manager (WAM), built into Windows."
+    },
+    {
+      "task_id": "T-019",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "macOS devices meet the requirements for brokered sign-in through the Microsoft Enterprise SSO plug-in and the registered broker redirect URI",
+      "partial": true,
+      "stage_of": "T-019",
+      "preconditions": ["Claude Desktop version 1.19367.0 or later"],
+      "steps": [
+        "Confirm devices run Claude Desktop 1.19367.0 or later",
+        "Enroll the Mac in an MDM, register it in Entra ID, and mark it compliant",
+        "For non-Intune MDMs, use the partner device-compliance integration that reports to Intune and Entra",
+        "Install Intune Company Portal, which provides the broker",
+        "Deploy an Extensible SSO configuration profile of type Redirect pointed at the Microsoft Enterprise SSO plug-in through MDM",
+        "Register msauth.com.anthropic.claudefordesktop://auth on the local-mode app under Mobile and desktop applications",
+        "Remove the msauth.com.anthropic.claudefordesktop.helper://auth entry if the registration lists it"
+      ],
+      "evidence": {
+        "anchor": "### How users sign in",
+        "quote": "**Intune Company Portal** is installed; it provides the broker."
+      },
+      "notes": "The macOS redirect URI appears under the iOS / macOS section after saving."
+    },
+    {
+      "task_id": "T-010",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the user is signed out of the connector and its stored Entra tokens are deleted from the device",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": ["Select Disconnect next to the connector"],
+      "evidence": {
+        "anchor": "### Token storage and sign-out",
+        "quote": "Selecting **Disconnect** next to the connector signs the user out and deletes its stored tokens."
+      },
+      "notes": ""
+    },
+    {
+      "task_id": "T-010",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "the brokered work or school account is removed or the user's Entra sessions are revoked, so the connector's access ends rather than only its local tokens being deleted",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": ["the user signed in through the device broker"],
+      "steps": [
+        "Remove the work or school account in Windows Settings under Accounts → Access work or school",
+        "Or remove the account in macOS Company Portal",
+        "Or revoke the user's sessions in Entra"
+      ],
+      "evidence": {
+        "anchor": "### Token storage and sign-out",
+        "quote": "remove the account in Windows Settings (**Accounts → Access work or school**) or macOS Company Portal, or revoke the user's sessions in Entra, to end access entirely"
+      },
+      "notes": "Mixes OS account settings and Entra; effect timing depends on continuousAccessEvaluation (minutes when enabled, otherwise up to one hour)."
+    },
+    {
+      "task_id": "T-013",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "the Entra error blocking the connector's sign-in is identified and corrected on the local-mode app registration or the device, and sign-in completes",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "For AADSTS50011, add or correct the redirect URI named in the error under Mobile and desktop applications",
+        "For AADSTS900971, register msauth.com.anthropic.claudefordesktop://auth on the local-mode app",
+        "For AADSTS65001, re-check that Graph delegated permissions were admin-consented",
+        "For AADSTS53003, meet the brokered sign-in requirements for the platform, then restart Claude Desktop",
+        "For AADSTS7000218, set Allow public client flows to Yes on the local-mode app registration",
+        "If sign-in opens the browser where the broker was expected, re-check the brokered sign-in requirements"
+      ],
+      "evidence": {
+        "anchor": "### Troubleshoot the local connector",
+        "quote": "Add or correct that URI under *Mobile and desktop applications* (step 1.2, or the brokered sign-in requirements above)"
+      },
+      "notes": "Sign-in and Graph errors are logged to mcp-server-office365-builtin.log in the Claude Desktop logs directory."
+    },
+    {
+      "task_id": "T-015",
+      "new_task": null,
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "third-party-admin",
+      "mechanism": "click-through",
+      "outcome": "the missing or unconsented Graph scope behind a permission error, a Graph 403, or absent write tools is added and consented, so the connector's tools appear and succeed",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "For a tool permission error or Graph 403, identify the scope the tool needs",
+        "Add the scope on the app registration and in the entry's scope list",
+        "Grant admin consent for the scope",
+        "For missing or failing write tools, add the matching write scope to the entry and consent it on the app registration",
+        "Upgrade Claude Desktop if the installed version predates write support"
+      ],
+      "evidence": {
+        "anchor": "### Troubleshoot the local connector",
+        "quote": "Add the scope in both places and grant admin consent"
+      },
+      "notes": "Fix spans the Entra app registration and the connector entry's scope field in the managed configuration."
+    },
+    {
+      "task_id": "NEW",
+      "new_task": {
+        "label": "troubleshoot a connector that does not appear in the product",
+        "outcome": "the reason a configured connector is absent from settings or from the Add server options is identified and the entry loads in the app",
+        "why": "T-013/T-014/T-015 all presuppose a connector that is present; these rows cover version and configuration-parsing failures that occur before any connection or sign-in is attempted"
+      },
+      "product": "claude-desktop-3p",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "the version or configuration-parsing fault that keeps the built-in Microsoft 365 connector out of settings is identified and the entry loads",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "If Test connection reports the built-in server is not included, upgrade Claude Desktop",
+        "If Microsoft 365 is missing from the Add server options, upgrade Claude Desktop or author the JSON entry directly",
+        "If the connector is missing from settings, check the app's main log for the line naming the dropped entry",
+        "Correct the rejected entry: unrecognized scope name, missing tenantId or clientId, or a url, transport, or command field mixed in"
+      ],
+      "evidence": {
+        "anchor": "### Troubleshoot the local connector",
+        "quote": "Check the app's main log for a line naming the dropped entry"
+      },
+      "notes": "Configuration parsing and connection lifecycle messages appear in main.log in the Claude Desktop logs directory."
+    }
+  ],
+  "no_procedures": false,
+  "coverage_notes": "Covers the user sign-in flow, the microsoftAuthBroker configuration key, the Windows and macOS brokered sign-in requirement sets, Disconnect plus full access revocation, and the troubleshooting table split by which task's outcome each row's fix achieves. Concept-only passages (token storage, broker fallback behavior, log file locations) are recorded as notes rather than extracted as procedures."
+}

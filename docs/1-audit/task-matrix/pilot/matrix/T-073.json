@@ -1,0 +1,116 @@
+{
+  "task_id": "T-073",
+  "task": "verify an uploaded skill works in the product",
+  "view": "product",
+  "families": [
+    {
+      "family_id": "P1",
+      "surface": "chat",
+      "mechanism": "prompt-claude",
+      "label": "Give Claude a matching task and confirm the skill loads",
+      "variants": [
+        {
+          "variant_id": "P1a",
+          "label": "Enable in Customize > Skills, prompt, read Claude's thinking, iterate the description",
+          "actor": "end-user",
+          "products": [
+            "claude"
+          ],
+          "preconditions": [
+            "the skill has been uploaded to the account"
+          ],
+          "steps": [
+            "Enable the skill in Customize > Skills",
+            "Try prompts that should trigger it",
+            "Review Claude's thinking to confirm it is loading the skill",
+            "Iterate on the description if Claude is not using it when expected"
+          ],
+          "sources": [
+            {
+              "unit_id": "skills--how-to",
+              "anchor": "### After uploading"
+            }
+          ]
+        },
+        {
+          "variant_id": "P1b",
+          "label": "Check a plugin-delivered skill on a member device after the admin upload",
+          "actor": "admin",
+          "products": [
+            "claude-gov"
+          ],
+          "preconditions": [
+            "the skill is packaged in a plugin and added on the admin portal Plugins card",
+            "if the admin chose Members choose, the plugin must be installed on the device first"
+          ],
+          "steps": [
+            "Open Claude Desktop as a member",
+            "Install the plugin if you chose Members choose",
+            "Give Claude a task the skill should match",
+            "Confirm Claude picks it up",
+            "To change the skill later, update the plugin"
+          ],
+          "sources": [
+            {
+              "unit_id": "government--desktop--skills",
+              "anchor": "## Building and deploying your own skills"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cells": {
+    "claude": {
+      "status": "documented",
+      "variants": [
+        "P1a"
+      ],
+      "diff": [
+        "actor-differs",
+        "steps-differ",
+        "precondition-differs"
+      ],
+      "note": "self-uploaded skill: the user enables it in Customize > Skills, then prompts and inspects Claude's thinking"
+    },
+    "claude-desktop-3p": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    },
+    "claude-gov": {
+      "status": "documented",
+      "variants": [
+        "P1b"
+      ],
+      "diff": [
+        "actor-differs",
+        "steps-differ",
+        "precondition-differs"
+      ],
+      "note": "admin verifies a plugin-delivered skill on a device; the upload checks packaging, not skill content, so a malformed SKILL.md only shows up here"
+    },
+    "claude-tag": {
+      "status": "absent",
+      "variants": [],
+      "diff": [
+        "absent"
+      ],
+      "note": ""
+    }
+  },
+  "misfiled": [],
+  "checked": [
+    "skills--how-to ### After uploading (read with the surrounding ## Testing your skill and ## Packaging your skill sections)",
+    "government--desktop--skills ## Building and deploying your own skills (Check it on a device paragraph in full, plus ## Create and manage skills and ## Skills for administrators)"
+  ],
+  "summary": "Both documented cells confirm a skill by prompting Claude, but differ in actor, enabling gate, and how the skill reached the account.",
+  "open_questions": [
+    "The claude-gov record is tagged actor admin while its steps say to open Claude Desktop 'as a member'; the text does not say whether the admin verifies on their own device or asks a member, so P1b may be a two-actor path.",
+    "Whether P1a's first step (enable in Customize > Skills) belongs to T-042 rather than here could not be settled from the source; it was kept because it opens the same numbered list that ends in a confirmed trigger.",
+    "No records for claude-web, claude-desktop, claude-desktop-3p, claude-tag, or cowork; the reads could not distinguish pages that genuinely omit a verification step from units absent in the pilot corpus."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "task_id": "T-039",
+  "task": "package a plugin archive",
+  "definition": "Lay out plugin.json and component folders and zip them into an uploadable plugin package.",
+  "outcome": "a plugin archive with a valid plugin.json and its component folders exists as a file, ready to upload or publish; it is not installed anywhere",
+  "view": "builder",
+  "artifact": "plugin",
+  "stage": "package",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-039",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "a plugin zip holding plugin.json and the skill folders under skills/ exists as a file, ready to upload",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a written skill folder"
+      ],
+      "steps": [
+        "Create .claude-plugin/plugin.json with name and version, plus a description",
+        "Place each skill folder under skills/",
+        "Add one folder per skill if the plugin carries several",
+        "Zip the plugin contents, or the wrapping plugin folder itself"
+      ],
+      "evidence": {
+        "anchor": "## Building and deploying your own skills",
+        "quote": "The smallest valid package is the manifest plus your skill folder under `skills/`"
+      },
+      "notes": "Zipping the plugin folder itself also works, since the upload accepts the single wrapping folder.",
+      "_unit_id": "government--desktop--skills",
+      "_page": "government/desktop/skills.md"
+    },
+    {
+      "task_id": "T-039",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": "Cowork",
+      "actor": "admin",
+      "surface": "chat",
+      "mechanism": "prompt-claude",
+      "outcome": "Claude has arranged the skill files into the plugin layout and produced the zip",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "Cowork tasks available in your deployment"
+      ],
+      "steps": [
+        "Open a Cowork task",
+        "Give Claude the plugin layout",
+        "Paste in the full rules from Plugin archive formats",
+        "Ask Claude to arrange the files and produce the zip"
+      ],
+      "evidence": {
+        "anchor": "## Building and deploying your own skills",
+        "quote": "Claude can do the assembly in a Cowork task: give it the layout above, paste in the full rules from"
+      },
+      "notes": "mode: cowork; Claude Desktop in Claude for Government does not include a packaging skill, so the layout must be in the request.",
+      "_unit_id": "government--desktop--skills",
+      "_page": "government/desktop/skills.md"
+    }
+  ]
+}

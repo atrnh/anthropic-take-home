@@ -1,0 +1,52 @@
+{
+  "task_id": "T-049",
+  "task": "set up a skills repository with auto-sync",
+  "definition": "Put org skills in a git repository, enable auto-sync, and grant Claude write access.",
+  "outcome": "the organization's skills come from a connected git repository, changes there propagate to members automatically, and Claude holds the write access needed to open pull requests",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-049",
+      "new_task": null,
+      "product": "claude-tag",
+      "product_evidence": null,
+      "actor": "admin",
+      "surface": "admin-settings",
+      "mechanism": "click-through",
+      "outcome": "the org's skills come from a private GitHub repository registered as an auto-syncing plugin marketplace, Claude has write access to it, and its plugins are attached to a scope",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a private or internal GitHub repository laid out as a Claude Code plugin marketplace with .claude-plugin/marketplace.json at the root",
+        "for a github.com repository, the GitHub connector must be enabled for the organization",
+        "the Claude GitHub App must already be linked to the GitHub organization",
+        "the repository archive must be no larger than 512 MiB"
+      ],
+      "steps": [
+        "Create a private or internal GitHub repository laid out as a Claude Code plugin marketplace, with .claude-plugin/marketplace.json at the root and one folder per plugin",
+        "Fork a public repository into a private one first, since a public repository cannot be selected",
+        "Go to the Plugins page at claude.ai/admin-settings/plugins",
+        "Click Add plugins and choose Sync from GitHub",
+        "Select the repository, leave Sync automatically on, and click Create",
+        "Open an Access bundle and go to its Repositories tab",
+        "Add the repository to the bundle",
+        "In the same bundle's Plugins tab, toggle on the plugins from the new marketplace"
+      ],
+      "evidence": {
+        "anchor": "## Set up the skills repository",
+        "quote": "Select the repository, leave **Sync automatically** on (the default), and click **Create**."
+      },
+      "notes": "Step 1 happens on GitHub (third-party-admin surface) and the registration steps in claude.ai admin settings; kept as one variant since they are sequential stages of one path. Verification stated: the repository appears in the bundle's Repositories list and the marketplace's plugins appear in its Plugins tab.",
+      "_unit_id": "claude-tag--admins--skills-repo",
+      "_page": "claude-tag/admins/skills-repo.md"
+    }
+  ]
+}

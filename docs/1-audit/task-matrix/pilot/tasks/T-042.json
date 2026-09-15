@@ -1,0 +1,42 @@
+{
+  "task_id": "T-042",
+  "task": "find and enable a skill",
+  "definition": "See which skills are available in Settings and turn one on or off.",
+  "outcome": "a skill already present in this product is switched on (or off) for the account, so Claude will or will not load it; nothing has been run to check it",
+  "view": "product",
+  "artifact": "",
+  "stage": "",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-042",
+      "new_task": null,
+      "product": "claude-gov",
+      "product_evidence": null,
+      "actor": "end-user",
+      "surface": "app-settings",
+      "mechanism": "click-through",
+      "outcome": "the member sees their skills and has switched one on or off in Claude Desktop",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [],
+      "steps": [
+        "Open Customize in the sidebar",
+        "Open Skills",
+        "Turn a listed skill on or off"
+      ],
+      "evidence": {
+        "anchor": "## Create and manage skills",
+        "quote": "Open **Customize** in the sidebar, then **Skills**, to see your skills and turn any of them on or off."
+      },
+      "notes": "",
+      "_unit_id": "government--desktop--skills",
+      "_page": "government/desktop/skills.md"
+    }
+  ]
+}

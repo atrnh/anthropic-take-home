@@ -1,0 +1,43 @@
+{
+  "task_id": "T-072",
+  "task": "package a skill for distribution",
+  "definition": "Zip a skill folder into a single uploadable skill file for upload or hand-off.",
+  "outcome": "a single skill file containing the skill directory exists, ready to upload or hand to someone else; it is not installed anywhere",
+  "view": "builder",
+  "artifact": "skill",
+  "stage": "package",
+  "products_in_scope": [
+    "claude",
+    "claude-desktop-3p",
+    "claude-gov",
+    "claude-tag"
+  ],
+  "records": [
+    {
+      "task_id": "T-072",
+      "new_task": null,
+      "product": "claude",
+      "product_evidence": null,
+      "actor": "developer",
+      "surface": "filesystem",
+      "mechanism": "edit-file",
+      "outcome": "a ZIP file containing the skill directory itself exists, ready to upload to Claude",
+      "partial": false,
+      "stage_of": null,
+      "preconditions": [
+        "a skill directory with SKILL.md exists"
+      ],
+      "steps": [
+        "Ensure the directory name matches the skill's name field",
+        "Create a ZIP file containing the skill directory, not its files at the ZIP root"
+      ],
+      "evidence": {
+        "anchor": "## Packaging your skill",
+        "quote": "Create a ZIP file containing the skill directory"
+      },
+      "notes": "",
+      "_unit_id": "skills--how-to",
+      "_page": "skills/how-to.md"
+    }
+  ]
+}
