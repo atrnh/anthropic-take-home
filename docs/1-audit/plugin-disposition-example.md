@@ -1,7 +1,11 @@
 # Plugin installation and distribution: editorial disposition example
 
-Status: proposal for review, 2026-09-15. This is the first worked example for
-the audit memo, not the complete slice audit or an implemented migration.
+Start with the [short audit memo](README.md). This supporting evidence draft
+preserves the detailed first example behind its plugin recommendations.
+
+Status: proposal for review, 2026-09-15. This is not the complete slice audit
+or an implemented migration.
+
 Evidence comes from the 54-page snapshot fetched on 2026-09-14, recorded in
 [the manifest](../../corpus/manifest.json). Statements below describe that
 snapshot, not independently verified current product behavior.
@@ -52,11 +56,15 @@ Extend Claude
     └── Submit a plugin to the directory      /docs/plugins/submit
 ```
 
+### Alternate entrances
+
 These paths are proposed, except the existing overview and submission paths.
 Cowork, Government, and Claude Tag landing pages remain alternate entry points to
 the applicable task and context. They do not own duplicate versions of the
 complete plugin manual. Claude Code remains a link to its existing documentation;
 this example does not migrate that external documentation.
+
+### Preserve the Claude Tag workflow
 
 The Claude Tag skills-repository guide keeps its existing URL. Its outcome is
 establishing a repository Claude can propose changes to, with human review and
@@ -83,6 +91,8 @@ until it has been reviewed. Do not synthesize its instructions from member UI.
 
 ## One page, separate Markdown sources
 
+### Authoring layout
+
 Illustrative authoring layout only; these files and selectors are not implemented:
 
 ```text
@@ -94,6 +104,8 @@ procedures/plugins/distribute/government.md
 procedures/plugins/distribute/claude-tag-upload.md
 procedures/plugins/distribute/claude-tag-sync.md
 ```
+
+### Applicability metadata
 
 Each procedure records task, actor, place of use, deployment conditions when
 known, mechanism, outcome, and source evidence. Where an administrator performs
@@ -114,6 +126,8 @@ applicability; they are not a requirement to show seven controls to the reader.
    Government instructions explicitly distinguish installation from connector access.
 6. **Next steps:** manage the installed plugin, or follow applicable connector setup.
 
+### Context selection and fallback
+
 Persist deployment context across tasks only when it remains relevant. Keep
 installation method local to the task. Do not offer one dropdown mixing Cowork,
 Government, and ZIP upload, or imply that every combination exists.
@@ -127,6 +141,8 @@ expanding the presentation system; see the [worked rewrite](../2-standards/rewri
 Explicit context in an incoming link wins over a saved preference, and the page
 visibly shows that context. With no applicable procedure, explain the documentation
 gap and retain the existing relevant route. Do not silently show another workflow.
+
+### Interface acceptance criteria
 
 The eventual interface must support keyboard operation, shareable context links,
 and a readable no-script/print representation with labeled variants. Hidden tabs
@@ -148,6 +164,8 @@ include canonical content where needed; they are not separately maintained manua
 | `/docs/claude-tag/admins/skills-repo` | Keep the skills-improvement workflow, repository guidance, prompts, and related resources. Reuse canonical distribution sources for upload/sync steps. Resolve conflicting archive-format claims before rewriting them. | Keep URL and headings, including `#upload-a-plugin-as-a-zip-file`. The included upload procedure is the same source shown in the administrator task page. |
 | `/docs/plugins/submit` | Keep the direct-install / own-marketplace / public-directory route choice, validation, access prerequisites, submission, review, update behavior, trust information, and policy links. Shorten repeated component definitions into links; retain publisher-specific setup guidance. | Keep URL and existing anchors. Route direct installation to the applicable member guide, own-marketplace setup to the existing Claude Code guide or reviewed administration instructions, and public submission to the retained section. Do not funnel all sharing through administration. |
 | `/docs/office-agents/fsi-plugins` | Move collection guidance under plugins; retain repository URL, core-first order, add-ons, skills, provider access requirements, customization guidance, and review warning. Reuse verified generic installation steps. | After publishing the replacement, permanent redirect to `/docs/plugins/collections/financial-services`. Preserve all existing heading IDs at the destination. |
+
+### Disposition guardrails
 
 This pass proposes one whole-page relocation, several content consolidations, and
 specific prose deletions. It proposes no deletion of a unique workflow and no 404s.
@@ -172,6 +190,8 @@ The query fields here are a proposed public URL contract, not deployed functiona
 | `/docs/claude-tag/admins/skills-repo#upload-a-plugin-as-a-zip-file` | Keep current URL/anchor and include the canonical Claude Tag upload-and-attach workflow. |
 | `/docs/office-agents/fsi-plugins#install-plugins` | `/docs/plugins/collections/financial-services#install-plugins`, retaining core-first instructions. |
 
+### Inventory every route and anchor
+
 These are representative mappings, not a complete anchor inventory. Before launch,
 enumerate every rendered heading/explicit ID on all seven old pages and account for
 each. The Markdown snapshot establishes headings; actual rendered IDs need checking.
@@ -179,6 +199,9 @@ The manifest also records `.md` source URLs. Inventory those machine-readable ro
 alongside extensionless browser URLs, preserve access to the corresponding content,
 and update the documentation index when destinations change. Give composed variants
 unique IDs so repeated headings do not compete for the same fragment.
+
+### Handle URL fragments explicitly
+
 URL fragments are not sent to the server, so a server redirect cannot choose a
 different task based on the incoming fragment. Retain real legacy anchor targets
 and useful links on bridge pages; optional client routing can read the fragment and
@@ -211,6 +234,8 @@ preservation through the actual host and retain the same IDs on the replacement.
 5. **Expand only after this example holds.** Apply the same disposition fields to
    the rest of the slice. The existing extraction artifacts are evidence inputs;
    this example neither reruns that pipeline nor establishes full-corpus coverage.
+
+### Acceptance examples
 
 Acceptance examples: a Government member can identify that plugin installation
 does not add connectors; a Government admin can distinguish stopping delivery from

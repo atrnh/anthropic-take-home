@@ -1,6 +1,18 @@
 # Proposed information architecture and migration
 
-Draft, 2026-09-15. This applies the [plugin example](plugin-disposition-example.md) across the [54-page disposition ledger](disposition-ledger.md). The [memo](audit-memo.md) is the short recommendation. Paths below are proposed unless the ledger identifies them as existing. This document is maintained by hand.
+Draft, 2026-09-15. Start with the [short audit memo](README.md).
+This supporting draft applies the [plugin example](plugin-disposition-example.md)
+across the [54-page disposition ledger](disposition-ledger.md). Paths below are
+proposed unless the ledger identifies them as existing. This document is maintained
+by hand.
+
+## In this draft
+
+- [Navigation tree](#organize-by-capability-and-task)
+- [Destination scopes](#give-new-destinations-explicit-scope)
+- [Content and presentation](#author-complete-procedures-compose-the-readers-view)
+- [Old-link behavior](#preserve-incoming-intent)
+- [Migration and acceptance](#migrate-in-reader-testable-batches)
 
 ## Organize by capability and task
 
@@ -92,6 +104,8 @@ The [ledger](disposition-ledger.md) assigns every existing URL to a retained pag
 
 Keep shared concepts in their existing Skills, Plugins, and Connectors overviews. Maintain divergent workflows in separate source files. Compose the applicable workflow into its task page. Reuse small identical passages only when scope and outcome stay identical.
 
+### Describe applicability
+
 Record these dimensions independently in the editorial record:
 
 - **Place of use:** for example, an M365 add-in, Science, or Desktop.
@@ -100,7 +114,15 @@ Record these dimensions independently in the editorial record:
 - **Local method:** file/marketplace, remote/local, or Helm/Compose.
 - **Outcome:** installed, attached to a scope, authenticated, permitted to act, or submitted for review.
 
-These are applicability facts, not five required dropdowns. Ask only for choices that change instructions. Use recognizable account/application labels and adjacent **How to check** guidance. If the evidence supplies no reliable UI check, tell readers what to ask their administrator. Never infer deployment merely because a page mentions Cowork or Desktop.
+### Help readers choose instructions
+
+These are applicability facts, not five required dropdowns. Ask only for choices
+that change instructions. Use recognizable account/application labels and adjacent
+**How to check** guidance. If the evidence supplies no reliable UI check, tell
+readers what to ask their administrator. Never infer deployment merely because a
+page mentions Cowork or Desktop.
+
+### Preserve context and access
 
 An explicit incoming context wins over a saved choice and remains visible. Preserve a method comparison when readers need to decide, especially Microsoft 365's local/remote data paths. Unknown context must offer identification help and the retained relevant route, never silently substitute an arbitrary procedure. Keyboard, no-script, print, and shareable links must retain complete labeled instructions.
 
@@ -129,7 +151,7 @@ Do not send removed sections to a homepage. Before redirecting a page, preserve 
 4. **Test content and compatibility together.** Inventory all original sections and anchors. Verify every unique instruction has a home, each applicable workflow stands alone, and old links preserve task/context. Check unknown choices, saved-context conflicts, keyboard use, and no-script/print views. Review `.md` outputs for labeled variants.
 5. **Release and observe.** Publishing owners ship content and routing together. Keep the previous published version and route map available for rollback. If a migrated link selects the wrong workflow, restore its prior useful page while repairing the mapping. Remove duplicate authored text after acceptance; retain bridges while bare links still carry multiple plausible intents.
 
-Acceptance scenarios:
+### Acceptance scenarios
 
 - A Government member installs a plugin and correctly identifies that its bundled connectors were not connected.
 - A Government administrator packages a textual skill as a plugin and verifies that it actually loads on a member device.

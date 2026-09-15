@@ -1,10 +1,26 @@
 # Slice-wide editorial disposition ledger
 
-Draft for review, 2026-09-15. Covers all 54 pages in the [2026-09-14 snapshot](../../corpus/manifest.json). This is an editorial disposition pass, not a live product verification, code review, or implemented migration. The [memo](audit-memo.md) gives the recommendation; [proposed IA](proposed-ia.md) defines destinations and migration checks. The [plugin example](plugin-disposition-example.md) supplies the detailed first case.
+Draft for review, 2026-09-15. Covers all 54 pages in the
+[2026-09-14 snapshot](../../corpus/manifest.json). Start with the
+[short audit memo](README.md) for the recommendation.
+
+This is an editorial disposition pass, not a live product verification, code
+review, or implemented migration. The [proposed IA](proposed-ia.md) defines
+destinations and migration checks. The [plugin example](plugin-disposition-example.md)
+supplies the detailed first case.
 
 This is maintained editorial content. Edit this file directly. Keep `corpus/` unchanged. Existing task-matrix outputs are supporting research, not the authority for these decisions.
 
 ## How to read the ledger
+
+Use the task-family sections to review one part of the slice at a time:
+
+- [Skills and contextual entry points](#skills-and-contextual-entry-points)
+- [Plugins and distribution](#plugins-and-distribution)
+- [Connectors for members and administrators](#connectors-for-members-and-administrators)
+- [Build and publish](#build-and-publish)
+- [MCP Apps and private-network operations](#mcp-apps-and-private-network-operations)
+- [Publication questions](#publication-questions-to-resolve)
 
 Each source link opens the pinned page. The adjacent section names identify the evidence. Current paths are relative to `https://claude.com`; proposed paths are not deployed. **P1** means instructions can be misapplied or a consequential condition can be missed. **P2** means readers must navigate between tasks or reconcile overlapping explanations. **P3** means localized duplication or wording. **Keep** means no structural change is justified by this pass, not that every technical claim has been verified.
 

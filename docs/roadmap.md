@@ -6,7 +6,7 @@ and developer-platform documentation sites are outside the exercise.
 
 ## Drafts available for review
 
-- [Audit memo](1-audit/audit-memo.md), backed by the
+- [Short audit memo](1-audit/README.md), backed by the
   [54-page disposition ledger](1-audit/disposition-ledger.md) and
   [proposed IA and migration](1-audit/proposed-ia.md).
 - [Style-guide excerpt](2-standards/style-guide.md),
