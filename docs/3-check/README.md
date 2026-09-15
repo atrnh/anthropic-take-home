@@ -1,5 +1,8 @@
 # Check for repeated explanatory prose
 
+Follow-up: the [TF-IDF retrieval bake-off](tfidf-bakeoff.md) compares candidate
+generation while preserving this lexical baseline and its editorial evaluation.
+
 This working prototype flags exact and near-exact prose overlap in the pinned
 Claude Docs snapshot. It addresses the audit's recommendation to
 [remove competing explanations and redundant upkeep](../1-audit/audit-memo.md).

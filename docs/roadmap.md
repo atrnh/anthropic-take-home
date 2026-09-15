@@ -15,6 +15,7 @@ and developer-platform documentation sites are outside the exercise.
 - [Repeated-prose checker, results, and evaluation](3-check/README.md).
   The working prototype finds useful cases but does not meet its proposed
   precision or coverage targets for routine use.
+  The [TF-IDF bake-off](3-check/tfidf-bakeoff.md) tests candidate retrieval separately.
 
 These are drafts, not approved final submission artifacts. The audit proposes
 changes against the pinned snapshot; live product checks, rendered-anchor
