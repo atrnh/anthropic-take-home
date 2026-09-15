@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Install a plugin</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+    :root { color-scheme: light; font: 17px/1.65 system-ui, sans-serif; color: #252522; background: #faf9f6; }
+    body { max-width: 800px; margin: 0 auto; padding: 48px 24px 100px; }
+    h1 { font-size: 2.6rem; line-height: 1.15; letter-spacing: -.04em; }
+    h2 { margin-top: 2.6rem; line-height: 1.3; }
+    h3 { margin-top: 2rem; line-height: 1.4; }
+    a { color: #245b74; text-underline-offset: .18em; }
+    li { margin: .55rem 0; }
+    select { font: inherit; max-width: 100%; padding: .65rem; border: 1px solid #888; border-radius: 4px; background: white; color: inherit; }
+    label { display: block; font-weight: 650; margin-bottom: .4rem; }
+    .chooser { position: sticky; top: 0; background: #faf9f6; padding: .7rem 0; z-index: 1; border-bottom: 1px solid #d6d1c9; }
+    #selection-status { margin: .4rem 0 0; font-size: .9rem; }
+    [id] { scroll-margin-top: 145px; }
+    .help { border-left: 3px solid #b9ae9c; padding: 1px 20px; margin: 1.8rem 0; background: #f1eee7; }
+    .help h3 { margin-top: 1rem; }
+    .help p { padding-bottom: .3rem; }
+    blockquote { margin-left: 0; padding-left: 1rem; border-left: 2px solid #aaa; }
+    .variant { border-top: 1px solid #d6d1c9; margin-top: 2rem; }
+    :focus-visible { outline: 3px solid #245b74; outline-offset: 4px; }
+    code { font-size: .9em; }
+    [hidden] { display: none !important; }
+    @media print { .chooser { display: none; } .variant[hidden] { display: block !important; } body { padding: 0; } }
+  </style>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const chooser = document.querySelector('.chooser');
+    const select = document.querySelector('#instructions');
+    const status = document.querySelector('#selection-status');
+    const variants = [...document.querySelectorAll('.variant')];
+    const ids = variants.map(section => section.id);
+    const labels = {cowork: 'Cowork — general guide', government: 'Cowork — Claude for Government'};
+    const contextFromHash = () => ids.find(id => location.hash === '#' + id || location.hash.startsWith('#' + id + '-'));
+    function render() {
+      const requested = new URL(location.href).searchParams.get('instructions');
+      const hashContext = contextFromHash();
+      let selected = requested === null ? (hashContext || '') : requested;
+      let message = '';
+      if (![...ids, '', 'all'].includes(selected)) {
+        selected = '';
+        message = 'This link names an unknown guide. Use How to check, then choose your instructions.';
+      } else if (ids.includes(selected) && hashContext && selected !== hashContext) {
+        selected = '';
+        message = 'This link names two different guides. Use How to check, then choose your instructions.';
+      }
+      select.value = selected;
+      variants.forEach(section => { section.hidden = selected !== 'all' && section.id !== selected; });
+      status.textContent = message || (selected === 'all' ? 'Showing both labeled guides.' : selected ? 'Showing ' + labels[selected] + '.' : 'Use How to check below, then choose a guide.');
+      if (hashContext && (selected === hashContext || selected === 'all')) {
+        document.getElementById(location.hash.slice(1))?.scrollIntoView();
+      }
+    }
+    select.addEventListener('change', () => {
+      const url = new URL(location.href);
+      if (select.value) url.searchParams.set('instructions', select.value);
+      else url.searchParams.delete('instructions');
+      const hashContext = contextFromHash();
+      if (hashContext && select.value !== 'all' && hashContext !== select.value) url.hash = '';
+      history.pushState(null, '', url);
+      render();
+    });
+    window.addEventListener('popstate', render);
+    window.addEventListener('hashchange', render);
+    chooser.hidden = false;
+    render();
+  });
+  </script>
+</head>
+<body>
+<!-- Generated by ../build.py from ../source/. Do not edit; rebuild instead. -->
+<h1 id="install-a-plugin">Install a plugin</h1>
+<p>Add a plugin for your own use in Cowork. A <a
+href="https://claude.com/docs/plugins/overview">plugin</a> packages
+capabilities such as skills and tools so you can install them
+together.</p>
+<h2 id="choose-your-instructions">Choose your instructions</h2>
+<p>The available plugins and installation behavior depend on how your
+organization provides Claude. Choose the guide that matches the Claude
+account you are using for this task.</p>
+<div class="chooser" hidden="">
+<label for="instructions">Instructions for</label>
+<select id="instructions"> <option value="">Choose a guide</option>
+<option value="cowork">Cowork — general guide</option>
+<option value="government">Cowork — Claude for Government</option>
+<option value="all">Show both guides</option> </select>
+<p id="selection-status" role="status" aria-live="polite">
+</p>
+</div>
+<section id="how-to-check" class="help">
+<h3>How to check</h3>
+<p>Check the setup instructions your organization gave you for Claude.
+If they identify <strong>Claude for Government</strong>, choose that
+guide. If they direct you to the general Cowork guide, choose
+<strong>Cowork — general guide</strong>.</p>
+<p>If you set up Claude yourself, start with the general Cowork guide.
+If your organization set it up and the instructions do not identify the
+guide, ask the person who manages Claude:</p>
+<blockquote>
+<p>Which plugin installation guide applies to my Claude account: the
+general Cowork guide, Claude for Government, or another setup?</p>
+</blockquote>
+<p>If neither guide matches, ask that person for the relevant
+installation instructions. The absence of a Government label does not
+identify your setup. You can also choose <strong>Show both
+guides</strong> to compare the instructions.</p>
+</section>
+<section id="cowork" class="variant">
+<h2 id="cowork-general-guide">Cowork — general guide</h2>
+<p>Use these instructions in Cowork. Plugins are not used in Chat.</p>
+<p>Install plugins only from sources you trust. Review a plugin’s
+contents, permissions, connected services, and data access before
+installing it. See <a
+href="https://claude.com/docs/plugins/submit#security">plugin security
+guidance</a>.</p>
+<p>A plugin can contain skills, connectors, agents, commands, and hooks.
+Hooks can run scripts during a session. A connector may require you to
+sign in before Claude can use it.</p>
+<h3 id="cowork-marketplace">Install from a marketplace</h3>
+<p>Use this method to browse a marketplace already available in
+Cowork.</p>
+<ol type="1">
+<li>Open <strong>Customize</strong> in the sidebar, then
+<strong>Plugins</strong>.</li>
+<li>Select <strong>Browse plugins</strong>. The default marketplace is
+Anthropic’s official catalog.</li>
+<li>Select a plugin and choose <strong>Install</strong>.</li>
+<li>If a bundled connector asks you to sign in, complete the
+sign-in.</li>
+<li>Open the installed plugin to inspect its components. Enable or
+disable individual components as needed.</li>
+</ol>
+<p>The plugin is installed and you can inspect what it provides.
+Installation does not replace any sign-in required by its
+connectors.</p>
+<h3 id="cowork-git">Install from a Git marketplace</h3>
+<p>Use this method when someone has shared a repository of plugins with
+you. Cowork supports GitHub, including GitHub Enterprise, and public
+GitLab and Bitbucket repositories.</p>
+<ol type="1">
+<li>Open <strong>Customize</strong> in the sidebar, then
+<strong>Plugins</strong>.</li>
+<li>Select <strong>Add marketplace</strong> and enter the repository
+URL. For GitHub, you can also enter <code>owner/repo</code>.</li>
+<li>Select <strong>Browse plugins</strong> and find the plugin from the
+added marketplace.</li>
+<li>Select the plugin and choose <strong>Install</strong>.</li>
+<li>If a bundled connector asks you to sign in, complete the
+sign-in.</li>
+<li>Open the installed plugin to inspect its components. Enable or
+disable individual components as needed.</li>
+</ol>
+<p>The repository’s plugins appear alongside plugins from other
+marketplaces, and the plugin you selected is installed.</p>
+<h3 id="cowork-file">Install from a file</h3>
+<p>Use this method when someone has shared a plugin package with you.
+Check the <a
+href="https://claude.com/docs/cowork/guide/plugins#limits">package
+limits</a> before uploading it.</p>
+<ol type="1">
+<li>Open <strong>Customize</strong> in the sidebar, then
+<strong>Plugins</strong>.</li>
+<li>Select the upload option and choose the plugin package.</li>
+<li>Open the installed plugin to inspect its components. Enable or
+disable individual components as needed.</li>
+</ol>
+<p>The plugin appears in your installed plugins. Check its connectors
+for any sign-in they require before using their tools.</p>
+<h3 id="cowork-required">Plugins your organization requires</h3>
+<p>On Team and Enterprise plans, required plugins install automatically.
+A required plugin shows <strong>This plugin is required by your
+organization</strong>, and you cannot remove it. You do not need to
+install it yourself.</p>
+<h3 id="cowork-next">Next steps</h3>
+<ul>
+<li><a
+href="https://claude.com/docs/cowork/guide/plugins#update-and-remove-plugins">Update
+or remove a plugin</a>.</li>
+<li><a href="https://claude.com/docs/cowork/3p/extensions">Provision
+plugins for an organization</a>.</li>
+<li><a href="https://claude.com/docs/plugins/submit">Submit a plugin to
+the public directory</a>.</li>
+</ul>
+</section>
+<section id="government" class="variant">
+<h2 id="cowork-claude-for-government">Cowork — Claude for
+Government</h2>
+<p>Use these instructions in Claude Desktop when your organization
+provides Claude for Government.</p>
+<p>Plugins add skills, commands, agents, and hooks. Hooks run on your
+device. Connectors declared by a plugin you add yourself are not added
+to Claude Desktop, and a local MCP server declared by a plugin never
+runs. Your administrators provide connectors separately under
+<strong>Customize</strong>, then <strong>Connectors</strong>.</p>
+<h3 id="government-organization">Install a plugin your organization
+provides</h3>
+<p>Installing a plugin does not add its bundled connectors. Your
+administrators provide connectors separately.</p>
+<ol type="1">
+<li>Open <strong>Customize</strong> in the sidebar, then
+<strong>Plugins</strong>.</li>
+<li>Check <strong>Organization plugins</strong> to see the organization
+plugins already installed.</li>
+<li>If the plugin is not installed, select <strong>Browse
+plugins</strong>, then the <strong>Organization</strong> tab.</li>
+<li>Find the plugin your administrators have made available and install
+it.</li>
+<li>Open the installed plugin to inspect its components. Turn individual
+components on or off as needed.</li>
+</ol>
+<p>The plugin appears under <strong>Organization plugins</strong>. If
+your administrators set it to install automatically, it is already
+installed and you do not need to install it again.</p>
+<h3 id="government-file">Install from a file</h3>
+<p>Install only plugins you trust. Uploaded plugins are not controlled
+by Anthropic. A plugin you upload is added only on the device you are
+using. Its bundled connectors are not added, and its declared local MCP
+servers do not run.</p>
+<ol type="1">
+<li>Open <strong>Customize</strong> in the sidebar, then
+<strong>Plugins</strong>.</li>
+<li>Select <strong>Add plugin</strong>, then <strong>Upload
+plugin</strong>.</li>
+<li>Choose the plugin’s <code>.zip</code> file. Claude Desktop displays
+a notice about trusting uploaded plugins.</li>
+<li>Open the installed plugin to inspect its skills, commands, agents,
+and hooks. Turn individual components on or off as needed.</li>
+</ol>
+<p>The plugin is installed on this device. Its declared connectors are
+not added; use the connectors your administrators provide
+separately.</p>
+<h3 id="government-marketplace">Looking for a marketplace?</h3>
+<p>Claude for Government does not include a public plugin marketplace.
+You can add your own from <strong>Browse plugins</strong>, but your
+organization’s network controls determine whether it can be downloaded.
+Ask your administrator which marketplace you can use and how to add
+it.</p>
+<h3 id="government-next">Next steps</h3>
+<ul>
+<li><a
+href="https://claude.com/docs/government/desktop/plugins#find-and-install-plugins">Create
+a plugin with Claude</a>.</li>
+<li><a
+href="https://claude.com/docs/government/desktop/plugins#manage-installed-plugins">Manage
+installed plugins</a>.</li>
+<li><a
+href="https://claude.com/docs/government/config/plugins-and-connectors">Distribute
+plugins to an organization</a>.</li>
+</ul>
+</section>
+</body>
+</html>

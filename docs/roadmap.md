@@ -1,61 +1,57 @@
 # Roadmap
 
-Slice under examination: the cross-product primitives — **Skills, Plugins, and
-Connectors**.
+Audit and improve a slice of [Claude Docs](https://claude.com/docs).
+Our chosen slice is **Skills, Plugins, and Connectors**. The separate Claude Code
+and developer-platform documentation sites are outside the exercise.
 
-## Part 1 — Audit
+## Drafts available for review
 
-- [x] Fetch a pinned corpus snapshot of the slice — `corpus/`
-- [ ] Build the page inventory as a task–procedure–difference matrix — `docs/1-audit/inventory.md`, produced by the `task-matrix` skill (`.claude/skills/task-matrix/`); pilot run and findings in `docs/1-audit/task-matrix/pilot/`
-- [ ] Write the audit memo — `docs/1-audit/audit-memo.md`
-- [ ] Diagram the proposed IA and URL mapping — `docs/1-audit/proposed-ia.md`
+- [Audit memo](1-audit/audit-memo.md), backed by the
+  [54-page disposition ledger](1-audit/disposition-ledger.md) and
+  [proposed IA and migration](1-audit/proposed-ia.md).
+- [Style-guide excerpt](2-standards/style-guide.md),
+  [how-to template](2-standards/templates/how-to.md), and
+  [worked before/after page](2-standards/rewrite/README.md).
 
-## Part 2 — The standards
+These are drafts, not approved final submission artifacts. The audit proposes
+changes against the pinned snapshot; live product checks, rendered-anchor
+inventory, and reader validation remain publication work.
 
-- [ ] Write the style guide excerpt, with a stable ID per rule —
-      `docs/2-standards/style-guide.md`
-- [ ] Write the how-to content-type template —
-      `docs/2-standards/templates/how-to.md`
-- [ ] Explain how authors pick a content type —
-      `docs/2-standards/templates/README.md`
-- [ ] Capture the unmodified source page — `docs/2-standards/rewrite/before.md`
-- [ ] Rewrite the page to the standard — `docs/2-standards/rewrite/after.md`
-- [ ] Log each edit against the rule ID that required it —
-      `docs/2-standards/rewrite/changelog.md`
+## Submission checklist
 
-## Part 3 — The system
+### 1. Audit
 
-- [ ] Build the checker CLI — `docslint/`
-- [ ] Version the Claude judge prompt — `docslint/prompts/`
-- [ ] Label the gold-set fixtures and their expected findings —
-      `docslint/tests/goldset/`
-- [ ] Run the checker on the real corpus and commit the output — `reports/`
-- [ ] Diagnose the checker's false positives and negatives —
-      `docs/3-system/error-analysis.md`
-- [ ] Set precision and recall targets, and justify the false-positive
-      tolerance — `docs/3-system/evaluation.md`
-- [ ] Wire the checker into CI — `.github/workflows/docslint.yml`
-- [ ] Document how to install, run, and read the checker —
-      `docslint/README.md`
+- [ ] Write a short, opinionated memo covering:
+  - What is wrong and which improvements matter most.
+  - What to delete or merge, and what happens to readers following the old URLs.
+  - A proposed information architecture and how to migrate to it.
+  - What to measure and how to instrument it to determine whether the changes work.
 
-## Part 4 — Adoption
+### 2. Standards
 
-- [ ] Write the adoption memo — `docs/4-adoption/adoption-memo.md`
+- [ ] Write a style-guide excerpt and one content-type template that address the
+  audit findings. Make the rules specific enough to apply consistently.
+- [ ] Rewrite one existing page using those standards. Include the original,
+  the rewrite, and a note explaining what changed and why.
 
-## Supporting
+### 3. Automated check
 
-- [ ] Write the project README — `README.md`
-- [ ] Collect the Claude transcripts and workflows — `transcripts/`
-- [ ] Keep the time log, marking the 6-hour line — `docs/time-log.md`
+- [ ] Build a working prototype that flags one class of problem identified in the
+  audit, and run it against the live docs or a scrape of them.
+- [ ] Provide a GitHub link and the results, including a few cases the check got wrong.
+- [ ] Explain how to evaluate the check, the acceptable false-positive rate and
+  its rationale, how to detect degradation, and how to keep it current.
 
-## Sequencing
+### 4. Adoption
 
-1. Corpus snapshot — needed by both Part 1 and Part 3.
-2. Inventory, then the audit memo and IA.
-3. Style guide and template, then the rewrite as proof.
-4. Checker against that standard, then the run, error analysis, and evaluation.
-5. Adoption memo.
-6. README, transcripts, and time log last.
+- [ ] In a few paragraphs, explain how to get teams to adopt the standards and
+  check without authority over them, including how to handle a team that ignores them.
 
-If time runs short, Part 3 ships with fewer rules rather than Parts 1 and 2
-shipping thinner.
+## Time and submission
+
+- Aim for about six hours. If work continues beyond that, identify what existed
+  at the six-hour mark and distinguish later additions.
+- Prefer depth over breadth. Note unfinished work and proposed next steps.
+- Submit the memo as Markdown, PDF, or part of the GitHub submission; include the
+  standards, template, and before/after page as Markdown or in the repository.
+- Include Claude transcripts, chats, and workflows if Claude is used.
