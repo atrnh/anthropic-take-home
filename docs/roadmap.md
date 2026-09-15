@@ -12,6 +12,9 @@ and developer-platform documentation sites are outside the exercise.
 - [Style-guide excerpt](2-standards/style-guide.md),
   [how-to template](2-standards/templates/how-to.md), and
   [worked before/after page](2-standards/rewrite/README.md).
+- [Repeated-prose checker, results, and evaluation](3-check/README.md).
+  The working prototype finds useful cases but does not meet its proposed
+  precision or coverage targets for routine use.
 
 These are drafts, not approved final submission artifacts. The audit proposes
 changes against the pinned snapshot; live product checks, rendered-anchor

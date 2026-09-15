@@ -1,0 +1,420 @@
+{
+  "snapshot": {
+    "fetched_at": "2026-09-14T18:15:34.068550+00:00",
+    "page_count": 54,
+    "manifest_sha256": "aacc5ca32cf977b56e6f4ed88cdfd20fcb87817cab10d6eceff6879c334a8690"
+  },
+  "settings": {
+    "min_words": 15,
+    "threshold": 0.5,
+    "shingle_words": 3
+  },
+  "passage_count": 661,
+  "finding_count": 18,
+  "findings": [
+    {
+      "id": "097edff8eeff",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/google/calendar.md",
+        "start": 56,
+        "end": 56,
+        "text": "You must authenticate directly to your Google account. For Claude for Work (Team/Enterprise) plans, an Owner or Primary Owner must enable integrations at the account level."
+      },
+      "right": {
+        "path": "connectors/google/gmail.md",
+        "start": 59,
+        "end": 59,
+        "text": "You must authenticate directly to your Google account. For Claude for Work (Team/Enterprise) plans, an Owner or Primary Owner must enable integrations at the account level."
+      }
+    },
+    {
+      "id": "313ea4aede53",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/mcp-tunnels/oauth.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      },
+      "right": {
+        "path": "connectors/mcp-tunnels/troubleshooting.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      }
+    },
+    {
+      "id": "4f8c85a7a5ef",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/mcp-tunnels/oauth.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      },
+      "right": {
+        "path": "connectors/mcp-tunnels/overview.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team. The preview is provided as-is, without uptime, support, or continuity commitments, and it depends on a third-party network provider (Cloudflare) that makes no availability commitment for the underlying transport. Anthropic may modify or discontinue MCP tunnels at any time."
+      }
+    },
+    {
+      "id": "50e2acff8cb4",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/mcp-tunnels/setup.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      },
+      "right": {
+        "path": "connectors/mcp-tunnels/troubleshooting.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      }
+    },
+    {
+      "id": "58520fb644ba",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/mcp-tunnels/overview.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team. The preview is provided as-is, without uptime, support, or continuity commitments, and it depends on a third-party network provider (Cloudflare) that makes no availability commitment for the underlying transport. Anthropic may modify or discontinue MCP tunnels at any time."
+      },
+      "right": {
+        "path": "connectors/mcp-tunnels/troubleshooting.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      }
+    },
+    {
+      "id": "86c59db1a0d5",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/mcp-tunnels/oauth.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      },
+      "right": {
+        "path": "connectors/mcp-tunnels/setup.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      }
+    },
+    {
+      "id": "b404cd26a481",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/google/calendar.md",
+        "start": 21,
+        "end": 21,
+        "text": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started)."
+      },
+      "right": {
+        "path": "connectors/google/gmail.md",
+        "start": 21,
+        "end": 21,
+        "text": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started)."
+      }
+    },
+    {
+      "id": "ce838a41b8f4",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/mcp-tunnels/overview.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team. The preview is provided as-is, without uptime, support, or continuity commitments, and it depends on a third-party network provider (Cloudflare) that makes no availability commitment for the underlying transport. Anthropic may modify or discontinue MCP tunnels at any time."
+      },
+      "right": {
+        "path": "connectors/mcp-tunnels/setup.md",
+        "start": 10,
+        "end": 10,
+        "text": "  MCP tunnels are in research preview and are available to organizations on the Claude Enterprise plan by request. To request access, [submit the MCP tunnels interest form](https://claude.com/form/mcp-tunnels) or contact your Anthropic account team."
+      }
+    },
+    {
+      "id": "ea2903677218",
+      "similarity": 1.0,
+      "left": {
+        "path": "connectors/custom/remote-mcp.md",
+        "start": 42,
+        "end": 42,
+        "text": "If your Add custom connector dialog has two steps, see [The Add custom connector dialog, field by field](#the-add-custom-connector-dialog-field-by-field)."
+      },
+      "right": {
+        "path": "connectors/custom/remote-mcp.md",
+        "start": 58,
+        "end": 58,
+        "text": "If your Add custom connector dialog has two steps, see [The Add custom connector dialog, field by field](#the-add-custom-connector-dialog-field-by-field)."
+      }
+    },
+    {
+      "id": "014d8601041b",
+      "similarity": 0.963,
+      "left": {
+        "path": "connectors/building/mcp-apps/instance-supersession.md",
+        "start": 13,
+        "end": 13,
+        "text": "The snippets on this page assume you have registered a UI resource and tool and created an `App` instance from `@modelcontextprotocol/ext-apps`. See the [SDK Quickstart](https://modelcontextprotocol.github.io/ext-apps/api/documents/Quickstart.html) if you haven't."
+      },
+      "right": {
+        "path": "connectors/building/mcp-apps/transparent-theming.md",
+        "start": 11,
+        "end": 11,
+        "text": "The snippets on this page assume you have registered a UI resource and created an `App` instance from `@modelcontextprotocol/ext-apps`. See the [SDK Quickstart](https://modelcontextprotocol.github.io/ext-apps/api/documents/Quickstart.html) if you haven't."
+      }
+    },
+    {
+      "id": "d654de3b8aaf",
+      "similarity": 0.8,
+      "left": {
+        "path": "connectors/building/mcp-apps/design-guidelines.md",
+        "start": 256,
+        "end": 256,
+        "text": "Prefer controls with visible options (segmented buttons, toggle chips, inline tabs) over menus and dropdowns, which can conflict with the host container."
+      },
+      "right": {
+        "path": "connectors/building/mcp-apps/design-guidelines.md",
+        "start": 274,
+        "end": 274,
+        "text": "Prefer controls with visible options (segmented buttons, toggle chips, inline tabs) over menus and dropdowns. Menus conflict with the host container and are harder to use on mobile."
+      }
+    },
+    {
+      "id": "94f2bac64dde",
+      "similarity": 0.6875,
+      "left": {
+        "path": "connectors/mcp-tunnels/oauth.md",
+        "start": 42,
+        "end": 42,
+        "text": "When you add the tunneled MCP server as a custom connector in **Organization settings > Connectors**, turn on **Tunnel OAuth configuration** in the connector dialog. The values you enter replace the ones Claude would otherwise read from the authorization server's metadata. Anthropic enables this option for each organization in the research preview on request, so if the toggle does not appear in the dialog, contact your Anthropic account team."
+      },
+      "right": {
+        "path": "connectors/mcp-tunnels/troubleshooting.md",
+        "start": 131,
+        "end": 131,
+        "text": "Anthropic enables the option for each organization in the research preview on request. Contact your Anthropic account team."
+      }
+    },
+    {
+      "id": "3a2092bab58f",
+      "similarity": 0.65,
+      "left": {
+        "path": "connectors/building/after-publishing.md",
+        "start": 15,
+        "end": 15,
+        "text": "Plugin updates are pushed via your GitHub repo. CI mirrors changes to the public marketplace and runs automated screening on each update."
+      },
+      "right": {
+        "path": "plugins/submit.md",
+        "start": 88,
+        "end": 88,
+        "text": "After your plugin is published, updates pushed to your GitHub repo are picked up automatically—CI mirrors changes to the public marketplace and runs automated screening on each update. You do not need to re-submit the form for updates."
+      }
+    },
+    {
+      "id": "62975f03076b",
+      "similarity": 0.6,
+      "left": {
+        "path": "connectors/building/authentication.md",
+        "start": 71,
+        "end": 71,
+        "text": "This gives you a stable, registered OAuth client without requiring DCR or CIMD on your end, while keeping the user-consent step. Anthropic stores your credentials securely and uses them only for token exchange on behalf of consenting users; they are shared across the hosted Claude surfaces (Claude.ai web, Desktop, mobile, and Cowork). Claude Code runs its own OAuth flow on the user's machine and identifies itself with its own [Client ID Metadata Document](#callback-urls), so it does not use Anthropic-held credentials. Claude Managed Agents uses a separate credential set."
+      },
+      "right": {
+        "path": "connectors/building/authentication.md",
+        "start": 149,
+        "end": 149,
+        "text": "For the hosted Claude surfaces (Claude.ai web, Desktop, mobile, and Cowork), register the following redirect URI:"
+      }
+    },
+    {
+      "id": "66658fb6e9de",
+      "similarity": 0.566,
+      "left": {
+        "path": "third-party/claude-desktop/connectors-m365.md",
+        "start": 13,
+        "end": 13,
+        "text": "When Claude Desktop is deployed on third-party inference, Claude can read your organization's Microsoft 365 data (Outlook mail and calendar, OneDrive, SharePoint, and Teams) through a connector registered in your own Microsoft Entra tenant. Two connectors are available: a [remote connector](#remote-connector) hosted by Anthropic, and a [local connector](#local-connector) built into the desktop app."
+      },
+      "right": {
+        "path": "third-party/claude-desktop/connectors-m365.md",
+        "start": 32,
+        "end": 32,
+        "text": "When Claude Desktop is deployed on third-party inference, Claude can read your organization's Microsoft 365 data (Outlook mail and calendar, OneDrive, SharePoint, and Teams) through Anthropic's Microsoft 365 connector service. The desktop app authenticates with an app registration you create in your own Microsoft Entra tenant, and the connector service performs the Microsoft Graph calls on the signed-in user's behalf."
+      }
+    },
+    {
+      "id": "f33698cf074e",
+      "similarity": 0.5556,
+      "left": {
+        "path": "connectors/building/submission.md",
+        "start": 111,
+        "end": 111,
+        "text": "After you submit, track your submission's status and read reviewer feedback in the [submissions dashboard](https://claude.ai/admin-settings/directory/submissions). See [Managing your listing](/docs/connectors/building/managing-your-listing) for what's available there, including server health and usage metrics after publication. Email `mcp-review@anthropic.com` for escalations."
+      },
+      "right": {
+        "path": "connectors/building/submission.md",
+        "start": 178,
+        "end": 178,
+        "text": "After you submit, your submission's status and any reviewer feedback appear in the [submissions dashboard](https://claude.ai/admin-settings/directory/submissions). See [Managing your listing](/docs/connectors/building/managing-your-listing)."
+      }
+    },
+    {
+      "id": "e20701ba2490",
+      "similarity": 0.55,
+      "left": {
+        "path": "connectors/building/mcp.md",
+        "start": 9,
+        "end": 9,
+        "text": "The Model Context Protocol (MCP) is an open standard created by Anthropic for AI applications to connect with tools and data sources."
+      },
+      "right": {
+        "path": "connectors/overview.md",
+        "start": 9,
+        "end": 9,
+        "text": "Connectors extend Claude's capabilities by connecting it to external tools and data sources. They are powered by the [Model Context Protocol (MCP)](/docs/connectors/building/mcp), an open standard created by Anthropic that provides a unified way for AI applications to interact with the outside world."
+      }
+    },
+    {
+      "id": "cd561a0f2e24",
+      "similarity": 0.5366,
+      "left": {
+        "path": "connectors/directory.md",
+        "start": 11,
+        "end": 11,
+        "text": "The directory contains both verified connectors and community connectors. Verified connectors have been tested by Anthropic for quality and compatibility and met the Software Directory Policy requirements at the time of review, though verification is not a security audit. Anthropic screens community connectors before listing but does not review them in depth. The label reflects the level of review each connector received, not how it works: once connected, a community connector has the same capabilities and access as any connector you grant. See [connector verification](/docs/connectors/verification) to learn what each label means."
+      },
+      "right": {
+        "path": "connectors/verification.md",
+        "start": 21,
+        "end": 21,
+        "text": "The label reflects the level of review each connector received. It affects how the connector is displayed and discovered in the directory, not how the connector itself functions: once connected, a community connector has the same capabilities and access as any connector you grant."
+      }
+    }
+  ],
+  "evaluation": {
+    "counts": {
+      "development": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 3,
+        "TN": 5
+      },
+      "evaluation": {
+        "TP": 0,
+        "FP": 1,
+        "FN": 3,
+        "TN": 4
+      }
+    },
+    "cases": [
+      {
+        "id": "development-plugin-definition-overview-cowork",
+        "split": "development",
+        "outcome": "FN",
+        "finding_ids": []
+      },
+      {
+        "id": "development-plugin-definition-overview-government",
+        "split": "development",
+        "outcome": "FN",
+        "finding_ids": []
+      },
+      {
+        "id": "development-sales-plugin-example",
+        "split": "development",
+        "outcome": "FN",
+        "finding_ids": []
+      },
+      {
+        "id": "development-government-unconnected-plugin-connectors",
+        "split": "development",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "development-context-specific-install-procedures",
+        "split": "development",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "development-marketplace-generic-versus-finance",
+        "split": "development",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "development-member-uninstall-versus-admin-removal",
+        "split": "development",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "development-conflicting-organization-management-claims",
+        "split": "development",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "evaluation-skill-definition-overview-government",
+        "split": "evaluation",
+        "outcome": "FN",
+        "finding_ids": []
+      },
+      {
+        "id": "evaluation-google-owner-enable-prerequisite",
+        "split": "evaluation",
+        "outcome": "FP",
+        "finding_ids": [
+          "b404cd26a481"
+        ]
+      },
+      {
+        "id": "evaluation-drive-live-sync-faq",
+        "split": "evaluation",
+        "outcome": "FN",
+        "finding_ids": []
+      },
+      {
+        "id": "evaluation-permanent-directory-slug",
+        "split": "evaluation",
+        "outcome": "FN",
+        "finding_ids": []
+      },
+      {
+        "id": "evaluation-skill-loading-versus-m365-use",
+        "split": "evaluation",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "evaluation-google-service-limitations",
+        "split": "evaluation",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "evaluation-style-reference-versus-theming-procedure",
+        "split": "evaluation",
+        "outcome": "TN",
+        "finding_ids": []
+      },
+      {
+        "id": "evaluation-authentication-reference-versus-lazy-auth",
+        "split": "evaluation",
+        "outcome": "TN",
+        "finding_ids": []
+      }
+    ]
+  }
+}

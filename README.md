@@ -11,3 +11,6 @@ Start with the [draft audit memo](docs/1-audit/audit-memo.md). Its supporting
 pages, and the [proposed IA](docs/1-audit/proposed-ia.md) describes migration.
 
 See the [roadmap](docs/roadmap.md) for planned deliverables.
+
+The [automated-check prototype](docs/3-check/README.md) includes a reproducible
+54-page run, reviewed findings, and an evaluation of its mistakes and limitations.

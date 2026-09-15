@@ -1,0 +1,92 @@
+[
+  {
+    "id": "097edff8eeff",
+    "actionable": false,
+    "reason": "Authentication and organization enablement are prerequisites readers need beside each service procedure."
+  },
+  {
+    "id": "313ea4aede53",
+    "actionable": false,
+    "reason": "Keep research-preview eligibility and access instructions visible on each entry page."
+  },
+  {
+    "id": "4f8c85a7a5ef",
+    "actionable": false,
+    "reason": "Keep the availability notice on each entry page; the overview also carries additional service limitations."
+  },
+  {
+    "id": "50e2acff8cb4",
+    "actionable": false,
+    "reason": "Keep research-preview eligibility and access instructions visible on each entry page."
+  },
+  {
+    "id": "58520fb644ba",
+    "actionable": false,
+    "reason": "Keep the availability notice on each entry page; the overview also carries additional service limitations."
+  },
+  {
+    "id": "86c59db1a0d5",
+    "actionable": false,
+    "reason": "Keep research-preview eligibility and access instructions visible on each entry page."
+  },
+  {
+    "id": "b404cd26a481",
+    "actionable": false,
+    "reason": "This is a short required prerequisite with a canonical walkthrough link, not an explanation to remove."
+  },
+  {
+    "id": "ce838a41b8f4",
+    "actionable": false,
+    "reason": "Keep the availability notice on each entry page; the overview also carries additional service limitations."
+  },
+  {
+    "id": "ea2903677218",
+    "actionable": false,
+    "reason": "Each plan-specific procedure needs its own link to the dialog variant; the repeated signpost is intentional."
+  },
+  {
+    "id": "014d8601041b",
+    "actionable": false,
+    "reason": "Both standalone implementation guides need their SDK prerequisites. One additionally requires a tool."
+  },
+  {
+    "id": "d654de3b8aaf",
+    "actionable": true,
+    "reason": "The same-page advice on visible controls is repeated almost verbatim; keep the fuller explanation under its dedicated heading."
+  },
+  {
+    "id": "94f2bac64dde",
+    "actionable": false,
+    "reason": "Troubleshooting must repeat the specific access remedy for a missing toggle; it answers a different reader need."
+  },
+  {
+    "id": "3a2092bab58f",
+    "actionable": true,
+    "reason": "The audit assigns plugin-update behavior to the plugin submission page; the lifecycle router can link there."
+  },
+  {
+    "id": "62975f03076b",
+    "actionable": false,
+    "reason": "The shared product list scopes two different facts: held credentials and the redirect URI to register."
+  },
+  {
+    "id": "66658fb6e9de",
+    "actionable": false,
+    "reason": "The introduction compares two connectors; the remote section needs its specific hosting and authentication explanation."
+  },
+  {
+    "id": "f33698cf074e",
+    "actionable": false,
+    "reason": "A review-process overview and the end of a submission procedure both need the short status/feedback destination."
+  },
+  {
+    "id": "e20701ba2490",
+    "actionable": false,
+    "reason": "The connector overview needs a short MCP orientation and already links to the canonical explanation."
+  },
+  {
+    "id": "cd561a0f2e24",
+    "actionable": true,
+    "reason": "The directory overview repeats the longer explanation of label versus capability; shorten it and retain its verification link and trust caveat."
+  }
+]
