@@ -18,6 +18,7 @@ and developer-platform documentation sites are outside the exercise.
   The [TF-IDF bake-off](3-check/tfidf-bakeoff.md) tests candidate retrieval separately.
   The [editorial judge pilot](3-check/judge-pilot.md) tests classification and
   source-evidence validation on a small sample.
+- [Adoption draft](4-adoption/adoption.md), pending Ashley's voice revision.
 
 These are drafts, not approved final submission artifacts. The audit proposes
 changes against the pinned snapshot; live product checks, rendered-anchor
