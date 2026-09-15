@@ -25,7 +25,7 @@ def words(text: str) -> list[str]:
     return re.findall(r"\w+", html.unescape(text).casefold())
 
 
-def passages(path: str, source: str, min_words: int) -> list[Passage]:
+def passages(path: str, source: str, min_words: int, *, include_lists: bool = False) -> list[Passage]:
     """Read prose paragraphs in this snapshot's Markdown/MDX, retaining source lines."""
     result = []
     block: list[tuple[int, str]] = []
@@ -33,6 +33,8 @@ def passages(path: str, source: str, min_words: int) -> list[Passage]:
     hidden = ""
     comment = False
     in_list = False
+    capture_item = False
+    list_indent = 0
 
     def flush() -> None:
         if block:
@@ -55,6 +57,10 @@ def passages(path: str, source: str, min_words: int) -> list[Passage]:
             if "-->" in line:
                 comment = False
             continue
+        indent = len(line) - len(line.lstrip())
+        if (include_lists and indent <= list_indent
+                and (stripped.startswith("<") or re.match(r"(`{3,}|~{3,})", stripped))):
+            in_list = capture_item = False
         match = re.match(r"(`{3,}|~{3,})", stripped)
         if match:
             flush()
@@ -70,14 +76,21 @@ def passages(path: str, source: str, min_words: int) -> list[Passage]:
             if f"</{match[1]}>" not in line:
                 hidden = match[1]
             continue
-        if re.match(r"(?:[-+*]|\d+[.)])\s", stripped):
+        marker = re.match(r"([-+*]|\d+[.)])\s", stripped)
+        if marker:
             flush()
             in_list = True
+            list_indent = indent
+            capture_item = include_lists and marker[1] in ("-", "+", "*")
+            if capture_item:
+                block.append((number, line))
             continue
         if in_list and line[:1].isspace():
-            continue
-        if stripped:
+            if not capture_item:
+                continue
+        elif stripped:
             in_list = False
+            capture_item = False
         if (not stripped or stripped.startswith(("#", ">", "|", "<"))
                 or re.match(r"(?:import|export)\s", stripped)
                 or re.fullmatch(r"[-*_]{3,}", stripped)
@@ -89,7 +102,7 @@ def passages(path: str, source: str, min_words: int) -> list[Passage]:
     return result
 
 
-def load_corpus(root: Path, min_words: int) -> tuple[dict, list[Passage]]:
+def load_corpus(root: Path, min_words: int, *, include_lists: bool = False) -> tuple[dict, list[Passage]]:
     manifest_bytes = (root / "manifest.json").read_bytes()
     manifest = json.loads(manifest_bytes)
     if manifest["page_count"] != len(manifest["pages"]):
@@ -105,7 +118,7 @@ def load_corpus(root: Path, min_words: int) -> tuple[dict, list[Passage]]:
         raw = target.read_bytes()
         if hashlib.sha256(raw).hexdigest() != page["sha256"]:
             raise ValueError(f"Snapshot hash mismatch: {path}")
-        result.extend(passages(path, raw.decode("utf-8"), min_words))
+        result.extend(passages(path, raw.decode("utf-8"), min_words, include_lists=include_lists))
     return {
         "fetched_at": manifest["fetched_at"],
         "page_count": len(seen),

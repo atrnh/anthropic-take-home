@@ -1,0 +1,536 @@
+{
+  "snapshot": {
+    "fetched_at": "2026-09-14T18:15:34.068550+00:00",
+    "page_count": 54,
+    "manifest_sha256": "aacc5ca32cf977b56e6f4ed88cdfd20fcb87817cab10d6eceff6879c334a8690"
+  },
+  "examples_sha256": "cccc8d3000373ceba3632563696626a23f4ae0b108765ede347feceb2807f898",
+  "python": "3.13.14",
+  "packages": {
+    "scikit-learn": "1.7.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "settings": {
+    "min_words": 10,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "stop_words": "english",
+    "sublinear_tf": true,
+    "norm": "l2",
+    "smooth_idf": true,
+    "floor": "score > 0",
+    "primary_k": 5,
+    "pair_policy": "either direction; self excluded; same-page pairs retained",
+    "tie_break": "score rounded to 12 decimals, then corpus path/line order",
+    "include_unordered_lists": true
+  },
+  "passage_count": 980,
+  "possible_pairs": 479710,
+  "runs": [
+    {
+      "method": "expanded_trigram_0.5",
+      "candidate_pairs": 40,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq"
+      ]
+    },
+    {
+      "method": "trigram_top_1",
+      "candidate_pairs": 677,
+      "positive_cases_retrieved": 3,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 3,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-sales-plugin-example",
+        "development-government-unconnected-plugin-connectors",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug",
+        "evaluation-style-reference-versus-theming-procedure"
+      ]
+    },
+    {
+      "method": "trigram_top_3",
+      "candidate_pairs": 1718,
+      "positive_cases_retrieved": 4,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 4,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-sales-plugin-example",
+        "development-government-unconnected-plugin-connectors",
+        "development-context-specific-install-procedures",
+        "evaluation-skill-definition-overview-government",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug",
+        "evaluation-style-reference-versus-theming-procedure"
+      ]
+    },
+    {
+      "method": "trigram_top_5",
+      "candidate_pairs": 2504,
+      "positive_cases_retrieved": 4,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 5,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-sales-plugin-example",
+        "development-government-unconnected-plugin-connectors",
+        "development-context-specific-install-procedures",
+        "development-member-uninstall-versus-admin-removal",
+        "evaluation-skill-definition-overview-government",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug",
+        "evaluation-style-reference-versus-theming-procedure"
+      ]
+    },
+    {
+      "method": "trigram_top_10",
+      "candidate_pairs": 3901,
+      "positive_cases_retrieved": 5,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 5,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-plugin-definition-overview-government",
+        "development-sales-plugin-example",
+        "development-government-unconnected-plugin-connectors",
+        "development-context-specific-install-procedures",
+        "development-member-uninstall-versus-admin-removal",
+        "evaluation-skill-definition-overview-government",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug",
+        "evaluation-style-reference-versus-theming-procedure"
+      ]
+    },
+    {
+      "method": "trigram_budget_18",
+      "candidate_pairs": 18,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq"
+      ]
+    },
+    {
+      "method": "trigram_budget_50",
+      "candidate_pairs": 50,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq"
+      ]
+    },
+    {
+      "method": "trigram_budget_100",
+      "candidate_pairs": 100,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq"
+      ]
+    },
+    {
+      "method": "tfidf_top_1",
+      "candidate_pairs": 762,
+      "positive_cases_retrieved": 4,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-sales-plugin-example",
+        "evaluation-skill-definition-overview-government",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug"
+      ]
+    },
+    {
+      "method": "tfidf_top_3",
+      "candidate_pairs": 2141,
+      "positive_cases_retrieved": 5,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 5,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-plugin-definition-overview-government",
+        "development-sales-plugin-example",
+        "development-government-unconnected-plugin-connectors",
+        "development-context-specific-install-procedures",
+        "development-member-uninstall-versus-admin-removal",
+        "evaluation-skill-definition-overview-government",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug",
+        "evaluation-style-reference-versus-theming-procedure"
+      ]
+    },
+    {
+      "method": "tfidf_top_5",
+      "candidate_pairs": 3486,
+      "positive_cases_retrieved": 5,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 5,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-plugin-definition-overview-government",
+        "development-sales-plugin-example",
+        "development-government-unconnected-plugin-connectors",
+        "development-context-specific-install-procedures",
+        "development-member-uninstall-versus-admin-removal",
+        "evaluation-skill-definition-overview-government",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug",
+        "evaluation-style-reference-versus-theming-procedure"
+      ]
+    },
+    {
+      "method": "tfidf_top_10",
+      "candidate_pairs": 6755,
+      "positive_cases_retrieved": 6,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 7,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "development-plugin-definition-overview-cowork",
+        "development-plugin-definition-overview-government",
+        "development-sales-plugin-example",
+        "development-government-unconnected-plugin-connectors",
+        "development-context-specific-install-procedures",
+        "development-marketplace-generic-versus-finance",
+        "development-member-uninstall-versus-admin-removal",
+        "evaluation-skill-definition-overview-government",
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug",
+        "evaluation-style-reference-versus-theming-procedure",
+        "evaluation-authentication-reference-versus-lazy-auth"
+      ]
+    },
+    {
+      "method": "tfidf_budget_18",
+      "candidate_pairs": 18,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq"
+      ]
+    },
+    {
+      "method": "tfidf_budget_50",
+      "candidate_pairs": 50,
+      "positive_cases_retrieved": 2,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug"
+      ]
+    },
+    {
+      "method": "tfidf_budget_100",
+      "candidate_pairs": 100,
+      "positive_cases_retrieved": 2,
+      "positive_cases_total": 6,
+      "eligible_positive_cases": 6,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 10,
+      "retrieved_case_ids": [
+        "evaluation-google-owner-enable-prerequisite",
+        "evaluation-drive-live-sync-faq",
+        "evaluation-permanent-directory-slug"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "development-plugin-definition-overview-cowork",
+      "split": "development",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.0,
+        "best_global_rank": null,
+        "best_direction_rank": null
+      },
+      "tfidf": {
+        "highest_score": 0.109046,
+        "best_global_rank": 2085,
+        "best_direction_rank": 8
+      }
+    },
+    {
+      "id": "development-plugin-definition-overview-government",
+      "split": "development",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.027027,
+        "best_global_rank": 4407,
+        "best_direction_rank": 7
+      },
+      "tfidf": {
+        "highest_score": 0.185433,
+        "best_global_rank": 523,
+        "best_direction_rank": 2
+      }
+    },
+    {
+      "id": "development-sales-plugin-example",
+      "split": "development",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.081633,
+        "best_global_rank": 1136,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 0.333505,
+        "best_global_rank": 113,
+        "best_direction_rank": 1
+      }
+    },
+    {
+      "id": "development-government-unconnected-plugin-connectors",
+      "split": "development",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.188679,
+        "best_global_rank": 213,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 0.310396,
+        "best_global_rank": 125,
+        "best_direction_rank": 2
+      }
+    },
+    {
+      "id": "development-context-specific-install-procedures",
+      "split": "development",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.058824,
+        "best_global_rank": 1854,
+        "best_direction_rank": 2
+      },
+      "tfidf": {
+        "highest_score": 0.159929,
+        "best_global_rank": 790,
+        "best_direction_rank": 2
+      }
+    },
+    {
+      "id": "development-marketplace-generic-versus-finance",
+      "split": "development",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.0,
+        "best_global_rank": null,
+        "best_direction_rank": null
+      },
+      "tfidf": {
+        "highest_score": 0.075626,
+        "best_global_rank": 4912,
+        "best_direction_rank": 7
+      }
+    },
+    {
+      "id": "development-member-uninstall-versus-admin-removal",
+      "split": "development",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.038462,
+        "best_global_rank": 3162,
+        "best_direction_rank": 5
+      },
+      "tfidf": {
+        "highest_score": 0.109295,
+        "best_global_rank": 2074,
+        "best_direction_rank": 3
+      }
+    },
+    {
+      "id": "development-conflicting-organization-management-claims",
+      "split": "development",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.0,
+        "best_global_rank": null,
+        "best_direction_rank": null
+      },
+      "tfidf": {
+        "highest_score": 0.025431,
+        "best_global_rank": 42823,
+        "best_direction_rank": 65
+      }
+    },
+    {
+      "id": "evaluation-skill-definition-overview-government",
+      "split": "evaluation",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.088235,
+        "best_global_rank": 982,
+        "best_direction_rank": 2
+      },
+      "tfidf": {
+        "highest_score": 0.208803,
+        "best_global_rank": 386,
+        "best_direction_rank": 1
+      }
+    },
+    {
+      "id": "evaluation-google-owner-enable-prerequisite",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 1.0,
+        "best_global_rank": 3,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 1.0,
+        "best_global_rank": 3,
+        "best_direction_rank": 1
+      }
+    },
+    {
+      "id": "evaluation-drive-live-sync-faq",
+      "split": "evaluation",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.875,
+        "best_global_rank": 14,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 0.800187,
+        "best_global_rank": 11,
+        "best_direction_rank": 1
+      }
+    },
+    {
+      "id": "evaluation-permanent-directory-slug",
+      "split": "evaluation",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.076923,
+        "best_global_rank": 1183,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 0.463414,
+        "best_global_rank": 39,
+        "best_direction_rank": 1
+      }
+    },
+    {
+      "id": "evaluation-skill-loading-versus-m365-use",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.0,
+        "best_global_rank": null,
+        "best_direction_rank": null
+      },
+      "tfidf": {
+        "highest_score": 0.0,
+        "best_global_rank": null,
+        "best_direction_rank": null
+      }
+    },
+    {
+      "id": "evaluation-google-service-limitations",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": false,
+      "trigram": null,
+      "tfidf": null
+    },
+    {
+      "id": "evaluation-style-reference-versus-theming-procedure",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.125,
+        "best_global_rank": 395,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 0.150886,
+        "best_global_rank": 921,
+        "best_direction_rank": 3
+      }
+    },
+    {
+      "id": "evaluation-authentication-reference-versus-lazy-auth",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.0,
+        "best_global_rank": null,
+        "best_direction_rank": null
+      },
+      "tfidf": {
+        "highest_score": 0.053615,
+        "best_global_rank": 10316,
+        "best_direction_rank": 7
+      }
+    }
+  ]
+}

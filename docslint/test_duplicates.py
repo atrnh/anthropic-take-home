@@ -53,6 +53,46 @@ Editors can link to that explanation from their task pages.
     for item in extracted:
         assert item.text == "\n".join(source.splitlines()[item.start - 1:item.end])
     assert extracted[0].text.endswith("task pages.")
+    expanded = passages("example.md", source, 10, include_lists=True)
+    assert len(expanded) == 3 and expanded[0].text == f"* {prose}", expanded
+    list_source = f"""- {prose}
+  Wrapped detail remains part of this item.
++ Too short
+1. {prose}
+   Ordered continuation stays excluded.
+
+{prose}"""
+    expanded = passages("lists.md", list_source, 10, include_lists=True)
+    assert [(p.start, p.end) for p in expanded] == [(1, 2), (7, 7)], expanded
+    assert passages("lists.md", list_source, 10) == [expanded[1]]
+    for item in expanded:
+        assert item.text == "\n".join(list_source.splitlines()[item.start - 1:item.end])
+    boundaries = f"""<AccordionGroup>
+  <Accordion>
+    * {prose}
+    ```text
+    This code must never be mistaken for explanatory prose in the corpus.
+    ```
+    Standalone prose after the fence still belongs in the extracted corpus.
+  </Accordion>
+  <Accordion>
+    1. {prose}
+       This ordered continuation must stay excluded from the extracted corpus.
+  </Accordion>
+  <Accordion>
+    Standalone sibling prose after the ordered list must also be extracted.
+  </Accordion>
+</AccordionGroup>"""
+    expanded = passages("boundaries.md", boundaries, 10, include_lists=True)
+    assert [(p.start, p.end) for p in expanded] == [(3, 3), (7, 7), (14, 14)], expanded
+    ordered_code = f"""1. {prose}
+   ```text
+   {prose}
+   ```
+   This continuation after nested code still belongs to the ordered step.
+
+{prose}"""
+    assert [p.start for p in passages("ordered-code.md", ordered_code, 10, include_lists=True)] == [7]
     assert words("**Read** [the guide](/first) &amp; `verify`.") == ["read", "the", "guide", "verify"]
     assert words("**Read** [the guide](/second) &amp; `verify`.") == ["read", "the", "guide", "verify"]
 
@@ -134,6 +174,11 @@ def check_artifacts() -> None:
     actionable = sum(row["actionable"] for row in reviews)
     print(f"PASS: reproducible snapshot results; {actionable}/{len(findings)} findings labeled actionable")
     print(json.dumps(expected["evaluation"]["counts"], sort_keys=True))
+    _, expanded = load_corpus(root / "corpus", 10, include_lists=True)
+    drive = {p.start: p for p in expanded if p.path == "connectors/google/drive.md"}
+    assert drive[51].end == 51 and drive[59].end == 59
+    assert len(words(drive[51].text)) == 11 and len(words(drive[59].text)) == 10
+    print("PASS: expanded extraction includes both Drive passages with exact source ranges")
 
 
 if __name__ == "__main__":

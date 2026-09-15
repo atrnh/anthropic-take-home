@@ -2,6 +2,7 @@
 
 Follow-up: the [TF-IDF retrieval bake-off](tfidf-bakeoff.md) compares candidate
 generation while preserving this lexical baseline and its editorial evaluation.
+The [extraction follow-up](extraction-followup.md) closes the known coverage gap.
 
 This working prototype flags exact and near-exact prose overlap in the pinned
 Claude Docs snapshot. It addresses the audit's recommendation to

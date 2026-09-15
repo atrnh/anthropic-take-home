@@ -1,5 +1,9 @@
 # TF-IDF retrieval bake-off
 
+Follow-up: [expanded extraction](extraction-followup.md) now admits the missing
+Drive passages and tests all six positives. The fixed-input results below remain
+the original comparison.
+
 **TF-IDF improves candidate retrieval on our known examples.** At top 5 it
 retrieves 4 of 6 positive cases, compared with 3 of 6 for trigram top-5 retrieval.
 At top 10 it retrieves all **5 representable positives**. The sixth case never

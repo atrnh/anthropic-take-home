@@ -22,7 +22,7 @@ def similarities(items: list[Passage]) -> dict[str, np.ndarray]:
     texts = [" ".join(words(item.text)) for item in items]
     vectors = TfidfVectorizer(ngram_range=(1, 2), stop_words="english",
                              sublinear_tf=True, norm="l2").fit_transform(texts)
-    # ponytail: dense pair scores fit this 661-passage experiment; block multiplication at larger scale.
+    # ponytail: dense pair scores fit this 54-page experiment; block multiplication at larger scale.
     tfidf = (vectors @ vectors.T).toarray()
     shingles = []
     for text in texts:
@@ -86,21 +86,23 @@ def summarize(name, selected, cases, examples):
     }
 
 
-def run(root: Path, examples_path: Path):
-    snapshot, items = load_corpus(root, 15)
+def run(root: Path, examples_path: Path, *, expanded_extraction: bool = False):
+    min_words = 10 if expanded_extraction else 15
+    snapshot, items = load_corpus(root, min_words, include_lists=expanded_extraction)
     examples = json.loads(examples_path.read_text())
     evaluate(examples, [], root)  # Validate frozen labels and source ranges before scoring.
     cases = case_pairs(examples, items)
     matrices = similarities(items)
     rankings = {name: ranked_pairs(matrix) for name, matrix in matrices.items()}
     baseline = {pair for pair in rankings["trigram"][0] if matrices["trigram"][pair] >= 0.5}
-    # Check that this experiment reproduces the published baseline's candidate selection.
+    # Check agreement with the shared checker on this mode's passage set.
     index = {(p.path, p.start, p.end): i for i, p in enumerate(items)}
     archived = {tuple(sorted(index[(f[side]["path"], f[side]["start"], f[side]["end"])]
                              for side in ("left", "right")))
                 for f in find_duplicates(items, 0.5)}
     assert baseline == archived, "Trigram selection diverged from the existing checker"
-    summaries = [summarize("published_trigram_0.5", baseline, cases, examples)]
+    baseline_name = "expanded_trigram_0.5" if expanded_extraction else "published_trigram_0.5"
+    summaries = [summarize(baseline_name, baseline, cases, examples)]
     for name, (pairs, ranks) in rankings.items():
         for k in (1, 3, 5, 10):
             summaries.append(summarize(f"{name}_top_{k}", top_k(pairs, ranks, k), cases, examples))
@@ -130,7 +132,7 @@ def run(root: Path, examples_path: Path):
         "examples_sha256": hashlib.sha256(examples_path.read_bytes()).hexdigest(),
         "python": platform.python_version(),
         "packages": {name: version(name) for name in ("scikit-learn", "numpy", "scipy")},
-        "settings": {"min_words": 15, "ngram_range": [1, 2], "stop_words": "english",
+        "settings": {"min_words": min_words, "ngram_range": [1, 2], "stop_words": "english",
                      "sublinear_tf": True, "norm": "l2", "smooth_idf": True,
                      "floor": "score > 0", "primary_k": 5,
                      "pair_policy": "either direction; self excluded; same-page pairs retained",
@@ -140,6 +142,8 @@ def run(root: Path, examples_path: Path):
         "runs": summaries,
         "cases": details,
     }
+    if expanded_extraction:
+        result["settings"]["include_unordered_lists"] = True
     return result, items, matrices, rankings
 
 
@@ -168,11 +172,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--self-check", action="store_true")
     parser.add_argument("--candidates", action="store_true", help="Print TF-IDF top-5 pairs as TSV")
+    parser.add_argument("--expanded-extraction", action="store_true",
+                        help="Include unordered list prose and lower the minimum to 10 words")
     args = parser.parse_args()
     if args.self_check:
         self_check()
     project = Path(__file__).resolve().parents[1]
-    result, items, matrices, rankings = run(project / "corpus", project / "docs/3-check/examples.json")
+    result, items, matrices, rankings = run(project / "corpus", project / "docs/3-check/examples.json",
+                                          expanded_extraction=args.expanded_extraction)
     if args.candidates:
         print("left_path\tleft_start\tleft_end\tright_path\tright_start\tright_end\tscore")
         pairs, ranks = rankings["tfidf"]
