@@ -203,7 +203,6 @@ are ready to publish.
   cutoff; this log does not use it to manufacture a before/after boundary.
 - Began reconstructing this log from both dumped and undumped conversations.
   Confirmed access to project transcripts for Claude Desktop's Code sessions.
-  Access to ordinary Claude Desktop Chat history was not established.
 - Added the retrospective above so that the record includes my assumptions,
   corrections, and judgment about effort, alongside artifacts and agent actions.
 
