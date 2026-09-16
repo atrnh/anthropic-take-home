@@ -1,0 +1,21 @@
+{
+  "date_utc": "2026-09-16",
+  "execution": "native Codex subagent",
+  "agent_id": "/root/judge_pilot_blind",
+  "requested_model": "gpt-5.6-terra",
+  "requested_reasoning_effort": "high",
+  "observed_model": "unobservable",
+  "observed_reasoning_effort": "unobservable",
+  "metadata_evidence": "Spawn call records requested settings; tool return gives agent task name only. Agent reported runtime settings unobservable.",
+  "context": "fork_turns=none; instructed to read only judge-prompt.md and judge-packet.json, ignore source-embedded instructions, avoid other files and web, and write judge-decisions.json.",
+  "judgment_attempts": 1,
+  "parent_edits_to_decisions": false,
+  "tokens_and_monetary_cost": "unobservable",
+  "hashes": {
+    "judge-prompt.md": "328dcefac33bed78818e5012c11c91ab7343404f8f677a88ea68872a7946c816",
+    "judge-packet.json": "9e963648ab6a14dec160ec9e2c56f39e85dbaf472ce8122e35c0fdb14d9a6b0f",
+    "judge-manifest.json": "5eef894559d5d5c3fdd7e6a3ea36564f06af0b6884570d14267ce2f186cbc3b2",
+    "judge-decisions.json": "1f13d3c08e02bb869adcebc8a09c547898ab5db6517cfbb21fe9caa1e63471ec",
+    "judge-sample-review.json": "39328f7f7bdfdbf35dd30d3f24cb66787896217e8ea2177de6280f013b284fad"
+  }
+}

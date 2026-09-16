@@ -3,6 +3,8 @@
 Follow-up: the [TF-IDF retrieval bake-off](tfidf-bakeoff.md) compares candidate
 generation while preserving this lexical baseline and its editorial evaluation.
 The [extraction follow-up](extraction-followup.md) closes the known coverage gap.
+The [editorial judge pilot](judge-pilot.md) tests model judgment on a bounded
+packet of known cases and newly sampled candidates.
 
 This working prototype flags exact and near-exact prose overlap in the pinned
 Claude Docs snapshot. It addresses the audit's recommendation to

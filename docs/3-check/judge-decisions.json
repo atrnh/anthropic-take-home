@@ -1,0 +1,340 @@
+{
+  "cases": [
+    {
+      "id": "6597390db75cdb0cc6b726c0511191a2fdd0fa1400641ae589563f9f28878533",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both passages concern plugin availability and management.",
+      "unique_left": "Beta availability for paid users, local storage, and planned sharing and management.",
+      "unique_right": "Organization-required plugins, automatic installation, and inability to remove them.",
+      "rationale": "The left passage states rollout and storage status, while the right states an administrator policy and its user-facing consequence.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Plugin support in Cowork is available as a beta for all paid Claude users.",
+        "right": "On Team and Enterprise plans, administrators can require certain plugins for everyone in the organization."
+      }
+    },
+    {
+      "id": "0000a4dbe357ac9fc5bdf805eb92a32fc7ec74d077d3ea9b2d314edde77f25eb",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both refer to MCP Bundles (MCPB) and desktop extensions.",
+      "unique_left": "Links to the complete specification and an architecture overview.",
+      "unique_right": "Defines desktop extensions as local MCP servers packaged for Claude Desktop.",
+      "rationale": "One passage directs readers to external technical references; the other classifies a product integration type.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "See the [MCPB repository](https://github.com/modelcontextprotocol/mcpb) for the complete specification",
+        "right": "* **Desktop extensions** — local MCP servers packaged as [MCP Bundles (MCPB)](https://github.com/modelcontextprotocol/mcpb) for Claude Desktop"
+      }
+    },
+    {
+      "id": "10433465d06e14b404e1d3540607d19b1b34992fcddd18257ad7bd7e1e8ca6c2",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both explain authentication for remote MCP servers in Claude.",
+      "unique_left": "Scope of Claude authentication support and its supported authentication types.",
+      "unique_right": "Lazy authentication behavior and the inline Connect-card recovery flow.",
+      "rationale": "The left passage orients implementers to the authentication reference, while the right explains one authentication pattern and its runtime interaction.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Claude supports the following authentication types for remote MCP servers.",
+        "right": "**Lazy authentication** (sometimes called *mixed auth*) lets a single server expose both"
+      }
+    },
+    {
+      "id": "0020f594283fc263db0d4a6be9b352b7e82e8f91d368f25d3faeaf3ae3d66879",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern MCP servers and plugins.",
+      "unique_left": "Independent server and plugin update behavior and automated screening for GitHub updates.",
+      "unique_right": "Introduces the capabilities that remote MCP servers enable.",
+      "rationale": "Update ownership and a capability introduction answer different questions; the target passages do not repeat an explanatory claim.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Both MCP servers and plugins can update without Anthropic involvement.",
+        "right": "Remote MCP servers enable Claude to invoke tools that can:"
+      }
+    },
+    {
+      "id": "510e6218be0c13de3cf961624d17c8efd2d9abdf4c4dcc4e6266d990df6db6f2",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both define plugins as packages that add Claude capabilities together in one unit.",
+      "unique_left": "MCP connectors and the role, team, and company specialization outcome.",
+      "unique_right": "Cowork-specific installation framing and marketplace, organization, and uploaded-file origins.",
+      "rationale": "The core definition and component list perform the same introductory work. The Cowork page can retain its source and installation context with a short orientation linked to the fuller overview.",
+      "suggested_consolidation": "Keep the fuller general definition in the left passage; shorten the right passage to a Cowork-specific orientation and link to it, while retaining the installation sources.",
+      "evidence": {
+        "left": "Plugins are reusable capability packages that extend Claude with custom functionality.",
+        "right": "A plugin is a package that extends what Claude can do in Cowork."
+      }
+    },
+    {
+      "id": "009b01fb3d3c24a8e2be7b0b9c016831044281c3352217ff0ac2aa5941572be1",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both discuss directory review labels and Anthropic review limits.",
+      "unique_left": "Connector discovery, its labels, and the fact that listing does not change exposed tools.",
+      "unique_right": "Plugin submission review and a trust warning for plugin installers.",
+      "rationale": "The passages apply review labels to different artifacts and preserve different reader decisions about discovery versus installation trust.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Listing a connector in the directory makes it discoverable by other people and gives it a review label",
+        "right": "Plugins are submitted by developers and creators in the community."
+      }
+    },
+    {
+      "id": "cdd78f353ae9f72459b4760ba7380fe95aa576ce6eb8e5b10e488525af2cd06f",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both tell a reader where to open the Plugins area and how to install a plugin.",
+      "unique_left": "Marketplace installation, authentication, component review, and generic file installation.",
+      "unique_right": "Organization-provided availability, automatic installation, uploaded ZIP trust notice, and creation with Claude.",
+      "rationale": "The shared navigation begins two independently usable procedures: one general marketplace procedure and one organization-specific procedure with materially different choices and outcomes.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Open **Customize** in the sidebar, then **Plugins**.",
+        "right": "Open **Customize** in the sidebar, then **Plugins**. The organization plugins you have installed are listed under **Organization plugins**."
+      }
+    },
+    {
+      "id": "a62a853864f90235a005eb6271a19e753466caa88863c7ffc73435821e05af3d",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both describe removing a plugin.",
+      "unique_left": "Individual user removal, including required organization plugins that cannot be removed.",
+      "unique_right": "An administrator removing delivered plugins and the effect on members' already installed copies.",
+      "rationale": "The passages address different actors and lifecycle consequences, so one cannot replace the other.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "To remove a plugin, open it and click **Uninstall**.",
+        "right": "To remove a plugin, click its remove icon and save the change."
+      }
+    },
+    {
+      "id": "1745e3aa14f24a5946ca9fe5d34b649d86013ab3fe2165c857fea96f327bc20c",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both use the same sales-plugin example to show a CRM connector, sales-process skill, and prospect-research and call-follow-up commands.",
+      "unique_left": "Claude pulls defined plugin context when it is relevant.",
+      "unique_right": "A competitive-analysis sub-agent and the distinction between a complete specialist and individual building blocks.",
+      "rationale": "The examples perform the same illustrative work and can be combined into one example without losing either unique detail.",
+      "suggested_consolidation": "Keep one consolidated sales-plugin example, preserving the context-reuse statement and the competitive-analysis sub-agent detail; replace the other example with a cross-reference.",
+      "evidence": {
+        "left": "A sales plugin, for example, could connect Claude to your CRM and knowledge base, teach it your sales process, and give you slash commands for everything from prospect research to call follow-ups.",
+        "right": "For example, a sales plugin might bundle a CRM connector, a skill that teaches Claude your sales process, slash commands for common tasks like prospect research and call follow-ups, and a sub-agent that handles competitive analysis in parallel."
+      }
+    },
+    {
+      "id": "6e2615cafe30a79fb26f0fe04d5fd0429983161830d39ca82e61c2c56eb098e8",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both state that an Owner or Primary Owner must enable an organization integration before it appears in the connector list and link to the same walkthrough.",
+      "unique_left": "None.",
+      "unique_right": "None.",
+      "rationale": "The passages are identical and no unique fact would be lost by keeping one canonical instance.",
+      "suggested_consolidation": "Keep one instance of the sentence and its walkthrough link; remove or cross-reference the duplicate instance.",
+      "evidence": {
+        "left": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list.",
+        "right": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list."
+      }
+    },
+    {
+      "id": "0061466b0770d7f19de1c51ce046a217f611c35278662d9bdd4abed269326956",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both state access or enablement prerequisites for a connected service.",
+      "unique_left": "Microsoft 365 delegated permissions and administrator-enabled write actions.",
+      "unique_right": "Paid Slack-plan availability and Slack-admin approval.",
+      "rationale": "The passages govern different services with different permission models and user decisions.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "All permissions are delegated: Claude acts on behalf of users",
+        "right": "Claude is available to paid Slack plan users."
+      }
+    },
+    {
+      "id": "0005289ee0fd040a468672114275d3ccd91e8c4badc81a2704c9b736b7d9a09c",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern Claude capabilities in Microsoft 365 applications.",
+      "unique_left": "Specific Outlook and SharePoint actions and the write-actions condition.",
+      "unique_right": "Common Connector and Skill behavior across four named M365 applications and settings enablement.",
+      "rationale": "An action inventory and a cross-application configuration statement answer different questions.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Claude can take actions in Outlook and SharePoint: send mail and manage drafts",
+        "right": "Connectors and Skills work the same way across Claude for Excel,\nPowerPoint, Word, and Outlook."
+      }
+    },
+    {
+      "id": "000854e94ba92cedf88e2e11ecfdad2d0b51a9715b2633c556be6dff24b567b9",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both explain use of a custom connector.",
+      "unique_left": "A directory connector becomes Custom after it no longer matches its listing.",
+      "unique_right": "A connector URL can be added directly even without a directory listing.",
+      "rationale": "The passages describe separate paths into the same category: an update mismatch versus direct URL addition.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Because your connector no longer matches the updated directory listing, it shows under \"Custom\"",
+        "right": "If you have a connector's URL, it can be added as a custom connector."
+      }
+    },
+    {
+      "id": "9f82abcdff7391141889ac6124b332af2bdc4c261db460e14d1941925060665f",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both state that the directory URL slug is permanent after publication because it determines the listing URL.",
+      "unique_left": "The literal listing URL pattern, sharing guidance, and the distinction between mutable display names and immutable slugs.",
+      "unique_right": "None.",
+      "rationale": "The right passage restates the left passage's core rule without adding a separate explanatory role.",
+      "suggested_consolidation": "Keep the left passage as the canonical explanation, including its URL pattern and sharing guidance; replace the right passage with a cross-reference or remove it.",
+      "evidence": {
+        "left": "Your directory slug is fixed after publication.",
+        "right": "The URL slug is locked: it's permanent after publication, since it determines your listing URL."
+      }
+    },
+    {
+      "id": "6c09f530a8e793e4cd028cd31da89d9ecaba21a6ce46bb5e28e4199ce33cfbdc",
+      "classification": "NECESSARY_REPETITION",
+      "needs_review": false,
+      "shared_explanation": "Documents continue syncing with the latest Google Drive version.",
+      "unique_left": "A concise feature-list label, \"Live sync\".",
+      "unique_right": "A direct FAQ question about whether documents update after they are added.",
+      "rationale": "The feature list supports scanning, while the FAQ needs an explicit answer to the reader's question; both local roles remain useful.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "* **Live sync**: Documents continue syncing with the latest Google Drive version",
+        "right": "Yes, documents continue syncing with the latest Google Drive version."
+      }
+    },
+    {
+      "id": "051fa6b200fc5cc96270a075c474b58f9163dab5983f29f0baeb60a28d9edc5e",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both explain that uploaded plugins deliver skills, slash commands, sub-agents, and hooks, while plugin-declared connectors are not connected in a government context.",
+      "unique_left": "User-added plugins, administrator-provided connectors, and the rule that a local MCP server never runs.",
+      "unique_right": "A government administrator's plugin upload and the instruction to add a member connector on the Connectors card.",
+      "rationale": "The overlapping limit is applied in distinct deployment and actor contexts, with different usable next steps and an additional local-server constraint on the left.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Connectors declared by a plugin you add yourself are not added to Claude Desktop's connectors",
+        "right": "In Claude for Government, a connector declared in a plugin you upload here is not connected"
+      }
+    },
+    {
+      "id": "bb490a53e3b828c6e483d09137072c42dd03e77760a3475025ef910fcb58b18b",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both define plugins as packages that add Claude capabilities in one unit, including skills, slash commands, and sub-agents.",
+      "unique_left": "MCP connectors and the tailored-specialist outcome.",
+      "unique_right": "Hooks, Cowork and Code applicability, and a link to the Plugins overview.",
+      "rationale": "The introductory definition repeats the same explanatory work. The product-surface and component differences can remain next to a concise link to one full definition.",
+      "suggested_consolidation": "Keep the fuller general definition in the left passage; shorten the right passage to Cowork and Code applicability plus its overview link, retaining the hook detail.",
+      "evidence": {
+        "left": "Plugins are reusable capability packages that extend Claude with custom functionality.",
+        "right": "A plugin is a package that adds capabilities to Claude in a single step"
+      }
+    },
+    {
+      "id": "e743e6fa9d7fd28a798f5a797efb2313f9a8659ec954bb59972ed0b647a8f693",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both define a skill as reusable instructions with optional scripts and resources that Claude loads for a matching task.",
+      "unique_left": "Skills are directories and each has a `SKILL.md` file defining activation and instructions.",
+      "unique_right": "The workflow-teaching benefit and a link to the Skills overview.",
+      "rationale": "These are parallel introductory definitions. One can be canonical while the other preserves its reuse framing and link in a shorter reference.",
+      "suggested_consolidation": "Keep the left passage's structural definition and `SKILL.md` detail; shorten the right passage to the reuse benefit and link to the canonical overview.",
+      "evidence": {
+        "left": "Skills are directories containing instructions, scripts, and resources that Claude dynamically loads to handle specific tasks.",
+        "right": "A skill is a set of instructions, with optional scripts and resources, that Claude loads when a task matches it"
+      }
+    },
+    {
+      "id": "6ff5efc7e26b52ec12d8e4e6333f661294427d72bc7575cc4934807d4d357ac6",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both show how to add a GitHub repository marketplace in Cowork.",
+      "unique_left": "A general repository-marketplace procedure, supported hosting services, shorthand, plugin installation, and updates.",
+      "unique_right": "A concrete financial-services walkthrough with the Personal tab and a specific repository URL.",
+      "rationale": "The left is a general reference procedure, while the right is a specialized example procedure whose concrete path and expected result need to remain understandable on its own.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "A Git repository that contains plugin packages can serve as a marketplace.",
+        "right": "Select \"Personal\", click the \"+\" button, then select \"Add\n    marketplace from GitHub\"."
+      }
+    },
+    {
+      "id": "2e2fe67780ee210cc444c9f7342435984c6cc035dd6492f53dbb98fcd71e6904",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both explain that MCP Apps receive host-provided styling information for theming.",
+      "unique_left": "A design-level statement about style variables, token categories, and automatic light and dark adaptation.",
+      "unique_right": "The `hostContext` handshake fields and the technical names of provided variables and fonts.",
+      "rationale": "The left gives design guidance, while the right gives the implementation interface needed to consume that guidance.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "MCP Apps automatically receive style variables from the host client.",
+        "right": "Claude passes a [`hostContext`](https://modelcontextprotocol.github.io/ext-apps/api/interfaces/app.McpUiHostContext.html) object to your widget"
+      }
+    },
+    {
+      "id": "000703d0fb98e5d56bdc1320a4c68b4b6c2020b020b9e2edd4d1470b0a2647be",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both distinguish local stdio-based connectors from remote connectors.",
+      "unique_left": "A troubleshooting explanation for why `ui.domain` is unavailable and possible remedies.",
+      "unique_right": "The local and remote execution and access model.",
+      "rationale": "The shared architectural fact supports separate purposes: resolving a configuration limitation and explaining the system's deployment distinction.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Local connectors have no URL to hash, so `ui.domain` is not available for them.",
+        "right": "MCPBs run on the user's machine via stdio with access to local and internal resources."
+      }
+    },
+    {
+      "id": "cbe2799f97d41ba9670a62a9d53a366f0ff57c588e15817c8bee34c777ce4f6f",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both describe how Skills become available and are applied.",
+      "unique_left": "The progressive-disclosure loading sequence and its context-efficiency purpose.",
+      "unique_right": "M365 add-in availability, automatic application, and sidebar invocation.",
+      "rationale": "One explains loading mechanics; the other explains an end user's app-specific experience and control.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Skills use progressive disclosure to manage context efficiently:",
+        "right": "Skills you've enabled in your Claude settings are available in all\nClaude for M365 add-ins."
+      }
+    },
+    {
+      "id": "000abe3af65c8fb03e98255ba9a090779016e716a1993418557a0a023df71689",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both set expectations for descriptive metadata.",
+      "unique_left": "The fields included in connector listing metadata.",
+      "unique_right": "Accuracy and invocation guidance for each tool description.",
+      "rationale": "A listing's public metadata inventory and an author's tool-description requirement concern different artifacts and readers.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "* **Listing metadata**: tagline, description, categories, documentation and privacy policy links, support contact, and icon",
+        "right": "Each tool description should state precisely what the tool does and when to invoke it."
+      }
+    },
+    {
+      "id": "421acd2bc509226ec2e5135aff4c902120646090c56c3015efe5ef2712d55586",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both present service limitations and searchable-content access limits.",
+      "unique_left": "Email creation, sending, modification, and embedded-image limitations.",
+      "unique_right": "Calendar-event and invitation limitations.",
+      "rationale": "The passages list distinct limits for different service functions, and each needs to remain next to its respective capability guidance.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "* Claude cannot create, send, or modify emails",
+        "right": "* Claude cannot create, modify, or delete calendar events"
+      }
+    }
+  ]
+}

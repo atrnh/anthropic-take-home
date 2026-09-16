@@ -1,0 +1,55 @@
+{
+  "assessor": "parent agent; not human adjudication",
+  "method": "Reviewed sampled target text and supplied context before reading judge decisions. Rubric shared with judge; judgments made separately.",
+  "packet_sha256": "9e963648ab6a14dec160ec9e2c56f39e85dbaf472ce8122e35c0fdb14d9a6b0f",
+  "cases": [
+    {
+      "id": "0000a4dbe357ac9fc5bdf805eb92a32fc7ec74d077d3ea9b2d314edde77f25eb",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "A reference link to the MCPB specification and architecture overview serves a different purpose from a submission-type bullet defining eligible desktop extensions."
+    },
+    {
+      "id": "0020f594283fc263db0d4a6be9b352b7e82e8f91d368f25d3faeaf3ae3d66879",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Automatic propagation of server and plugin updates is distinct from the introduction to remote tool actions and their security consequences."
+    },
+    {
+      "id": "009b01fb3d3c24a8e2be7b0b9c016831044281c3352217ff0ac2aa5941572be1",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Connector directory labels and plugin review describe different catalog objects. Each passage preserves its applicable review and trust information; the connector passage also distinguishes discoverability from tool capabilities."
+    },
+    {
+      "id": "0061466b0770d7f19de1c51ce046a217f611c35278662d9bdd4abed269326956",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Microsoft delegated permissions and administrator-controlled writes are distinct from Slack plan eligibility and app approval."
+    },
+    {
+      "id": "0005289ee0fd040a468672114275d3ccd91e8c4badc81a2704c9b736b7d9a09c",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "The Microsoft connector action list describes Outlook and SharePoint capabilities. The Office-agent passage describes where connectors and skills are enabled across applications."
+    },
+    {
+      "id": "000854e94ba92cedf88e2e11ecfdad2d0b51a9715b2633c556be6dff24b567b9",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "An endpoint change causing an existing connection to appear as Custom is distinct from explaining that a connector URL can be added without a directory listing."
+    },
+    {
+      "id": "000703d0fb98e5d56bdc1320a4c68b4b6c2020b020b9e2edd4d1470b0a2647be",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "The troubleshooting passage explains a missing ui.domain value and its remedies. The MCPB comparison explains local versus remote architecture to guide a build choice."
+    },
+    {
+      "id": "000abe3af65c8fb03e98255ba9a090779016e716a1993418557a0a023df71689",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Editable directory listing metadata and accuracy requirements for callable tool descriptions concern different objects and reader tasks."
+    }
+  ]
+}
