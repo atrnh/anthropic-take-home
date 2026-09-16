@@ -3,17 +3,10 @@
 Start with the [short audit memo](README.md). This supporting evidence draft
 preserves the detailed first example behind its plugin recommendations.
 
-Status: proposal for review, 2026-09-15. This is not the complete slice audit
-or an implemented migration.
-
-Evidence comes from the 54-page snapshot fetched on 2026-09-14, recorded in
-[the manifest](../../corpus/manifest.json). Statements below describe that
-snapshot, not independently verified current product behavior.
-
-Continuation: the [slice-wide ledger](disposition-ledger.md) now covers all 54
+The [slice-wide ledger](disposition-ledger.md) covers all 54
 pages, including the Government connector-policy destination left open below.
 The [proposed IA](proposed-ia.md) carries the current migration recommendation;
-this file preserves the detailed first example.
+this file preserves a detailed, worked example.
 
 ## Recommendation
 

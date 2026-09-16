@@ -1,66 +1,81 @@
 # Audit Memo
 
-## Fix the model first
+## Improvements that matter most
 
-Claude Docs groups Connectors, Skills, and Plugins alongside Cowork, Claude Tag,
-Claude for M365, Science, third-party platforms, and Government under
-"products." But these aren't all products. The list mixes capabilities, places
-to use Claude, and ways organizations provide access. It's hard to tell what's
-shared across Claude and what changes with your setup.
+### Align docs with how Claude actually works
 
-![Claude Docs navigation and product cards, annotated to highlight Connectors, Skills, and Plugins under Browse all products.](images/claude-docs-product-taxonomy.png)
+Claude Docs lists connectors, skills, and plugins as products, but they aren't. The main
+site navigation gets it right: they're capabilities that work across many products.
 
-The main site tells a different story. It lists Skills and Claude for Microsoft
-365 under "Features." Even the names change: "@Claude" becomes "Claude Tag," and
-"Claude Cowork" becomes "Cowork." Readers shouldn't have to sort this out before
-they can find instructions.
+Organize the docs the same way. Lead with **Skills**, **Plugins**, and **Connectors**
+belong together, with tasks under each: use a skill, install a plugin, connect a service.
+Add **Administer extensions** and **Build and publish** for readers doing that work.
+Product landing pages stay as entrances to the same pages, so most URLs don't need to
+move. The [proposedIA](proposed-ia.md) maps the full slice.
 
-![The main Claude site's navigation lists Skills and Claude for Microsoft 365 as Features, with Claude Cowork and @Claude under Products.](images/claude-site-navigation.png)
+### Give each page one clear job
 
-Here's the model I'd use:
+Docs should meet users where they are. Someone just getting started doesn't need to know
+about `SKILL.md` files or progressive disclosure yet. Someone in the middle of authoring a
+skill doesn't need to be told what a skill is.
 
-> Claude uses connectors to access tools and data, skills to follow reusable
-> instructions, and plugins to package capabilities for distribution. How you
-> enable, use, or administer them depends on where you use Claude and how your
-> organization provides access.
+Pick one Diátaxis mode (tutorial, explainer, how-to guide, reference) for each page and
+stick to it.
 
-I'd fix the model first. It'll help readers understand the overlap and give
-writers a clearer home for each task. Organize navigation around capabilities
-and tasks, then show the complete workflow for the reader's setup. Start with
-the misleading setup and availability claims in the
-[54-page disposition ledger](disposition-ledger.md).
+This gets easier after [aligning the docs with
+reality](#align-docs-with-how-claude-actually-works): we know that skills are conceptually
+the same across all products, so [the page on connectors and skills for Claude
+Science](../../corpus/claude-science/connectors-and-skills.md) can be decomposed into
+universal explainers (what a connector/skill is), tutorials (how to get started with
+connectors/skills), how-tos (how to add a skill), and product-specific reference (list of
+connectors/skills included with Claude Science).
 
-## What matters most
+### Separate tasks with different outcomes
 
-### 1. Make it clear which instructions apply
+Readers arrive with a goal in mind. The docs should help readers choose the job they're
+trying to do before showing them the steps. Each how-to guide should name one outcome and
+make it clear when the reader is done. A custom skill and a published distribution of a
+skill are two different outcomes.
 
-The connector overview says you only need to authenticate. But the Microsoft 365
-guide requires tenant consent and, for Team and Enterprise, organization
-enablement. Tell readers what they'll need and which steps belong to an admin
-before they start.
+Sharing a product name doesn't make two tasks the same. [Attaching GitHub
+files](../../corpus/connectors/github/index.md) and [using GitHub MCP
+tools](../../corpus/third-party/claude-desktop/connectors-github.md) get readers different
+results, so they need different guides. "Done" needs the same care: in Government, an
+installed plugin doesn't connect its bundled tools, so "installed" and "ready to use" need
+separate checks.
 
-To distribute a Government skill, you'll need a text-only skill in a plugin
-wrapper. Installing a Government plugin doesn't connect its bundled tools.
-Uploading a Claude Tag plugin doesn't attach it to a scope. Each procedure
-should say what "done" means and how to check it. See the [draft findings](audit-memo.md#fix-applicability-before-rearranging-navigation)
-and [plugin evidence](plugin-disposition-example.md#evidence-and-priorities).
+### Scope instructions to the reader's context
 
-### 2. Separate tasks with different outcomes
+The same capability can work differently depending on where someone uses Claude and how
+their organization provides access. Instructions written for one context read as universal,
+and readers in other contexts hit dead ends with no idea why.
 
-Adding GitHub files and configuring GitHub MCP tools are different jobs. The
-Slack page mixes an earlier app with a data connector and a route to Claude Tag.
-The financial-services plugin collection sits under M365 add-ins even though its
-steps target Cowork. Help readers choose the job they're trying to do before
-showing them the steps. See the [connector decisions](disposition-ledger.md#connectors-for-members-and-administrators)
-and [plugin decisions](disposition-ledger.md#plugins-and-distribution).
+State prerequisites where they apply, and when a step needs an admin, tell the reader what
+to ask for. When steps differ by context, put each context's workflow on the same task page.
+Ask readers to choose only when the choice changes the steps, and tell them how to find out
+which context they're in. The [worked example](../2-standards/rewrite/README.md) shows this
+on "Install a plugin."
 
-### 3. Stop maintaining competing explanations
+The [connector overview](../../corpus/connectors/overview.md) says prebuilt integrations
+need nothing beyond authentication, but [Microsoft
+365](../../corpus/connectors/microsoft/365.md) needs tenant consent and, on Team and
+Enterprise, admin enablement. Skills have the same gap: the [authoring
+guide](../../corpus/skills/how-to.md) allows scripts, while
+[Government](../../corpus/government/desktop/skills.md) requires text-only skills in a
+plugin wrapper.
 
-Explain each capability once. The plugin overview doesn't need a second catalog
-or a history lesson. Link to the directory and cut the detours. Put listing edits
-and permanent-slug rules under listing management. Keep server and plugin updates
-separate, since they're different jobs. Specialist references still earn their
-own pages. The [ledger](disposition-ledger.md) covers the decisions for all 54 pages.
+### Explain each concept once
+
+Every duplicate explanation is one more thing to keep accurate, and duplicates drift apart.
+Readers who find two versions can't tell which one to trust.
+
+Give each concept one home and link to it from everywhere else.
+
+The [plugin overview](../../corpus/plugins/overview.md) repeats the plugin directory and
+promises org management that [the Cowork guide already
+documents](../../corpus/cowork/guide/plugins.md). Detailed specialist references aren't
+duplicates, though, and can stay.
+
 
 ## Principles behind the proposal
 
@@ -140,10 +155,17 @@ Extend Claude
     └── Update integrations and manage listings
 ```
 
+
 ## What to merge or remove, and where old links go
 
-We can consolidate content without moving every URL. Don't delete a duplicate
-until its replacement works, and don't lose any unique workflows.
+Publish replacements before adding redirects. When an old page served several tasks, turn
+it into a short "choose your task" page instead of redirecting everyone to one destination.
+Keep legacy anchors in place, since redirects can't see URL fragments, and include `.md`
+routes and `llms.txt`.
+
+Migrate one family at a time, starting with plugin installation and Government skill
+packaging. Product owners resolve the ledger's open questions first, and the previous build
+stays available for rollback.
 
 | Content decision | What readers following old URLs get |
 | --- | --- |

@@ -1,18 +1,20 @@
 # Proposed information architecture and migration
 
-Draft, 2026-09-15. Start with the [short audit memo](README.md).
-This supporting draft applies the [plugin example](plugin-disposition-example.md)
-across the [54-page disposition ledger](disposition-ledger.md). Paths below are
-proposed unless the ledger identifies them as existing. This document is maintained
-by hand.
+Start with the [short audit memo](README.md). For an example of how to put this into
+practice, see the [plugin example](plugin-disposition-example.md).
 
-## In this draft
+## Contents
 
-- [Navigation tree](#organize-by-capability-and-task)
-- [Destination scopes](#give-new-destinations-explicit-scope)
-- [Content and presentation](#author-complete-procedures-compose-the-readers-view)
-- [Old-link behavior](#preserve-incoming-intent)
-- [Migration and acceptance](#migrate-in-reader-testable-batches)
+- [Contents](#contents)
+- [Organize by capability and task](#organize-by-capability-and-task)
+- [Give new destinations explicit scope](#give-new-destinations-explicit-scope)
+- [Author complete procedures, compose the reader's view](#author-complete-procedures-compose-the-readers-view)
+  - [Describe applicability](#describe-applicability)
+  - [Help readers choose instructions](#help-readers-choose-instructions)
+  - [Preserve context and access](#preserve-context-and-access)
+- [Preserve incoming intent](#preserve-incoming-intent)
+- [Migrate in reader-testable batches](#migrate-in-reader-testable-batches)
+  - [Acceptance scenarios](#acceptance-scenarios)
 
 ## Organize by capability and task
 
