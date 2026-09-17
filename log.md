@@ -1,6 +1,23 @@
 # Project log
 
-Reconstructed on 15 September 2026 from repository artifacts, committed transcripts,
+| Date | Work and decisions |
+| --- | --- |
+| Sept. 14 | Establish scope, preserve sources, and set up the repo. [(see details)](#14-september-establish-the-scope-and-preserve-the-sources) |
+| Sept. 14–15 | Investigate product overlap through a task matrix, revise the taxonomy, and attempt a full-corpus extraction. [(see details)](#14-and-15-september-investigate-overlap-through-a-task-matrix) |
+|  | Trace the effort spent building the analysis workflow, correcting task matches, and reconciling product boundaries. [(see details)](#where-the-effort-went) |
+|  | Clarify the information architecture, distinguish shared capabilities from product contexts, and shift toward editorial decisions. [(see details)](#14-and-15-september-clarify-the-information-architecture) |
+|  | Revisit my assumptions, recognize the matrix's diminishing returns, and define a smaller investigation for next time. [(see details)](#what-i-learned-and-why-i-would-scope-this-differently) |
+| Sept. 15 | Turn the findings into an editorial proposal, audit all 54 pages, and plan navigation and migration. [(see details)](#15-september-turn-the-findings-into-an-editorial-proposal) |
+|  | Demonstrate the standards with a plugin-installation rewrite and verify its context-specific workflows. [(see details)](#15-september-demonstrate-the-standards-with-one-worked-page) |
+|  | Record the process, plan the remaining deliverables, and establish a time estimate based on human attention. [(see details)](#15-september-record-the-process-and-initial-remaining-work) |
+|  | Build and evaluate the duplicate-prose check, compare retrieval methods, and test model-based editorial judgment. [(see details)](#15-september-build-and-evaluate-the-duplicate-prose-check) |
+| Sept. 15–16 | Refine the memo's voice and conceptual argument, clarify each page's purpose, and remove obsolete artifacts. [(see details)](#15-and-16-september-refine-the-memo-and-its-presentation) |
+|  | Draft an adoption approach around a willing team's work, contributor support, and an advisory check. [(see details)](#15-and-16-september-draft-the-adoption-approach) |
+|  | Export the supporting conversations, refresh later discussions, and link the redacted source records. [(see details)](#conversation-sources) |
+| Sept. 17 | Mark the six-hour checkpoint and identify subsequent work as beyond the budget. [(see details)](#17-september-six-hour-checkpoint) |
+
+Reconstructed on 15 September 2026 and updated on 16 September from repository
+artifacts, committed transcripts,
 additional local Claude and Codex/ChatGPT conversations, and my retrospective in
 the log-writing conversation. Dates use America/Los_Angeles. First-person
 reflections are Ashley's; interpretations of the conversation history are labeled.
@@ -48,14 +65,17 @@ are ready to publish.
   pilot, with client or mode recorded separately. The pilot still flagged
   third-party-inference Desktop as a deployment being represented as a product.
   This was a working taxonomy, not a settled model of the entire product family.
-- Preserved the [pilot results and remaining problems](docs/1-audit/task-matrix/pilot/README.md),
-  including unresolved cross-task overlaps and 54 open questions.
+- Preserved the pilot results and remaining problems, including unresolved
+  cross-task overlaps and 54 open questions. The
+  [pilot conversation](transcripts/2026-09-14-8e6904c0.md) records this work;
+  the pilot files were later removed from the working tree on 16 September.
 - Added six newly discovered tasks and cleaned up references to removed product
   IDs across the pilot data, schema, and splitting logic.
 - Attempted expansion to all 54 pages, split into 62 work units. Nearly all raw
   extraction workers returned, but the last worker and a retry hit a usage limit.
   The run stopped before validation, merge, and reconciliation produced a final
-  inventory. Only the pilot is preserved in the current checkout.
+  inventory. Only the pilot was committed, in `1d77690`; its files remain in
+  Git history after the later cleanup.
 
 ### Where the effort went
 
@@ -178,40 +198,158 @@ are ready to publish.
   behavior. Those checks establish the demonstration's behavior, not the
   correctness of the live Claude installation UI.
 
-## 15 September: record the process and remaining work
+## 15 September: record the process and initial remaining work
 
 - Simplified the root README to describe the project and moved the deliverable
   checklist into the roadmap. I did not want to overdefine the tasks or embed
   implementation assumptions in the checklist.
 - Committed the slice-wide audit and standards work and merged it to `main` as
-  `bda1f3c`. This is the baseline present in this checkout.
+  `bda1f3c`. This was the baseline for the first version of this log.
 - Completed a later readability pass in worktree `836b`: broke the audit into
   smaller sections, added an audit-folder README as the short memo, retained and
   linked the supporting drafts, and linked that entry point from the root README.
-  At the time of this log, those edits remain uncommitted in that separate
-  worktree and are not included here.
+  Those edits were still uncommitted when this log was first compiled. The
+  later commit and integration are recorded below.
 - Planned task 3 around a prototype that flags duplicated explanatory prose,
   distinguishing harmful duplication from useful repetition and related but
-  different content. The detector and its evaluation have not been implemented.
+  different content. Implementation and evaluation followed later that day.
 - Planned task 4 around adoption through a willing team's concrete problem and
-  the plugin rewrite as a pilot. The adoption write-up has not been produced.
+  the plugin rewrite as a pilot. A working draft followed later that day.
 - Added a Codex transcript-dumping skill alongside the Claude version. Kept
   transcript capture separate from the editorial deliverables.
 - Asked for project-time estimates and explicitly checked that parallel work was
   not counted twice. A later assistant estimate was about 5 hours 35 minutes.
-  That is a historical estimate, not a verified total or an established six-hour
-  cutoff; this log does not use it to manufacture a before/after boundary.
+  I challenged whether I had actually spent that long. The assistant acknowledged
+  conflating agent runtime with my attention.
+- Clarified that I multitask: unattended agent runtime often does not count,
+  while immediate replies usually mean I am still engaged. I reported about
+  three hours of work on 14 September and accepted a revised checkpoint of
+  **4 hours 15 minutes spent, 1 hour 45 minutes remaining** on 15 September.
+  That is an accepted estimate at that point, not a final total or an exact
+  six-hour cutoff for the later work.
 - Began reconstructing this log from both dumped and undumped conversations.
   Confirmed access to project transcripts for Claude Desktop's Code sessions.
 - Added the retrospective above so that the record includes my assumptions,
   corrections, and judgment about effort, alongside artifacts and agent actions.
 
+## 15 September: build and evaluate the duplicate-prose check
+
+- Confirmed that duplicated explanatory prose was the right problem because it
+  directly matched the audit. The later change of approach did not change that
+  target.
+- Built a working checker for repeated explanatory prose against the pinned
+  54-page corpus. It retains source text and line numbers, verifies the corpus
+  hashes, and reports candidate passage pairs for editorial review.
+- The first lexical baseline flagged 18 pairs. Review judged three actionable
+  and 15 false positives; it also missed all six positive cases in the small
+  audit-derived example set. Saved those results and examples instead of
+  presenting the prototype as ready to enforce in CI.
+- Created the private `atrnh/anthropic-take-home` GitHub repository and pushed
+  the initial prototype as `431298a`. The task recorded passing verification,
+  reproducible saved results, and a check that the remote commit and report
+  matched the local work.
+- Questioned the false positives and whether a deterministic approach was viable.
+  I had assumed the check needed to be deterministic; it did not. Shifted toward
+  code for extraction, source validation, and evaluation, with a model making
+  the editorial judgment about redundancy.
+- Explored inexpensive alternatives to embeddings, then chose a small TF-IDF
+  comparison before escalating to a heavier approach. Approved fixing the
+  extraction gap and then running a bounded model-judge pilot.
+- Compared TF-IDF, which weights words and phrases by how distinctive they are,
+  with the baseline's three-word overlap method. With the same extracted
+  passages, TF-IDF retrieved five of the six known positives at ten candidates
+  per passage. The sixth was missing from the extracted text, so changing the
+  matcher alone could not recover it.
+- Expanded extraction to include short unordered-list prose. On the full corpus,
+  TF-IDF then retrieved all six known positives among 6,755 candidate pairs.
+  Kept the original baseline and earlier experiment reproducible. This was a
+  retrieval result on reused examples, not a measure of editorial accuracy.
+- Ran a blinded model-judge pilot on the 16 existing labeled cases and eight
+  newly sampled candidates. The judge received source text and context without
+  the labels or retrieval scores. Its source and evidence checks passed for all
+  24 responses.
+- Against the existing labels, the judge produced five true positives, one false
+  positive, one false negative, and nine true negatives. It still treated a
+  necessary local prerequisite as removable duplication. A correct duplicate
+  classification could also recommend the wrong canonical home for the text.
+- The experiment's recommendation was to keep TF-IDF and improve the editorial
+  rubric before judging the whole queue. The eight new candidates were all
+  rejected, with agreement from a separate agent review; that agreement is not
+  human ground truth. These small, reused sets do not validate production
+  precision or recall.
+- Committed the prototype and experiments as `431298a`, `633df9b`, `b3336b6`,
+  and `db76af4` on `codex/duplicate-prose-check`. As of this update, that branch
+  has not been merged into `main`. Its reports live under `docs/3-check/` on
+  that branch, including `README.md`, `tfidf-bakeoff.md`,
+  `extraction-followup.md`, and `judge-pilot.md`.
+
+## 15 and 16 September: refine the memo and its presentation
+
+- Brought the introduction from my audit note into the memo, including two
+  screenshots comparing the main site's navigation with Claude Docs. Kept the
+  supporting drafts and made the audit-folder README the short memo's entry point.
+- Asked for a "Silicon Valley professional" voice: casual, concise, more
+  contractions, and sentences that sound natural read aloud. I wanted to assume
+  an intelligent reader and cut disclosures that did not serve the memo's
+  purpose, including repeated scope and testing-status notes.
+- Committed that pass on 15 September and integrated it into `main` on
+  16 September as `a579ab8`.
+- Continued editing the memo around the improvements that matter most: align
+  the conceptual model, give each page a clear job, distinguish task outcomes,
+  scope instructions to the reader's context, and explain each concept once.
+- Connected the IA argument to software architecture: getting the model right
+  makes later design decisions easier. A shared concept can have one explanation,
+  while how-to instructions and reference material vary with the reader's task
+  and context.
+- Clarified that docs should support the reader's current stage of work. Someone
+  getting started with skills does not need implementation details immediately;
+  someone already authoring a skill does not need another basic definition.
+  Applied Diátaxis to give each page one clear purpose.
+- Committed the streamlined memo on 16 September as `77a1d7c`. That cleanup also
+  removed the two screenshots and 115 matrix-pilot files from the working tree.
+  Their history and the exported conversations remain available. Added
+  `.DS_Store` to the repository ignore rules.
+
+## 15 and 16 September: draft the adoption approach
+
+- Created an [adoption draft](docs/4-adoption/adoption.md) grounded in my prior
+  curriculum and build-system work, rather than treating adoption as a generic
+  rollout. It remains a working draft for me to revise in my own voice.
+- Asked for the approach to reflect my historical practice using the vault and
+  SelfWiki. Accepted the result as "a good start" and asked to commit it, while
+  explicitly reserving a rewrite in my own voice.
+- Proposed starting with individual conversations and a willing team's real
+  documentation problem, using the plugin before/after example to invite
+  critique and work through an actual update.
+- Connected standards to contributor support: onboarding, acceptance criteria,
+  good and bad examples, explanations of reader consequences, and a shared place
+  for questions and decisions. The goal is for authors to maintain the content
+  without depending on me to rewrite it for them.
+- Kept the automated check advisory while contributors assess its usefulness
+  and incorrect flags. The draft distinguishes a noisy check, unclear ownership,
+  deadline pressure, and a legitimate exception when a team does not follow it.
+  Blocking publication would need evidence that the check earns that role.
+- Rebasing and integration on 16 September put the draft and its roadmap link
+  on `main` as `c3af9e6`. This records a proposed adoption approach, not a
+  completed rollout or approved final submission.
+
+## 17 September: six-hour checkpoint
+
+- Marked **6 hours of project time spent, 0 hours remaining in the six-hour
+  budget** at my request on 17 September 2026, at approximately 10:35 a.m. PDT.
+  This is my declared checkpoint, using the human-attention basis established
+  above. Work after this point falls beyond the six-hour budget.
+
 ## Conversation sources
 
-Exported on 15 September 2026. Each file includes user and assistant messages,
-tool calls, and truncated tool results. The take-home prompt and identifying
-values are redacted; hidden instructions and reasoning are omitted. Message
-counts below are the exporters' counts, not counts of human turns.
+The original source snapshots were exported on 15 September 2026. On 16
+September, four exports were refreshed and three conversations were added.
+The Claude and Codex exports include user and assistant messages, tool calls,
+and truncated tool results. The ChatGPT architecture discussion contains the
+messages available through the app; its original search results were unavailable.
+The take-home prompt and identifying values are redacted; hidden instructions,
+reasoning, and attached app screenshots are omitted. Message counts below are
+the exporters' counts, not counts of human turns.
 
 - [Setup](transcripts/2026-09-14-43576142.md) · Claude · 33 messages.
 - [Matrix design and pilots](transcripts/2026-09-14-8e6904c0.md) · Claude · 106 messages.
@@ -223,12 +361,20 @@ counts below are the exporters' counts, not counts of human turns.
 - [IA decisions](transcripts/2026-09-14-01a0a236.md) · Codex/ChatGPT · 14 messages.
 - [Worked rewrite and standards](transcripts/2026-09-15-01a0a67f.md) · Codex/ChatGPT · 44 messages.
 - [Slice-wide audit](transcripts/2026-09-15-01a0a6c9.md) · Codex/ChatGPT · 15 messages.
-- [Time-estimate discussion](transcripts/2026-09-15-01a0a6be.md) · Codex/ChatGPT · 13 messages.
-- [Task 3 planning](transcripts/2026-09-15-01a0a6db-4c58.md) · Codex/ChatGPT · 4 messages.
-- [Task 4 planning](transcripts/2026-09-15-01a0a6db-85a2.md) · Codex/ChatGPT · 4 messages.
-- [Audit readability pass](transcripts/2026-09-15-01a0a6e4.md) · Codex/ChatGPT · 16 messages.
+- [Time-estimate discussion](transcripts/2026-09-15-01a0a6be.md) · Codex/ChatGPT · 19 messages.
+- [Task 3 planning](transcripts/2026-09-15-01a0a6db-4c58.md) · Codex/ChatGPT · 72 messages.
+- [Task 4 planning](transcripts/2026-09-15-01a0a6db-85a2.md) · Codex/ChatGPT · 13 messages.
+- [Audit readability pass](transcripts/2026-09-15-01a0a6e4.md) · Codex/ChatGPT · 27 messages.
 - [This log and Ashley's retrospective](transcripts/2026-09-15-01a0a6eb.md) · Codex/ChatGPT · 19 messages.
+- [Add architecture foundation sentence](transcripts/2026-09-16-01a0abf6.md) · Codex/ChatGPT · 6 messages.
+- [Commit all changes](transcripts/2026-09-16-01a0ac9a.md) · Codex/ChatGPT · 10 messages.
+- [Semantic Deduplication Architecture](transcripts/2026-09-15-6aa9d341.md) · ChatGPT · 5 messages.
 
-All 15 referenced conversations now have local exports. The current conversation
-is a snapshot taken during this export task. Artifact status in the log was
-checked against `bda1f3c` and the additional local work described above.
+All 18 supporting conversations referenced here have local exports. The seven
+conversations used for the 16 September update are captured through their
+latest available messages at export time. Other exports retain their original
+15 September snapshots.
+
+Artifact status was checked against `main` at `c3af9e6` and the separate
+`codex/duplicate-prose-check` branch at `db76af4`. Dates describe when work
+happened; a later rebase or integration can have a different commit date.
