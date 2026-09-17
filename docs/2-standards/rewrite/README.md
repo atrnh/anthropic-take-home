@@ -1,7 +1,7 @@
 # Install a plugin: worked rewrite
 
 This example applies the [style-guide excerpt](../style-guide.md) and
-[how-to template](../templates/how-to.md) to the pinned Cowork installation page.
+[how-to template](../how-to-template.md) to the pinned Cowork installation page.
 It incorporates a separately authored Government variant to demonstrate one
 task page presenting different workflows. It is not a published Claude Docs page.
 

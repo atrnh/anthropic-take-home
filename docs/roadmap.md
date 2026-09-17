@@ -10,7 +10,7 @@ and developer-platform documentation sites are outside the exercise.
   [54-page disposition ledger](1-audit/disposition-ledger.md) and
   [proposed IA and migration](1-audit/proposed-ia.md).
 - [Style-guide excerpt](2-standards/style-guide.md),
-  [how-to template](2-standards/templates/how-to.md), and
+  [how-to template](2-standards/how-to-template.md), and
   [worked before/after page](2-standards/rewrite/README.md).
 - [Repeated-prose checker, results, and evaluation](3-check/README.md).
   The working prototype finds useful cases but does not meet its proposed

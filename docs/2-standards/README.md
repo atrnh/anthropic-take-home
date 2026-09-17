@@ -1,7 +1,7 @@
 # Editorial standards and worked rewrite
 
 Start with the [style-guide excerpt](style-guide.md) for rules on writing task
-pages with context-dependent instructions. The [how-to template](templates/how-to.md)
+pages with context-dependent instructions. The [how-to template](how-to-template.md)
 provides the page structure.
 
 Continue reading to learn how to view the [plugin installation rewrite](rewrite/README.md).

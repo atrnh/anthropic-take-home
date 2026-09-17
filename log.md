@@ -155,7 +155,7 @@ are ready to publish.
 ## 15 September: demonstrate the standards with one worked page
 
 - Created a [style-guide excerpt](docs/2-standards/style-guide.md) and
-  [how-to template](docs/2-standards/templates/how-to.md) tied to the audit's
+  [how-to template](docs/2-standards/how-to-template.md) tied to the audit's
   findings about scope, complete procedures, outcomes, and source evidence.
 - Rewrote "Install a plugin" as one task page composed from separately authored
   Cowork and Government workflows. Preserved the original Cowork page, generated
