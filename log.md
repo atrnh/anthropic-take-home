@@ -28,12 +28,12 @@ are ready to publish.
 
 - Chose skills, plugins, and connectors in Claude Docs as the documentation slice.
   Created a project README and a deliverable checklist in
-  [the roadmap](docs/roadmap.md).
+  the former roadmap, removed during submission cleanup.
 - Corrected the initial corpus fetch, which had pulled from Claude Code Docs.
   The exercise concerns `claude.com/docs`; Claude Code and developer-platform
   documentation are outside its scope.
 - Saved a [54-page corpus snapshot](corpus/manifest.json) and a
-  [fetch script](docslint/fetch_corpus.py), giving the audit a fixed body of source
+  [fetch script](3-check/docslint/fetch_corpus.py), giving the audit a fixed body of source
   material to inspect and cite.
 - Added a Claude transcript-dumping skill and saved the setup conversation.
   Refined redaction to remove personal identifiers and the take-home prompt by
@@ -146,13 +146,13 @@ are ready to publish.
 
 ## 15 September: turn the findings into an editorial proposal
 
-- Developed a detailed [plugin disposition example](docs/1-audit/plugin-disposition-example.md)
+- Developed a detailed [plugin disposition example](1-audit/plugin-disposition-example.md)
   to work through shared concepts, distinct tasks, complete workflow variants,
   and the fate of existing pages and links.
 - Extended the editorial pass to every page in the snapshot. Drafted the
-  [54-page disposition ledger](docs/1-audit/disposition-ledger.md),
-  [audit memo](docs/1-audit/audit-memo.md), and
-  [proposed IA and migration plan](docs/1-audit/proposed-ia.md).
+  [54-page disposition ledger](1-audit/disposition-ledger.md),
+  [audit memo](1-audit/audit-memo.md), and
+  [proposed IA and migration plan](1-audit/proposed-ia.md).
 - Proposed capability and task entries for skills, plugins, and connectors, with
   administration and building/publishing routes for distinct work. Existing
   product/context entry points can lead to the same canonical instructions.
@@ -174,13 +174,13 @@ are ready to publish.
 
 ## 15 September: demonstrate the standards with one worked page
 
-- Created a [style-guide excerpt](docs/2-standards/style-guide.md) and
-  [how-to template](docs/2-standards/how-to-template.md) tied to the audit's
+- Created a [style-guide excerpt](2-standards/style-guide.md) and
+  [how-to template](2-standards/how-to-template.md) tied to the audit's
   findings about scope, complete procedures, outcomes, and source evidence.
 - Rewrote "Install a plugin" as one task page composed from separately authored
   Cowork and Government workflows. Preserved the original Cowork page, generated
   Markdown and an interactive HTML preview, and documented every original
-  section's treatment in the [rewrite package](docs/2-standards/rewrite/README.md).
+  section's treatment in the [rewrite package](2-standards/rewrite/README.md).
 - Required identification help beside the workflow chooser. Readers cannot be
   expected to know their setup; the page needs a short "How to check" explanation
   and an administrator-question fallback where the sources do not establish a
@@ -192,7 +192,7 @@ are ready to publish.
   `generated/`, and preserved `snapshots/` so that future edits go to the right
   files.
 - Ran artifact checks and browser checks during the rewrite work. The
-  [recorded verification](docs/2-standards/rewrite/changelog.md#verification)
+  [recorded verification](2-standards/rewrite/changelog.md#verification)
   covers source preservation, reproducible output, both variants, keyboard
   selection, direct links, unknown context, history navigation, and no-script
   behavior. Those checks establish the demonstration's behavior, not the
@@ -279,7 +279,7 @@ are ready to publish.
   precision or recall.
 - Committed the prototype and experiments as `431298a`, `633df9b`, `b3336b6`,
   and `db76af4` on `codex/duplicate-prose-check`. As of this update, that branch
-  has not been merged into `main`. Its reports live under `docs/3-check/` on
+  has not been merged into `main`. Its reports live under `3-check/` on
   that branch, including `README.md`, `tfidf-bakeoff.md`,
   `extraction-followup.md`, and `judge-pilot.md`.
 
@@ -312,7 +312,7 @@ are ready to publish.
 
 ## 15 and 16 September: draft the adoption approach
 
-- Created an [adoption draft](docs/4-adoption/adoption.md) grounded in my prior
+- Created an [adoption draft](4-adoption/README.md) grounded in my prior
   curriculum and build-system work, rather than treating adoption as a generic
   rollout. It remains a working draft for me to revise in my own voice.
 - Asked for the approach to reflect my historical practice using the vault and
