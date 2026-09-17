@@ -1,11 +1,50 @@
 # Adoption
 
-Working draft for Ashley to revise in her own voice before submission.
+I have a playbook that's served me well, but the fun is in knowing when to set it aside — the right move is often something improvised for the specific team in front of me.
 
-I would start by talking individually with the people writing and maintaining these pages: what changes most often, where reviews get stuck, and which documentation problems keep returning to their team. When helping instructors move from direct Canvas edits to a shared build system, I took a grassroots approach, starting with people who had already expressed frustration with the existing workflow. I supported them with short explanations, wiki documentation, and public Slack discussions where others could learn from the same questions. For this proposal, I would bring the plugin installation before/after example to the responsible writers and product experts, ask them to challenge it, and help them apply the approach to one real update.
+Getting buy-in and adoption is a really fun problem to solve, because the potential
+solutions are
 
-The standards would be part of that support. In my curriculum work, I have paired contributor onboarding with written acceptance criteria and good and bad examples from the material people were editing. Here, the how-to template and worked rewrite show what scoped prerequisites, complete procedures, and observable results look like. Review feedback should explain the consequence for the reader and point to a usable example. I would keep a shared place for questions and decisions, then improve the guidance when repeated questions reveal that it is unclear. Authors should be able to make a sound revision without depending on me to rewrite it for them.
+You've written a standard and built a checker. Now several product teams need to use them,
+and none of them report to you. How do you get adoption? What do you do about the team
+that ignores you? Please describe your approach in only a few paragraphs tops.
 
-I would introduce the automated check where contributors already work, initially as advisory feedback. Each finding should identify the problem, explain why it matters, and give the author a practical next step. During the pilot, I would review findings with contributors, record incorrect flags and missed problems, and adjust the check before proposing any blocking behavior. My build-system work has focused on preventing recurring problems such as code examples drifting from the files they describe. I would apply the same principle here: automate a specific, testable failure and keep product correctness and editorial judgment with people. The check's evaluation would determine whether it earns a stronger role in the publishing workflow.
+I would start by talking individually with the people writing and maintaining these pages:
+what changes most often, where reviews get stuck, and which documentation problems keep
+returning to their team. When helping instructors move from direct Canvas edits to a
+shared build system, I took a grassroots approach, starting with people who had already
+expressed frustration with the existing workflow. I supported them with short
+explanations, wiki documentation, and public Slack discussions where others could learn
+from the same questions. For this proposal, I would bring the plugin installation
+before/after example to the responsible writers and product experts, ask them to challenge
+it, and help them apply the approach to one real update.
 
-If a team ignored the standards or check, I would first find out why. A deadline, a noisy check, unclear ownership, and a legitimate exception need different responses. I would work through one of their pages with them and revise the guidance if their case exposed a flaw. If the disagreement concerned a rule's value, I would use a concrete reader task or observed failure to test it, as I have used external evidence to move curriculum disagreements beyond personal preference. If a consequential problem remained unresolved, I would document the reader impact, the attempted fixes, and the decision needed from the responsible owner. I would judge adoption by whether teams can maintain better instructions with less repeated help, alongside whether readers reach the intended outcome.
+The standards would be part of that support. In my curriculum work, I have paired
+contributor onboarding with written acceptance criteria and good and bad examples from the
+material people were editing. Here, the how-to template and worked rewrite show what
+scoped prerequisites, complete procedures, and observable results look like. Review
+feedback should explain the consequence for the reader and point to a usable example. I
+would keep a shared place for questions and decisions, then improve the guidance when
+repeated questions reveal that it is unclear. Authors should be able to make a sound
+revision without depending on me to rewrite it for them.
+
+I would introduce the automated check where contributors already work, initially as
+advisory feedback. Each finding should identify the problem, explain why it matters, and
+give the author a practical next step. During the pilot, I would review findings with
+contributors, record incorrect flags and missed problems, and adjust the check before
+proposing any blocking behavior. My build-system work has focused on preventing recurring
+problems such as code examples drifting from the files they describe. I would apply the
+same principle here: automate a specific, testable failure and keep product correctness
+and editorial judgment with people. The check's evaluation would determine whether it
+earns a stronger role in the publishing workflow.
+
+If a team ignored the standards or check, I would first find out why. A deadline, a noisy
+check, unclear ownership, and a legitimate exception need different responses. I would
+work through one of their pages with them and revise the guidance if their case exposed a
+flaw. If the disagreement concerned a rule's value, I would use a concrete reader task or
+observed failure to test it, as I have used external evidence to move curriculum
+disagreements beyond personal preference. If a consequential problem remained unresolved,
+I would document the reader impact, the attempted fixes, and the decision needed from the
+responsible owner. I would judge adoption by whether teams can maintain better
+instructions with less repeated help, alongside whether readers reach the intended
+outcome.
