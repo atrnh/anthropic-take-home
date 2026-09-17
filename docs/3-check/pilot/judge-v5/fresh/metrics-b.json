@@ -1,0 +1,88 @@
+{
+  "known": {
+    "abstentions": 0,
+    "conditional_recall": {
+      "denominator": 3,
+      "numerator": 2,
+      "value": 0.6666666666666666
+    },
+    "counts": {
+      "FN": 1,
+      "FP": 0,
+      "TN": 3,
+      "TP": 2
+    },
+    "coverage": {
+      "denominator": 6,
+      "numerator": 6,
+      "value": 1.0
+    },
+    "outcomes": [
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "fresh-builder-testing-summary",
+        "needs_review": false,
+        "outcome": "TP"
+      },
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "fresh-external-link-allowlist",
+        "needs_review": false,
+        "outcome": "TP"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "fresh-generic-auth-vs-m365-prereqs",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "fresh-mcpb-route-vs-builder",
+        "needs_review": false,
+        "outcome": "FN"
+      },
+      {
+        "classification": "NECESSARY_REPETITION",
+        "example_id": "fresh-test-credentials-checklist",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "NECESSARY_REPETITION",
+        "example_id": "fresh-tunnel-key-revocation-branches",
+        "needs_review": false,
+        "outcome": "TN"
+      }
+    ],
+    "precision": {
+      "denominator": 2,
+      "numerator": 2,
+      "value": 1.0
+    },
+    "recall": {
+      "denominator": 3,
+      "numerator": 2,
+      "value": 0.6666666666666666
+    }
+  },
+  "new_sample": {
+    "abstentions": 0,
+    "classification_counts": {
+      "ACTIONABLE_DUPLICATE": 0,
+      "NECESSARY_REPETITION": 0,
+      "RELATED_BUT_DISTINCT": 0
+    }
+  },
+  "provenance": {
+    "judgments_sha256": "bfd1b83b5d84cc3e643c6585f348e7f0bb5079ef40d0fac5be83dfff7bd4c6ec",
+    "manifest_sha256": "a4c7f2dd41b0efdb4c598c66c4277906544d01d51096fa80fac7748c9b64bb5f",
+    "packet_sha256": "a1d0c17fedca8ca18216885a93f77f1830dd3de6a6b8689fcfc86a45f45b392b"
+  },
+  "schema_version": 1,
+  "scope": {
+    "known": "direct editorial judge evaluation on frozen full-span examples",
+    "new_sample": "classification distribution only; no independent labels",
+    "retrieval_end_to_end": false
+  }
+}

@@ -7,7 +7,7 @@ settings. It measures candidate retrieval, not editorial accuracy.
 
 ## Change
 
-`uv run docslint/bakeoff.py --expanded-extraction` admits unordered Markdown list
+`uv run docs/3-check/docslint/bakeoff.py --expanded-extraction` admits unordered Markdown list
 items and their indented prose continuations, and lowers the minimum from 15 to
 10 words. Each list item begins a new passage; blank lines still separate prose
 paragraphs. Numbered items and their prose continuations remain excluded, as do
@@ -81,12 +81,12 @@ six known cases are diagnostic and reused, not a held-out accuracy benchmark.
 ## Reproduce
 
 ```sh
-uv run python docslint/test_duplicates.py
-uv run docslint/bakeoff.py --self-check > /tmp/claude-original.json
-diff -u docs/3-check/tfidf-bakeoff.json /tmp/claude-original.json
-uv run docslint/bakeoff.py --expanded-extraction --self-check > /tmp/claude-expanded.json
-diff -u docs/3-check/tfidf-expanded.json /tmp/claude-expanded.json
-uv run docslint/bakeoff.py --expanded-extraction --candidates > /tmp/claude-expanded-candidates.tsv
+uv run python docs/3-check/docslint/test_duplicates.py
+uv run docs/3-check/docslint/bakeoff.py --self-check > /tmp/claude-original.json
+diff -u docs/3-check/pilot/tfidf-bakeoff.json /tmp/claude-original.json
+uv run docs/3-check/docslint/bakeoff.py --expanded-extraction --self-check > /tmp/claude-expanded.json
+diff -u docs/3-check/pilot/tfidf-expanded.json /tmp/claude-expanded.json
+uv run docs/3-check/docslint/bakeoff.py --expanded-extraction --candidates > /tmp/claude-expanded-candidates.tsv
 ```
 
 The last command exports the expanded primary top-5 queue of 3,486 pairs. The

@@ -113,14 +113,18 @@ def strata(rows: list[tuple[int, int]], count: int = 4) -> list[list[tuple[int, 
 
 
 def prepare(output_dir: Path, project: Path | None = None, *,
-            prompt_path: Path | None = None, sample_offset: int = 0) -> tuple[Path, Path]:
-    project = project or Path(__file__).resolve().parents[1]
+            prompt_path: Path | None = None, sample_offset: int = 0,
+            examples_path: Path | None = None) -> tuple[Path, Path]:
+    project = project or Path(__file__).resolve().parents[3]
     if type(sample_offset) is not int or sample_offset < 0:
         raise ValueError("sample_offset must be a nonnegative integer")
+    explicit_examples = examples_path is not None
+    if explicit_examples and sample_offset:
+        raise ValueError("sample_offset must be zero with explicit examples")
     corpus = project / "corpus"
-    examples_path = project / "docs/3-check/examples.json"
-    results_path = project / "docs/3-check/results.json"
-    prompt_path = prompt_path or project / "docs/3-check/judge-prompt.md"
+    examples_path = examples_path or project / "docs/3-check/pilot/examples.json"
+    results_path = project / "docs/3-check/pilot/results.json"
+    prompt_path = prompt_path or project / "docs/3-check/pilot/judge-prompt.md"
     snapshot, items = load_corpus(corpus, 10, include_lists=True)
     examples_raw = examples_path.read_bytes()
     examples = json.loads(examples_raw)
@@ -129,24 +133,27 @@ def prepare(output_dir: Path, project: Path | None = None, *,
     reviewed = {pair_hash(row["left"], row["right"])
                 for row in json.loads(results_raw)["findings"]}
 
-    matrices = similarities(items)
-    pairs, ranks = ranked_pairs(matrices["tfidf"])
-    candidates = top_k(pairs, ranks, 10)
-    frozen = set().union(*case_pairs(examples, items).values())
-    queue = [pair for pair in pairs
-             if pair in candidates and pair not in frozen
-             and pair_hash(items[pair[0]], items[pair[1]]) not in reviewed]
-    groups = strata(queue)
-    selected = []
-    for number, group in enumerate(groups, 1):
-        chosen = sorted(group, key=lambda pair: pair_hash(items[pair[0]], items[pair[1]]))[
-            sample_offset:sample_offset + 2
-        ]
-        if len(chosen) != 2:
-            raise ValueError(f"Stratum {number} cannot supply two candidates at offset {sample_offset}")
-        selected.extend((pair, number) for pair in chosen)
-    if len(examples) != 16 or len(selected) != 8:
-        raise ValueError("Pilot requires 16 frozen examples and 8 sampled candidates")
+    if explicit_examples:
+        matrices = pairs = ranks = candidates = queue = groups = selected = None
+    else:
+        matrices = similarities(items)
+        pairs, ranks = ranked_pairs(matrices["tfidf"])
+        candidates = top_k(pairs, ranks, 10)
+        frozen = set().union(*case_pairs(examples, items).values())
+        queue = [pair for pair in pairs
+                 if pair in candidates and pair not in frozen
+                 and pair_hash(items[pair[0]], items[pair[1]]) not in reviewed]
+        groups = strata(queue)
+        selected = []
+        for number, group in enumerate(groups, 1):
+            chosen = sorted(group, key=lambda pair: pair_hash(items[pair[0]], items[pair[1]]))[
+                sample_offset:sample_offset + 2
+            ]
+            if len(chosen) != 2:
+                raise ValueError(f"Stratum {number} cannot supply two candidates at offset {sample_offset}")
+            selected.extend((pair, number) for pair in chosen)
+        if len(examples) != 16 or len(selected) != 8:
+            raise ValueError("Pilot requires 16 frozen examples and 8 sampled candidates")
 
     cases: list[dict] = []
     manifest_cases: list[dict] = []
@@ -161,9 +168,9 @@ def prepare(output_dir: Path, project: Path | None = None, *,
             "global_rank": None, "queue_rank": None, "left_rank": None,
             "right_rank": None, "stratum": None, "selection_sha256": None,
         })
-    queue_rank = {pair: rank for rank, pair in enumerate(queue, 1)}
-    global_rank = {pair: rank for rank, pair in enumerate(pairs, 1)}
-    for (a, b), stratum in selected:
+    queue_rank = {pair: rank for rank, pair in enumerate(queue or [], 1)}
+    global_rank = {pair: rank for rank, pair in enumerate(pairs or [], 1)}
+    for (a, b), stratum in selected or []:
         left, right = items[a], items[b]
         case_id = pair_hash(left, right)
         cases.append({"id": case_id, "left": packet_side(corpus, left),
@@ -188,7 +195,18 @@ def prepare(output_dir: Path, project: Path | None = None, *,
         "examples_sha256": sha256(examples_raw),
         "results_sha256": sha256(results_raw),
         "prompt_sha256": sha256(prompt_path.read_bytes()),
-        "selection": {
+        "selection": ({
+            "method": "provided_labeled_examples",
+            "min_words": 10,
+            "include_unordered_lists": True,
+            "top_k": 10,
+            "candidate_pairs": 0,
+            "excluded_frozen_pairs": 0,
+            "excluded_reviewed_pairs": 0,
+            "remaining_pairs": 0,
+            "strata": [],
+            "cases": manifest_cases,
+        } if explicit_examples else {
             "method": "expanded_tfidf_top_10_hash_stratified",
             "min_words": 10,
             "include_unordered_lists": True,
@@ -206,7 +224,7 @@ def prepare(output_dir: Path, project: Path | None = None, *,
                 for number, group in enumerate(groups, 1)
             ],
             "cases": manifest_cases,
-        },
+        }),
         "runtime": {
             "python": platform.python_version(),
             "packages": {name: version(name) for name in ("scikit-learn", "numpy", "scipy")},
@@ -242,7 +260,8 @@ def nonnegative_int(value: str) -> int:
 
 
 def _load_bound_inputs(packet_path: Path, manifest_path: Path, project: Path, *,
-                       prompt_path: Path | None = None) -> tuple[dict, dict, dict[str, dict], dict[str, str]]:
+                       prompt_path: Path | None = None,
+                       examples_path: Path | None = None) -> tuple[dict, dict, dict[str, dict], dict[str, str]]:
     packet_raw = packet_path.read_bytes()
     manifest_raw = manifest_path.read_bytes()
     packet = json.loads(packet_raw)
@@ -255,16 +274,17 @@ def _load_bound_inputs(packet_path: Path, manifest_path: Path, project: Path, *,
     snapshot, _ = load_corpus(corpus, 10, include_lists=True)
     if manifest.get("snapshot") != snapshot:
         raise ValueError("Snapshot binding mismatch")
-    examples_path = project / "docs/3-check/examples.json"
+    explicit_examples = examples_path is not None
+    examples_path = examples_path or project / "docs/3-check/pilot/examples.json"
     examples_raw = examples_path.read_bytes()
     examples = json.loads(examples_raw)
     validate_examples(examples, [], corpus)
     if manifest.get("examples_sha256") != sha256(examples_raw):
         raise ValueError("Examples hash mismatch")
-    results_path = project / "docs/3-check/results.json"
+    results_path = project / "docs/3-check/pilot/results.json"
     if manifest.get("results_sha256") != sha256(results_path.read_bytes()):
         raise ValueError("Baseline results hash mismatch")
-    prompt_path = prompt_path or project / "docs/3-check/judge-prompt.md"
+    prompt_path = prompt_path or project / "docs/3-check/pilot/judge-prompt.md"
     if manifest.get("prompt_sha256") != sha256(prompt_path.read_bytes()):
         raise ValueError("Prompt hash mismatch")
     corpus_manifest = json.loads((corpus / "manifest.json").read_text())
@@ -300,8 +320,11 @@ def _load_bound_inputs(packet_path: Path, manifest_path: Path, project: Path, *,
             raise ValueError("Sample manifest case has invalid provenance")
         else:
             sample_count += 1
-    if known_count != 16 or sample_count != 8:
-        raise ValueError("Manifest requires 16 known and 8 sample cases")
+    expected_counts = (len(examples), 0) if explicit_examples else (16, 8)
+    if (known_count, sample_count) != expected_counts:
+        raise ValueError(
+            f"Manifest requires {expected_counts[0]} known and {expected_counts[1]} sample cases"
+        )
     for case in packet["cases"]:
         _object(case, {"id", "left", "right"}, "packet case")
         _text(case["id"], "case id")
@@ -334,10 +357,12 @@ def _load_bound_inputs(packet_path: Path, manifest_path: Path, project: Path, *,
 
 
 def evaluate(packet_path: Path, manifest_path: Path, judgments_path: Path,
-             project: Path | None = None, *, prompt_path: Path | None = None) -> dict:
-    project = project or Path(__file__).resolve().parents[1]
+             project: Path | None = None, *, prompt_path: Path | None = None,
+             examples_path: Path | None = None) -> dict:
+    project = project or Path(__file__).resolve().parents[3]
     packet, _, records, provenance = _load_bound_inputs(
-        packet_path, manifest_path, project, prompt_path=prompt_path
+        packet_path, manifest_path, project, prompt_path=prompt_path,
+        examples_path=examples_path,
     )
     judgments_raw = judgments_path.read_bytes()
     judgments = json.loads(judgments_raw)
@@ -369,7 +394,8 @@ def evaluate(packet_path: Path, manifest_path: Path, judgments_path: Path,
             if quote not in targets[row["id"]][side]["text"]:
                 raise ValueError(f"{side} evidence is not a literal target substring")
 
-    examples = {row["id"]: row for row in json.loads((project / "docs/3-check/examples.json").read_text())}
+    examples_path = examples_path or project / "docs/3-check/pilot/examples.json"
+    examples = {row["id"]: row for row in json.loads(examples_path.read_text())}
     known = Counter(TP=0, FP=0, FN=0, TN=0)
     abstentions = 0
     outcomes, sample = [], Counter({name: 0 for name in sorted(CLASSIFICATIONS)})
@@ -422,21 +448,25 @@ def main() -> None:
     prepare_parser = commands.add_parser("prepare")
     prepare_parser.add_argument("--output-dir", required=True, type=Path)
     prepare_parser.add_argument("--prompt", type=Path)
+    prepare_parser.add_argument("--examples", type=Path)
     prepare_parser.add_argument("--sample-offset", type=nonnegative_int, default=0)
     evaluate_parser = commands.add_parser("evaluate")
     evaluate_parser.add_argument("--packet", required=True, type=Path)
     evaluate_parser.add_argument("--manifest", required=True, type=Path)
     evaluate_parser.add_argument("--judgments", required=True, type=Path)
     evaluate_parser.add_argument("--prompt", type=Path)
+    evaluate_parser.add_argument("--examples", type=Path)
     args = parser.parse_args()
     if args.command == "prepare":
         packet, manifest = prepare(
-            args.output_dir, prompt_path=args.prompt, sample_offset=args.sample_offset
+            args.output_dir, prompt_path=args.prompt, sample_offset=args.sample_offset,
+            examples_path=args.examples,
         )
         print(json.dumps({"packet": str(packet), "manifest": str(manifest)}, sort_keys=True))
     else:
         print(json.dumps(evaluate(
-            args.packet, args.manifest, args.judgments, prompt_path=args.prompt
+            args.packet, args.manifest, args.judgments, prompt_path=args.prompt,
+            examples_path=args.examples,
         ), indent=2, sort_keys=True))
 
 

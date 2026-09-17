@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "id": "3a35db210f9eb6573835822d660fafb28e0a51e5b7ce2b8adb7888e9102f202b",
+      "classification": "NECESSARY_REPETITION",
+      "needs_review": false,
+      "shared_explanation": "The Tunnels API key should be revoked once the installation no longer needs it.",
+      "unique_left": "The Helm path explains that release-history Secrets retain --set values and that Kubernetes Secrets are not encrypted at rest by default.",
+      "unique_right": "The other path tells the reader to unset API_TOKEN and states that the stack does not need the key at runtime.",
+      "rationale": "Both warnings put a security-critical action next to the point at which a different deployment path finishes using the key. The left warning supplies Helm-specific exposure details; the right supplies the shell cleanup and runtime condition. Each must remain visible in its own procedure before readers continue.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Revoke the Tunnels API key in **Organization settings > Tunnels > Tunnels API** as soon as the install completes.",
+        "right": "Revoke the Tunnels API key in **Organization settings > Tunnels > Tunnels API** before continuing, and run `unset API_TOKEN`."
+      }
+    },
+    {
+      "id": "0afe6ea54a953480af722372be851c29c02490c08c860dfcfa73a03632b8e140",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both passages direct connector builders to test in Claude as a custom connector and to use MCP Inspector for validation.",
+      "unique_left": "The overview also directs Claude Code users to add the server with claude mcp add and check /mcp.",
+      "unique_right": "The testing guide explains production testing, account eligibility, local-server tunneling and its warning, and what to validate with Inspector.",
+      "rationale": "The concise testing list repeats the testing guide's two core actions while the guide provides the independently useful procedure and safety context. The overview can retain a brief Claude Code-specific note and a link without making the technical-specifications page less useful.",
+      "suggested_consolidation": "Keep a one-sentence testing orientation in the overview, retain the Claude Code command and /mcp note there, and link to the testing guide for custom-connector and Inspector instructions. Keep the guide's account, tunnel, and authentication-warning details locally. Before editing, verify that the destination guide remains the intended home for both Claude and Claude Code testing guidance.",
+      "evidence": {
+        "left": "1. Add directly to Claude via **Customize > Connectors**\n2. Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to validate auth flows",
+        "right": "Any Claude account (Free, Pro, Max, Team, or Enterprise) can add a custom connector. Go to **Customize > Connectors**, select **Add custom connector**, and enter your server's URL."
+      }
+    },
+    {
+      "id": "9d2358731a488716ebf1fe50cd0ed4c37375d4d72a2a7d9fb6cffdf4c1c20d11",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both passages describe MCPB as packaging a local MCP server and its dependencies for desktop use.",
+      "unique_left": "The desktop-extensions overview positions MCPB as a deployment utility and summarizes distribution, updates, cross-platform support, and signing.",
+      "unique_right": "The build guide defines the .mcpb archive and manifest, explains single-click installation and runtime characteristics, and frames the local-versus-remote choice.",
+      "rationale": "The overview answers what desktop extensions and their distribution tooling are for, while the build guide supplies the technical definition and decision context needed to build one. Their shared vocabulary supports different reader questions, so the excerpts are not duplicate explanatory work.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "MCPB is Anthropic's utility for building and deploying desktop extensions:",
+        "right": "An `.mcpb` file is a zip archive containing a local MCP server and a `manifest.json`. It enables single-click installation in Claude Desktop, similar to a browser extension."
+      }
+    },
+    {
+      "id": "493374b5b74ee3a66266483a5d5d084d18cb60c0d9cb49a240e60c43b0eb4d38",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Both passages explain that directory connectors may allowlist HTTPS origins or custom URI schemes so declared destinations bypass the external-link confirmation.",
+      "unique_left": "The submission page explains what submitters must provide, states that every declared destination must be organization-owned, and describes the optional field's review consequence.",
+      "unique_right": "The external-links guide explains the default modal, distinguishes directory from custom or local connectors, and gives the matching behavior and invalid-entry rules.",
+      "rationale": "The two detailed shape-and-matching explanations perform the same reference work. The submission procedure needs a short instruction to provide the field and retain its ownership constraint, while the behavior guide is the stronger home for the full allowlisting reference and examples.",
+      "suggested_consolidation": "Make the external-links guide the detailed reference for destination shapes, matching, and confirmation behavior; merge any needed ownership rule into that reference if appropriate. Shorten the submission page to tell submitters to provide organization-owned allowed link URIs when applicable and link to the reference. Keep the submission-specific ownership and optional-field conditions visible there. Before editing, verify that both pages use the same accepted custom-scheme form and that ownership enforcement is accurately described.",
+      "evidence": {
+        "left": "Provide each entry in one of two forms:",
+        "right": "Each entry must be one of two shapes:"
+      }
+    },
+    {
+      "id": "1ce07c62d4813d1e794362a8ca4dfd80704a7d8b6dbe1eaa1fd06f3b64dffc9f",
+      "classification": "NECESSARY_REPETITION",
+      "needs_review": false,
+      "shared_explanation": "Directory submission requires a fully populated test account for reviewers.",
+      "unique_left": "The testing guide explains why the account must contain real functionality and asks for setup instructions for an unfamiliar reviewer.",
+      "unique_right": "The checklist presents test credentials as one of several submission requirements and pairs it with related publication requirements.",
+      "rationale": "The detailed testing guide explains how to prepare credentials, while the checklist must repeat the requirement where a submitter decides whether the package is ready. This is a prerequisite whose concise visibility in both locations helps prevent an avoidable failed submission.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Directory submission requires test credentials. Provide a **fully populated account**—not an empty shell—so reviewers can exercise real functionality (list real records, search real data, exercise write tools on real resources).",
+        "right": "* **Test credentials** are required and must be a fully populated account."
+      }
+    },
+    {
+      "id": "eea2505c462d0d192bce9a3020aec6b62d731d5fe92ba3e9e3c50334d3dbf3fb",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both passages mention connecting through Customize > Connectors.",
+      "unique_left": "The getting-started page gives a generic end-user authentication sequence after choosing any connector.",
+      "unique_right": "The Microsoft 365 guide states plan-specific setup conditions, tenant consent, supported account type, user roles, administrator access, and its administrator setup phase.",
+      "rationale": "The generic instructions answer how an individual authenticates a chosen connector. The Microsoft 365 material determines whether and how an organization can make that particular connector available. The shared navigation label does not make the distinct actor responsibilities or prerequisites redundant.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "1. Click \"Connect\" next to your chosen service\n2. Log in to your account on that service",
+        "right": "On Free, Pro, and Max plans, no organization-level setup is needed. Connect from **Customize > Connectors** in claude.ai."
+      }
+    }
+  ]
+}

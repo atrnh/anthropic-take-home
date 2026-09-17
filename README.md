@@ -12,5 +12,6 @@ supporting drafts and the disposition ledger covering all 54 snapshot pages.
 
 See the [roadmap](docs/roadmap.md) for planned deliverables.
 
-The [automated-check prototype](docs/3-check/README.md) includes a reproducible
-54-page run, reviewed findings, and an evaluation of its mistakes and limitations.
+The [duplicate-prose review workflow](docs/3-check/README.md) generates a searchable
+local report from the 54-page snapshot. Its [pilot archive](docs/3-check/pilot/README.md)
+preserves the experiments, reviewed findings, and evaluation limitations.

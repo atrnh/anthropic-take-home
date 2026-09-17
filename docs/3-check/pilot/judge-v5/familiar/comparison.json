@@ -1,0 +1,290 @@
+{
+  "scope": "Same16 familiar full-span cases, two independent requested runs; neither retrieved-only nor held-out accuracy.",
+  "binary_agreement": {
+    "numerator": 13,
+    "denominator": 16
+  },
+  "classification_agreement": {
+    "numerator": 12,
+    "denominator": 16
+  },
+  "differences": [
+    {
+      "example_id": "development-government-unconnected-plugin-connectors",
+      "a": "NECESSARY_REPETITION",
+      "b": "RELATED_BUT_DISTINCT"
+    },
+    {
+      "example_id": "development-marketplace-generic-versus-finance",
+      "a": "ACTIONABLE_DUPLICATE",
+      "b": "RELATED_BUT_DISTINCT"
+    },
+    {
+      "example_id": "development-plugin-definition-overview-government",
+      "a": "RELATED_BUT_DISTINCT",
+      "b": "ACTIONABLE_DUPLICATE"
+    },
+    {
+      "example_id": "evaluation-skill-definition-overview-government",
+      "a": "RELATED_BUT_DISTINCT",
+      "b": "ACTIONABLE_DUPLICATE"
+    }
+  ],
+  "runs": {
+    "a": {
+      "abstentions": 0,
+      "conditional_recall": {
+        "denominator": 6,
+        "numerator": 3,
+        "value": 0.5
+      },
+      "counts": {
+        "FN": 3,
+        "FP": 0,
+        "TN": 10,
+        "TP": 3
+      },
+      "coverage": {
+        "denominator": 16,
+        "numerator": 16,
+        "value": 1.0
+      },
+      "outcomes": [
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-conflicting-organization-management-claims",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-context-specific-install-procedures",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "development-government-unconnected-plugin-connectors",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-marketplace-generic-versus-finance",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-member-uninstall-versus-admin-removal",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-cowork",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-plugin-definition-overview-government",
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-sales-plugin-example",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-authentication-reference-versus-lazy-auth",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-drive-live-sync-faq",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-owner-enable-prerequisite",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-service-limitations",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-permanent-directory-slug",
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-skill-definition-overview-government",
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-skill-loading-versus-m365-use",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-style-reference-versus-theming-procedure",
+          "needs_review": false,
+          "outcome": "TN"
+        }
+      ],
+      "precision": {
+        "denominator": 3,
+        "numerator": 3,
+        "value": 1.0
+      },
+      "recall": {
+        "denominator": 6,
+        "numerator": 3,
+        "value": 0.5
+      }
+    },
+    "b": {
+      "abstentions": 0,
+      "conditional_recall": {
+        "denominator": 6,
+        "numerator": 4,
+        "value": 0.6666666666666666
+      },
+      "counts": {
+        "FN": 2,
+        "FP": 0,
+        "TN": 10,
+        "TP": 4
+      },
+      "coverage": {
+        "denominator": 16,
+        "numerator": 16,
+        "value": 1.0
+      },
+      "outcomes": [
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-conflicting-organization-management-claims",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-context-specific-install-procedures",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-government-unconnected-plugin-connectors",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-marketplace-generic-versus-finance",
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-member-uninstall-versus-admin-removal",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-cowork",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-government",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-sales-plugin-example",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-authentication-reference-versus-lazy-auth",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-drive-live-sync-faq",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-owner-enable-prerequisite",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-service-limitations",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-permanent-directory-slug",
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "evaluation-skill-definition-overview-government",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-skill-loading-versus-m365-use",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-style-reference-versus-theming-procedure",
+          "needs_review": false,
+          "outcome": "TN"
+        }
+      ],
+      "precision": {
+        "denominator": 4,
+        "numerator": 4,
+        "value": 1.0
+      },
+      "recall": {
+        "denominator": 6,
+        "numerator": 4,
+        "value": 0.6666666666666666
+      }
+    }
+  },
+  "fresh_status": "Awaiting human adjudication; no fresh judge outputs exist."
+}

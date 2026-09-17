@@ -1,0 +1,444 @@
+{
+  "historical_labels_sha256": "cccc8d3000373ceba3632563696626a23f4ae0b108765ede347feceb2807f898",
+  "label_override": {
+    "authority": "Ashley explicitly chose to keep both passages after adopting case-by-case FAQ policy.",
+    "classification": "NECESSARY_REPETITION",
+    "duplicate": false,
+    "example_id": "evaluation-drive-live-sync-faq"
+  },
+  "runs": {
+    "control": {
+      "adjudicated_counts": {
+        "ABSTAIN": 0,
+        "FN": 0,
+        "FP": 1,
+        "TN": 10,
+        "TP": 5
+      },
+      "coverage": 1.0,
+      "historical_counts": {
+        "FN": 0,
+        "FP": 0,
+        "TN": 10,
+        "TP": 6
+      },
+      "outcomes": [
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-conflicting-organization-management-claims",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-context-specific-install-procedures",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "development-government-unconnected-plugin-connectors",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "development-marketplace-generic-versus-finance",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-member-uninstall-versus-admin-removal",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-cowork",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-government",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-sales-plugin-example",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-authentication-reference-versus-lazy-auth",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "evaluation-drive-live-sync-faq",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "FP"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-owner-enable-prerequisite",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-service-limitations",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "evaluation-permanent-directory-slug",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "evaluation-skill-definition-overview-government",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-skill-loading-versus-m365-use",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-style-reference-versus-theming-procedure",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        }
+      ],
+      "provenance": {
+        "judgments_sha256": "976bbe818024280924a356794dd24217e726cc26a3546080c178badb8f60287e",
+        "manifest_sha256": "c5879ed796d29036f7fd25b24b2bffee5602345f9e003b8be7c1f979fb4a0922",
+        "packet_sha256": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134"
+      },
+      "recall": 1.0,
+      "sample": {
+        "abstentions": 0,
+        "classification_counts": {
+          "ACTIONABLE_DUPLICATE": 0,
+          "NECESSARY_REPETITION": 0,
+          "RELATED_BUT_DISTINCT": 8
+        }
+      }
+    },
+    "v3": {
+      "adjudicated_counts": {
+        "ABSTAIN": 1,
+        "FN": 0,
+        "FP": 0,
+        "TN": 10,
+        "TP": 5
+      },
+      "coverage": 0.9375,
+      "historical_counts": {
+        "FN": 0,
+        "FP": 0,
+        "TN": 10,
+        "TP": 5
+      },
+      "outcomes": [
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-conflicting-organization-management-claims",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-context-specific-install-procedures",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "development-government-unconnected-plugin-connectors",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-marketplace-generic-versus-finance",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-member-uninstall-versus-admin-removal",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-cowork",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-government",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-sales-plugin-example",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-authentication-reference-versus-lazy-auth",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "evaluation-drive-live-sync-faq",
+          "expected_duplicate": false,
+          "needs_review": true,
+          "outcome": "ABSTAIN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-owner-enable-prerequisite",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-service-limitations",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "evaluation-permanent-directory-slug",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "evaluation-skill-definition-overview-government",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-skill-loading-versus-m365-use",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-style-reference-versus-theming-procedure",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        }
+      ],
+      "provenance": {
+        "judgments_sha256": "637d56d316da02232b42dc8f4a1a2f9c786db3694689d554636249c0eb3fdbd3",
+        "manifest_sha256": "5a5007ece37afcfc346f473cd573e0cddb26d1ae784494a4b5c725ffc9e97648",
+        "packet_sha256": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134"
+      },
+      "recall": 1.0,
+      "sample": {
+        "abstentions": 0,
+        "classification_counts": {
+          "ACTIONABLE_DUPLICATE": 0,
+          "NECESSARY_REPETITION": 0,
+          "RELATED_BUT_DISTINCT": 8
+        }
+      }
+    },
+    "v4": {
+      "adjudicated_counts": {
+        "ABSTAIN": 0,
+        "FN": 3,
+        "FP": 1,
+        "TN": 10,
+        "TP": 2
+      },
+      "coverage": 1.0,
+      "historical_counts": {
+        "FN": 4,
+        "FP": 1,
+        "TN": 9,
+        "TP": 2
+      },
+      "outcomes": [
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-conflicting-organization-management-claims",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-context-specific-install-procedures",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "development-government-unconnected-plugin-connectors",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-marketplace-generic-versus-finance",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "FP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "development-member-uninstall-versus-admin-removal",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-plugin-definition-overview-cowork",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "development-plugin-definition-overview-government",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "development-sales-plugin-example",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-authentication-reference-versus-lazy-auth",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-drive-live-sync-faq",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-owner-enable-prerequisite",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-google-service-limitations",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-permanent-directory-slug",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "evaluation-skill-definition-overview-government",
+          "expected_duplicate": true,
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-skill-loading-versus-m365-use",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "evaluation-style-reference-versus-theming-procedure",
+          "expected_duplicate": false,
+          "needs_review": false,
+          "outcome": "TN"
+        }
+      ],
+      "provenance": {
+        "judgments_sha256": "bf728f784d2c007eeb13b56c116284cf87102d4f67ab6a3d65a9f71b74f528f7",
+        "manifest_sha256": "14058bf597b66135b305fa900454705131573a030d99b19531c0a96367015557",
+        "packet_sha256": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134"
+      },
+      "recall": 0.4,
+      "sample": {
+        "abstentions": 0,
+        "classification_counts": {
+          "ACTIONABLE_DUPLICATE": 0,
+          "NECESSARY_REPETITION": 0,
+          "RELATED_BUT_DISTINCT": 8
+        }
+      }
+    }
+  },
+  "scope": "Post-hoc rescoring of familiar cases; not held-out accuracy"
+}

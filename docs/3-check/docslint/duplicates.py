@@ -25,7 +25,8 @@ def words(text: str) -> list[str]:
     return re.findall(r"\w+", html.unescape(text).casefold())
 
 
-def passages(path: str, source: str, min_words: int, *, include_lists: bool = False) -> list[Passage]:
+def passages(path: str, source: str, min_words: int, *, include_lists: bool = False,
+             include_ordered_lists: bool = False) -> list[Passage]:
     """Read prose paragraphs in this snapshot's Markdown/MDX, retaining source lines."""
     result = []
     block: list[tuple[int, str]] = []
@@ -34,6 +35,7 @@ def passages(path: str, source: str, min_words: int, *, include_lists: bool = Fa
     comment = False
     in_list = False
     capture_item = False
+    ordered_item = False
     list_indent = 0
 
     def flush() -> None:
@@ -58,7 +60,7 @@ def passages(path: str, source: str, min_words: int, *, include_lists: bool = Fa
                 comment = False
             continue
         indent = len(line) - len(line.lstrip())
-        if (include_lists and indent <= list_indent
+        if ((include_lists or include_ordered_lists) and indent <= list_indent
                 and (stripped.startswith("<") or re.match(r"(`{3,}|~{3,})", stripped))):
             in_list = capture_item = False
         match = re.match(r"(`{3,}|~{3,})", stripped)
@@ -78,10 +80,15 @@ def passages(path: str, source: str, min_words: int, *, include_lists: bool = Fa
             continue
         marker = re.match(r"([-+*]|\d+[.)])\s", stripped)
         if marker:
-            flush()
+            unordered = marker[1] in ("-", "+", "*")
+            if not (include_ordered_lists and in_list and ordered_item
+                    and not unordered and indent == list_indent):
+                flush()
             in_list = True
             list_indent = indent
-            capture_item = include_lists and marker[1] in ("-", "+", "*")
+            ordered_item = not unordered
+            capture_item = ((include_lists and unordered)
+                            or (include_ordered_lists and not unordered))
             if capture_item:
                 block.append((number, line))
             continue
@@ -102,7 +109,8 @@ def passages(path: str, source: str, min_words: int, *, include_lists: bool = Fa
     return result
 
 
-def load_corpus(root: Path, min_words: int, *, include_lists: bool = False) -> tuple[dict, list[Passage]]:
+def load_corpus(root: Path, min_words: int, *, include_lists: bool = False,
+                include_ordered_lists: bool = False) -> tuple[dict, list[Passage]]:
     manifest_bytes = (root / "manifest.json").read_bytes()
     manifest = json.loads(manifest_bytes)
     if manifest["page_count"] != len(manifest["pages"]):
@@ -118,7 +126,9 @@ def load_corpus(root: Path, min_words: int, *, include_lists: bool = False) -> t
         raw = target.read_bytes()
         if hashlib.sha256(raw).hexdigest() != page["sha256"]:
             raise ValueError(f"Snapshot hash mismatch: {path}")
-        result.extend(passages(path, raw.decode("utf-8"), min_words, include_lists=include_lists))
+        result.extend(passages(path, raw.decode("utf-8"), min_words,
+                               include_lists=include_lists,
+                               include_ordered_lists=include_ordered_lists))
     return {
         "fetched_at": manifest["fetched_at"],
         "page_count": len(seen),

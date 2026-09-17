@@ -1,0 +1,64 @@
+{
+  "execution": "Native agents instructed to use only prompt and their packet; filesystem isolation not enforced or independently verified.",
+  "protocol": "One frozen v5 prompt; two independent runs per packet; no retries or prompt tuning for scores. Fresh labels require human review before any fresh judgment.",
+  "familiar": {
+    "requested_model": "gpt-5.6-terra",
+    "requested_reasoning_effort": "high",
+    "observed_model": "unobservable",
+    "observed_reasoning_effort": "unobservable",
+    "agents": [
+      "/root/judge_v5_familiar_a",
+      "/root/judge_v5_familiar_b"
+    ],
+    "input_hashes": {
+      "prompt.md": "5f6ec55a8661c3ba9e4cc2da77225f158e7e8b33d432be2fa255c00e2a7e1ffe",
+      "examples-adjudicated.json": "63413d0b34f657007624e0de77e656c9036c427ca32c50a1e9c2ec56744d0c7e",
+      "familiar/judge-packet.json": "edf2fa08b814bab69315d825ecfceef61f3a168ce5d4f5a06845c8eea5f4dba5",
+      "familiar/judge-manifest.json": "7d17c4ad330f674ebb368c16b3400672dfe8fab20d9ef2c568b77a7dacd0844a"
+    },
+    "status": "completed and validated",
+    "corrections": {
+      "a": "Agent reported correcting whitespace in two evidence excerpts before finalization; no decision corrections reported. Intermediate output not archived.",
+      "b": "Agent reported no corrections."
+    },
+    "output_hashes": {
+      "familiar/decisions-a.json": "584902a5730a212b2663cfb3cb494be4e8c678f5e8968455e9b743f4eacecbea",
+      "familiar/decisions-b.json": "bdf6ea1d37490b91e7d817b768d1fec93f3a8bca85c9eb4feaec9cb16d970979",
+      "familiar/metrics-a.json": "297dc5c5977edbbc532b27e395b1e0d29c9f9873537c344768eb1af7868fa860",
+      "familiar/metrics-b.json": "850ec53edeb849cee8f0207b59f94ffe655229864bf086dbc16c3dde2965d822",
+      "familiar/comparison.json": "a10686b95a60139cf55b5b0bd84aa9a9eb33030e252790c75043457b23550402",
+      "treatment-review.json": "5c8afef84c3fd467c7be8d7f95935cf24475e94a9bce63b7ed0b07211a1808c2"
+    }
+  },
+  "fresh": {
+    "status": "completed and validated",
+    "human_approval": "Ashley: all six cases are correct. approved. Approval recorded before either fresh judge dispatch.",
+    "requested_model": "gpt-5.6-terra",
+    "requested_reasoning_effort": "high",
+    "observed_model": "unobservable",
+    "observed_reasoning_effort": "unobservable",
+    "agents": [
+      "/root/judge_v5_fresh_a",
+      "/root/judge_v5_fresh_b"
+    ],
+    "input_hashes": {
+      "prompt.md": "5f6ec55a8661c3ba9e4cc2da77225f158e7e8b33d432be2fa255c00e2a7e1ffe",
+      "examples-fresh.json": "6b575924346195abbbfe87b6e0752e8799985319c8e713b189e3fb26e809d738",
+      "fresh/judge-packet.json": "a1d0c17fedca8ca18216885a93f77f1830dd3de6a6b8689fcfc86a45f45b392b",
+      "fresh/judge-manifest.json": "a4c7f2dd41b0efdb4c598c66c4277906544d01d51096fa80fac7748c9b64bb5f"
+    },
+    "corrections": {
+      "a": "Agent reported removing an extra literal closing Note tag from one evidence quote before finalization. No decision corrections reported; intermediate output not archived.",
+      "b": "Agent reported no corrections."
+    },
+    "output_hashes": {
+      "retrieval-fresh.json": "6f00c815e3751491de1ed9f07aea3eeecdc907b82fdffa6654cb260ba0197a90",
+      "fresh/decisions-a.json": "d98f29f40470e6997c222c115645d69c6d1aec1eba40e76de7cec766aca894f3",
+      "fresh/decisions-b.json": "bfd1b83b5d84cc3e643c6585f348e7f0bb5079ef40d0fac5be83dfff7bd4c6ec",
+      "fresh/metrics-a.json": "41283657e05de6685bfa0c14e3bf6836b93e03f552e7b7c5e8ded8500474b5bc",
+      "fresh/metrics-b.json": "75ee3fc8406a5617244bb53d78fc39a36f493e9e99643c993837e5b0483e02d9",
+      "fresh/comparison.json": "975da5c222c4cf24a29891376d7000ad4bc502f2beddea43e1ad498ce45c988e",
+      "fresh/treatment-review.json": "2f7b271cef4027e7c3130f7226201376c5f7287f7fc1cc5211a2ccf297fa6dd3"
+    }
+  }
+}

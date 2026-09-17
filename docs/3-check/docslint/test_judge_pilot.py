@@ -2,7 +2,7 @@
 # requires-python = ">=3.10,<3.14"
 # dependencies = ["scikit-learn==1.7.2"]
 # ///
-"""Run with `uv run docslint/test_judge_pilot.py`."""
+"""Run with `uv run docs/3-check/docslint/test_judge_pilot.py`."""
 
 from copy import deepcopy
 import json
@@ -12,8 +12,8 @@ import tempfile
 from judge_pilot import evaluate, headings_before, prepare, sha256, stable_bytes
 
 
-ROOT = Path(__file__).resolve().parents[1]
-ARTIFACTS = ROOT / "docs/3-check"
+ROOT = Path(__file__).resolve().parents[3]
+ARTIFACTS = ROOT / "docs/3-check/pilot"
 
 
 def reject(call, message: str) -> None:
@@ -24,8 +24,9 @@ def reject(call, message: str) -> None:
     raise AssertionError(message)
 
 
-def judgments(packet: dict, manifest: dict) -> dict:
-    examples = {row["id"]: row for row in json.loads((ARTIFACTS / "examples.json").read_text())}
+def judgments(packet: dict, manifest: dict, examples_path: Path | None = None) -> dict:
+    examples_path = examples_path or ARTIFACTS / "examples.json"
+    examples = {row["id"]: row for row in json.loads(examples_path.read_text())}
     records = {row["id"]: row for row in manifest["selection"]["cases"]}
     abstained = False
     rows = []
@@ -124,6 +125,66 @@ def check() -> None:
                "Negative sample offset was accepted")
         reject(lambda: prepare(temp / "oversized", sample_offset=1_000_000),
                "Unavailable sample offset was accepted")
+
+        source_examples = json.loads((ARTIFACTS / "examples.json").read_text())
+        custom_examples = deepcopy([source_examples[0], source_examples[3]])
+        custom_examples[0]["duplicate"] = False
+        for example in custom_examples:
+            example["cohort"] = "fresh"
+            example["label_authority"] = "external editorial review"
+            example["expected_treatment"] = "retain both passages"
+        custom_examples_path = temp / "custom-examples.json"
+        custom_examples_path.write_bytes(stable_bytes(custom_examples))
+        custom_dir = temp / "custom"
+        custom_packet_path, custom_manifest_path = prepare(
+            custom_dir, examples_path=custom_examples_path
+        )
+        custom_packet = json.loads(custom_packet_path.read_text())
+        custom_manifest = json.loads(custom_manifest_path.read_text())
+        assert len(custom_packet["cases"]) == 2
+        assert len(custom_manifest["selection"]["cases"]) == 2
+        assert {row["source_group"] for row in custom_manifest["selection"]["cases"]} == {"known"}
+        assert custom_manifest["selection"]["method"] == "provided_labeled_examples"
+        reject(
+            lambda: prepare(temp / "custom-offset", examples_path=custom_examples_path,
+                            sample_offset=1),
+            "Explicit examples accepted a nonzero sample offset",
+        )
+
+        custom_judgments_path = temp / "custom-judgments.json"
+        custom_judgments_path.write_bytes(stable_bytes(
+            judgments(custom_packet, custom_manifest, custom_examples_path)
+        ))
+        custom_metrics = evaluate(
+            custom_packet_path, custom_manifest_path, custom_judgments_path,
+            examples_path=custom_examples_path,
+        )
+        assert custom_metrics["known"]["counts"] == {"TP": 0, "FP": 0, "FN": 0, "TN": 2}
+        assert len(custom_metrics["known"]["outcomes"]) == 2
+        assert custom_metrics["new_sample"] == {
+            "classification_counts": {
+                "ACTIONABLE_DUPLICATE": 0,
+                "NECESSARY_REPETITION": 0,
+                "RELATED_BUT_DISTINCT": 0,
+            },
+            "abstentions": 0,
+        }
+        reject(
+            lambda: evaluate(custom_packet_path, custom_manifest_path,
+                             custom_judgments_path),
+            "Custom packet accepted the default labels",
+        )
+        changed_examples = deepcopy(custom_examples)
+        changed_examples[0]["expected_treatment"] = "consolidate"
+        changed_examples_path = temp / "changed-examples.json"
+        changed_examples_path.write_bytes(stable_bytes(changed_examples))
+        reject(
+            lambda: evaluate(
+                custom_packet_path, custom_manifest_path, custom_judgments_path,
+                examples_path=changed_examples_path,
+            ),
+            "Treatment metadata hash mismatch was accepted",
+        )
 
         valid_path = temp / "valid.json"
         valid_path.write_bytes(stable_bytes(judgments(packet, manifest)))

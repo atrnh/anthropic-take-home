@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Possible duplicate prose review</title>
+  <style>
+    :root { color-scheme: light; --ink:#202833; --muted:#5e6b7b; --line:#d8dee7; --paper:#fff; --wash:#f5f7fa; --blue:#235c9e; --bluewash:#eaf2fc; --advice:#6c3c00; --advicewash:#fff4e3; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--wash); font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    a { color:var(--blue); }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #f2aa32; outline-offset:2px; }
+    .shell { max-width:1500px; margin:auto; padding:28px clamp(16px,4vw,48px) 48px; }
+    header { display:flex; gap:24px; align-items:flex-start; justify-content:space-between; margin-bottom:20px; }
+    h1 { font-size:clamp(1.55rem,3vw,2.25rem); line-height:1.15; margin:0 0 8px; letter-spacing:-.025em; }
+    h2 { font-size:1rem; margin:0 0 12px; }
+    p { margin:0; }
+    .intro { color:var(--muted); max-width:75ch; }
+    .summary { flex:0 0 auto; border:1px solid var(--line); background:var(--paper); padding:10px 14px; border-radius:9px; color:var(--muted); }
+    .filters { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:16px; display:grid; grid-template-columns:minmax(220px,2fr) minmax(170px,1fr) auto; gap:12px; align-items:end; }
+    label { display:grid; gap:5px; color:var(--muted); font-size:.9rem; font-weight:650; }
+    input, select, button { border:1px solid #aeb9c8; border-radius:7px; background:#fff; color:var(--ink); font:inherit; padding:8px 10px; }
+    button { cursor:pointer; font-weight:650; }
+    button:hover:not(:disabled) { background:var(--bluewash); border-color:var(--blue); }
+    button:disabled { cursor:not-allowed; color:#8a96a5; background:#edf0f4; }
+    .status { margin:20px 0 12px; color:var(--muted); }
+    .list { display:grid; gap:18px; }
+    .case { border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--paper); box-shadow:0 1px 2px #26384d0d; }
+    .case-head { padding:14px 18px; background:#fbfcfd; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; align-items:center; gap:9px 15px; }
+    .case-id { color:var(--muted); font-size:.82rem; overflow-wrap:anywhere; }
+    .score { font-variant-numeric:tabular-nums; font-weight:750; color:#164a84; }
+    .score-note { color:var(--muted); font-size:.88rem; }
+    .pair { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+    .passage { padding:18px; min-width:0; }
+    .passage + .passage { border-left:1px solid var(--line); }
+    .passage h2 { display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+    .location { color:var(--muted); font-size:.88rem; overflow-wrap:anywhere; }
+    .breadcrumbs { color:var(--muted); font-size:.87rem; margin:-5px 0 12px; }
+    .quote, .context { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font: .88rem/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+    .quote { border-left:3px solid #8eb8e7; background:#f5f9fe; padding:12px; }
+    details { margin-top:12px; }
+    summary { cursor:pointer; color:var(--blue); font-weight:650; }
+    .context { margin-top:8px; border:1px solid var(--line); border-radius:6px; padding:10px; background:#fbfcfd; color:#435061; }
+    .advice { border-top:1px solid var(--line); background:var(--advicewash); padding:14px 18px; }
+    .badge { display:inline-block; background:#f4d39f; color:#593100; font-size:.82rem; font-weight:750; padding:2px 7px; border-radius:999px; }
+    .advice details { margin-top:8px; }
+    .advice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 22px; margin:12px 0 0; }
+    .advice-grid div { min-width:0; }
+    dt { color:var(--advice); font-weight:750; font-size:.86rem; }
+    dd { margin:2px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .pager { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin-top:24px; }
+    .pager label { display:flex; align-items:center; gap:6px; }
+    .pager input { width:5.5rem; }
+    .empty { background:var(--paper); border:1px dashed #aeb9c8; border-radius:10px; padding:28px; color:var(--muted); text-align:center; }
+    @media (max-width:760px) { .shell { padding-top:20px; } header { display:block; } .summary { display:inline-block; margin-top:14px; } .filters { grid-template-columns:1fr; } .pair { grid-template-columns:1fr; } .passage + .passage { border-left:0; border-top:1px solid var(--line); } .advice-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <h1>Possible duplicate prose</h1>
+        <p class="intro">This queue is a similarity-based starting point for human review. A similarity score measures wording overlap; it is not a confidence score or a decision to consolidate.</p>
+      </div>
+      <p class="summary" id="summary"></p>
+    </header>
+    <form class="filters" id="filters">
+      <label>Search source paths or passage text<input id="search" type="search" autocomplete="off" placeholder="for example: plugins or install"></label>
+      <label>Compare pages<select id="page-filter"><option value="all">Any page pairing</option><option value="same">Same page only</option><option value="cross">Different pages only</option></select></label>
+      <button type="button" id="clear">Clear filters</button>
+    </form>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <section class="list" id="results" aria-label="Candidate pairs"></section>
+    <nav class="pager" aria-label="Candidate pages">
+      <button type="button" id="previous">Previous</button>
+      <span id="page-status"></span>
+      <button type="button" id="next">Next</button>
+      <label>Go to page <input id="page-input" type="number" min="1" step="1" inputmode="numeric"></label>
+      <button type="button" id="go">Go</button>
+    </nav>
+  </main>
+  <script>
+    const report = __REPORT_DATA__;
+    const perPage = 25;
+    let page = 1;
+    const $ = (id) => document.getElementById(id);
+    const text = (value) => value == null ? "" : String(value);
+    const node = (tag, className, value) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (value != null) element.textContent = value;
+      return element;
+    };
+    const lineRange = (passage) => passage.start === passage.end ? `line ${passage.start}` : `lines ${passage.start}–${passage.end}`;
+    function sourceLocation(passage) {
+      const wrap = node("span", "location");
+      const label = `${text(passage.path)} · ${lineRange(passage)}`;
+      const href = text(passage.source_href).trim();
+      if (href && !href.startsWith("//") && !/^[a-z][a-z0-9+.-]*:/i.test(href)) {
+        const link = node("a", "", label);
+        link.href = href;
+        wrap.append(link);
+      } else wrap.textContent = label;
+      return wrap;
+    }
+    function makePassage(title, passage) {
+      const section = node("section", "passage");
+      const heading = node("h2", "", title);
+      heading.append(sourceLocation(passage));
+      section.append(heading);
+      if (Array.isArray(passage.heading_context) && passage.heading_context.length) section.append(node("p", "breadcrumbs", passage.heading_context.join(" › ")));
+      section.append(node("blockquote", "quote", text(passage.text)));
+      if (passage.context_text) {
+        const details = node("details");
+        details.append(node("summary", "", `Show neighboring context (${passage.context_start}–${passage.context_end})`));
+        details.append(node("pre", "context", text(passage.context_text)));
+        section.append(details);
+      }
+      return section;
+    }
+    function addAdvice(caseNode, advice) {
+      const section = node("section", "advice");
+      section.append(node("span", "badge", "Editorial advice (tentative)"));
+      section.append(node("p", "score-note", "All suggestions still require human review."));
+      const details = node("details");
+      details.append(node("summary", "", "Show advisory details"));
+      const grid = node("dl", "advice-grid");
+      const labels = { classification: "Classification", needs_review: "Judge requested extra review", rationale: "Rationale", suggested_consolidation: "Suggested consolidation" };
+      for (const key of Object.keys(labels)) {
+        if (!(key in advice)) continue;
+        const row = node("div");
+        row.append(node("dt", "", labels[key]));
+        row.append(node("dd", "", typeof advice[key] === "boolean" ? (advice[key] ? "Yes" : "No") : text(advice[key])));
+        grid.append(row);
+      }
+      details.append(grid); section.append(details); caseNode.append(section);
+    }
+    function filtered() {
+      const query = $("search").value.trim().toLocaleLowerCase();
+      const mode = $("page-filter").value;
+      return report.items.filter((item) => {
+        const left = report.passages[item.left];
+        const right = report.passages[item.right];
+        const same = left.path === right.path;
+        if (mode === "same" && !same || mode === "cross" && same) return false;
+        if (!query) return true;
+        return [left.path, right.path, left.text, right.text].some((value) => text(value).toLocaleLowerCase().includes(query));
+      });
+    }
+    function render() {
+      const rows = filtered();
+      const pages = Math.max(1, Math.ceil(rows.length / perPage));
+      page = Math.min(page, pages);
+      const start = (page - 1) * perPage;
+      const visible = rows.slice(start, start + perPage);
+      $("summary").textContent = `${report.candidate_count.toLocaleString()} candidate pairs · ${report.passage_count.toLocaleString()} passages`;
+      $("status").textContent = `Showing ${visible.length ? `${start + 1}–${start + visible.length}` : "0"} of ${rows.length.toLocaleString()} filtered candidates (${report.candidate_count.toLocaleString()} total).`;
+      const results = $("results"); results.replaceChildren();
+      if (!visible.length) results.append(node("p", "empty", "No candidates match these filters. Try clearing the search or page filter."));
+      for (const item of visible) {
+        const card = node("article", "case");
+        const head = node("div", "case-head");
+        head.append(node("span", "score", `Similarity score: ${Number(item.score).toFixed(3)}`));
+        head.append(node("span", "score-note", "This is a similarity measure, not a confidence score."));
+        if (item.ranks && Object.keys(item.ranks).length) head.append(node("span", "score-note", `Retrieval ranks: ${Object.values(item.ranks).join(" / ")}`));
+        head.append(node("span", "case-id", `ID: ${text(item.id)}`));
+        card.append(head);
+        const pair = node("div", "pair"); pair.append(makePassage("Passage A", report.passages[item.left]), makePassage("Passage B", report.passages[item.right])); card.append(pair);
+        if (item.advice) addAdvice(card, item.advice);
+        results.append(card);
+      }
+      $("page-status").textContent = `Page ${page} of ${pages}`;
+      $("page-input").value = page; $("page-input").max = pages;
+      $("previous").disabled = page === 1; $("next").disabled = page === pages;
+    }
+    function resetPage() { page = 1; render(); }
+    $("filters").addEventListener("submit", (event) => event.preventDefault());
+    $("search").addEventListener("input", resetPage);
+    $("page-filter").addEventListener("change", resetPage);
+    $("clear").addEventListener("click", () => { $("filters").reset(); resetPage(); $("search").focus(); });
+    $("previous").addEventListener("click", () => { page -= 1; render(); window.scrollTo({top: 0, behavior: "smooth"}); });
+    $("next").addEventListener("click", () => { page += 1; render(); window.scrollTo({top: 0, behavior: "smooth"}); });
+    $("go").addEventListener("click", () => { page = Math.max(1, Math.trunc(Number($("page-input").value)) || 1); render(); });
+    $("page-input").addEventListener("keydown", (event) => { if (event.key === "Enter") { event.preventDefault(); $("go").click(); } });
+    render();
+  </script>
+</body>
+</html>

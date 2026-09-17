@@ -1,0 +1,282 @@
+{
+  "snapshot": {
+    "fetched_at": "2026-09-14T18:15:34.068550+00:00",
+    "page_count": 54,
+    "manifest_sha256": "aacc5ca32cf977b56e6f4ed88cdfd20fcb87817cab10d6eceff6879c334a8690"
+  },
+  "examples_sha256": "6b575924346195abbbfe87b6e0752e8799985319c8e713b189e3fb26e809d738",
+  "python": "3.13.14",
+  "packages": {
+    "scikit-learn": "1.7.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "settings": {
+    "min_words": 10,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "stop_words": "english",
+    "sublinear_tf": true,
+    "norm": "l2",
+    "smooth_idf": true,
+    "floor": "score > 0",
+    "primary_k": 5,
+    "pair_policy": "either direction; self excluded; same-page pairs retained",
+    "tie_break": "score rounded to 12 decimals, then corpus path/line order",
+    "include_unordered_lists": true
+  },
+  "passage_count": 980,
+  "possible_pairs": 479710,
+  "runs": [
+    {
+      "method": "expanded_trigram_0.5",
+      "candidate_pairs": 40,
+      "positive_cases_retrieved": 0,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 0,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": []
+    },
+    {
+      "method": "trigram_top_1",
+      "candidate_pairs": 677,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "trigram_top_3",
+      "candidate_pairs": 1718,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "trigram_top_5",
+      "candidate_pairs": 2504,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "trigram_top_10",
+      "candidate_pairs": 3901,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "trigram_budget_18",
+      "candidate_pairs": 18,
+      "positive_cases_retrieved": 0,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 0,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": []
+    },
+    {
+      "method": "trigram_budget_50",
+      "candidate_pairs": 50,
+      "positive_cases_retrieved": 0,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 0,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": []
+    },
+    {
+      "method": "trigram_budget_100",
+      "candidate_pairs": 100,
+      "positive_cases_retrieved": 0,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 0,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": []
+    },
+    {
+      "method": "tfidf_top_1",
+      "candidate_pairs": 762,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "tfidf_top_3",
+      "candidate_pairs": 2141,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "tfidf_top_5",
+      "candidate_pairs": 3486,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "tfidf_top_10",
+      "candidate_pairs": 6755,
+      "positive_cases_retrieved": 1,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 1,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": [
+        "fresh-external-link-allowlist",
+        "fresh-test-credentials-checklist"
+      ]
+    },
+    {
+      "method": "tfidf_budget_18",
+      "candidate_pairs": 18,
+      "positive_cases_retrieved": 0,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 0,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": []
+    },
+    {
+      "method": "tfidf_budget_50",
+      "candidate_pairs": 50,
+      "positive_cases_retrieved": 0,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 0,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": []
+    },
+    {
+      "method": "tfidf_budget_100",
+      "candidate_pairs": 100,
+      "positive_cases_retrieved": 0,
+      "positive_cases_total": 3,
+      "eligible_positive_cases": 2,
+      "negative_cases_retrieved": 0,
+      "negative_cases_total": 3,
+      "retrieved_case_ids": []
+    }
+  ],
+  "cases": [
+    {
+      "id": "fresh-mcpb-route-vs-builder",
+      "split": "evaluation",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.0,
+        "best_global_rank": null,
+        "best_direction_rank": null
+      },
+      "tfidf": {
+        "highest_score": 0.05025,
+        "best_global_rank": 11789,
+        "best_direction_rank": 15
+      }
+    },
+    {
+      "id": "fresh-builder-testing-summary",
+      "split": "evaluation",
+      "duplicate": true,
+      "eligible": false,
+      "trigram": null,
+      "tfidf": null
+    },
+    {
+      "id": "fresh-external-link-allowlist",
+      "split": "evaluation",
+      "duplicate": true,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.103448,
+        "best_global_rank": 601,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 0.242601,
+        "best_global_rank": 255,
+        "best_direction_rank": 1
+      }
+    },
+    {
+      "id": "fresh-tunnel-key-revocation-branches",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": false,
+      "trigram": null,
+      "tfidf": null
+    },
+    {
+      "id": "fresh-test-credentials-checklist",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": true,
+      "trigram": {
+        "highest_score": 0.222222,
+        "best_global_rank": 153,
+        "best_direction_rank": 1
+      },
+      "tfidf": {
+        "highest_score": 0.278771,
+        "best_global_rank": 155,
+        "best_direction_rank": 1
+      }
+    },
+    {
+      "id": "fresh-generic-auth-vs-m365-prereqs",
+      "split": "evaluation",
+      "duplicate": false,
+      "eligible": false,
+      "trigram": null,
+      "tfidf": null
+    }
+  ]
+}

@@ -172,13 +172,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--self-check", action="store_true")
     parser.add_argument("--candidates", action="store_true", help="Print TF-IDF top-5 pairs as TSV")
+    parser.add_argument("--examples", type=Path, help="Evaluation labels; defaults to the original examples")
     parser.add_argument("--expanded-extraction", action="store_true",
                         help="Include unordered list prose and lower the minimum to 10 words")
     args = parser.parse_args()
     if args.self_check:
         self_check()
-    project = Path(__file__).resolve().parents[1]
-    result, items, matrices, rankings = run(project / "corpus", project / "docs/3-check/examples.json",
+    project = Path(__file__).resolve().parents[3]
+    result, items, matrices, rankings = run(project / "corpus", args.examples or project / "docs/3-check/pilot/examples.json",
                                           expanded_extraction=args.expanded_extraction)
     if args.candidates:
         print("left_path\tleft_start\tleft_end\tright_path\tright_start\tright_end\tscore")

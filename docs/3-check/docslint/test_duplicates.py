@@ -1,4 +1,4 @@
-"""Run with `uv run python docslint/test_duplicates.py`. No test dependencies."""
+"""Run with `uv run python docs/3-check/docslint/test_duplicates.py`. No test dependencies."""
 
 import hashlib
 import json
@@ -26,6 +26,11 @@ export const Beta = () => <Info>{prose}</Info>;
 ~~~text
 {prose}
 ~~~
+<CodeGroup>
+```text
+{prose}
+```
+</CodeGroup>
 1. {prose}
 
    {prose}
@@ -55,6 +60,9 @@ Editors can link to that explanation from their task pages.
     assert extracted[0].text.endswith("task pages.")
     expanded = passages("example.md", source, 10, include_lists=True)
     assert len(expanded) == 3 and expanded[0].text == f"* {prose}", expanded
+    ordered = passages("example.md", source, 10, include_ordered_lists=True)
+    assert len(ordered) == 4 and ordered[2:] == extracted, ordered
+    assert ordered[0].text == f"1. {prose}" and ordered[1].text == f"   {prose}", ordered
     list_source = f"""- {prose}
   Wrapped detail remains part of this item.
 + Too short
@@ -67,6 +75,24 @@ Editors can link to that explanation from their task pages.
     assert passages("lists.md", list_source, 10) == [expanded[1]]
     for item in expanded:
         assert item.text == "\n".join(list_source.splitlines()[item.start - 1:item.end])
+    mixed_lists = f"""1. {prose}
+   Wrapped ordered detail remains part of this item.
+- {prose}
+  Wrapped unordered detail remains part of this item.
+2. Too short
+
+{prose}"""
+    ordered = passages("mixed-lists.md", mixed_lists, 10, include_ordered_lists=True)
+    unordered = passages("mixed-lists.md", mixed_lists, 10, include_lists=True)
+    both = passages("mixed-lists.md", mixed_lists, 10, include_lists=True,
+                    include_ordered_lists=True)
+    assert [(p.start, p.end) for p in ordered] == [(1, 2), (7, 7)], ordered
+    assert [(p.start, p.end) for p in unordered] == [(3, 4), (7, 7)], unordered
+    assert [(p.start, p.end) for p in both] == [(1, 2), (3, 4), (7, 7)], both
+    checklist = "1. Add the connector to Claude.\n2. Validate authentication using the inspector.\n\n" + prose
+    grouped = passages("checklist.md", checklist, 10, include_ordered_lists=True)
+    assert [(p.start, p.end) for p in grouped] == [(1, 2), (4, 4)], grouped
+    assert grouped[0].text == "\n".join(checklist.splitlines()[:2])
     boundaries = f"""<AccordionGroup>
   <Accordion>
     * {prose}
@@ -85,6 +111,8 @@ Editors can link to that explanation from their task pages.
 </AccordionGroup>"""
     expanded = passages("boundaries.md", boundaries, 10, include_lists=True)
     assert [(p.start, p.end) for p in expanded] == [(3, 3), (7, 7), (14, 14)], expanded
+    ordered = passages("boundaries.md", boundaries, 10, include_ordered_lists=True)
+    assert [(p.start, p.end) for p in ordered] == [(7, 7), (10, 11), (14, 14)], ordered
     ordered_code = f"""1. {prose}
    ```text
    {prose}
@@ -93,6 +121,9 @@ Editors can link to that explanation from their task pages.
 
 {prose}"""
     assert [p.start for p in passages("ordered-code.md", ordered_code, 10, include_lists=True)] == [7]
+    ordered = passages("ordered-code.md", ordered_code, 10, include_ordered_lists=True)
+    assert [p.start for p in ordered] == [1, 5, 7], ordered
+    assert all("code must never" not in p.text for p in ordered)
     assert words("**Read** [the guide](/first) &amp; `verify`.") == ["read", "the", "guide", "verify"]
     assert words("**Read** [the guide](/second) &amp; `verify`.") == ["read", "the", "guide", "verify"]
 
@@ -116,6 +147,17 @@ Editors can link to that explanation from their task pages.
         (root / "manifest.json").write_text(json.dumps(manifest))
         snapshot, loaded = load_corpus(root, 3)
         assert snapshot["page_count"] == 3 and loaded == items
+
+        list_text = f"1. {prose}\n- {prose}"
+        (root / "lists.md").write_text(list_text)
+        manifest["pages"].append({
+            "path": "lists.md", "sha256": hashlib.sha256(list_text.encode()).hexdigest(),
+        })
+        manifest["page_count"] = 4
+        (root / "manifest.json").write_text(json.dumps(manifest))
+        _, loaded = load_corpus(root, 10, include_ordered_lists=True)
+        list_passages = [item for item in loaded if item.path == "lists.md"]
+        assert [item.start for item in list_passages] == [1], list_passages
 
         def span(path: str) -> dict:
             return {"path": path, "start": 1, "end": 1}
@@ -152,8 +194,8 @@ Editors can link to that explanation from their task pages.
 
 
 def check_artifacts() -> None:
-    root = Path(__file__).resolve().parents[1]
-    artifacts = root / "docs/3-check"
+    root = Path(__file__).resolve().parents[3]
+    artifacts = root / "docs/3-check/pilot"
     expected = json.loads((artifacts / "results.json").read_text())
     settings = expected["settings"]
     snapshot, items = load_corpus(root / "corpus", settings["min_words"])

@@ -1,0 +1,587 @@
+{
+  "examples_sha256": "cccc8d3000373ceba3632563696626a23f4ae0b108765ede347feceb2807f898",
+  "packet_sha256": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134",
+  "prompt_sha256": "a5899d90ce82149132d9d65905ed11a4dd92b53416ac44db7a8e08bd1757d5d0",
+  "results_sha256": "199c6dcbd7b1407acd9fccae3edbf013692a17e32e49bbe8405d500eed9d7c4a",
+  "runtime": {
+    "packages": {
+      "numpy": "2.5.3",
+      "scikit-learn": "1.7.2",
+      "scipy": "1.18.1"
+    },
+    "python": "3.13.14"
+  },
+  "schema_version": 1,
+  "selection": {
+    "candidate_pairs": 6755,
+    "cases": [
+      {
+        "example_id": null,
+        "global_rank": 1516,
+        "id": "000c89288870bf5153ce62a3031acd4338e3c736c56ded97c1fe1d5e60820a4a",
+        "left": {
+          "end": 73,
+          "path": "connectors/building/review-criteria.md",
+          "start": 73
+        },
+        "left_rank": 4,
+        "queue_rank": 1487,
+        "right": {
+          "end": 88,
+          "path": "plugins/submit.md",
+          "start": 88
+        },
+        "right_rank": 3,
+        "score": 0.124149741441,
+        "selection_sha256": "000c89288870bf5153ce62a3031acd4338e3c736c56ded97c1fe1d5e60820a4a",
+        "source_group": "sample",
+        "stratum": 1
+      },
+      {
+        "example_id": null,
+        "global_rank": 11651,
+        "id": "001703eaf9890ec55179db9211398b97f26ed9585fe326b82cb0b603f1e38430",
+        "left": {
+          "end": 296,
+          "path": "third-party/claude-desktop/connectors-m365.md",
+          "start": 296
+        },
+        "left_rank": 37,
+        "queue_rank": 5846,
+        "right": {
+          "end": 326,
+          "path": "third-party/claude-desktop/connectors-m365.md",
+          "start": 326
+        },
+        "right_rank": 7,
+        "score": 0.050568189517,
+        "selection_sha256": "001703eaf9890ec55179db9211398b97f26ed9585fe326b82cb0b603f1e38430",
+        "source_group": "sample",
+        "stratum": 4
+      },
+      {
+        "example_id": null,
+        "global_rank": 11284,
+        "id": "00202bd2f1ef5c73d995efc543320972668c3923e3cb657753c0885f3090c392",
+        "left": {
+          "end": 350,
+          "path": "connectors/mcp-tunnels/setup.md",
+          "start": 350
+        },
+        "left_rank": 15,
+        "queue_rank": 5796,
+        "right": {
+          "end": 358,
+          "path": "connectors/mcp-tunnels/setup.md",
+          "start": 358
+        },
+        "right_rank": 8,
+        "score": 0.051333971763,
+        "selection_sha256": "00202bd2f1ef5c73d995efc543320972668c3923e3cb657753c0885f3090c392",
+        "source_group": "sample",
+        "stratum": 4
+      },
+      {
+        "example_id": null,
+        "global_rank": 5776,
+        "id": "002f42fa853714eb974467a8659afc9964de28d62570351cfcff8aee98e0a693",
+        "left": {
+          "end": 89,
+          "path": "connectors/building/mcp-apps/getting-started.md",
+          "start": 89
+        },
+        "left_rank": 12,
+        "queue_rank": 4294,
+        "right": {
+          "end": 80,
+          "path": "connectors/slack/index.md",
+          "start": 80
+        },
+        "right_rank": 8,
+        "score": 0.070181188709,
+        "selection_sha256": "002f42fa853714eb974467a8659afc9964de28d62570351cfcff8aee98e0a693",
+        "source_group": "sample",
+        "stratum": 3
+      },
+      {
+        "example_id": null,
+        "global_rank": 4618,
+        "id": "00532f35f0bffbbe2d3b5d3e1c552633abfaf09c0cfa494c0d50e74aeb977a9d",
+        "left": {
+          "end": 29,
+          "path": "connectors/building/mcp-apps/cross-compatibility.md",
+          "start": 29
+        },
+        "left_rank": 23,
+        "queue_rank": 3764,
+        "right": {
+          "end": 179,
+          "path": "connectors/building/mcp-apps/instance-supersession.md",
+          "start": 179
+        },
+        "right_rank": 8,
+        "score": 0.077772332286,
+        "selection_sha256": "00532f35f0bffbbe2d3b5d3e1c552633abfaf09c0cfa494c0d50e74aeb977a9d",
+        "source_group": "sample",
+        "stratum": 3
+      },
+      {
+        "example_id": null,
+        "global_rank": 576,
+        "id": "006f35b6cfb8259ce4b35cd99e43c9f83b983a9d5713bc201112de4d4669ad1f",
+        "left": {
+          "end": 79,
+          "path": "connectors/building/directory-vs-custom.md",
+          "start": 79
+        },
+        "left_rank": 4,
+        "queue_rank": 552,
+        "right": {
+          "end": 47,
+          "path": "connectors/directory.md",
+          "start": 47
+        },
+        "right_rank": 4,
+        "score": 0.179230539556,
+        "selection_sha256": "006f35b6cfb8259ce4b35cd99e43c9f83b983a9d5713bc201112de4d4669ad1f",
+        "source_group": "sample",
+        "stratum": 1
+      },
+      {
+        "example_id": null,
+        "global_rank": 3013,
+        "id": "00c69b9dafbd553c2bd3253baf76c8a7c265fb11e586198516f4b015ee6421db",
+        "left": {
+          "end": 20,
+          "path": "connectors/building/testing.md",
+          "start": 20
+        },
+        "left_rank": 4,
+        "queue_rank": 2803,
+        "right": {
+          "end": 49,
+          "path": "connectors/building/troubleshooting.md",
+          "start": 49
+        },
+        "right_rank": 6,
+        "score": 0.093552572515,
+        "selection_sha256": "00c69b9dafbd553c2bd3253baf76c8a7c265fb11e586198516f4b015ee6421db",
+        "source_group": "sample",
+        "stratum": 2
+      },
+      {
+        "example_id": null,
+        "global_rank": 2953,
+        "id": "0100aa918443cbc94eb4278e2fa5a8eba8b583e1e622b78d6f814d28de8c28f8",
+        "left": {
+          "end": 47,
+          "path": "connectors/building/mcpb.md",
+          "start": 47
+        },
+        "left_rank": 1,
+        "queue_rank": 2760,
+        "right": {
+          "end": 30,
+          "path": "connectors/overview.md",
+          "start": 30
+        },
+        "right_rank": 15,
+        "score": 0.094303789194,
+        "selection_sha256": "0100aa918443cbc94eb4278e2fa5a8eba8b583e1e622b78d6f814d28de8c28f8",
+        "source_group": "sample",
+        "stratum": 2
+      },
+      {
+        "example_id": "development-government-unconnected-plugin-connectors",
+        "global_rank": null,
+        "id": "051fa6b200fc5cc96270a075c474b58f9163dab5983f29f0baeb60a28d9edc5e",
+        "left": {
+          "end": 40,
+          "path": "government/desktop/plugins.md",
+          "start": 40
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 17,
+          "path": "government/config/plugins-and-connectors.md",
+          "start": 17
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-authentication-reference-versus-lazy-auth",
+        "global_rank": null,
+        "id": "10433465d06e14b404e1d3540607d19b1b34992fcddd18257ad7bd7e1e8ca6c2",
+        "left": {
+          "end": 13,
+          "path": "connectors/building/authentication.md",
+          "start": 9
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 11,
+          "path": "connectors/building/lazy-authentication.md",
+          "start": 9
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "development-sales-plugin-example",
+        "global_rank": null,
+        "id": "1745e3aa14f24a5946ca9fe5d34b649d86013ab3fe2165c857fea96f327bc20c",
+        "left": {
+          "end": 49,
+          "path": "plugins/overview.md",
+          "start": 49
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 33,
+          "path": "plugins/submit.md",
+          "start": 33
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-style-reference-versus-theming-procedure",
+        "global_rank": null,
+        "id": "2e2fe67780ee210cc444c9f7342435984c6cc035dd6492f53dbb98fcd71e6904",
+        "left": {
+          "end": 284,
+          "path": "connectors/building/mcp-apps/design-guidelines.md",
+          "start": 282
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 75,
+          "path": "connectors/building/mcp-apps/transparent-theming.md",
+          "start": 67
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-google-service-limitations",
+        "global_rank": null,
+        "id": "421acd2bc509226ec2e5135aff4c902120646090c56c3015efe5ef2712d55586",
+        "left": {
+          "end": 74,
+          "path": "connectors/google/gmail.md",
+          "start": 68
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 71,
+          "path": "connectors/google/calendar.md",
+          "start": 65
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "development-plugin-definition-overview-cowork",
+        "global_rank": null,
+        "id": "510e6218be0c13de3cf961624d17c8efd2d9abdf4c4dcc4e6266d990df6db6f2",
+        "left": {
+          "end": 9,
+          "path": "plugins/overview.md",
+          "start": 9
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 9,
+          "path": "cowork/guide/plugins.md",
+          "start": 9
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "development-conflicting-organization-management-claims",
+        "global_rank": null,
+        "id": "6597390db75cdb0cc6b726c0511191a2fdd0fa1400641ae589563f9f28878533",
+        "left": {
+          "end": 62,
+          "path": "plugins/overview.md",
+          "start": 62
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 86,
+          "path": "cowork/guide/plugins.md",
+          "start": 86
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-drive-live-sync-faq",
+        "global_rank": null,
+        "id": "6c09f530a8e793e4cd028cd31da89d9ecaba21a6ce46bb5e28e4199ce33cfbdc",
+        "left": {
+          "end": 51,
+          "path": "connectors/google/drive.md",
+          "start": 51
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 60,
+          "path": "connectors/google/drive.md",
+          "start": 58
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-google-owner-enable-prerequisite",
+        "global_rank": null,
+        "id": "6e2615cafe30a79fb26f0fe04d5fd0429983161830d39ca82e61c2c56eb098e8",
+        "left": {
+          "end": 21,
+          "path": "connectors/google/gmail.md",
+          "start": 21
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 21,
+          "path": "connectors/google/calendar.md",
+          "start": 21
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "development-marketplace-generic-versus-finance",
+        "global_rank": null,
+        "id": "6ff5efc7e26b52ec12d8e4e6333f661294427d72bc7575cc4934807d4d357ac6",
+        "left": {
+          "end": 66,
+          "path": "cowork/guide/plugins.md",
+          "start": 49
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 55,
+          "path": "office-agents/fsi-plugins.md",
+          "start": 35
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-permanent-directory-slug",
+        "global_rank": null,
+        "id": "9f82abcdff7391141889ac6124b332af2bdc4c261db460e14d1941925060665f",
+        "left": {
+          "end": 29,
+          "path": "connectors/building/after-publishing.md",
+          "start": 23
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 88,
+          "path": "connectors/building/managing-your-listing.md",
+          "start": 88
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "development-member-uninstall-versus-admin-removal",
+        "global_rank": null,
+        "id": "a62a853864f90235a005eb6271a19e753466caa88863c7ffc73435821e05af3d",
+        "left": {
+          "end": 34,
+          "path": "government/desktop/plugins.md",
+          "start": 34
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 67,
+          "path": "government/config/plugins-and-connectors.md",
+          "start": 67
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "development-plugin-definition-overview-government",
+        "global_rank": null,
+        "id": "bb490a53e3b828c6e483d09137072c42dd03e77760a3475025ef910fcb58b18b",
+        "left": {
+          "end": 9,
+          "path": "plugins/overview.md",
+          "start": 9
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 11,
+          "path": "government/desktop/plugins.md",
+          "start": 11
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-skill-loading-versus-m365-use",
+        "global_rank": null,
+        "id": "cbe2799f97d41ba9670a62a9d53a366f0ff57c588e15817c8bee34c777ce4f6f",
+        "left": {
+          "end": 23,
+          "path": "skills/overview.md",
+          "start": 17
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 47,
+          "path": "office-agents/connectors-and-skills.md",
+          "start": 40
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "development-context-specific-install-procedures",
+        "global_rank": null,
+        "id": "cdd78f353ae9f72459b4760ba7380fe95aa576ce6eb8e5b10e488525af2cd06f",
+        "left": {
+          "end": 47,
+          "path": "cowork/guide/plugins.md",
+          "start": 26
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 30,
+          "path": "government/desktop/plugins.md",
+          "start": 24
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "evaluation-skill-definition-overview-government",
+        "global_rank": null,
+        "id": "e743e6fa9d7fd28a798f5a797efb2313f9a8659ec954bb59972ed0b647a8f693",
+        "left": {
+          "end": 9,
+          "path": "skills/overview.md",
+          "start": 9
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 11,
+          "path": "government/desktop/skills.md",
+          "start": 11
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      }
+    ],
+    "excluded_frozen_pairs": 16,
+    "excluded_reviewed_pairs": 17,
+    "include_unordered_lists": true,
+    "method": "expanded_tfidf_top_10_hash_stratified",
+    "min_words": 10,
+    "remaining_pairs": 6722,
+    "sample_offset": 2,
+    "strata": [
+      {
+        "number": 1,
+        "rank_end": 1681,
+        "rank_start": 1,
+        "size": 1681
+      },
+      {
+        "number": 2,
+        "rank_end": 3362,
+        "rank_start": 1682,
+        "size": 1681
+      },
+      {
+        "number": 3,
+        "rank_end": 5042,
+        "rank_start": 3363,
+        "size": 1680
+      },
+      {
+        "number": 4,
+        "rank_end": 6722,
+        "rank_start": 5043,
+        "size": 1680
+      }
+    ],
+    "top_k": 10
+  },
+  "snapshot": {
+    "fetched_at": "2026-09-14T18:15:34.068550+00:00",
+    "manifest_sha256": "aacc5ca32cf977b56e6f4ed88cdfd20fcb87817cab10d6eceff6879c334a8690",
+    "page_count": 54
+  }
+}

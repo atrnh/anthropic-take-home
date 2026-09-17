@@ -1,0 +1,75 @@
+{
+  "scope": "Parent qualitative assessment of the five explicitly human-adjudicated treatments only; not an independent human score or automatic text-match metric.",
+  "rubric": {
+    "pass": "Follows the agreed treatment and preserves required information.",
+    "partial": "Correct consolidation direction but omits a required merge/preservation step.",
+    "fail": "Rejects the agreed consolidation or proposes an incompatible treatment."
+  },
+  "cases": [
+    {
+      "example_id": "evaluation-drive-live-sync-faq",
+      "runs": {
+        "a": {
+          "assessment": "pass",
+          "reason": "Keeps both brief entry points without abstention."
+        },
+        "b": {
+          "assessment": "pass",
+          "reason": "Keeps both brief entry points without abstention."
+        }
+      }
+    },
+    {
+      "example_id": "development-plugin-definition-overview-government",
+      "runs": {
+        "a": {
+          "assessment": "fail",
+          "reason": "Calls the passages distinct and proposes no consolidation."
+        },
+        "b": {
+          "assessment": "partial",
+          "reason": "Flags overlap and shortens/links, but does not propose merging generally useful additions into the overview. Treats Cowork/Code applicability as local and leaves component scope for verification."
+        }
+      }
+    },
+    {
+      "example_id": "evaluation-skill-definition-overview-government",
+      "runs": {
+        "a": {
+          "assessment": "fail",
+          "reason": "Calls the passages distinct and proposes no consolidation."
+        },
+        "b": {
+          "assessment": "partial",
+          "reason": "Flags overlap and shortens/links, but does not explicitly merge optional-resource and workflow-reuse information into the overview."
+        }
+      }
+    },
+    {
+      "example_id": "evaluation-permanent-directory-slug",
+      "runs": {
+        "a": {
+          "assessment": "fail",
+          "reason": "Keeps both; no consolidation under listing management."
+        },
+        "b": {
+          "assessment": "fail",
+          "reason": "Keeps both; no consolidation under listing management."
+        }
+      }
+    },
+    {
+      "example_id": "development-marketplace-generic-versus-finance",
+      "runs": {
+        "a": {
+          "assessment": "pass",
+          "reason": "Merges navigation and repository-addition procedure into general guidance, preserves specialized inputs/outcome, and explicitly flags UI wording for verification."
+        },
+        "b": {
+          "assessment": "fail",
+          "reason": "Calls the passages distinct and preserves the specialized procedure without merging the complete path into the general guide."
+        }
+      }
+    }
+  ]
+}

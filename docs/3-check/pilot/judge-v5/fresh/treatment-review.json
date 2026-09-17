@@ -1,0 +1,88 @@
+{
+  "scope": "Parent qualitative assessment against six treatments approved by Ashley before fresh judging; not an independent human score or automatic text-match metric.",
+  "rubric": {
+    "pass": "Follows the agreed treatment and preserves required information.",
+    "partial": "Correct consolidation direction but omits a required merge/preservation step.",
+    "fail": "Rejects the agreed consolidation or proposes an incompatible treatment."
+  },
+  "cases": [
+    {
+      "example_id": "fresh-mcpb-route-vs-builder",
+      "runs": {
+        "a": {
+          "assessment": "partial",
+          "reason": "Flags overlap and shortens/links, but leaves enterprise/update/signing/cross-platform additions on the route page conditionally rather than explicitly merging useful general additions into the builder guide. Correctly flags capability scope for verification."
+        },
+        "b": {
+          "assessment": "fail",
+          "reason": "Calls the passages distinct and proposes no consolidation."
+        }
+      }
+    },
+    {
+      "example_id": "fresh-builder-testing-summary",
+      "runs": {
+        "a": {
+          "assessment": "partial",
+          "reason": "Consolidates the custom-connector and Inspector instructions, but explicitly leaves the unique Claude Code check in the index rather than incorporating it into the testing guide."
+        },
+        "b": {
+          "assessment": "partial",
+          "reason": "Consolidates the custom-connector and Inspector instructions, but explicitly retains the Claude Code command and /mcp note in the index rather than moving them into the testing guide."
+        }
+      }
+    },
+    {
+      "example_id": "fresh-external-link-allowlist",
+      "runs": {
+        "a": {
+          "assessment": "pass",
+          "reason": "Moves detailed matching explanation to the external-links guide while retaining optional-field, applicability, and ownership requirements locally; calls for reconciliation before editing."
+        },
+        "b": {
+          "assessment": "pass",
+          "reason": "Makes external-links the reference and retains submission ownership and optional-field requirements, with accepted-form verification before editing."
+        }
+      }
+    },
+    {
+      "example_id": "fresh-tunnel-key-revocation-branches",
+      "runs": {
+        "a": {
+          "assessment": "pass",
+          "reason": "Keeps security warnings visible in both independent procedures and recognizes their distinct cleanup/rationale."
+        },
+        "b": {
+          "assessment": "pass",
+          "reason": "Keeps both warnings and their local cleanup/security details."
+        }
+      }
+    },
+    {
+      "example_id": "fresh-test-credentials-checklist",
+      "runs": {
+        "a": {
+          "assessment": "pass",
+          "reason": "Keeps detailed preparation guidance and the short prerequisite in the checklist."
+        },
+        "b": {
+          "assessment": "pass",
+          "reason": "Keeps the populated-account prerequisite visible in both contexts."
+        }
+      }
+    },
+    {
+      "example_id": "fresh-generic-auth-vs-m365-prereqs",
+      "runs": {
+        "a": {
+          "assessment": "pass",
+          "reason": "Keeps service-specific organization/administrator prerequisites distinct from the generic user flow."
+        },
+        "b": {
+          "assessment": "pass",
+          "reason": "Keeps Microsoft tenant/role prerequisites and generic authentication distinct."
+        }
+      }
+    }
+  ]
+}

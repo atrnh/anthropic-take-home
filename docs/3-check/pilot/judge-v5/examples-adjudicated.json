@@ -1,0 +1,306 @@
+[
+  {
+    "id": "development-plugin-definition-overview-cowork",
+    "split": "development",
+    "left": {
+      "path": "plugins/overview.md",
+      "start": 9,
+      "end": 9
+    },
+    "right": {
+      "path": "cowork/guide/plugins.md",
+      "start": 9,
+      "end": 9
+    },
+    "duplicate": true,
+    "reason": "Both passages define a plugin as one package that extends Claude by bundling skills, connectors, agents, and commands or hooks. The Cowork page needs only a short orientation linked to the canonical concept, so maintaining both full definitions is actionable duplication.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "Both passages define a plugin as one package that extends Claude by bundling skills, connectors, agents, and commands or hooks. The Cowork page needs only a short orientation linked to the canonical concept, so maintaining both full definitions is actionable duplication."
+  },
+  {
+    "id": "development-plugin-definition-overview-government",
+    "split": "development",
+    "left": {
+      "path": "plugins/overview.md",
+      "start": 9,
+      "end": 9
+    },
+    "right": {
+      "path": "government/desktop/plugins.md",
+      "start": 11,
+      "end": 11
+    },
+    "duplicate": true,
+    "reason": "Merge broadly applicable additions from the Government introduction into the general plugin overview. Preserve genuinely Government-specific information locally, then shorten the introduction and link to the improved overview. Do not infer exclusive applicability from page location.",
+    "cohort": "familiar",
+    "label_authority": "Ashley explicitly adjudicated this case in the current conversation before v5",
+    "expected_treatment": "Merge broadly applicable additions from the Government introduction into the general plugin overview. Preserve genuinely Government-specific information locally, then shorten the introduction and link to the improved overview. Do not infer exclusive applicability from page location."
+  },
+  {
+    "id": "development-sales-plugin-example",
+    "split": "development",
+    "left": {
+      "path": "plugins/overview.md",
+      "start": 49,
+      "end": 49
+    },
+    "right": {
+      "path": "plugins/submit.md",
+      "start": 33,
+      "end": 33
+    },
+    "duplicate": true,
+    "reason": "Both passages use a sales-plugin example with a CRM connector, sales-process guidance, prospect research, and call follow-ups. The submission example adds a competitive-analysis sub-agent. The common explanation can have one home while preserving that additional component example.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "Both passages use a sales-plugin example with a CRM connector, sales-process guidance, prospect research, and call follow-ups. The submission example adds a competitive-analysis sub-agent. The common explanation can have one home while preserving that additional component example."
+  },
+  {
+    "id": "development-government-unconnected-plugin-connectors",
+    "split": "development",
+    "left": {
+      "path": "government/desktop/plugins.md",
+      "start": 40,
+      "end": 40
+    },
+    "right": {
+      "path": "government/config/plugins-and-connectors.md",
+      "start": 17,
+      "end": 17
+    },
+    "duplicate": false,
+    "reason": "The connector behavior changes both member installation and administrator distribution decisions. Each procedure must show it locally before the governed steps under PROC-02. Possible source reuse is unobservable in this snapshot and does not make the visible repetition unnecessary.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "The connector behavior changes both member installation and administrator distribution decisions. Each procedure must show it locally before the governed steps under PROC-02. Possible source reuse is unobservable in this snapshot and does not make the visible repetition unnecessary."
+  },
+  {
+    "id": "development-context-specific-install-procedures",
+    "split": "development",
+    "left": {
+      "path": "cowork/guide/plugins.md",
+      "start": 26,
+      "end": 47
+    },
+    "right": {
+      "path": "government/desktop/plugins.md",
+      "start": 24,
+      "end": 30
+    },
+    "duplicate": false,
+    "reason": "These are complete installation procedures for different deployments. Cowork includes marketplace authentication and component review; Government distinguishes organization, file, and Create with Claude routes. Shared control names do not make the workflows redundant.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "These are complete installation procedures for different deployments. Cowork includes marketplace authentication and component review; Government distinguishes organization, file, and Create with Claude routes. Shared control names do not make the workflows redundant."
+  },
+  {
+    "id": "development-marketplace-generic-versus-finance",
+    "split": "development",
+    "left": {
+      "path": "cowork/guide/plugins.md",
+      "start": 49,
+      "end": 66
+    },
+    "right": {
+      "path": "office-agents/fsi-plugins.md",
+      "start": 35,
+      "end": 55
+    },
+    "duplicate": true,
+    "reason": "Merge the complete navigation path from the financial-services guide into the general installation guide. Shorten the specialized passage to a link while retaining its repository URL and collection-specific installation order/details. Verify differing UI wording before the edit; that verification need does not negate the consolidation opportunity.",
+    "cohort": "familiar",
+    "label_authority": "Ashley explicitly adjudicated this case in the current conversation before v5",
+    "expected_treatment": "Merge the complete navigation path from the financial-services guide into the general installation guide. Shorten the specialized passage to a link while retaining its repository URL and collection-specific installation order/details. Verify differing UI wording before the edit; that verification need does not negate the consolidation opportunity."
+  },
+  {
+    "id": "development-member-uninstall-versus-admin-removal",
+    "split": "development",
+    "left": {
+      "path": "government/desktop/plugins.md",
+      "start": 34,
+      "end": 34
+    },
+    "right": {
+      "path": "government/config/plugins-and-connectors.md",
+      "start": 67,
+      "end": 67
+    },
+    "duplicate": false,
+    "reason": "The member passage describes uninstalling a local copy and the exception for required plugins. The administrator passage describes stopping delivery and explicitly says existing copies remain. Similar removal vocabulary covers distinct actors and outcomes.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "The member passage describes uninstalling a local copy and the exception for required plugins. The administrator passage describes stopping delivery and explicitly says existing copies remain. Similar removal vocabulary covers distinct actors and outcomes."
+  },
+  {
+    "id": "development-conflicting-organization-management-claims",
+    "split": "development",
+    "left": {
+      "path": "plugins/overview.md",
+      "start": 62,
+      "end": 62
+    },
+    "right": {
+      "path": "cowork/guide/plugins.md",
+      "start": 86,
+      "end": 86
+    },
+    "duplicate": false,
+    "reason": "These passages concern organization-wide plugin management, but they conflict: one calls it forthcoming while the other documents required plugins already managed by administrators. This needs an owner-confirmed correction, not automatic consolidation as duplicate prose.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "These passages concern organization-wide plugin management, but they conflict: one calls it forthcoming while the other documents required plugins already managed by administrators. This needs an owner-confirmed correction, not automatic consolidation as duplicate prose."
+  },
+  {
+    "id": "evaluation-skill-definition-overview-government",
+    "split": "evaluation",
+    "left": {
+      "path": "skills/overview.md",
+      "start": 9,
+      "end": 9
+    },
+    "right": {
+      "path": "government/desktop/skills.md",
+      "start": 11,
+      "end": 11
+    },
+    "duplicate": true,
+    "reason": "Merge the optional scripts/resources and workflow-reuse explanation into the skills overview. Shorten the Government introduction to brief orientation and a link; retain Government-specific sourcing and management guidance.",
+    "cohort": "familiar",
+    "label_authority": "Ashley explicitly adjudicated this case in the current conversation before v5",
+    "expected_treatment": "Merge the optional scripts/resources and workflow-reuse explanation into the skills overview. Shorten the Government introduction to brief orientation and a link; retain Government-specific sourcing and management guidance."
+  },
+  {
+    "id": "evaluation-google-owner-enable-prerequisite",
+    "split": "evaluation",
+    "left": {
+      "path": "connectors/google/gmail.md",
+      "start": 21,
+      "end": 21
+    },
+    "right": {
+      "path": "connectors/google/calendar.md",
+      "start": 21,
+      "end": 21
+    },
+    "duplicate": false,
+    "reason": "Owner enablement is a prerequisite each service method must expose before its connection steps. The canonical walkthrough link does not replace that local prerequisite. Rendered repetition cannot establish whether the authoring source is shared.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "Owner enablement is a prerequisite each service method must expose before its connection steps. The canonical walkthrough link does not replace that local prerequisite. Rendered repetition cannot establish whether the authoring source is shared."
+  },
+  {
+    "id": "evaluation-drive-live-sync-faq",
+    "split": "evaluation",
+    "left": {
+      "path": "connectors/google/drive.md",
+      "start": 51,
+      "end": 51
+    },
+    "right": {
+      "path": "connectors/google/drive.md",
+      "start": 58,
+      "end": 60
+    },
+    "duplicate": false,
+    "reason": "Keep both brief passages: the feature bullet supports scanning and the FAQ gives a direct answer. No consolidation or extra navigation is needed.",
+    "cohort": "familiar",
+    "label_authority": "Ashley explicitly adjudicated this case in the current conversation before v5",
+    "expected_treatment": "Keep both brief passages: the feature bullet supports scanning and the FAQ gives a direct answer. No consolidation or extra navigation is needed."
+  },
+  {
+    "id": "evaluation-permanent-directory-slug",
+    "split": "evaluation",
+    "left": {
+      "path": "connectors/building/after-publishing.md",
+      "start": 23,
+      "end": 29
+    },
+    "right": {
+      "path": "connectors/building/managing-your-listing.md",
+      "start": 88,
+      "end": 88
+    },
+    "duplicate": true,
+    "reason": "Consolidate the full slug explanation, URL format, and sharing guidance under listing management. Shorten after-publishing to a brief reminder and link. Keep the locked-slug constraint visible beside editing instructions.",
+    "cohort": "familiar",
+    "label_authority": "Ashley explicitly adjudicated this case in the current conversation before v5",
+    "expected_treatment": "Consolidate the full slug explanation, URL format, and sharing guidance under listing management. Shorten after-publishing to a brief reminder and link. Keep the locked-slug constraint visible beside editing instructions."
+  },
+  {
+    "id": "evaluation-skill-loading-versus-m365-use",
+    "split": "evaluation",
+    "left": {
+      "path": "skills/overview.md",
+      "start": 17,
+      "end": 23
+    },
+    "right": {
+      "path": "office-agents/connectors-and-skills.md",
+      "start": 40,
+      "end": 47
+    },
+    "duplicate": false,
+    "reason": "The overview explains progressive loading of metadata, instructions, and resources. The M365 passage explains app-specific availability, automatic use, and filtering in the slash picker. They share skill terminology but answer different reader questions.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "The overview explains progressive loading of metadata, instructions, and resources. The M365 passage explains app-specific availability, automatic use, and filtering in the slash picker. They share skill terminology but answer different reader questions."
+  },
+  {
+    "id": "evaluation-google-service-limitations",
+    "split": "evaluation",
+    "left": {
+      "path": "connectors/google/gmail.md",
+      "start": 68,
+      "end": 74
+    },
+    "right": {
+      "path": "connectors/google/calendar.md",
+      "start": 65,
+      "end": 71
+    },
+    "duplicate": false,
+    "reason": "The sections have parallel structure and both describe read-only access, but the actual restrictions differ by service: email creation and embedded images versus event changes and invitations. Each service page must retain its applicable limits.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "The sections have parallel structure and both describe read-only access, but the actual restrictions differ by service: email creation and embedded images versus event changes and invitations. Each service page must retain its applicable limits."
+  },
+  {
+    "id": "evaluation-style-reference-versus-theming-procedure",
+    "split": "evaluation",
+    "left": {
+      "path": "connectors/building/mcp-apps/design-guidelines.md",
+      "start": 282,
+      "end": 284
+    },
+    "right": {
+      "path": "connectors/building/mcp-apps/transparent-theming.md",
+      "start": 67,
+      "end": 75
+    },
+    "duplicate": false,
+    "reason": "The design guide introduces the canonical token reference and its adaptive behavior. The theming guide identifies the runtime hostContext fields needed to apply those tokens. This is a reference-to-procedure relationship, not competing explanatory prose.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "The design guide introduces the canonical token reference and its adaptive behavior. The theming guide identifies the runtime hostContext fields needed to apply those tokens. This is a reference-to-procedure relationship, not competing explanatory prose."
+  },
+  {
+    "id": "evaluation-authentication-reference-versus-lazy-auth",
+    "split": "evaluation",
+    "left": {
+      "path": "connectors/building/authentication.md",
+      "start": 9,
+      "end": 13
+    },
+    "right": {
+      "path": "connectors/building/lazy-authentication.md",
+      "start": 9,
+      "end": 11
+    },
+    "duplicate": false,
+    "reason": "The authentication page introduces Claude's supported remote-server authentication reference. The lazy-auth page explains a specific mixed-auth behavior and the user-visible challenge flow. The specialist explanation is not a duplicate of the general reference.",
+    "cohort": "familiar",
+    "label_authority": "historical agent-authored evaluation label; not newly human-adjudicated",
+    "expected_treatment": "The authentication page introduces Claude's supported remote-server authentication reference. The lazy-auth page explains a specific mixed-auth behavior and the user-visible challenge flow. The specialist explanation is not a duplicate of the general reference."
+  }
+]

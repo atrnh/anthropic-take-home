@@ -129,10 +129,10 @@ this next step, not evidence that our 90% editorial-precision target is met.
 ## Reproduce and inspect
 
 ```sh
-uv run docslint/bakeoff.py --self-check > /tmp/claude-tfidf-bakeoff.json
-diff -u docs/3-check/tfidf-bakeoff.json /tmp/claude-tfidf-bakeoff.json
-uv run docslint/bakeoff.py --candidates > /tmp/claude-tfidf-candidates.tsv
-uv run python docslint/test_duplicates.py
+uv run docs/3-check/docslint/bakeoff.py --self-check > /tmp/claude-tfidf-bakeoff.json
+diff -u docs/3-check/pilot/tfidf-bakeoff.json /tmp/claude-tfidf-bakeoff.json
+uv run docs/3-check/docslint/bakeoff.py --candidates > /tmp/claude-tfidf-candidates.tsv
+uv run python docs/3-check/docslint/test_duplicates.py
 ```
 
 `uv` installs the script's isolated scikit-learn dependency on first run. Scoring
@@ -150,6 +150,6 @@ of approved editorial changes.
 
 [Machine-readable results](tfidf-bakeoff.json) contain all 15 configurations,
 per-case ranks and retrieval outcomes, package versions, and hashes of the corpus
-manifest and labels. [The script](../../docslint/bakeoff.py) reuses the existing
+manifest and labels. [The script](../docslint/bakeoff.py) reuses the existing
 corpus loader and extraction. The original checker, labels, results, and editorial
 reviews remain unchanged.

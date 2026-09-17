@@ -13,10 +13,12 @@ and developer-platform documentation sites are outside the exercise.
   [how-to template](2-standards/how-to-template.md), and
   [worked before/after page](2-standards/rewrite/README.md).
 - [Repeated-prose checker, results, and evaluation](3-check/README.md).
+- [Adoption draft](4-adoption/adoption.md), pending Ashley's voice revision.
+- [Duplicate-prose review workflow and pilot archive](3-check/README.md).
   The working prototype finds useful cases but does not meet its proposed
   precision or coverage targets for routine use.
-  The [TF-IDF bake-off](3-check/tfidf-bakeoff.md) tests candidate retrieval separately.
-  The [editorial judge pilot](3-check/judge-pilot.md) tests classification and
+  The [TF-IDF bake-off](3-check/pilot/tfidf-bakeoff.md) tests candidate retrieval separately.
+  The [editorial judge pilot](3-check/pilot/judge-pilot.md) tests classification and
   source-evidence validation on a small sample.
 - [Adoption draft](4-adoption/adoption.md), pending Ashley's voice revision.
 - [Repeated-prose checker, results, and evaluation](3-check/README.md).

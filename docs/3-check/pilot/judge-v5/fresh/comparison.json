@@ -1,0 +1,154 @@
+{
+  "scope": "Six purposefully selected, human-approved fresh pairs; full-span judgment evaluated separately from extraction and retrieval. Not whole-corpus accuracy or end-to-end results.",
+  "binary_agreement": {
+    "numerator": 5,
+    "denominator": 6
+  },
+  "classification_agreement": {
+    "numerator": 5,
+    "denominator": 6
+  },
+  "differences": [
+    {
+      "example_id": "fresh-mcpb-route-vs-builder",
+      "a": "ACTIONABLE_DUPLICATE",
+      "b": "RELATED_BUT_DISTINCT"
+    }
+  ],
+  "runs": {
+    "a": {
+      "abstentions": 0,
+      "conditional_recall": {
+        "denominator": 3,
+        "numerator": 3,
+        "value": 1.0
+      },
+      "counts": {
+        "FN": 0,
+        "FP": 0,
+        "TN": 3,
+        "TP": 3
+      },
+      "coverage": {
+        "denominator": 6,
+        "numerator": 6,
+        "value": 1.0
+      },
+      "outcomes": [
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "fresh-builder-testing-summary",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "fresh-external-link-allowlist",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "fresh-generic-auth-vs-m365-prereqs",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "fresh-mcpb-route-vs-builder",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "fresh-test-credentials-checklist",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "fresh-tunnel-key-revocation-branches",
+          "needs_review": false,
+          "outcome": "TN"
+        }
+      ],
+      "precision": {
+        "denominator": 3,
+        "numerator": 3,
+        "value": 1.0
+      },
+      "recall": {
+        "denominator": 3,
+        "numerator": 3,
+        "value": 1.0
+      }
+    },
+    "b": {
+      "abstentions": 0,
+      "conditional_recall": {
+        "denominator": 3,
+        "numerator": 2,
+        "value": 0.6666666666666666
+      },
+      "counts": {
+        "FN": 1,
+        "FP": 0,
+        "TN": 3,
+        "TP": 2
+      },
+      "coverage": {
+        "denominator": 6,
+        "numerator": 6,
+        "value": 1.0
+      },
+      "outcomes": [
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "fresh-builder-testing-summary",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "ACTIONABLE_DUPLICATE",
+          "example_id": "fresh-external-link-allowlist",
+          "needs_review": false,
+          "outcome": "TP"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "fresh-generic-auth-vs-m365-prereqs",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "RELATED_BUT_DISTINCT",
+          "example_id": "fresh-mcpb-route-vs-builder",
+          "needs_review": false,
+          "outcome": "FN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "fresh-test-credentials-checklist",
+          "needs_review": false,
+          "outcome": "TN"
+        },
+        {
+          "classification": "NECESSARY_REPETITION",
+          "example_id": "fresh-tunnel-key-revocation-branches",
+          "needs_review": false,
+          "outcome": "TN"
+        }
+      ],
+      "precision": {
+        "denominator": 2,
+        "numerator": 2,
+        "value": 1.0
+      },
+      "recall": {
+        "denominator": 3,
+        "numerator": 2,
+        "value": 0.6666666666666666
+      }
+    }
+  }
+}

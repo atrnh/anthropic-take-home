@@ -35,7 +35,7 @@ Two disagreements explain the current limit:
 Even a correct binary classification does not validate the proposed edit. For
 the permanent-slug duplicate, the judge recommends keeping the lifecycle
 explanation and removing or linking the listing-management copy. The
-[audit](../1-audit/audit-memo.md) proposes the opposite canonical home. The
+[audit](../../1-audit/audit-memo.md) proposes the opposite canonical home. The
 classification counts as a true positive; its consolidation direction still
 needs editorial correction. The judge was not given the audit's ownership
 decisions, so supplying that context would be part of evaluating such suggestions.
@@ -127,15 +127,15 @@ run. Findings remain proposals for an editor; they are never deletion commands.
 From the repository root:
 
 ```sh
-uv run docslint/test_judge_pilot.py
-uv run docslint/judge_pilot.py prepare --output-dir /tmp/claude-judge-pilot
-diff -u docs/3-check/judge-packet.json /tmp/claude-judge-pilot/judge-packet.json
-diff -u docs/3-check/judge-manifest.json /tmp/claude-judge-pilot/judge-manifest.json
-uv run docslint/judge_pilot.py evaluate \
-  --packet docs/3-check/judge-packet.json \
-  --manifest docs/3-check/judge-manifest.json \
-  --judgments docs/3-check/judge-decisions.json > /tmp/claude-judge-metrics.json
-diff -u docs/3-check/judge-metrics.json /tmp/claude-judge-metrics.json
+uv run docs/3-check/docslint/test_judge_pilot.py
+uv run docs/3-check/docslint/judge_pilot.py prepare --output-dir /tmp/claude-judge-pilot
+diff -u docs/3-check/pilot/judge-packet.json /tmp/claude-judge-pilot/judge-packet.json
+diff -u docs/3-check/pilot/judge-manifest.json /tmp/claude-judge-pilot/judge-manifest.json
+uv run docs/3-check/docslint/judge_pilot.py evaluate \
+  --packet docs/3-check/pilot/judge-packet.json \
+  --manifest docs/3-check/pilot/judge-manifest.json \
+  --judgments docs/3-check/pilot/judge-decisions.json > /tmp/claude-judge-metrics.json
+diff -u docs/3-check/pilot/judge-metrics.json /tmp/claude-judge-metrics.json
 ```
 
 Preparation uses the existing isolated scikit-learn dependency. The

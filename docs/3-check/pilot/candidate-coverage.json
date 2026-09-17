@@ -1,0 +1,772 @@
+{
+  "scope": "Coverage follow-up on familiar/adjudicated examples; adaptive tuning, not held-out accuracy. Judge is advisory; all selected pairs remain in the queue.",
+  "snapshot": {
+    "fetched_at": "2026-09-14T18:15:34.068550+00:00",
+    "manifest_sha256": "aacc5ca32cf977b56e6f4ed88cdfd20fcb87817cab10d6eceff6879c334a8690",
+    "page_count": 54
+  },
+  "runtime": {
+    "packages": {
+      "numpy": "2.5.3",
+      "scikit-learn": "1.7.2",
+      "scipy": "1.18.1"
+    },
+    "python": "3.13.14"
+  },
+  "settings": {
+    "include_ordered_lists": true,
+    "include_unordered_lists": true,
+    "judge_policy": "Advisory only; no judge verdict removes or approves a candidate",
+    "min_words": 10,
+    "ordered_list_chunks": "Contiguous same-indent items together; blank lines and code split chunks",
+    "pair_policy": "Either direction; self and zero-score pairs excluded",
+    "top_k": 20
+  },
+  "baseline": {
+    "passages": 980,
+    "candidate_pairs": 6755,
+    "familiar_positive_cases_retrieved": 6,
+    "familiar_positive_cases_total": 6,
+    "fresh_positive_cases_retrieved": 1,
+    "fresh_positive_cases_total": 3,
+    "artifacts": [
+      "judge-v5/retrieval-adjudicated.json",
+      "judge-v5/retrieval-fresh.json"
+    ]
+  },
+  "grouped_top10": {
+    "passages": 1027,
+    "candidate_pairs": 7108,
+    "coverage": [
+      {
+        "examples_sha256": "63413d0b34f657007624e0de77e656c9036c427ca32c50a1e9c2ec56744d0c7e",
+        "summary": {
+          "method": "tfidf_top_10",
+          "candidate_pairs": 7108,
+          "positive_cases_retrieved": 6,
+          "positive_cases_total": 6,
+          "eligible_positive_cases": 6,
+          "negative_cases_retrieved": 7,
+          "negative_cases_total": 10,
+          "retrieved_case_ids": [
+            "development-plugin-definition-overview-cowork",
+            "development-plugin-definition-overview-government",
+            "development-sales-plugin-example",
+            "development-government-unconnected-plugin-connectors",
+            "development-context-specific-install-procedures",
+            "development-marketplace-generic-versus-finance",
+            "development-member-uninstall-versus-admin-removal",
+            "evaluation-skill-definition-overview-government",
+            "evaluation-google-owner-enable-prerequisite",
+            "evaluation-drive-live-sync-faq",
+            "evaluation-permanent-directory-slug",
+            "evaluation-style-reference-versus-theming-procedure",
+            "evaluation-authentication-reference-versus-lazy-auth"
+          ]
+        },
+        "cases": [
+          {
+            "id": "development-plugin-definition-overview-cowork",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 8,
+            "example_candidate_id": "510e6218be0c13de3cf961624d17c8efd2d9abdf4c4dcc4e6266d990df6db6f2"
+          },
+          {
+            "id": "development-plugin-definition-overview-government",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 2,
+            "example_candidate_id": "bb490a53e3b828c6e483d09137072c42dd03e77760a3475025ef910fcb58b18b"
+          },
+          {
+            "id": "development-sales-plugin-example",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 1,
+            "example_candidate_id": "1745e3aa14f24a5946ca9fe5d34b649d86013ab3fe2165c857fea96f327bc20c"
+          },
+          {
+            "id": "development-government-unconnected-plugin-connectors",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 2,
+            "example_candidate_id": "051fa6b200fc5cc96270a075c474b58f9163dab5983f29f0baeb60a28d9edc5e"
+          },
+          {
+            "id": "development-context-specific-install-procedures",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 2,
+            "example_candidate_id": "4cd71040f48eacbc819e00f17cc5a23cb616c14dbc6e815d85cc632e1722a241"
+          },
+          {
+            "id": "development-marketplace-generic-versus-finance",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 7,
+            "example_candidate_id": "d41ffc42cc73ededc46435dee982396a01fd2d97da3e59c01289ed7e90847e63"
+          },
+          {
+            "id": "development-member-uninstall-versus-admin-removal",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 3,
+            "example_candidate_id": "a62a853864f90235a005eb6271a19e753466caa88863c7ffc73435821e05af3d"
+          },
+          {
+            "id": "development-conflicting-organization-management-claims",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": false,
+            "best_direction_rank": 70,
+            "example_candidate_id": null
+          },
+          {
+            "id": "evaluation-skill-definition-overview-government",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 1,
+            "example_candidate_id": "e743e6fa9d7fd28a798f5a797efb2313f9a8659ec954bb59972ed0b647a8f693"
+          },
+          {
+            "id": "evaluation-google-owner-enable-prerequisite",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 1,
+            "example_candidate_id": "6e2615cafe30a79fb26f0fe04d5fd0429983161830d39ca82e61c2c56eb098e8"
+          },
+          {
+            "id": "evaluation-drive-live-sync-faq",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 1,
+            "example_candidate_id": "67dcd72596970ea3a0fe4cd163ecf92ee24ccce733ecf3a2ea4671fe832d55d2"
+          },
+          {
+            "id": "evaluation-permanent-directory-slug",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 1,
+            "example_candidate_id": "dfa8d4250a2ea28a1527e38cd6f72f7fa49e823eca5db1b3d748705b572808c3"
+          },
+          {
+            "id": "evaluation-skill-loading-versus-m365-use",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": false,
+            "best_direction_rank": 91,
+            "example_candidate_id": null
+          },
+          {
+            "id": "evaluation-google-service-limitations",
+            "duplicate": false,
+            "eligible": false,
+            "retrieved": false,
+            "best_direction_rank": null,
+            "example_candidate_id": null
+          },
+          {
+            "id": "evaluation-style-reference-versus-theming-procedure",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 3,
+            "example_candidate_id": "0b96a60f022762c41583508dd9111051a362dea1c086c8ffac8f611ea8c88673"
+          },
+          {
+            "id": "evaluation-authentication-reference-versus-lazy-auth",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 7,
+            "example_candidate_id": "17a07c1c4236ec7e74812f217100fc59998c9d31a73f3b492bd6346cf6e68aac"
+          }
+        ]
+      },
+      {
+        "examples_sha256": "6b575924346195abbbfe87b6e0752e8799985319c8e713b189e3fb26e809d738",
+        "summary": {
+          "method": "tfidf_top_10",
+          "candidate_pairs": 7108,
+          "positive_cases_retrieved": 2,
+          "positive_cases_total": 3,
+          "eligible_positive_cases": 3,
+          "negative_cases_retrieved": 1,
+          "negative_cases_total": 3,
+          "retrieved_case_ids": [
+            "fresh-builder-testing-summary",
+            "fresh-external-link-allowlist",
+            "fresh-test-credentials-checklist"
+          ]
+        },
+        "cases": [
+          {
+            "id": "fresh-mcpb-route-vs-builder",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": false,
+            "best_direction_rank": 18,
+            "example_candidate_id": null
+          },
+          {
+            "id": "fresh-builder-testing-summary",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 2,
+            "example_candidate_id": "9da6d63df51e8bf8c3bc7473df2a832acd37efee6ec22125254eacba0f6c6113"
+          },
+          {
+            "id": "fresh-external-link-allowlist",
+            "duplicate": true,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 1,
+            "example_candidate_id": "5dabda3dcd93646d7e61e36e1a6c14bfbb415176d3615f4fa0e8b28b5d4848cb"
+          },
+          {
+            "id": "fresh-tunnel-key-revocation-branches",
+            "duplicate": false,
+            "eligible": false,
+            "retrieved": false,
+            "best_direction_rank": null,
+            "example_candidate_id": null
+          },
+          {
+            "id": "fresh-test-credentials-checklist",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": true,
+            "best_direction_rank": 1,
+            "example_candidate_id": "91b0e3e1d1cf2d3533638f1a543b8f94af79166bc2206197a4137655ca666ba3"
+          },
+          {
+            "id": "fresh-generic-auth-vs-m365-prereqs",
+            "duplicate": false,
+            "eligible": true,
+            "retrieved": false,
+            "best_direction_rank": 38,
+            "example_candidate_id": null
+          }
+        ]
+      }
+    ]
+  },
+  "grouped_top20": {
+    "passages": 1027,
+    "candidate_pairs": 13786,
+    "coverage": [
+      {
+        "cases": [
+          {
+            "best_direction_rank": 8,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "510e6218be0c13de3cf961624d17c8efd2d9abdf4c4dcc4e6266d990df6db6f2",
+            "id": "development-plugin-definition-overview-cowork",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 2,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "bb490a53e3b828c6e483d09137072c42dd03e77760a3475025ef910fcb58b18b",
+            "id": "development-plugin-definition-overview-government",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 1,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "1745e3aa14f24a5946ca9fe5d34b649d86013ab3fe2165c857fea96f327bc20c",
+            "id": "development-sales-plugin-example",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 2,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "051fa6b200fc5cc96270a075c474b58f9163dab5983f29f0baeb60a28d9edc5e",
+            "id": "development-government-unconnected-plugin-connectors",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 2,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "4cd71040f48eacbc819e00f17cc5a23cb616c14dbc6e815d85cc632e1722a241",
+            "id": "development-context-specific-install-procedures",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 7,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "d41ffc42cc73ededc46435dee982396a01fd2d97da3e59c01289ed7e90847e63",
+            "id": "development-marketplace-generic-versus-finance",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 3,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "a62a853864f90235a005eb6271a19e753466caa88863c7ffc73435821e05af3d",
+            "id": "development-member-uninstall-versus-admin-removal",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 70,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": null,
+            "id": "development-conflicting-organization-management-claims",
+            "retrieved": false
+          },
+          {
+            "best_direction_rank": 1,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "e743e6fa9d7fd28a798f5a797efb2313f9a8659ec954bb59972ed0b647a8f693",
+            "id": "evaluation-skill-definition-overview-government",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 1,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "6e2615cafe30a79fb26f0fe04d5fd0429983161830d39ca82e61c2c56eb098e8",
+            "id": "evaluation-google-owner-enable-prerequisite",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 1,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "67dcd72596970ea3a0fe4cd163ecf92ee24ccce733ecf3a2ea4671fe832d55d2",
+            "id": "evaluation-drive-live-sync-faq",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 1,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "dfa8d4250a2ea28a1527e38cd6f72f7fa49e823eca5db1b3d748705b572808c3",
+            "id": "evaluation-permanent-directory-slug",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 91,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": null,
+            "id": "evaluation-skill-loading-versus-m365-use",
+            "retrieved": false
+          },
+          {
+            "best_direction_rank": null,
+            "duplicate": false,
+            "eligible": false,
+            "example_candidate_id": null,
+            "id": "evaluation-google-service-limitations",
+            "retrieved": false
+          },
+          {
+            "best_direction_rank": 3,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "0b96a60f022762c41583508dd9111051a362dea1c086c8ffac8f611ea8c88673",
+            "id": "evaluation-style-reference-versus-theming-procedure",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 7,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "17a07c1c4236ec7e74812f217100fc59998c9d31a73f3b492bd6346cf6e68aac",
+            "id": "evaluation-authentication-reference-versus-lazy-auth",
+            "retrieved": true
+          }
+        ],
+        "examples_sha256": "63413d0b34f657007624e0de77e656c9036c427ca32c50a1e9c2ec56744d0c7e",
+        "summary": {
+          "candidate_pairs": 13786,
+          "eligible_positive_cases": 6,
+          "method": "tfidf_top_20",
+          "negative_cases_retrieved": 7,
+          "negative_cases_total": 10,
+          "positive_cases_retrieved": 6,
+          "positive_cases_total": 6,
+          "retrieved_case_ids": [
+            "development-plugin-definition-overview-cowork",
+            "development-plugin-definition-overview-government",
+            "development-sales-plugin-example",
+            "development-government-unconnected-plugin-connectors",
+            "development-context-specific-install-procedures",
+            "development-marketplace-generic-versus-finance",
+            "development-member-uninstall-versus-admin-removal",
+            "evaluation-skill-definition-overview-government",
+            "evaluation-google-owner-enable-prerequisite",
+            "evaluation-drive-live-sync-faq",
+            "evaluation-permanent-directory-slug",
+            "evaluation-style-reference-versus-theming-procedure",
+            "evaluation-authentication-reference-versus-lazy-auth"
+          ]
+        }
+      },
+      {
+        "cases": [
+          {
+            "best_direction_rank": 18,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "aa4d3504b82d30f940e671d12f408f0714213b02a457f90f9ef8440d1a107358",
+            "id": "fresh-mcpb-route-vs-builder",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 2,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "9da6d63df51e8bf8c3bc7473df2a832acd37efee6ec22125254eacba0f6c6113",
+            "id": "fresh-builder-testing-summary",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 1,
+            "duplicate": true,
+            "eligible": true,
+            "example_candidate_id": "5dabda3dcd93646d7e61e36e1a6c14bfbb415176d3615f4fa0e8b28b5d4848cb",
+            "id": "fresh-external-link-allowlist",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": null,
+            "duplicate": false,
+            "eligible": false,
+            "example_candidate_id": null,
+            "id": "fresh-tunnel-key-revocation-branches",
+            "retrieved": false
+          },
+          {
+            "best_direction_rank": 1,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": "91b0e3e1d1cf2d3533638f1a543b8f94af79166bc2206197a4137655ca666ba3",
+            "id": "fresh-test-credentials-checklist",
+            "retrieved": true
+          },
+          {
+            "best_direction_rank": 38,
+            "duplicate": false,
+            "eligible": true,
+            "example_candidate_id": null,
+            "id": "fresh-generic-auth-vs-m365-prereqs",
+            "retrieved": false
+          }
+        ],
+        "examples_sha256": "6b575924346195abbbfe87b6e0752e8799985319c8e713b189e3fb26e809d738",
+        "summary": {
+          "candidate_pairs": 13786,
+          "eligible_positive_cases": 3,
+          "method": "tfidf_top_20",
+          "negative_cases_retrieved": 1,
+          "negative_cases_total": 3,
+          "positive_cases_retrieved": 3,
+          "positive_cases_total": 3,
+          "retrieved_case_ids": [
+            "fresh-mcpb-route-vs-builder",
+            "fresh-builder-testing-summary",
+            "fresh-external-link-allowlist",
+            "fresh-test-credentials-checklist"
+          ]
+        }
+      }
+    ]
+  },
+  "retrieved_positive_evidence": [
+    {
+      "example_id": "development-plugin-definition-overview-cowork",
+      "candidate_id": "510e6218be0c13de3cf961624d17c8efd2d9abdf4c4dcc4e6266d990df6db6f2",
+      "score": 0.108800112642,
+      "left": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Install plugins\n\n> Add packaged skills, connectors, and agents to Cowork from the plugin marketplace or a file.\n\nA plugin is a package that extends what Claude can do in Cowork. Installing one can add skills, MCP connectors, subagents, slash commands, or hooks in a single step. Plugins come from the marketplace, from your organization, or from a file you upload.\n\nPlugins are available in Cowork and Code. They aren't used in Chat.\n\n## What a plugin can contain\n\nA plugin's manifest declares any combination of the following.\n\n| Component  | What it adds                                               |",
+        "end": 9,
+        "heading_context": [
+          "Install plugins"
+        ],
+        "path": "cowork/guide/plugins.md",
+        "start": 9,
+        "text": "A plugin is a package that extends what Claude can do in Cowork. Installing one can add skills, MCP connectors, subagents, slash commands, or hooks in a single step. Plugins come from the marketplace, from your organization, or from a file you upload."
+      },
+      "right": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Plugins overview\n\n> Extend Claude with reusable capability packages that bundle MCP connectors, skills, slash commands, and sub-agents\n\nPlugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit \u2014 turning Claude into a specialist tailored to your role, team, and company.\n\n## What plugins do\n\nPlugins let you define how you like work done, which tools and data to pull from, how to handle critical workflows, and what slash commands to expose so your team gets consistent outcomes. Every component is file-based, so plugins are easy to build, edit, and share.\n\nAs your team builds and shares plugins, Claude becomes a cross-functional expert. Best practices get baked into every interaction, so leaders and admins can spend less time enforcing processes and more time improving them.\n\n## Plugin directory",
+        "end": 9,
+        "heading_context": [
+          "Plugins overview"
+        ],
+        "path": "plugins/overview.md",
+        "start": 9,
+        "text": "Plugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit \u2014 turning Claude into a specialist tailored to your role, team, and company."
+      }
+    },
+    {
+      "example_id": "development-plugin-definition-overview-government",
+      "candidate_id": "bb490a53e3b828c6e483d09137072c42dd03e77760a3475025ef910fcb58b18b",
+      "score": 0.185664150265,
+      "left": {
+        "context_end": 19,
+        "context_start": 3,
+        "context_text": "> Use this file to discover all available pages before exploring further.\n\n# Plugins in Claude Desktop\n\n> Find, install, create, and remove plugins in Claude Desktop for Claude for Government, and understand what plugins add in this deployment.\n\n> **Who this is for:** Anyone who uses Claude Desktop in Claude for Government and wants to find, install, or create plugins.\n\nA plugin is a package that adds capabilities to Claude in a single step, such as skills, slash commands, sub-agents, and hooks. Plugins work in Cowork and in Code. See the [Plugins overview](/docs/plugins/overview) for more on what a plugin can contain.\n\n## Where plugins come from\n\nIn Claude for Government, plugins reach you in four ways:\n\n* Your administrators add plugins for your organization, and some of them install automatically.\n* You upload a plugin file you have.\n* You ask Claude to create a plugin with you.",
+        "end": 11,
+        "heading_context": [
+          "Plugins in Claude Desktop"
+        ],
+        "path": "government/desktop/plugins.md",
+        "start": 11,
+        "text": "A plugin is a package that adds capabilities to Claude in a single step, such as skills, slash commands, sub-agents, and hooks. Plugins work in Cowork and in Code. See the [Plugins overview](/docs/plugins/overview) for more on what a plugin can contain."
+      },
+      "right": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Plugins overview\n\n> Extend Claude with reusable capability packages that bundle MCP connectors, skills, slash commands, and sub-agents\n\nPlugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit \u2014 turning Claude into a specialist tailored to your role, team, and company.\n\n## What plugins do\n\nPlugins let you define how you like work done, which tools and data to pull from, how to handle critical workflows, and what slash commands to expose so your team gets consistent outcomes. Every component is file-based, so plugins are easy to build, edit, and share.\n\nAs your team builds and shares plugins, Claude becomes a cross-functional expert. Best practices get baked into every interaction, so leaders and admins can spend less time enforcing processes and more time improving them.\n\n## Plugin directory",
+        "end": 9,
+        "heading_context": [
+          "Plugins overview"
+        ],
+        "path": "plugins/overview.md",
+        "start": 9,
+        "text": "Plugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit \u2014 turning Claude into a specialist tailored to your role, team, and company."
+      }
+    },
+    {
+      "example_id": "development-sales-plugin-example",
+      "candidate_id": "1745e3aa14f24a5946ca9fe5d34b649d86013ab3fe2165c857fea96f327bc20c",
+      "score": 0.334049338353,
+      "left": {
+        "context_end": 57,
+        "context_start": 41,
+        "context_text": "<Note>\n  For technical details on plugin structure, manifests, and configuration, see the [Claude Code plugins reference](https://code.claude.com/docs/en/plugins-reference).\n</Note>\n\n## Plugins in Cowork\n\nPlugins are fully supported in [Cowork](https://support.claude.com/en/articles/13345190-getting-started-with-cowork), Anthropic's agentic workspace for complex, multi-step knowledge work. In Cowork, Claude runs inside an isolated virtual machine environment, executes tasks in parallel workstreams, and writes outputs directly to your file system \u2014 and plugins extend all of that capability.\n\nA sales plugin, for example, could connect Claude to your CRM and knowledge base, teach it your sales process, and give you slash commands for everything from prospect research to call follow-ups. You define what goes in the plugin once, and Claude pulls from that context whenever it's relevant.\n\n## How plugins compose capabilities\n\n| Plugin component   | What it adds                                                      | Example                                                                         |\n| ------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- |\n| **Skills**         | Specialized instructions Claude follows when relevant tasks arise | A \"brand voice\" skill that activates when drafting external communications      |\n| **MCP connectors** | Access to external tools and data                                 | A connector to a CRM that lets Claude read and update deal records              |\n| **Slash commands** | Explicit, user-triggered workflows                                | `/sales:prospect-research` to kick off a structured research workflow           |",
+        "end": 49,
+        "heading_context": [
+          "Plugins overview",
+          "Plugins in Cowork"
+        ],
+        "path": "plugins/overview.md",
+        "start": 49,
+        "text": "A sales plugin, for example, could connect Claude to your CRM and knowledge base, teach it your sales process, and give you slash commands for everything from prospect research to call follow-ups. You define what goes in the plugin once, and Claude pulls from that context whenever it's relevant."
+      },
+      "right": {
+        "context_end": 41,
+        "context_start": 25,
+        "context_text": "<Warning>\n  Exercise caution when installing community plugins. Always review a plugin's permissions, connected services, and data access before use.\n</Warning>\n\n## What makes a good plugin\n\nThe best plugins bundle related capabilities together into a coherent package that solves a specific job function or workflow end-to-end. Rather than exposing a single tool, a good plugin combines skills, connectors, slash commands, and sub-agents so Claude has everything it needs to handle a category of work.\n\nFor example, a sales plugin might bundle a CRM connector, a skill that teaches Claude your sales process, slash commands for common tasks like prospect research and call follow-ups, and a sub-agent that handles competitive analysis in parallel. Together, these components make Claude a specialist \u2014 individually, they're just building blocks.\n\nPlugins can include any combination of:\n\n* **Skills** \u2014 Task-specific instructions that Claude activates dynamically based on context\n* **MCP connectors** \u2014 Connections to external tools and data sources. Plugins can contain any MCP, including remote MCPs, local MCPs, and MCPBs. The MCP configuration within a plugin is highly customizable.\n* **Slash commands** \u2014 User-invoked commands for triggering specific workflows\n* **Sub-agents** \u2014 Custom agent definitions for delegating complex work\n",
+        "end": 33,
+        "heading_context": [
+          "Submitting your plugin",
+          "What makes a good plugin"
+        ],
+        "path": "plugins/submit.md",
+        "start": 33,
+        "text": "For example, a sales plugin might bundle a CRM connector, a skill that teaches Claude your sales process, slash commands for common tasks like prospect research and call follow-ups, and a sub-agent that handles competitive analysis in parallel. Together, these components make Claude a specialist \u2014 individually, they're just building blocks."
+      }
+    },
+    {
+      "example_id": "development-marketplace-generic-versus-finance",
+      "candidate_id": "d41ffc42cc73ededc46435dee982396a01fd2d97da3e59c01289ed7e90847e63",
+      "score": 0.074277896554,
+      "left": {
+        "context_end": 74,
+        "context_start": 58,
+        "context_text": "  </Step>\n\n  <Step title=\"Install plugins from it\">\n    Plugins defined in the repository appear alongside plugins from other\n    marketplaces. Install them the same way.\n  </Step>\n</Steps>\n\nClick **Update** on a marketplace to pull the latest plugins from its repository.\n\nFor administrator-managed marketplaces, see [MCP, plugins, skills, and hooks](/docs/cowork/3p/extensions) in the deployment guide.\n\n## Limits\n\nThe following are the default limits for plugin packages and marketplaces.\n\n| Limit                              | Value  |",
+        "end": 66,
+        "heading_context": [
+          "Install plugins",
+          "Use a Git repository as a marketplace"
+        ],
+        "path": "cowork/guide/plugins.md",
+        "start": 66,
+        "text": "Click **Update** on a marketplace to pull the latest plugins from its repository."
+      },
+      "right": {
+        "context_end": 63,
+        "context_start": 46,
+        "context_text": "\n  <Step title=\"Add the marketplace\">\n    Select \"Personal\", click the \"+\" button, then select \"Add\n    marketplace from GitHub\". Enter the repository URL:\n    `https://github.com/anthropics/financial-services`\n  </Step>\n</Steps>\n\nOnce added, you'll see the available financial services plugins in your\nmarketplace.\n\n## Install plugins\n\n<Steps>\n  <Step title=\"Browse the marketplace\">\n    From your plugin marketplace, browse the available financial\n    services plugins.\n  </Step>",
+        "end": 55,
+        "heading_context": [
+          "Install financial services plugins for Cowork",
+          "Add the marketplace"
+        ],
+        "path": "office-agents/fsi-plugins.md",
+        "start": 54,
+        "text": "Once added, you'll see the available financial services plugins in your\nmarketplace."
+      }
+    },
+    {
+      "example_id": "evaluation-skill-definition-overview-government",
+      "candidate_id": "e743e6fa9d7fd28a798f5a797efb2313f9a8659ec954bb59972ed0b647a8f693",
+      "score": 0.207110769709,
+      "left": {
+        "context_end": 19,
+        "context_start": 3,
+        "context_text": "> Use this file to discover all available pages before exploring further.\n\n# Skills in Claude Desktop\n\n> What skills are in Claude for Government, where they come from, how to create and manage your own, and how administrators distribute skills to members.\n\n> **Who this is for:** Anyone who uses Claude Desktop in Claude for Government. The last two sections are for administrators who distribute skills to members.\n\nA skill is a set of instructions, with optional scripts and resources, that Claude loads when a task matches it, so you can teach Claude a workflow once and reuse it. See the [Skills overview](/docs/skills/overview) for how skills work.\n\n## Where skills come from\n\nIn Claude for Government, your skills come from three places:\n\n* Skills you create yourself, which are stored on your device.\n* Skills bundled in plugins your administrators deliver, which arrive with the plugin as described in [Plugins in Claude Desktop](/docs/government/desktop/plugins).\n* Skills that ship with Claude Desktop for common document tasks, such as working with spreadsheets and presentations, which Claude loads automatically when a task calls for them.",
+        "end": 11,
+        "heading_context": [
+          "Skills in Claude Desktop"
+        ],
+        "path": "government/desktop/skills.md",
+        "start": 11,
+        "text": "A skill is a set of instructions, with optional scripts and resources, that Claude loads when a task matches it, so you can teach Claude a workflow once and reuse it. See the [Skills overview](/docs/skills/overview) for how skills work."
+      },
+      "right": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Skills overview\n\n> Extend Claude's capabilities with specialized instructions and workflows\n\nSkills are directories containing instructions, scripts, and resources that Claude dynamically loads to handle specific tasks. Each skill has a `SKILL.md` file that defines when it should be activated and what instructions Claude should follow.\n\n## Availability\n\nSkills are available for users on Pro, Max, Team, and Enterprise plans. The Skills feature requires code execution to be enabled.\n\n## How skills work\n\nSkills use progressive disclosure to manage context efficiently:",
+        "end": 9,
+        "heading_context": [
+          "Skills overview"
+        ],
+        "path": "skills/overview.md",
+        "start": 9,
+        "text": "Skills are directories containing instructions, scripts, and resources that Claude dynamically loads to handle specific tasks. Each skill has a `SKILL.md` file that defines when it should be activated and what instructions Claude should follow."
+      }
+    },
+    {
+      "example_id": "evaluation-permanent-directory-slug",
+      "candidate_id": "dfa8d4250a2ea28a1527e38cd6f72f7fa49e823eca5db1b3d748705b572808c3",
+      "score": 0.463312256484,
+      "left": {
+        "context_end": 31,
+        "context_start": 15,
+        "context_text": "Plugin updates are pushed via your GitHub repo. CI mirrors changes to the public marketplace and runs automated screening on each update.\n\n## Update your listing\n\nEdit your description, categories, icon, and other listing metadata from the submissions dashboard at [Organization settings > Directory](https://claude.ai/admin-settings/directory/submissions) in Claude.ai. See [Managing your listing](/docs/connectors/building/managing-your-listing) for what you can edit directly and which changes require review.\n\n## Slugs are permanent\n\nYour directory slug is fixed after publication. It determines your connector's permanent listing URL:\n\n```text theme={null}\nhttps://claude.ai/directory/connectors/SLUG\n```\n\nShare this URL from your own documentation or a \"Connect to Claude\" button to send users directly to your listing. Display names can change via the dashboard; the URL slug cannot.\n\n## Delist your connector",
+        "end": 23,
+        "heading_context": [
+          "Manage your listing after publishing",
+          "Slugs are permanent"
+        ],
+        "path": "connectors/building/after-publishing.md",
+        "start": 23,
+        "text": "Your directory slug is fixed after publication. It determines your connector's permanent listing URL:"
+      },
+      "right": {
+        "context_end": 90,
+        "context_start": 80,
+        "context_text": "Open your submission's detail page to edit the listing. You can change directly:\n\n* **Listing metadata**: tagline, description, categories, documentation and privacy policy links, support contact, and icon\n* **Company details**: company name and website\n* **Display name**: editable, but changing the name of a published server affects existing users and requires re-review\n\nSave your edits as you go, then submit them for review. Submitted changes show as pending until a reviewer approves them, and you can discard pending changes before they're approved.\n\nThe URL slug is locked: it's permanent after publication, since it determines your listing URL.\n\nFor other edits or escalations, email `mcp-review@anthropic.com`.",
+        "end": 88,
+        "heading_context": [
+          "Managing your directory listing",
+          "Edit your listing"
+        ],
+        "path": "connectors/building/managing-your-listing.md",
+        "start": 88,
+        "text": "The URL slug is locked: it's permanent after publication, since it determines your listing URL."
+      }
+    },
+    {
+      "example_id": "fresh-mcpb-route-vs-builder",
+      "candidate_id": "aa4d3504b82d30f940e671d12f408f0714213b02a457f90f9ef8440d1a107358",
+      "score": 0.048830535884,
+      "left": {
+        "context_end": 25,
+        "context_start": 9,
+        "context_text": "<Note>\n  MCPB is the secondary distribution path. Remote MCP servers are recommended for directory listing\u2014see [what to build](/docs/connectors/building/what-to-build).\n</Note>\n\nThis guide covers building an MCP Bundle (`.mcpb`) for internal use, private distribution, or as a foundation for [submission to the Connectors Directory](/docs/connectors/building/submission).\n\n## What is an MCPB?\n\nAn `.mcpb` file is a zip archive containing a local MCP server and a `manifest.json`. It enables single-click installation in Claude Desktop, similar to a browser extension.\n\nKey characteristics:\n\n* Runs locally on the user's machine\n* Communicates via stdio transport\n* Bundles all dependencies\n* Works offline\n* No OAuth required",
+        "end": 17,
+        "heading_context": [
+          "Build a desktop extension with MCPB",
+          "What is an MCPB?"
+        ],
+        "path": "connectors/building/mcpb.md",
+        "start": 17,
+        "text": "An `.mcpb` file is a zip archive containing a local MCP server and a `manifest.json`. It enables single-click installation in Claude Desktop, similar to a browser extension."
+      },
+      "right": {
+        "context_end": 34,
+        "context_start": 18,
+        "context_text": "\n* Local tool access without internet dependency\n* Enhanced security for sensitive operations\n* Custom integrations for internal tools\n* Enterprise deployment capabilities\n\n## MCPB (MCP Bundles)\n\nMCPB is Anthropic's utility for building and deploying desktop extensions:\n\n* Package MCP servers for distribution\n* Handle cross-platform compatibility\n* Manage dependencies\n* Support enterprise deployment\n\n### Key features\n",
+        "end": 26,
+        "heading_context": [
+          "Desktop extensions",
+          "MCPB (MCP Bundles)"
+        ],
+        "path": "connectors/custom/desktop-extensions.md",
+        "start": 26,
+        "text": "MCPB is Anthropic's utility for building and deploying desktop extensions:"
+      }
+    },
+    {
+      "example_id": "fresh-builder-testing-summary",
+      "candidate_id": "9da6d63df51e8bf8c3bc7473df2a832acd37efee6ec22125254eacba0f6c6113",
+      "score": 0.13476370857,
+      "left": {
+        "context_end": 78,
+        "context_start": 60,
+        "context_text": "| Claude.ai/Desktop max tool result size | \\~150,000 characters                                     |\n| Claude Code max tool result size       | 25,000 tokens (configurable via `MAX_MCP_OUTPUT_TOKENS`) |\n| Claude Code timeout                    | Configurable via `MCP_TOOL_TIMEOUT`                      |\n| Claude.ai/Desktop tool call timeout    | 240 seconds (4 minutes) per tool call                    |\n| Transport protocol                     | Streamable HTTP (legacy HTTP+SSE being deprecated)       |\n\n## Testing your server\n\n1. Add directly to Claude via **Customize > Connectors**\n2. Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to validate auth flows\n3. Add to Claude Code with `claude mcp add` and check `/mcp` for status. See the [Claude Code MCP quickstart](https://code.claude.com/docs/en/mcp-quickstart).\n\n## Related topics\n\n<Columns cols={2}>\n  <Card title=\"MCP Overview\" icon=\"plug\" href=\"/docs/connectors/building/mcp\">\n    Understanding the Model Context Protocol.\n  </Card>\n",
+        "end": 70,
+        "heading_context": [
+          "Building custom connectors",
+          "Testing your server"
+        ],
+        "path": "connectors/building/index.md",
+        "start": 68,
+        "text": "1. Add directly to Claude via **Customize > Connectors**\n2. Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to validate auth flows\n3. Add to Claude Code with `claude mcp add` and check `/mcp` for status. See the [Claude Code MCP quickstart](https://code.claude.com/docs/en/mcp-quickstart)."
+      },
+      "right": {
+        "context_end": 33,
+        "context_start": 17,
+        "context_text": "To test a server running on your machine, expose it as a public URL with a tunnel such as [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) or `ngrok`, then add the tunnel URL as a custom connector. This is the recommended pattern for iterating on MCP Apps as well.\n\n<Warning>\n  A tunnel exposes your local server to the public internet. Keep authentication enabled on your server while tunneling, and shut the tunnel down when you're done testing.\n</Warning>\n\n## Validate with MCP Inspector\n\nUse the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) to verify protocol compliance, exercise your auth flow, and inspect tool schemas before connecting to Claude.\n\n## Detect Claude as the client\n\nClaude identifies itself in the MCP `initialize` handshake via `clientInfo`, but the exact value depends on the surface and the request path. You may see `\"name\": \"claude-ai\"`, `\"name\": \"Anthropic\"` (sometimes with a service suffix), or `\"name\": \"claude-code\"`:\n\n```json theme={null}\n{ \"clientInfo\": { \"name\": \"Anthropic\", \"version\": \"1.0.0\" } }\n```",
+        "end": 25,
+        "heading_context": [
+          "Testing your connector",
+          "Validate with MCP Inspector"
+        ],
+        "path": "connectors/building/testing.md",
+        "start": 25,
+        "text": "Use the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) to verify protocol compliance, exercise your auth flow, and inspect tool schemas before connecting to Claude."
+      }
+    },
+    {
+      "example_id": "fresh-external-link-allowlist",
+      "candidate_id": "5dabda3dcd93646d7e61e36e1a6c14bfbb415176d3615f4fa0e8b28b5d4848cb",
+      "score": 0.242052748723,
+      "left": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Opening external links from MCP Apps\n\n> How Claude handles ui/open-link requests, and how directory connectors can allowlist destinations to skip the confirmation modal\n\nWhen your MCP App sends a `ui/open-link` request, Claude shows an \"Open external link\" confirmation modal before navigating. This protects users from being silently redirected by an embedded app.\n\nDirectory connectors can declare a set of trusted destinations that open immediately without the modal. Custom connectors and locally configured servers always show the modal.\n\n## Default behavior\n\nA `ui/open-link` request displays a confirmation modal showing the destination URL. The link opens in a new tab when the user confirms; the request resolves as cancelled if they dismiss the modal.\n\n## Allowlisting link destinations",
+        "end": 9,
+        "heading_context": [
+          "Opening external links from MCP Apps"
+        ],
+        "path": "connectors/building/mcp-apps/external-links.md",
+        "start": 9,
+        "text": "When your MCP App sends a `ui/open-link` request, Claude shows an \"Open external link\" confirmation modal before navigating. This protects users from being silently redirected by an embedded app."
+      },
+      "right": {
+        "context_end": 83,
+        "context_start": 67,
+        "context_text": "* Contact information\n\n<Warning>\n  Missing or incomplete privacy policies result in immediate rejection.\n</Warning>\n\n## Allowed link URIs\n\nIf your connector uses the `ui/open-link` capability to open URLs in the user's browser or native apps, provide the list of link targets your server will request. Claude uses this list to suppress the \"Open external link\" confirmation prompt for destinations you've declared. Links to any other destination still work\u2014users are simply asked to confirm before the link opens.\n\nProvide each entry in one of two forms:\n\n* **HTTPS origin** \u2014 `https://example.com`. Only the scheme and hostname are matched; paths, ports, and query strings are ignored. Subdomains are not implied\u2014list each one (`https://app.example.com`, `https://docs.example.com`).\n* **Custom URI scheme** \u2014 `myapp:` for deep links into a native app you own (for example, `spotify:` or `notion:`). Only the scheme is matched.\n\nEvery origin and scheme you list **must be owned by you** (the submitting organization). You may not list third-party domains or URI schemes registered to apps you don't publish. Entries you don't own will be removed during review.\n",
+        "end": 75,
+        "heading_context": [
+          "Submitting to the Connectors Directory",
+          "Allowed link URIs"
+        ],
+        "path": "connectors/building/submission.md",
+        "start": 75,
+        "text": "If your connector uses the `ui/open-link` capability to open URLs in the user's browser or native apps, provide the list of link targets your server will request. Claude uses this list to suppress the \"Open external link\" confirmation prompt for destinations you've declared. Links to any other destination still work\u2014users are simply asked to confirm before the link opens."
+      }
+    }
+  ]
+}

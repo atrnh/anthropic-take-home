@@ -1,0 +1,177 @@
+{
+  "cases": [
+    {
+      "id": "3a35db210f9eb6573835822d660fafb28e0a51e5b7ce2b8adb7888e9102f202b",
+      "left": {
+        "context_end": 104,
+        "context_start": 88,
+        "context_text": "          --namespace mcp-tunnel --create-namespace \\\n          -f values.yaml \\\n          --set api.token=\"$API_TOKEN\"\n        ```\n\n        The setup component runs as a pre-install hook, so `helm install` blocks until the tunnel is created, the CA is registered, and the credentials are stored in the `mcp-tunnel` Secret. If the install fails with a hook error, see [Troubleshooting](/docs/connectors/mcp-tunnels/troubleshooting#helm-install-fails-with-a-hook-error).\n\n        <Warning>\n          Revoke the Tunnels API key in **Organization settings > Tunnels > Tunnels API** as soon as the install completes. Helm records `--set` values in its release history Secrets, and Kubernetes Secrets are not encrypted at rest by default, so the key remains recoverable from the cluster until you revoke it.\n        </Warning>\n      </Step>\n\n      <Step title=\"Read the tunnel domain\">\n        You need the tunnel domain to add connectors later.\n\n        ```bash theme={null}\n        kubectl -n mcp-tunnel get secret mcp-tunnel \\",
+        "end": 96,
+        "heading_context": [
+          "Set up an MCP tunnel",
+          "Deploy the tunnel stack"
+        ],
+        "path": "connectors/mcp-tunnels/setup.md",
+        "start": 96,
+        "text": "          Revoke the Tunnels API key in **Organization settings > Tunnels > Tunnels API** as soon as the install completes. Helm records `--set` values in its release history Secrets, and Kubernetes Secrets are not encrypted at rest by default, so the key remains recoverable from the cluster until you revoke it."
+      },
+      "right": {
+        "context_end": 224,
+        "context_start": 208,
+        "context_text": "        Read the tunnel domain and keep it for later steps.\n\n        ```bash theme={null}\n        export TUNNEL_DOMAIN=$(sudo cat data/tunnel-domain)\n        echo \"$TUNNEL_DOMAIN\"\n        ```\n\n        <Warning>\n          Revoke the Tunnels API key in **Organization settings > Tunnels > Tunnels API** before continuing, and run `unset API_TOKEN`. The stack does not need the key at runtime.\n        </Warning>\n      </Step>\n\n      <Step title=\"Write the proxy config\">\n        `tunnel_domain` is required so the proxy can strip the domain from incoming hostnames and look up the remaining subdomain in `routes`. `routes` is a map, not a list.\n\n        ```bash theme={null}\n        cat > config/mcp-proxy.yaml <<EOF",
+        "end": 216,
+        "heading_context": [
+          "Set up an MCP tunnel",
+          "Deploy the tunnel stack"
+        ],
+        "path": "connectors/mcp-tunnels/setup.md",
+        "start": 216,
+        "text": "          Revoke the Tunnels API key in **Organization settings > Tunnels > Tunnels API** before continuing, and run `unset API_TOKEN`. The stack does not need the key at runtime."
+      }
+    },
+    {
+      "id": "0afe6ea54a953480af722372be851c29c02490c08c860dfcfa73a03632b8e140",
+      "left": {
+        "context_end": 78,
+        "context_start": 58,
+        "context_text": "| Constraint                             | Limit                                                    |\n| -------------------------------------- | -------------------------------------------------------- |\n| Claude.ai/Desktop max tool result size | \\~150,000 characters                                     |\n| Claude Code max tool result size       | 25,000 tokens (configurable via `MAX_MCP_OUTPUT_TOKENS`) |\n| Claude Code timeout                    | Configurable via `MCP_TOOL_TIMEOUT`                      |\n| Claude.ai/Desktop tool call timeout    | 240 seconds (4 minutes) per tool call                    |\n| Transport protocol                     | Streamable HTTP (legacy HTTP+SSE being deprecated)       |\n\n## Testing your server\n\n1. Add directly to Claude via **Customize > Connectors**\n2. Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to validate auth flows\n3. Add to Claude Code with `claude mcp add` and check `/mcp` for status. See the [Claude Code MCP quickstart](https://code.claude.com/docs/en/mcp-quickstart).\n\n## Related topics\n\n<Columns cols={2}>\n  <Card title=\"MCP Overview\" icon=\"plug\" href=\"/docs/connectors/building/mcp\">\n    Understanding the Model Context Protocol.\n  </Card>\n",
+        "end": 70,
+        "heading_context": [
+          "Building custom connectors",
+          "Technical specifications"
+        ],
+        "path": "connectors/building/index.md",
+        "start": 66,
+        "text": "## Testing your server\n\n1. Add directly to Claude via **Customize > Connectors**\n2. Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to validate auth flows\n3. Add to Claude Code with `claude mcp add` and check `/mcp` for status. See the [Claude Code MCP quickstart](https://code.claude.com/docs/en/mcp-quickstart)."
+      },
+      "right": {
+        "context_end": 33,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Testing your connector\n\n> Test your MCP server against Claude before submitting to the directory\n\nTest your server against the real Claude client before submitting. There is no separate staging environment—you test in production using a custom connector.\n\n## Test as a custom connector\n\nAny Claude account (Free, Pro, Max, Team, or Enterprise) can add a custom connector. Go to **Customize > Connectors**, select **Add custom connector**, and enter your server's URL. Custom connectors use the exact same runtime as directory connectors, so what works here will work after publication.\n\n## Test a local server\n\nTo test a server running on your machine, expose it as a public URL with a tunnel such as [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) or `ngrok`, then add the tunnel URL as a custom connector. This is the recommended pattern for iterating on MCP Apps as well.\n\n<Warning>\n  A tunnel exposes your local server to the public internet. Keep authentication enabled on your server while tunneling, and shut the tunnel down when you're done testing.\n</Warning>\n\n## Validate with MCP Inspector\n\nUse the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) to verify protocol compliance, exercise your auth flow, and inspect tool schemas before connecting to Claude.\n\n## Detect Claude as the client\n\nClaude identifies itself in the MCP `initialize` handshake via `clientInfo`, but the exact value depends on the surface and the request path. You may see `\"name\": \"claude-ai\"`, `\"name\": \"Anthropic\"` (sometimes with a service suffix), or `\"name\": \"claude-code\"`:\n\n```json theme={null}\n{ \"clientInfo\": { \"name\": \"Anthropic\", \"version\": \"1.0.0\" } }\n```",
+        "end": 25,
+        "heading_context": [
+          "Testing your connector"
+        ],
+        "path": "connectors/building/testing.md",
+        "start": 9,
+        "text": "Test your server against the real Claude client before submitting. There is no separate staging environment—you test in production using a custom connector.\n\n## Test as a custom connector\n\nAny Claude account (Free, Pro, Max, Team, or Enterprise) can add a custom connector. Go to **Customize > Connectors**, select **Add custom connector**, and enter your server's URL. Custom connectors use the exact same runtime as directory connectors, so what works here will work after publication.\n\n## Test a local server\n\nTo test a server running on your machine, expose it as a public URL with a tunnel such as [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) or `ngrok`, then add the tunnel URL as a custom connector. This is the recommended pattern for iterating on MCP Apps as well.\n\n<Warning>\n  A tunnel exposes your local server to the public internet. Keep authentication enabled on your server while tunneling, and shut the tunnel down when you're done testing.\n</Warning>\n\n## Validate with MCP Inspector\n\nUse the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) to verify protocol compliance, exercise your auth flow, and inspect tool schemas before connecting to Claude."
+      }
+    },
+    {
+      "id": "9d2358731a488716ebf1fe50cd0ed4c37375d4d72a2a7d9fb6cffdf4c1c20d11",
+      "left": {
+        "context_end": 46,
+        "context_start": 16,
+        "context_text": "\nDesktop extensions are local MCP servers that run on user devices, providing:\n\n* Local tool access without internet dependency\n* Enhanced security for sensitive operations\n* Custom integrations for internal tools\n* Enterprise deployment capabilities\n\n## MCPB (MCP Bundles)\n\nMCPB is Anthropic's utility for building and deploying desktop extensions:\n\n* Package MCP servers for distribution\n* Handle cross-platform compatibility\n* Manage dependencies\n* Support enterprise deployment\n\n### Key features\n\n* **Bundling**: Package your MCP server with all dependencies\n* **Distribution**: Deploy to users via your organization's channels\n* **Updates**: Manage version updates centrally\n* **Security**: Sign and verify extensions\n\n## When to use desktop vs remote\n\n| Use Case                    | Recommended       |\n| --------------------------- | ----------------- |\n| Access to local files/tools | Desktop Extension |\n| Internet-hosted services    | Remote MCP        |\n| Sensitive enterprise data   | Desktop Extension |",
+        "end": 38,
+        "heading_context": [
+          "Desktop extensions",
+          "What are desktop extensions?"
+        ],
+        "path": "connectors/custom/desktop-extensions.md",
+        "start": 24,
+        "text": "## MCPB (MCP Bundles)\n\nMCPB is Anthropic's utility for building and deploying desktop extensions:\n\n* Package MCP servers for distribution\n* Handle cross-platform compatibility\n* Manage dependencies\n* Support enterprise deployment\n\n### Key features\n\n* **Bundling**: Package your MCP server with all dependencies\n* **Distribution**: Deploy to users via your organization's channels\n* **Updates**: Manage version updates centrally\n* **Security**: Sign and verify extensions"
+      },
+      "right": {
+        "context_end": 33,
+        "context_start": 7,
+        "context_text": "> Package a local MCP server as a single-click .mcpb install for Claude Desktop\n\n<Note>\n  MCPB is the secondary distribution path. Remote MCP servers are recommended for directory listing—see [what to build](/docs/connectors/building/what-to-build).\n</Note>\n\nThis guide covers building an MCP Bundle (`.mcpb`) for internal use, private distribution, or as a foundation for [submission to the Connectors Directory](/docs/connectors/building/submission).\n\n## What is an MCPB?\n\nAn `.mcpb` file is a zip archive containing a local MCP server and a `manifest.json`. It enables single-click installation in Claude Desktop, similar to a browser extension.\n\nKey characteristics:\n\n* Runs locally on the user's machine\n* Communicates via stdio transport\n* Bundles all dependencies\n* Works offline\n* No OAuth required\n\nSee the [MCPB repository](https://github.com/modelcontextprotocol/mcpb) for the complete specification and the [Desktop Extensions blog post](https://www.anthropic.com/engineering/desktop-extensions) for an architecture overview.\n\n## Local (MCPB) vs remote: which to build\n\n| Choose MCPB when you need                                                                    | Choose a remote connector when you need                        |\n| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |\n| Access to systems behind your firewall (JIRA, Confluence, internal wikis, private databases) | Cloud services and public APIs with centralized infrastructure |",
+        "end": 25,
+        "heading_context": [
+          "Build a desktop extension with MCPB"
+        ],
+        "path": "connectors/building/mcpb.md",
+        "start": 15,
+        "text": "## What is an MCPB?\n\nAn `.mcpb` file is a zip archive containing a local MCP server and a `manifest.json`. It enables single-click installation in Claude Desktop, similar to a browser extension.\n\nKey characteristics:\n\n* Runs locally on the user's machine\n* Communicates via stdio transport\n* Bundles all dependencies\n* Works offline\n* No OAuth required"
+      }
+    },
+    {
+      "id": "493374b5b74ee3a66266483a5d5d084d18cb60c0d9cb49a240e60c43b0eb4d38",
+      "left": {
+        "context_end": 93,
+        "context_start": 65,
+        "context_text": "* Third-party sharing\n* Data retention\n* Contact information\n\n<Warning>\n  Missing or incomplete privacy policies result in immediate rejection.\n</Warning>\n\n## Allowed link URIs\n\nIf your connector uses the `ui/open-link` capability to open URLs in the user's browser or native apps, provide the list of link targets your server will request. Claude uses this list to suppress the \"Open external link\" confirmation prompt for destinations you've declared. Links to any other destination still work—users are simply asked to confirm before the link opens.\n\nProvide each entry in one of two forms:\n\n* **HTTPS origin** — `https://example.com`. Only the scheme and hostname are matched; paths, ports, and query strings are ignored. Subdomains are not implied—list each one (`https://app.example.com`, `https://docs.example.com`).\n* **Custom URI scheme** — `myapp:` for deep links into a native app you own (for example, `spotify:` or `notion:`). Only the scheme is matched.\n\nEvery origin and scheme you list **must be owned by you** (the submitting organization). You may not list third-party domains or URI schemes registered to apps you don't publish. Entries you don't own will be removed during review.\n\n<Note>\n  This field is optional. If omitted, your connector functions normally, but users are shown a confirmation prompt each time it opens a link.\n</Note>\n\n## Asset specifications\n\n### Carousel screenshots (MCP Apps)\n\n* **Format:** PNG\n* **Width:** at least 1000px",
+        "end": 85,
+        "heading_context": [
+          "Submitting to the Connectors Directory",
+          "Privacy policy requirements"
+        ],
+        "path": "connectors/building/submission.md",
+        "start": 73,
+        "text": "## Allowed link URIs\n\nIf your connector uses the `ui/open-link` capability to open URLs in the user's browser or native apps, provide the list of link targets your server will request. Claude uses this list to suppress the \"Open external link\" confirmation prompt for destinations you've declared. Links to any other destination still work—users are simply asked to confirm before the link opens.\n\nProvide each entry in one of two forms:\n\n* **HTTPS origin** — `https://example.com`. Only the scheme and hostname are matched; paths, ports, and query strings are ignored. Subdomains are not implied—list each one (`https://app.example.com`, `https://docs.example.com`).\n* **Custom URI scheme** — `myapp:` for deep links into a native app you own (for example, `spotify:` or `notion:`). Only the scheme is matched.\n\nEvery origin and scheme you list **must be owned by you** (the submitting organization). You may not list third-party domains or URI schemes registered to apps you don't publish. Entries you don't own will be removed during review.\n\n<Note>\n  This field is optional. If omitted, your connector functions normally, but users are shown a confirmation prompt each time it opens a link."
+      },
+      "right": {
+        "context_end": 36,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Opening external links from MCP Apps\n\n> How Claude handles ui/open-link requests, and how directory connectors can allowlist destinations to skip the confirmation modal\n\nWhen your MCP App sends a `ui/open-link` request, Claude shows an \"Open external link\" confirmation modal before navigating. This protects users from being silently redirected by an embedded app.\n\nDirectory connectors can declare a set of trusted destinations that open immediately without the modal. Custom connectors and locally configured servers always show the modal.\n\n## Default behavior\n\nA `ui/open-link` request displays a confirmation modal showing the destination URL. The link opens in a new tab when the user confirms; the request resolves as cancelled if they dismiss the modal.\n\n## Allowlisting link destinations\n\nIf your connector is published in the [Connectors Directory](/docs/connectors/directory), you can declare destinations that skip the modal. Provide them in the **Allowed link URIs** field when you [submit](/docs/connectors/building/submission) or update your directory listing.\n\nEach entry must be one of two shapes:\n\n| Entry shape       | Example                         | Matches                                                                                                                                                               |\n| ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| HTTPS origin      | `https://docs.example.com`      | Any `https://` URL whose hostname is exactly `docs.example.com` (case-insensitive). Subdomains do not match implicitly; list each one you need. Port is not compared. |\n| Custom URI scheme | `example-app` or `example-app:` | Any URL with the scheme `example-app:`, typically a deep link into your native mobile or desktop app.                                                                 |\n\nEntries that do not fit one of these shapes are ignored. This includes bare hostnames such as `example.com`, `http://` origins, and malformed values.\n\n### Example\n\nGiven the following allowlist:\n\n```text theme={null}\nhttps://example.com\nhttps://docs.example.com",
+        "end": 28,
+        "heading_context": [
+          "Opening external links from MCP Apps"
+        ],
+        "path": "connectors/building/mcp-apps/external-links.md",
+        "start": 9,
+        "text": "When your MCP App sends a `ui/open-link` request, Claude shows an \"Open external link\" confirmation modal before navigating. This protects users from being silently redirected by an embedded app.\n\nDirectory connectors can declare a set of trusted destinations that open immediately without the modal. Custom connectors and locally configured servers always show the modal.\n\n## Default behavior\n\nA `ui/open-link` request displays a confirmation modal showing the destination URL. The link opens in a new tab when the user confirms; the request resolves as cancelled if they dismiss the modal.\n\n## Allowlisting link destinations\n\nIf your connector is published in the [Connectors Directory](/docs/connectors/directory), you can declare destinations that skip the modal. Provide them in the **Allowed link URIs** field when you [submit](/docs/connectors/building/submission) or update your directory listing.\n\nEach entry must be one of two shapes:\n\n| Entry shape       | Example                         | Matches                                                                                                                                                               |\n| ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| HTTPS origin      | `https://docs.example.com`      | Any `https://` URL whose hostname is exactly `docs.example.com` (case-insensitive). Subdomains do not match implicitly; list each one you need. Port is not compared. |\n| Custom URI scheme | `example-app` or `example-app:` | Any URL with the scheme `example-app:`, typically a deep link into your native mobile or desktop app.                                                                 |\n\nEntries that do not fit one of these shapes are ignored. This includes bare hostnames such as `example.com`, `http://` origins, and malformed values."
+      }
+    },
+    {
+      "id": "1ce07c62d4813d1e794362a8ca4dfd80704a7d8b6dbe1eaa1fd06f3b64dffc9f",
+      "left": {
+        "context_end": 47,
+        "context_start": 29,
+        "context_text": "Claude identifies itself in the MCP `initialize` handshake via `clientInfo`, but the exact value depends on the surface and the request path. You may see `\"name\": \"claude-ai\"`, `\"name\": \"Anthropic\"` (sometimes with a service suffix), or `\"name\": \"claude-code\"`:\n\n```json theme={null}\n{ \"clientInfo\": { \"name\": \"Anthropic\", \"version\": \"1.0.0\" } }\n```\n\nDon't gate behavior on an exact `name` or `version` string — both vary across surfaces, request paths, and releases. Use `clientInfo` for telemetry and coarse feature detection only, and remember it's unauthenticated: any client can claim any name, so it must never feed an authorization decision.\n\n## Prepare test credentials for review\n\nDirectory submission requires test credentials. Provide a **fully populated account**—not an empty shell—so reviewers can exercise real functionality (list real records, search real data, exercise write tools on real resources). Include step-by-step setup instructions for someone unfamiliar with your service.\n\n## Debugging\n\nPartner-visible error logs are in development. In the meantime, use server-side logging on your end and the MCP Inspector to diagnose connection failures. Common causes of `initialize` timeouts include slow OAuth endpoints (keep discovery, registration, and token responses under ten seconds; see [endpoint latency](/docs/connectors/building/authentication#endpoint-latency)), overly strict `Origin`-header validation rejecting Anthropic's requests, and firewalls dropping Anthropic's egress traffic.\n\nIf your infrastructure logs show `403 Forbidden` responses your application didn't generate, your CDN or WAF is likely blocking Anthropic's traffic. See [firewall or WAF blocks Anthropic's traffic](/docs/connectors/building/troubleshooting#2-firewall-or-waf-blocks-anthropic%E2%80%99s-traffic) for the fix.\n\nFor a structured walkthrough of \"Couldn't reach the MCP server\" and \"Authorization failed\" errors, including DNS resolution checks, OAuth discovery diagnostics, and how to find the `ofid_` reference ID to include in a support request, see [troubleshooting connectors](/docs/connectors/building/troubleshooting).",
+        "end": 39,
+        "heading_context": [
+          "Testing your connector",
+          "Detect Claude as the client"
+        ],
+        "path": "connectors/building/testing.md",
+        "start": 37,
+        "text": "## Prepare test credentials for review\n\nDirectory submission requires test credentials. Provide a **fully populated account**—not an empty shell—so reviewers can exercise real functionality (list real records, search real data, exercise write tools on real resources). Include step-by-step setup instructions for someone unfamiliar with your service."
+      },
+      "right": {
+        "context_end": 78,
+        "context_start": 60,
+        "context_text": "\n## Unsupported use cases\n\nConnectors that do the following are not accepted:\n\n* Transfer money, cryptocurrency, or other financial assets\n* Generate images, video, or audio via AI models (design tools that produce diagrams, charts, or UI mockups are allowed)\n\n## Submission requirements\n\n* **Test credentials** are required and must be a fully populated account.\n* **Allowed link URIs** are recommended if your server calls `ui/open-link`. Declared HTTPS origins and custom URI schemes open without a confirmation prompt; anything else still prompts the user. See [Allowed link URIs](/docs/connectors/building/submission#allowed-link-uris).\n* **Public documentation** is required by your publish date—a blog post or help-center article is sufficient. You can share docs privately with Anthropic during review.\n* **Plugins** must link a public GitHub repo; closed-source is not accepted.\n* **MCPB** open-source and \"spec will evolve\" clauses in the [Software Directory Terms](https://support.claude.com/en/articles/13145338-anthropic-software-directory-terms) are required and not waivable.\n\n## Before you submit\n\nRun `claude plugin validate` on plugins. For MCP servers, exercise every tool through the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) and as a [custom connector in Claude](/docs/connectors/building/testing).",
+        "end": 72,
+        "heading_context": [
+          "Pre-submission checklist",
+          "Unsupported use cases"
+        ],
+        "path": "connectors/building/review-criteria.md",
+        "start": 68,
+        "text": "## Submission requirements\n\n* **Test credentials** are required and must be a fully populated account.\n* **Allowed link URIs** are recommended if your server calls `ui/open-link`. Declared HTTPS origins and custom URI schemes open without a confirmation prompt; anything else still prompts the user. See [Allowed link URIs](/docs/connectors/building/submission#allowed-link-uris).\n* **Public documentation** is required by your publish date—a blog post or help-center article is sufficient. You can share docs privately with Anthropic during review."
+      }
+    },
+    {
+      "id": "eea2505c462d0d192bce9a3020aec6b62d731d5fe92ba3e9e3c50334d3dbf3fb",
+      "left": {
+        "context_end": 53,
+        "context_start": 32,
+        "context_text": "\nAvailable connectors include:\n\n* Google Drive, Gmail, Calendar\n* GitHub\n* Slack\n* Microsoft 365\n\n### Step 3: Authenticate\n\n1. Click \"Connect\" next to your chosen service\n2. Log in to your account on that service\n3. Grant Claude the requested permissions\n4. Return to Claude\n\n## Using connectors in conversations\n\n### In chat\n\n1. Start a new conversation\n2. Click the \"+\" button\n3. Select \"Add from \\[Service]\"",
+        "end": 45,
+        "heading_context": [
+          "Get started with connectors",
+          "Setting up your first connector",
+          "Step 2: Choose a connector"
+        ],
+        "path": "connectors/getting-started.md",
+        "start": 40,
+        "text": "### Step 3: Authenticate\n\n1. Click \"Connect\" next to your chosen service\n2. Log in to your account on that service\n3. Grant Claude the requested permissions\n4. Return to Claude"
+      },
+      "right": {
+        "context_end": 43,
+        "context_start": 19,
+        "context_text": "* **Search and analyze documents** across SharePoint sites and OneDrive libraries\n* **Access email threads** and analyze Outlook communications\n* **Review meeting information** from Teams Calendar\n* **Pull insights** from Teams Chat discussions\n* **Send and manage email**, including drafts, labels, mail filters, and automatic replies\n* **Manage calendar events** and find meeting times\n* **Create and update files** in SharePoint\n\n## Setup requirements\n\nOn Free, Pro, and Max plans, no organization-level setup is needed. Connect from **Customize > Connectors** in claude.ai. A Microsoft Entra Global Administrator still needs to grant one-time tenant consent for your Microsoft organization.\n\n### Prerequisites\n\n* A work or school Microsoft account on a Microsoft Entra tenant (personal accounts such as outlook.com, hotmail.com, or live.com aren't supported)\n* Claude user with Owner or Primary Owner role (Team and Enterprise plans)\n* Global Administrator access to Microsoft Entra tenant\n* Active Microsoft 365 accounts for all users (Team and Enterprise plans)\n\n### Phase 1: Administrator setup\n\n**Automatic Setup (Recommended):**\n\n1. Navigate to **Organization settings > Connectors**\n2. Select **Add**, then **All available**",
+        "end": 35,
+        "heading_context": [
+          "Microsoft 365 connector",
+          "Capabilities"
+        ],
+        "path": "connectors/microsoft/365.md",
+        "start": 27,
+        "text": "## Setup requirements\n\nOn Free, Pro, and Max plans, no organization-level setup is needed. Connect from **Customize > Connectors** in claude.ai. A Microsoft Entra Global Administrator still needs to grant one-time tenant consent for your Microsoft organization.\n\n### Prerequisites\n\n* A work or school Microsoft account on a Microsoft Entra tenant (personal accounts such as outlook.com, hotmail.com, or live.com aren't supported)\n* Claude user with Owner or Primary Owner role (Team and Enterprise plans)\n* Global Administrator access to Microsoft Entra tenant"
+      }
+    }
+  ],
+  "schema_version": 1
+}

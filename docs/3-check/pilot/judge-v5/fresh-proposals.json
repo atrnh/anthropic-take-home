@@ -1,0 +1,98 @@
+[
+  {
+    "id": "fresh-mcpb-route-vs-builder",
+    "left": {
+      "path": "connectors/custom/desktop-extensions.md",
+      "start": 24,
+      "end": 38
+    },
+    "right": {
+      "path": "connectors/building/mcpb.md",
+      "start": 15,
+      "end": 25
+    },
+    "provisional_duplicate": true,
+    "expected_treatment": "Merge the overlapping packaging explanation into the MCPB builder guide, preserving useful general additions such as distribution guidance after verifying their scope. Shorten the route page to orientation and links, retaining its user and administrator routes.",
+    "rationale": "Both passages explain what MCPB packages and repeat bundled dependencies, local execution or distribution, and cross-platform or offline behavior. The builder guide is the natural owner of the full concept; the route page does not need a second feature catalog."
+  },
+  {
+    "id": "fresh-builder-testing-summary",
+    "left": {
+      "path": "connectors/building/index.md",
+      "start": 66,
+      "end": 70
+    },
+    "right": {
+      "path": "connectors/building/testing.md",
+      "start": 9,
+      "end": 25
+    },
+    "provisional_duplicate": true,
+    "expected_treatment": "Consolidate testing guidance in the testing guide, including the unique Claude Code check. Shorten the builder index checklist to a route to that guide; retain warnings and necessary testing context in the destination.",
+    "rationale": "The index repeats two core testing actions explained by the dedicated guide: add the server as a custom connector and validate it with MCP Inspector. This is actionable partial duplication even though the index also adds a Claude Code check."
+  },
+  {
+    "id": "fresh-external-link-allowlist",
+    "left": {
+      "path": "connectors/building/submission.md",
+      "start": 73,
+      "end": 85
+    },
+    "right": {
+      "path": "connectors/building/mcp-apps/external-links.md",
+      "start": 9,
+      "end": 28
+    },
+    "provisional_duplicate": true,
+    "expected_treatment": "Consolidate destination-matching rules in the external-links guide. Retain the submission field instructions, optional-field behavior, and ownership constraints locally, with a link to the detailed rules.",
+    "rationale": "Both passages explain that declared destinations bypass the confirmation modal and independently define the same HTTPS-origin and custom-scheme forms, including subdomain behavior. The submission page needs the form instruction, but not a second maintained explanation of matching behavior."
+  },
+  {
+    "id": "fresh-tunnel-key-revocation-branches",
+    "left": {
+      "path": "connectors/mcp-tunnels/setup.md",
+      "start": 96,
+      "end": 96
+    },
+    "right": {
+      "path": "connectors/mcp-tunnels/setup.md",
+      "start": 216,
+      "end": 216
+    },
+    "provisional_duplicate": false,
+    "expected_treatment": "Keep both warnings at the completion point of their respective Helm and Docker Compose branches. Shared source reuse may be useful, but the rendered warning should remain in both procedures.",
+    "rationale": "The wording repeats the same security action, but each deployment branch must tell the reader to revoke the short-lived key before they leave that branch. The Helm warning also explains its branch-specific exposure in release-history Secrets."
+  },
+  {
+    "id": "fresh-test-credentials-checklist",
+    "left": {
+      "path": "connectors/building/testing.md",
+      "start": 37,
+      "end": 39
+    },
+    "right": {
+      "path": "connectors/building/review-criteria.md",
+      "start": 68,
+      "end": 72
+    },
+    "provisional_duplicate": false,
+    "expected_treatment": "Keep the fully populated-account requirement in the pre-submission checklist and keep the preparation details in the testing guide. A link can connect them, but the checklist should not hide this rejection-relevant prerequisite.",
+    "rationale": "Both passages state that test credentials must use a fully populated account. One is a compact gate in a review checklist; the other explains what reviewers must be able to exercise and what setup instructions to provide. They serve different reader moments."
+  },
+  {
+    "id": "fresh-generic-auth-vs-m365-prereqs",
+    "left": {
+      "path": "connectors/getting-started.md",
+      "start": 40,
+      "end": 45
+    },
+    "right": {
+      "path": "connectors/microsoft/365.md",
+      "start": 27,
+      "end": 35
+    },
+    "provisional_duplicate": false,
+    "expected_treatment": "Keep the Microsoft-specific tenant-consent and role prerequisites with the Microsoft procedure. Scope the generic authentication steps and route readers to service-specific prerequisites instead of merging the two passages.",
+    "rationale": "Both concern connecting and authenticating a listed service, but the Microsoft passage adds a required Entra administrator handoff and account constraints. It is applicability-specific setup, not a second copy of the generic member flow."
+  }
+]

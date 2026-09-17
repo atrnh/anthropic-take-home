@@ -1,0 +1,165 @@
+{
+  "examples_sha256": "6b575924346195abbbfe87b6e0752e8799985319c8e713b189e3fb26e809d738",
+  "packet_sha256": "a1d0c17fedca8ca18216885a93f77f1830dd3de6a6b8689fcfc86a45f45b392b",
+  "prompt_sha256": "5f6ec55a8661c3ba9e4cc2da77225f158e7e8b33d432be2fa255c00e2a7e1ffe",
+  "results_sha256": "199c6dcbd7b1407acd9fccae3edbf013692a17e32e49bbe8405d500eed9d7c4a",
+  "runtime": {
+    "packages": {
+      "numpy": "2.5.3",
+      "scikit-learn": "1.7.2",
+      "scipy": "1.18.1"
+    },
+    "python": "3.13.14"
+  },
+  "schema_version": 1,
+  "selection": {
+    "candidate_pairs": 0,
+    "cases": [
+      {
+        "example_id": "fresh-builder-testing-summary",
+        "global_rank": null,
+        "id": "0afe6ea54a953480af722372be851c29c02490c08c860dfcfa73a03632b8e140",
+        "left": {
+          "end": 70,
+          "path": "connectors/building/index.md",
+          "start": 66
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 25,
+          "path": "connectors/building/testing.md",
+          "start": 9
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "fresh-test-credentials-checklist",
+        "global_rank": null,
+        "id": "1ce07c62d4813d1e794362a8ca4dfd80704a7d8b6dbe1eaa1fd06f3b64dffc9f",
+        "left": {
+          "end": 39,
+          "path": "connectors/building/testing.md",
+          "start": 37
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 72,
+          "path": "connectors/building/review-criteria.md",
+          "start": 68
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "fresh-tunnel-key-revocation-branches",
+        "global_rank": null,
+        "id": "3a35db210f9eb6573835822d660fafb28e0a51e5b7ce2b8adb7888e9102f202b",
+        "left": {
+          "end": 96,
+          "path": "connectors/mcp-tunnels/setup.md",
+          "start": 96
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 216,
+          "path": "connectors/mcp-tunnels/setup.md",
+          "start": 216
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "fresh-external-link-allowlist",
+        "global_rank": null,
+        "id": "493374b5b74ee3a66266483a5d5d084d18cb60c0d9cb49a240e60c43b0eb4d38",
+        "left": {
+          "end": 85,
+          "path": "connectors/building/submission.md",
+          "start": 73
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 28,
+          "path": "connectors/building/mcp-apps/external-links.md",
+          "start": 9
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "fresh-mcpb-route-vs-builder",
+        "global_rank": null,
+        "id": "9d2358731a488716ebf1fe50cd0ed4c37375d4d72a2a7d9fb6cffdf4c1c20d11",
+        "left": {
+          "end": 38,
+          "path": "connectors/custom/desktop-extensions.md",
+          "start": 24
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 25,
+          "path": "connectors/building/mcpb.md",
+          "start": 15
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      },
+      {
+        "example_id": "fresh-generic-auth-vs-m365-prereqs",
+        "global_rank": null,
+        "id": "eea2505c462d0d192bce9a3020aec6b62d731d5fe92ba3e9e3c50334d3dbf3fb",
+        "left": {
+          "end": 45,
+          "path": "connectors/getting-started.md",
+          "start": 40
+        },
+        "left_rank": null,
+        "queue_rank": null,
+        "right": {
+          "end": 35,
+          "path": "connectors/microsoft/365.md",
+          "start": 27
+        },
+        "right_rank": null,
+        "score": null,
+        "selection_sha256": null,
+        "source_group": "known",
+        "stratum": null
+      }
+    ],
+    "excluded_frozen_pairs": 0,
+    "excluded_reviewed_pairs": 0,
+    "include_unordered_lists": true,
+    "method": "provided_labeled_examples",
+    "min_words": 10,
+    "remaining_pairs": 0,
+    "strata": [],
+    "top_k": 10
+  },
+  "snapshot": {
+    "fetched_at": "2026-09-14T18:15:34.068550+00:00",
+    "manifest_sha256": "aacc5ca32cf977b56e6f4ed88cdfd20fcb87817cab10d6eceff6879c334a8690",
+    "page_count": 54
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "agent_id": "/root/judge_v4_blind",
+  "requested_model": "gpt-5.6-terra",
+  "requested_reasoning_effort": "high",
+  "observed_model": "unobservable",
+  "observed_reasoning_effort": "unobservable",
+  "fork_turns": "none",
+  "attempts": 1,
+  "execution": "Instruction-limited inputs; exclusive filesystem access not enforced or independently verified.",
+  "allowed_inputs": [
+    "prompt-v4.md",
+    "judge-packet.json"
+  ],
+  "sequence": "FAQ policy and specific Drive adjudication approved before run. Judge instructed to use rubric and packet only; parent scored after completion.",
+  "evidence_corrections": "Agent reported correcting capitalization and line breaks in marketplace and M365 quotes before finalizing; no classification edits reported. Parent prematurely validated an intermediate file and observed a literal-quote failure; final output passes full validation. Intermediate file was not archived.",
+  "hashes": {
+    "prompt-v4.md": "a5899d90ce82149132d9d65905ed11a4dd92b53416ac44db7a8e08bd1757d5d0",
+    "judge-packet.json": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134",
+    "v4-manifest.json": "14058bf597b66135b305fa900454705131573a030d99b19531c0a96367015557",
+    "v4-decisions.json": "bf728f784d2c007eeb13b56c116284cf87102d4f67ab6a3d65a9f71b74f528f7",
+    "v4-metrics.json": "3501156219fd89403a34ad832acd3156fcf8f264a0d9eb124657fb665664561d",
+    "v4-policy-comparison.json": "127db1dc40ef695013f921c3c10ee43afcf90f3403511e303c02f4671c24fcf6"
+  }
+}
