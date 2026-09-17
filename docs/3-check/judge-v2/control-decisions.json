@@ -1,0 +1,340 @@
+{
+  "cases": [
+    {
+      "id": "6597390db75cdb0cc6b726c0511191a2fdd0fa1400641ae589563f9f28878533",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both discuss organization-level plugin administration.",
+      "unique_left": "Cowork availability, local storage, and planned sharing.",
+      "unique_right": "Required plugins on Team and Enterprise plans, automatic installation, and non-removability.",
+      "rationale": "The overview states product availability and storage behavior; the guide explains an administrator-enforced installation state that affects removal decisions.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Plugin support in Cowork is available as a beta for all paid Claude users. Plugins are currently saved locally to your machine. Org-wide sharing and management are coming in the weeks ahead.",
+        "right": "On Team and Enterprise plans, administrators can require certain plugins for everyone in the organization. Required plugins install automatically and show **This plugin is required by your organization**; you can't remove them."
+      }
+    },
+    {
+      "id": "10433465d06e14b404e1d3540607d19b1b34992fcddd18257ad7bd7e1e8ca6c2",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern authentication for MCP servers.",
+      "unique_left": "Claude-specific authentication types and product coverage.",
+      "unique_right": "Lazy authentication behavior and the in-conversation challenge flow.",
+      "rationale": "The left is an authentication-options overview; the right is a design pattern for mixed public and protected tools.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Authentication is the most common source of partner questions. Claude's auth support differs in a few places from the generic MCP specification, so read this page even if you're already familiar with MCP auth.\n\n## Supported authentication types\n\nClaude supports the following authentication types for remote MCP servers. The same infrastructure backs Claude.ai, Claude Desktop, Claude mobile, Claude Code, and Cowork.",
+        "right": "Not every tool on an MCP server needs the user's identity. A product catalog can be browsed anonymously; an order history cannot. **Lazy authentication** (sometimes called *mixed auth*) lets a single server expose both: unauthenticated clients can connect, list tools, and call public ones, and the server only challenges for credentials when a protected tool is invoked. The challenge follows the [MCP authorization specification](https://modelcontextprotocol.io/specification/latest/basic/authorization).\n\nIn Claude, the challenge surfaces as an inline **Connect** card in the conversation. The user authenticates in a popup, Claude retries the same tool call automatically with the new token, and the turn continues \u2014 no context is lost."
+      }
+    },
+    {
+      "id": "510e6218be0c13de3cf961624d17c8efd2d9abdf4c4dcc4e6266d990df6db6f2",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Plugins are packages that extend Claude by combining capabilities such as skills, connectors, commands, and agents.",
+      "unique_left": "The broad, shareable-package framing and links to component overviews.",
+      "unique_right": "Cowork installation, hooks, and the marketplace, organization, and upload sources.",
+      "rationale": "Both introduce what a plugin is and enumerate its capabilities. The install page can retain its installation-specific facts with a shorter orientation.",
+      "suggested_consolidation": "Keep the fuller definition in the Plugins overview. Shorten the install-page introduction to a brief statement that plugins add capabilities in Cowork, retaining hooks and the three installation sources.",
+      "evidence": {
+        "left": "Plugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit \u2014 turning Claude into a specialist tailored to your role, team, and company.",
+        "right": "A plugin is a package that extends what Claude can do in Cowork. Installing one can add skills, MCP connectors, subagents, slash commands, or hooks in a single step. Plugins come from the marketplace, from your organization, or from a file you upload."
+      }
+    },
+    {
+      "id": "cdd78f353ae9f72459b4760ba7380fe95aa576ce6eb8e5b10e488525af2cd06f",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both explain how users obtain plugins through the Plugins interface.",
+      "unique_left": "Cowork marketplace, authentication, component review, and file-upload steps.",
+      "unique_right": "Claude for Government organization-tab, trust notice, and Create with Claude flow.",
+      "rationale": "The procedures apply to different deployments and have materially different available sources and controls.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "## Install a plugin\n\nOpen **Customize** in the sidebar, then **Plugins**.\n\n<Steps>\n  <Step title=\"Browse the marketplace\">\n    Select **Browse plugins** to see available plugins. The default marketplace\n    is Anthropic's official catalog; you can add other marketplaces by URL.\n  </Step>\n\n  <Step title=\"Install\">\n    Select a plugin and click **Install**. If the plugin includes a connector\n    that needs authentication, you're prompted to sign in.\n  </Step>\n\n  <Step title=\"Review components\">\n    Open the installed plugin to see its skills, connectors, agents, and hooks.\n    Enable or disable individual components as needed.\n  </Step>\n</Steps>\n\nTo install from a file instead, select the upload option on the Plugins page and select the plugin package.",
+        "right": "## Find and install plugins\n\nOpen **Customize** in the sidebar, then **Plugins**. The organization plugins you have installed are listed under **Organization plugins**. To find the rest, select **Browse plugins** and open the **Organization** tab, which lists every plugin your administrators have made available to you.\n\nA plugin your administrators set to install automatically is already installed. A plugin they offer for you to choose stays available on the **Organization** tab until you install it.\n\nTo install a plugin from a file, select **Add plugin**, then **Upload plugin**, and choose the plugin's `.zip` file. Claude Desktop shows a notice reminding you to install only plugins you trust, since uploaded plugins are not controlled by Anthropic. To have Claude build one, select **Add plugin**, then **Create with Claude**, and describe the plugin you want. Claude builds it for you, and you install the result."
+      }
+    },
+    {
+      "id": "a62a853864f90235a005eb6271a19e753466caa88863c7ffc73435821e05af3d",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both address plugin removal.",
+      "unique_left": "A member removes an installed plugin from Claude Desktop and may be blocked by an organizational requirement.",
+      "unique_right": "An administrator stops delivering a plugin but cannot remotely uninstall members' existing copies.",
+      "rationale": "The passages serve different actors and distinguish local uninstallation from administrator delivery.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Open an installed plugin to see the skills, slash commands, sub-agents, and hooks it provides, and turn individual components on or off. To remove a plugin, open it and click **Uninstall**. Most plugins you uninstall stay removed for you, including ones your administrators set to install automatically. A plugin your organization requires cannot be removed, and Claude Desktop tells you it is required by your organization if you try.",
+        "right": "To remove a plugin, click its remove icon and save the change. Removing a plugin stops delivering it, and there is not currently a way to uninstall a plugin remotely from members' devices, so members who already installed it keep their copy until they remove it themselves, as described under [Tool and connector cards](/docs/government/config/settings#tool-and-connector-cards)."
+      }
+    },
+    {
+      "id": "1745e3aa14f24a5946ca9fe5d34b649d86013ab3fe2165c857fea96f327bc20c",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "A sales plugin can combine a CRM connector, sales-process instruction, and commands for prospect research and follow-ups to make Claude a sales specialist.",
+      "unique_left": "Cowork context and the once-defined, reused plugin configuration.",
+      "unique_right": "The submission-page point that a good plugin also groups related capabilities, including competitive-analysis delegation.",
+      "rationale": "The examples repeat the same sales-plugin explanatory work. The submission page only needs the quality criterion and any unique component detail.",
+      "suggested_consolidation": "Keep the full sales example in Plugins overview. In the submission guide, replace the repeated scenario with a short cross-reference and retain the end-to-end package criterion and sub-agent detail.",
+      "evidence": {
+        "left": "A sales plugin, for example, could connect Claude to your CRM and knowledge base, teach it your sales process, and give you slash commands for everything from prospect research to call follow-ups. You define what goes in the plugin once, and Claude pulls from that context whenever it's relevant.",
+        "right": "For example, a sales plugin might bundle a CRM connector, a skill that teaches Claude your sales process, slash commands for common tasks like prospect research and call follow-ups, and a sub-agent that handles competitive analysis in parallel. Together, these components make Claude a specialist \u2014 individually, they're just building blocks."
+      }
+    },
+    {
+      "id": "6e2615cafe30a79fb26f0fe04d5fd0429983161830d39ca82e61c2c56eb098e8",
+      "classification": "NECESSARY_REPETITION",
+      "needs_review": false,
+      "shared_explanation": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration before it appears in the connector list.",
+      "unique_left": "The Gmail connection steps and Gmail-specific usage context.",
+      "unique_right": "The Google Calendar connection steps and Calendar-specific usage context.",
+      "rationale": "This prerequisite governs each service's connection procedure and must be visible where a reader is trying to connect that service.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started).",
+        "right": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started)."
+      }
+    },
+    {
+      "id": "002f42fa853714eb974467a8659afc9964de28d62570351cfcff8aee98e0a693",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "None; both passages refer to actions in Claude but explain unrelated actions.",
+      "unique_left": "Permission to render an MCP App inline.",
+      "unique_right": "Disconnecting a Slack connection from the Claude app.",
+      "rationale": "Displaying an MCP App and disconnecting Slack have different user goals and procedures.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Claude will prompt you for permission to display the App. Click \"Always allow\", and you'll see the MCP App render inline in the conversation.",
+        "right": "**Claude app**: Go to Claude's Home tab and click the red \"Disconnect\" button."
+      }
+    },
+    {
+      "id": "00202bd2f1ef5c73d995efc543320972668c3923e3cb657753c0885f3090c392",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern renewing a tunnel server certificate.",
+      "unique_left": "Certificate lifetime, local renewal properties, and automatic proxy reload behavior.",
+      "unique_right": "The Docker Compose scheduling behavior for the renewal command.",
+      "rationale": "The left provides deployment-wide certificate behavior; the right gives a Docker-specific operational instruction.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "**Server certificate.** The certificate the proxy presents is valid for 90 days, and you are responsible for renewing it before it expires. Renewal is local. It signs a new certificate with the CA already stored in your deployment, makes no API calls, and needs no API key. The proxy reloads the certificate file automatically, so no restart is required.",
+        "right": "    Run the renewal from the deployment directory. With `--renew-before=720h` the command does nothing while more than 30 days of validity remain, so it is safe to run on a schedule such as a daily cron entry."
+      }
+    },
+    {
+      "id": "9f82abcdff7391141889ac6124b332af2bdc4c261db460e14d1941925060665f",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "A published directory URL slug is permanent and determines the connector listing URL.",
+      "unique_left": "The literal URL pattern, sharing guidance, and display-name distinction.",
+      "unique_right": "The editing-page warning that the URL slug is locked.",
+      "rationale": "Both state the same immutability rule. The editing page needs only a brief warning while the after-publishing page supplies the full explanation.",
+      "suggested_consolidation": "Keep the complete slug explanation and URL example in Manage your listing after publishing. Reduce the editing-page sentence to a short locked-field warning with a link to that explanation.",
+      "evidence": {
+        "left": "Your directory slug is fixed after publication. It determines your connector's permanent listing URL:\n\n```text theme={null}\nhttps://claude.ai/directory/connectors/SLUG\n```\n\nShare this URL from your own documentation or a \"Connect to Claude\" button to send users directly to your listing. Display names can change via the dashboard; the URL slug cannot.",
+        "right": "The URL slug is locked: it's permanent after publication, since it determines your listing URL."
+      }
+    },
+    {
+      "id": "6c09f530a8e793e4cd028cd31da89d9ecaba21a6ce46bb5e28e4199ce33cfbdc",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Google Drive documents continue syncing with the latest version.",
+      "unique_left": "The concise live-sync feature claim.",
+      "unique_right": "The reader-facing FAQ question and answer about updates after adding a document.",
+      "rationale": "The exact behavior is stated twice on the same page. One authoritative feature statement can support a shorter FAQ response or cross-reference.",
+      "suggested_consolidation": "Keep the Live sync feature statement. Shorten the FAQ answer to a link or reference to Live sync while preserving the question for findability.",
+      "evidence": {
+        "left": "* **Live sync**: Documents continue syncing with the latest Google Drive version",
+        "right": "  <Accordion title=\"Do documents update after I add them?\">\n    Yes, documents continue syncing with the latest Google Drive version.\n  </Accordion>"
+      }
+    },
+    {
+      "id": "00c69b9dafbd553c2bd3253baf76c8a7c265fb11e586198516f4b015ee6421db",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern making a connector reachable from outside a local network.",
+      "unique_left": "The security warning for exposing a local test server through a tunnel.",
+      "unique_right": "A diagnostic explanation of why internal corporate DNS is not publicly routable.",
+      "rationale": "The left is a testing safety warning; the right diagnoses a specific public-DNS failure and provides a remedy.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "  A tunnel exposes your local server to the public internet. Keep authentication enabled on your server while tunneling, and shut the tunnel down when you're done testing.",
+        "right": "* **Internal corporate DNS.** A hostname that resolves on your VPN won't resolve to a routable address from the public internet."
+      }
+    },
+    {
+      "id": "051fa6b200fc5cc96270a075c474b58f9163dab5983f29f0baeb60a28d9edc5e",
+      "classification": "NECESSARY_REPETITION",
+      "needs_review": false,
+      "shared_explanation": "In Claude for Government, plugins deliver skills, slash commands, sub-agents, and hooks, but a connector declared in a plugin is not connected.",
+      "unique_left": "What an individual Claude Desktop user can expect from a plugin and its connectors.",
+      "unique_right": "How administrators must deliver plugins and connectors through separate Config cards.",
+      "rationale": "The same product restriction must be visible to both the member-facing and administrator-facing procedures because it changes what each actor can do.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "A plugin adds its skills, slash commands, sub-agents, and hooks, and its hooks run on your machine at defined points during a session. The connectors you can use are the ones your administrators provide, which appear under **Customize**, then **Connectors**. Connectors declared by a plugin you add yourself are not added to Claude Desktop's connectors, and a local [MCP server](/docs/connectors/overview) declared by a plugin never runs.",
+        "right": "A plugin you upload on the **Plugins** card delivers its skills, slash commands, sub-agents, and hooks to members, and its hooks run on the member's machine. In Claude for Government, a connector declared in a plugin you upload here is not connected, so to give members a connector, add it on the **Connectors** card instead."
+      }
+    },
+    {
+      "id": "bb490a53e3b828c6e483d09137072c42dd03e77760a3475025ef910fcb58b18b",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "A plugin is a package that adds or bundles capabilities such as skills, slash commands, and sub-agents.",
+      "unique_left": "The general reusable-package definition and connector-inclusive component overview.",
+      "unique_right": "Claude for Government applicability, hooks, and the link to the overview.",
+      "rationale": "The passages repeat the core definition. The Government page can use a brief local orientation and its existing overview link while retaining deployment-specific facts.",
+      "suggested_consolidation": "Keep the full capability definition in Plugins overview. Shorten the Government introduction to its product applicability and retain hooks plus the link to the overview.",
+      "evidence": {
+        "left": "Plugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit \u2014 turning Claude into a specialist tailored to your role, team, and company.",
+        "right": "A plugin is a package that adds capabilities to Claude in a single step, such as skills, slash commands, sub-agents, and hooks. Plugins work in Cowork and in Code. See the [Plugins overview](/docs/plugins/overview) for more on what a plugin can contain."
+      }
+    },
+    {
+      "id": "e743e6fa9d7fd28a798f5a797efb2313f9a8659ec954bb59972ed0b647a8f693",
+      "classification": "ACTIONABLE_DUPLICATE",
+      "needs_review": false,
+      "shared_explanation": "Skills contain instructions, optional scripts and resources, and load when a task matches them.",
+      "unique_left": "The `SKILL.md` activation detail and general availability context.",
+      "unique_right": "Claude for Government reuse framing and the link to the general overview.",
+      "rationale": "The Government page repeats the general definition and already directs readers to the overview, while its deployment-specific sources are the distinct information.",
+      "suggested_consolidation": "Keep the full skill definition in Skills overview. Shorten the Government introduction to a local orientation and retain its link and deployment-specific source information.",
+      "evidence": {
+        "left": "Skills are directories containing instructions, scripts, and resources that Claude dynamically loads to handle specific tasks. Each skill has a `SKILL.md` file that defines when it should be activated and what instructions Claude should follow.",
+        "right": "A skill is a set of instructions, with optional scripts and resources, that Claude loads when a task matches it, so you can teach Claude a workflow once and reuse it. See the [Skills overview](/docs/skills/overview) for how skills work."
+      }
+    },
+    {
+      "id": "6ff5efc7e26b52ec12d8e4e6333f661294427d72bc7575cc4934807d4d357ac6",
+      "classification": "NECESSARY_REPETITION",
+      "needs_review": false,
+      "shared_explanation": "A Git repository can be added as a plugin marketplace in Cowork through the Plugins interface.",
+      "unique_left": "Supported repository hosts, accepted URL forms, generic install behavior, and updates.",
+      "unique_right": "The financial-services repository URL and the exact application path for adding that marketplace.",
+      "rationale": "The specialist guide gives a complete, concrete setup for a named marketplace; the general guide provides the reusable procedure and supported-host constraints.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "## Use a Git repository as a marketplace\n\nA Git repository that contains plugin packages can serve as a marketplace. This is the typical way teams distribute their own plugins without publishing to the public catalog. Repositories on GitHub (including GitHub Enterprise) are supported; public repositories on GitLab and Bitbucket also work.\n\n<Steps>\n  <Step title=\"Add the repository\">\n    On the Plugins page, select **Add marketplace** and enter the repository's\n    URL. Cowork accepts the standard `https://github.com/owner/repo` form and\n    the `owner/repo` shorthand for GitHub.\n  </Step>\n\n  <Step title=\"Install plugins from it\">\n    Plugins defined in the repository appear alongside plugins from other\n    marketplaces. Install them the same way.\n  </Step>\n</Steps>\n\nClick **Update** on a marketplace to pull the latest plugins from its repository.",
+        "right": "## Add the marketplace\n\n<Steps>\n  <Step title=\"Open Cowork\">\n    Open the Claude Desktop app and select the Cowork tab in the mode\n    selector.\n  </Step>\n\n  <Step title=\"Open plugin browser\">\n    Select \"Customize\" on the left sidebar, then \"Browse plugins\".\n  </Step>\n\n  <Step title=\"Add the marketplace\">\n    Select \"Personal\", click the \"+\" button, then select \"Add\n    marketplace from GitHub\". Enter the repository URL:\n    `https://github.com/anthropics/financial-services`\n  </Step>\n</Steps>\n\nOnce added, you'll see the available financial services plugins in your\nmarketplace."
+      }
+    },
+    {
+      "id": "2e2fe67780ee210cc444c9f7342435984c6cc035dd6492f53dbb98fcd71e6904",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern MCP App use of host style variables.",
+      "unique_left": "The design rationale, token categories, and light- and dark-mode behavior.",
+      "unique_right": "The `hostContext` fields and how a widget receives the variables during `connect()`.",
+      "rationale": "The guidelines define visual expectations and values; the theming guide gives the implementation interface and lifecycle details.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "MCP Apps automatically receive style variables from the host client. Reference these CSS custom properties to create interfaces that feel native to Claude.\n\n**Color tokens** cover backgrounds, text, and borders. Semantic accent colors signal status. All tokens automatically adapt to light and dark mode.",
+        "right": "Claude passes a [`hostContext`](https://modelcontextprotocol.github.io/ext-apps/api/interfaces/app.McpUiHostContext.html) object to your widget during the [`connect()`](https://modelcontextprotocol.github.io/ext-apps/api/classes/app.App.html#connect) handshake. The fields relevant to theming are:\n\n| Field              | Contents                                                                                                                                                   |\n| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `theme`            | `\"light\"` or `\"dark\"`                                                                                                                                      |\n| `styles.variables` | CSS custom properties: `--color-background-*`, `--color-text-*`, `--color-border-*`, `--color-ring-*`, `--font-*`, `--border-radius-*`, `--border-width-*` |\n| `styles.css.fonts` | `@font-face` rules for Anthropic Sans, served from `https://assets.claude.ai`                                                                              |\n\nThe [Style variables](/docs/connectors/building/mcp-apps/design-guidelines#style-variables) section of the design guidelines lists every variable and its light- and dark-mode value."
+      }
+    },
+    {
+      "id": "00532f35f0bffbbe2d3b5d3e1c552633abfaf09c0cfa494c0d50e74aeb977a9d",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both mention `ui.domain`.",
+      "unique_left": "How to derive Claude's required domain value from a server URL.",
+      "unique_right": "How omitting or fixing a domain changes BroadcastChannel scope.",
+      "rationale": "The passages answer different implementation questions: domain construction versus cross-conversation channel behavior.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "For Claude, compute the `Resource._meta.ui.domain` value by running this command, replacing `https://example.com/mcp` with your server URL:",
+        "right": "* **Without `ui.domain`** (the default), Claude derives the iframe origin from the conversation and connector, so the broadcast is scoped to a single conversation."
+      }
+    },
+    {
+      "id": "001703eaf9890ec55179db9211398b97f26ed9585fe326b82cb0b603f1e38430",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern Microsoft 365 connector sign-in.",
+      "unique_left": "How sign-in begins and the general broker-versus-browser behavior.",
+      "unique_right": "A required macOS MDM Extensible SSO profile for brokered sign-in.",
+      "rationale": "The right is a platform-specific prerequisite within the broader sign-in procedure, not a repeated explanation of sign-in initiation.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "After the configuration is deployed, the connector appears in **Customize \u2192 Connectors** in Claude Desktop. Sign-in starts when the user selects **Connect**.",
+        "right": "    * An **Extensible SSO** configuration profile of type **Redirect**, pointed at the Microsoft Enterprise SSO plug-in, is deployed through MDM. The broker is unavailable without it."
+      }
+    },
+    {
+      "id": "0100aa918443cbc94eb4278e2fa5a8eba8b583e1e622b78d6f814d28de8c28f8",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both contrast local and remote MCP-server arrangements.",
+      "unique_left": "MCPB use cases as local secure proxies to internal resources.",
+      "unique_right": "What remote MCP servers are and their cloud-hosted access model.",
+      "rationale": "The left guides a build choice for MCPBs; the overview classifies remote MCP servers for readers surveying connector types.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Organizations commonly build MCPBs as secure proxies to internal MCP servers, for internal documentation access, and to connect development tools while preserving their security architecture.",
+        "right": "[Remote MCP servers](/docs/connectors/custom/remote-mcp) communicate with Claude over the internet, giving it access to cloud-hosted tools and data. You can connect to existing remote MCP servers or build your own for any tool or service."
+      }
+    },
+    {
+      "id": "000c89288870bf5153ce62a3031acd4338e3c736c56ded97c1fe1d5e60820a4a",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both concern plugins submitted to the public marketplace.",
+      "unique_left": "The requirement that a submitted plugin link a public GitHub repository.",
+      "unique_right": "Automatic marketplace updates and screening after a plugin is published.",
+      "rationale": "Submission eligibility and post-publication update behavior are distinct stages with no repeated explanatory claim.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "* **Plugins** must link a public GitHub repo; closed-source is not accepted.",
+        "right": "After your plugin is published, updates pushed to your GitHub repo are picked up automatically\u2014CI mirrors changes to the public marketplace and runs automated screening on each update. You do not need to re-submit the form for updates."
+      }
+    },
+    {
+      "id": "006f35b6cfb8259ce4b35cd99e43c9f83b983a9d5713bc201112de4d4669ad1f",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Both discuss directory connector URLs.",
+      "unique_left": "Per-tenant URL patterns and their authentication implications.",
+      "unique_right": "The effects on existing users when a provider changes a directory endpoint.",
+      "rationale": "A tenant-specific URL strategy differs from the migration behavior caused by a provider endpoint change.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "If your server URL varies per tenant (for example, `{tenant}.mcp.example.com`), submit one directory listing with a URL pattern. Each user enters their own URL when they connect. See [Servers with per-customer URLs](/docs/connectors/building/authentication#servers-with-per-customer-urls) for how this choice limits your authentication options.",
+        "right": "Occasionally a provider updates the endpoint URL behind its directory listing, for example moving a server from `https://mcp.example.com/sse` to `https://mcp.example.com/mcp`. This is a routine change on the provider's side. Here is what you may notice in Claude:"
+      }
+    },
+    {
+      "id": "cbe2799f97d41ba9670a62a9d53a366f0ff57c588e15817c8bee34c777ce4f6f",
+      "classification": "RELATED_BUT_DISTINCT",
+      "needs_review": false,
+      "shared_explanation": "Skills activate when relevant to a task.",
+      "unique_left": "The metadata, activation, and resource-loading sequence that manages context.",
+      "unique_right": "How enabled skills are available and directly invoked in Microsoft 365 add-ins.",
+      "rationale": "The overview explains progressive disclosure; the add-in guide explains product-specific availability and invocation.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "Skills use progressive disclosure to manage context efficiently:\n\n1. **Metadata loading**: Claude reads skill names and descriptions at startup (\\~100 tokens each)\n2. **Activation**: When a task matches a skill's description, Claude loads the full `SKILL.md` content\n3. **Resource loading**: Additional files (scripts, references) are loaded only when needed\n\nThis approach prevents context window overload while providing specialized capabilities on demand.",
+        "right": "Skills you've enabled in your Claude settings are available in all\nClaude for M365 add-ins. Claude applies relevant Skills automatically\nbased on what you're doing.\n\nYou can also invoke a Skill directly: type `/` in the sidebar to see\nSkills available for the app you're in, then select one, such as\n`/deck-check` in PowerPoint. Skills that aren't relevant to the current\napp are excluded from this list."
+      }
+    },
+    {
+      "id": "421acd2bc509226ec2e5135aff4c902120646090c56c3015efe5ef2712d55586",
+      "classification": "NECESSARY_REPETITION",
+      "needs_review": false,
+      "shared_explanation": "Both state service-specific limitations: Claude cannot change the service's items and can search only items the user can access.",
+      "unique_left": "Email-specific inability to send or modify messages and the embedded-image limitation.",
+      "unique_right": "Calendar-specific inability to modify events or send invitations.",
+      "rationale": "Each integration needs its own limitations before readers use that service, and the action limits differ by service.",
+      "suggested_consolidation": null,
+      "evidence": {
+        "left": "## Limitations\n\n<Warning>\n  * Claude cannot create, send, or modify emails\n  * Embedded images in emails are not visible to Claude\n  * Only emails you have access to can be searched\n</Warning>",
+        "right": "## Limitations\n\n<Warning>\n  * Claude cannot create, modify, or delete calendar events\n  * Claude cannot send calendar invitations\n  * Only calendars you have access to can be searched\n</Warning>"
+      }
+    }
+  ]
+}

@@ -19,7 +19,7 @@ ARTIFACTS = ROOT / "docs/3-check"
 def reject(call, message: str) -> None:
     try:
         call()
-    except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+    except (FileNotFoundError, KeyError, TypeError, ValueError, json.JSONDecodeError):
         return
     raise AssertionError(message)
 
@@ -63,6 +63,67 @@ def check() -> None:
         generated_packet, generated_manifest = prepare(temp)
         assert generated_packet.read_bytes() == packet_path.read_bytes()
         assert generated_manifest.read_bytes() == manifest_path.read_bytes()
+
+        alternate_prompt = temp / "alternate-prompt.md"
+        alternate_prompt.write_text("Alternate judge instructions.\n")
+        alternate_dir = temp / "alternate"
+        alternate_packet_path, alternate_manifest_path = prepare(
+            alternate_dir, prompt_path=alternate_prompt, sample_offset=2
+        )
+        alternate_packet = json.loads(alternate_packet_path.read_text())
+        alternate_manifest = json.loads(alternate_manifest_path.read_text())
+        repeat_dir = temp / "repeat"
+        repeat_packet, repeat_manifest = prepare(
+            repeat_dir, prompt_path=alternate_prompt, sample_offset=2
+        )
+        assert repeat_packet.read_bytes() == alternate_packet_path.read_bytes()
+        assert repeat_manifest.read_bytes() == alternate_manifest_path.read_bytes()
+        assert alternate_manifest["prompt_sha256"] == sha256(alternate_prompt.read_bytes())
+        assert alternate_manifest["selection"]["sample_offset"] == 2
+
+        original_known = {
+            row["id"] for row in manifest["selection"]["cases"]
+            if row["source_group"] == "known"
+        }
+        alternate_known = {
+            row["id"] for row in alternate_manifest["selection"]["cases"]
+            if row["source_group"] == "known"
+        }
+        original_sample = {
+            row["id"] for row in manifest["selection"]["cases"]
+            if row["source_group"] == "sample"
+        }
+        alternate_sample = {
+            row["id"] for row in alternate_manifest["selection"]["cases"]
+            if row["source_group"] == "sample"
+        }
+        assert len(original_known) == len(alternate_known) == 16
+        assert original_known == alternate_known
+        assert len(original_sample) == len(alternate_sample) == 8
+        assert original_sample.isdisjoint(alternate_sample)
+
+        alternate_judgments = temp / "alternate-judgments.json"
+        alternate_judgments.write_bytes(stable_bytes(judgments(alternate_packet, alternate_manifest)))
+        evaluate(
+            alternate_packet_path, alternate_manifest_path, alternate_judgments,
+            prompt_path=alternate_prompt,
+        )
+        reject(
+            lambda: evaluate(alternate_packet_path, alternate_manifest_path,
+                             alternate_judgments),
+            "Alternate prompt binding accepted the default prompt",
+        )
+        reject(
+            lambda: evaluate(
+                alternate_packet_path, alternate_manifest_path, alternate_judgments,
+                prompt_path=temp / "missing-prompt.md",
+            ),
+            "Missing prompt was accepted",
+        )
+        reject(lambda: prepare(temp / "negative", sample_offset=-1),
+               "Negative sample offset was accepted")
+        reject(lambda: prepare(temp / "oversized", sample_offset=1_000_000),
+               "Unavailable sample offset was accepted")
 
         valid_path = temp / "valid.json"
         valid_path.write_bytes(stable_bytes(judgments(packet, manifest)))
@@ -140,6 +201,14 @@ def check() -> None:
 
     evaluated = evaluate(packet_path, manifest_path, ARTIFACTS / "judge-decisions.json")
     assert evaluated == json.loads((ARTIFACTS / "judge-metrics.json").read_text())
+    refinement = ARTIFACTS / "judge-v2"
+    for prefix, prompt in (("control", ARTIFACTS / "judge-prompt.md"),
+                           ("judge", refinement / "prompt.md"),
+                           ("v3", refinement / "prompt-v3.md")):
+        evaluated = evaluate(refinement / "judge-packet.json",
+                             refinement / f"{prefix}-manifest.json",
+                             refinement / f"{prefix}-decisions.json", prompt_path=prompt)
+        assert evaluated == json.loads((refinement / f"{prefix}-metrics.json").read_text())
     print("PASS: deterministic preparation, strict bindings, judgment validation, and abstention metrics")
 
 

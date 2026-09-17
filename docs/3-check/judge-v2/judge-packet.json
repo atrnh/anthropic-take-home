@@ -1,0 +1,704 @@
+{
+  "cases": [
+    {
+      "id": "6597390db75cdb0cc6b726c0511191a2fdd0fa1400641ae589563f9f28878533",
+      "left": {
+        "context_end": 70,
+        "context_start": 54,
+        "context_text": "| ------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- |\n| **Skills**         | Specialized instructions Claude follows when relevant tasks arise | A \"brand voice\" skill that activates when drafting external communications      |\n| **MCP connectors** | Access to external tools and data                                 | A connector to a CRM that lets Claude read and update deal records              |\n| **Slash commands** | Explicit, user-triggered workflows                                | `/sales:prospect-research` to kick off a structured research workflow           |\n| **Sub-agents**     | Delegated workstreams that run in parallel                        | A sub-agent that handles competitive analysis while another drafts the proposal |\n\n## Availability\n\nPlugin support in Cowork is available as a beta for all paid Claude users. Plugins are currently saved locally to your machine. Org-wide sharing and management are coming in the weeks ahead.\n\n| Platform          | Plugin support                                                     |\n| ----------------- | ------------------------------------------------------------------ |\n| **Claude Code**   | Full plugin support — create, install, and use plugins             |\n| **Claude Cowork** | Full plugin support — plugins extend agentic, multi-step workflows |\n\nLooking to submit your own plugin? See [Submitting your plugin](/docs/plugins/submit#submitting-your-plugin).\n",
+        "end": 62,
+        "heading_context": [
+          "Plugins overview",
+          "Availability"
+        ],
+        "path": "plugins/overview.md",
+        "start": 62,
+        "text": "Plugin support in Cowork is available as a beta for all paid Claude users. Plugins are currently saved locally to your machine. Org-wide sharing and management are coming in the weeks ahead."
+      },
+      "right": {
+        "context_end": 94,
+        "context_start": 78,
+        "context_text": "| Marketplace repository archive     | 512 MB |\n| Plugins per marketplace            | 500    |\n| Marketplaces you can add           | 25     |\n\nThe in-app skill viewer previews individual files up to 1 MB. Larger files appear in the file list as \"too large to preview\" but are still available to Claude at runtime.\n\n## Plugins managed by your organization\n\nOn Team and Enterprise plans, administrators can require certain plugins for everyone in the organization. Required plugins install automatically and show **This plugin is required by your organization**; you can't remove them.\n\nFor how administrators provision plugins, see [MCP, plugins, skills, and hooks](/docs/cowork/3p/extensions) in the deployment guide.\n\n## Update and remove plugins\n\nCowork checks for plugin updates from the marketplace they came from. If you've edited a plugin's files locally, Cowork detects the change and warns you before an update would overwrite it.\n\nTo remove a plugin you installed, open it under **Customize → Plugins** and click **Uninstall**. Organization-managed plugins can only be removed by an administrator.",
+        "end": 86,
+        "heading_context": [
+          "Install plugins",
+          "Plugins managed by your organization"
+        ],
+        "path": "cowork/guide/plugins.md",
+        "start": 86,
+        "text": "On Team and Enterprise plans, administrators can require certain plugins for everyone in the organization. Required plugins install automatically and show **This plugin is required by your organization**; you can't remove them."
+      }
+    },
+    {
+      "id": "10433465d06e14b404e1d3540607d19b1b34992fcddd18257ad7bd7e1e8ca6c2",
+      "left": {
+        "context_end": 21,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Authentication for connectors\n\n> OAuth and authentication options for MCP servers in Claude\n\nAuthentication is the most common source of partner questions. Claude's auth support differs in a few places from the generic MCP specification, so read this page even if you're already familiar with MCP auth.\n\n## Supported authentication types\n\nClaude supports the following authentication types for remote MCP servers. The same infrastructure backs Claude.ai, Claude Desktop, Claude mobile, Claude Code, and Cowork.\n\n| Type                    | Description                                                                                                                                             | Availability                                              |\n| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |\n| `oauth_dcr`             | OAuth 2.0 with Dynamic Client Registration ([RFC 7591](https://www.rfc-editor.org/rfc/rfc7591))                                                         | Supported out of the box                                  |\n| `oauth_cimd`            | OAuth 2.0 with [Client ID Metadata Document](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization#client-id-metadata-documents) | Supported out of the box                                  |\n| `oauth_anthropic_creds` | OAuth 2.0 with [Anthropic-held client credentials](#anthropic-held-client-credentials)                                                                  | Contact `mcp-review@anthropic.com`                        |\n| `custom_connection`     | Custom URL or OAuth client credentials [entered at connection time](#credentials-entered-at-connection-time)                                            | Contact `mcp-review@anthropic.com`                        |\n| `static_headers`        | Fixed credential (API key or bearer token) entered by an organization administrator as a request header when adding the connector                       | Beta                                                      |",
+        "end": 13,
+        "heading_context": [
+          "Authentication for connectors"
+        ],
+        "path": "connectors/building/authentication.md",
+        "start": 9,
+        "text": "Authentication is the most common source of partner questions. Claude's auth support differs in a few places from the generic MCP specification, so read this page even if you're already familiar with MCP auth.\n\n## Supported authentication types\n\nClaude supports the following authentication types for remote MCP servers. The same infrastructure backs Claude.ai, Claude Desktop, Claude mobile, Claude Code, and Cowork."
+      },
+      "right": {
+        "context_end": 19,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Lazy authentication for MCP servers\n\n> Let users call public tools immediately and defer OAuth until a protected tool is actually invoked.\n\nNot every tool on an MCP server needs the user's identity. A product catalog can be browsed anonymously; an order history cannot. **Lazy authentication** (sometimes called *mixed auth*) lets a single server expose both: unauthenticated clients can connect, list tools, and call public ones, and the server only challenges for credentials when a protected tool is invoked. The challenge follows the [MCP authorization specification](https://modelcontextprotocol.io/specification/latest/basic/authorization).\n\nIn Claude, the challenge surfaces as an inline **Connect** card in the conversation. The user authenticates in a popup, Claude retries the same tool call automatically with the new token, and the turn continues — no context is lost.\n\n<Note>\n  If the user's organization has [Enterprise Managed Auth](/docs/connectors/building/enterprise-managed-auth) configured for your connector, the `401` triggers a silent token exchange instead of the **Connect** card. The tool call is retried automatically and the user sees no prompt.\n</Note>\n\nThe examples below are drawn from a single-file Express app using `@modelcontextprotocol/sdk` over Streamable HTTP.\n\n## Return 401, not a tool error",
+        "end": 11,
+        "heading_context": [
+          "Lazy authentication for MCP servers"
+        ],
+        "path": "connectors/building/lazy-authentication.md",
+        "start": 9,
+        "text": "Not every tool on an MCP server needs the user's identity. A product catalog can be browsed anonymously; an order history cannot. **Lazy authentication** (sometimes called *mixed auth*) lets a single server expose both: unauthenticated clients can connect, list tools, and call public ones, and the server only challenges for credentials when a protected tool is invoked. The challenge follows the [MCP authorization specification](https://modelcontextprotocol.io/specification/latest/basic/authorization).\n\nIn Claude, the challenge surfaces as an inline **Connect** card in the conversation. The user authenticates in a popup, Claude retries the same tool call automatically with the new token, and the turn continues — no context is lost."
+      }
+    },
+    {
+      "id": "510e6218be0c13de3cf961624d17c8efd2d9abdf4c4dcc4e6266d990df6db6f2",
+      "left": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Plugins overview\n\n> Extend Claude with reusable capability packages that bundle MCP connectors, skills, slash commands, and sub-agents\n\nPlugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit — turning Claude into a specialist tailored to your role, team, and company.\n\n## What plugins do\n\nPlugins let you define how you like work done, which tools and data to pull from, how to handle critical workflows, and what slash commands to expose so your team gets consistent outcomes. Every component is file-based, so plugins are easy to build, edit, and share.\n\nAs your team builds and shares plugins, Claude becomes a cross-functional expert. Best practices get baked into every interaction, so leaders and admins can spend less time enforcing processes and more time improving them.\n\n## Plugin directory",
+        "end": 9,
+        "heading_context": [
+          "Plugins overview"
+        ],
+        "path": "plugins/overview.md",
+        "start": 9,
+        "text": "Plugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit — turning Claude into a specialist tailored to your role, team, and company."
+      },
+      "right": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Install plugins\n\n> Add packaged skills, connectors, and agents to Cowork from the plugin marketplace or a file.\n\nA plugin is a package that extends what Claude can do in Cowork. Installing one can add skills, MCP connectors, subagents, slash commands, or hooks in a single step. Plugins come from the marketplace, from your organization, or from a file you upload.\n\nPlugins are available in Cowork and Code. They aren't used in Chat.\n\n## What a plugin can contain\n\nA plugin's manifest declares any combination of the following.\n\n| Component  | What it adds                                               |",
+        "end": 9,
+        "heading_context": [
+          "Install plugins"
+        ],
+        "path": "cowork/guide/plugins.md",
+        "start": 9,
+        "text": "A plugin is a package that extends what Claude can do in Cowork. Installing one can add skills, MCP connectors, subagents, slash commands, or hooks in a single step. Plugins come from the marketplace, from your organization, or from a file you upload."
+      }
+    },
+    {
+      "id": "cdd78f353ae9f72459b4760ba7380fe95aa576ce6eb8e5b10e488525af2cd06f",
+      "left": {
+        "context_end": 55,
+        "context_start": 18,
+        "context_text": "| ---------- | ---------------------------------------------------------- |\n| Skills     | Reusable instructions that teach Claude a workflow         |\n| Connectors | MCP servers that give Claude access to an external service |\n| Agents     | Specialized subagents Claude can delegate to               |\n| Hooks      | Scripts that run at defined points in a session            |\n\nAfter installing, open the plugin to see what it provides. Skills and agents appear as tabs; connectors and hooks have their own pages.\n\n## Install a plugin\n\nOpen **Customize** in the sidebar, then **Plugins**.\n\n<Steps>\n  <Step title=\"Browse the marketplace\">\n    Select **Browse plugins** to see available plugins. The default marketplace\n    is Anthropic's official catalog; you can add other marketplaces by URL.\n  </Step>\n\n  <Step title=\"Install\">\n    Select a plugin and click **Install**. If the plugin includes a connector\n    that needs authentication, you're prompted to sign in.\n  </Step>\n\n  <Step title=\"Review components\">\n    Open the installed plugin to see its skills, connectors, agents, and hooks.\n    Enable or disable individual components as needed.\n  </Step>\n</Steps>\n\nTo install from a file instead, select the upload option on the Plugins page and select the plugin package.\n\n## Use a Git repository as a marketplace\n\nA Git repository that contains plugin packages can serve as a marketplace. This is the typical way teams distribute their own plugins without publishing to the public catalog. Repositories on GitHub (including GitHub Enterprise) are supported; public repositories on GitLab and Bitbucket also work.\n\n<Steps>\n  <Step title=\"Add the repository\">\n    On the Plugins page, select **Add marketplace** and enter the repository's",
+        "end": 47,
+        "heading_context": [
+          "Install plugins",
+          "What a plugin can contain"
+        ],
+        "path": "cowork/guide/plugins.md",
+        "start": 26,
+        "text": "## Install a plugin\n\nOpen **Customize** in the sidebar, then **Plugins**.\n\n<Steps>\n  <Step title=\"Browse the marketplace\">\n    Select **Browse plugins** to see available plugins. The default marketplace\n    is Anthropic's official catalog; you can add other marketplaces by URL.\n  </Step>\n\n  <Step title=\"Install\">\n    Select a plugin and click **Install**. If the plugin includes a connector\n    that needs authentication, you're prompted to sign in.\n  </Step>\n\n  <Step title=\"Review components\">\n    Open the installed plugin to see its skills, connectors, agents, and hooks.\n    Enable or disable individual components as needed.\n  </Step>\n</Steps>\n\nTo install from a file instead, select the upload option on the Plugins page and select the plugin package."
+      },
+      "right": {
+        "context_end": 38,
+        "context_start": 16,
+        "context_text": "\n* Your administrators add plugins for your organization, and some of them install automatically.\n* You upload a plugin file you have.\n* You ask Claude to create a plugin with you.\n* You add a plugin marketplace and install plugins from it.\n\nClaude for Government does not include a public plugin marketplace; your administrators add your organization's plugins. You can also add a plugin marketplace of your own from **Browse plugins**. Your deployment's network controls determine whether a marketplace can be downloaded.\n\n## Find and install plugins\n\nOpen **Customize** in the sidebar, then **Plugins**. The organization plugins you have installed are listed under **Organization plugins**. To find the rest, select **Browse plugins** and open the **Organization** tab, which lists every plugin your administrators have made available to you.\n\nA plugin your administrators set to install automatically is already installed. A plugin they offer for you to choose stays available on the **Organization** tab until you install it.\n\nTo install a plugin from a file, select **Add plugin**, then **Upload plugin**, and choose the plugin's `.zip` file. Claude Desktop shows a notice reminding you to install only plugins you trust, since uploaded plugins are not controlled by Anthropic. To have Claude build one, select **Add plugin**, then **Create with Claude**, and describe the plugin you want. Claude builds it for you, and you install the result.\n\n## Manage installed plugins\n\nOpen an installed plugin to see the skills, slash commands, sub-agents, and hooks it provides, and turn individual components on or off. To remove a plugin, open it and click **Uninstall**. Most plugins you uninstall stay removed for you, including ones your administrators set to install automatically. A plugin your organization requires cannot be removed, and Claude Desktop tells you it is required by your organization if you try.\n\nA plugin you upload or create is added only on the device you are using.\n\n## What plugins add in Claude for Government",
+        "end": 30,
+        "heading_context": [
+          "Plugins in Claude Desktop",
+          "Where plugins come from"
+        ],
+        "path": "government/desktop/plugins.md",
+        "start": 24,
+        "text": "## Find and install plugins\n\nOpen **Customize** in the sidebar, then **Plugins**. The organization plugins you have installed are listed under **Organization plugins**. To find the rest, select **Browse plugins** and open the **Organization** tab, which lists every plugin your administrators have made available to you.\n\nA plugin your administrators set to install automatically is already installed. A plugin they offer for you to choose stays available on the **Organization** tab until you install it.\n\nTo install a plugin from a file, select **Add plugin**, then **Upload plugin**, and choose the plugin's `.zip` file. Claude Desktop shows a notice reminding you to install only plugins you trust, since uploaded plugins are not controlled by Anthropic. To have Claude build one, select **Add plugin**, then **Create with Claude**, and describe the plugin you want. Claude builds it for you, and you install the result."
+      }
+    },
+    {
+      "id": "a62a853864f90235a005eb6271a19e753466caa88863c7ffc73435821e05af3d",
+      "left": {
+        "context_end": 40,
+        "context_start": 26,
+        "context_text": "Open **Customize** in the sidebar, then **Plugins**. The organization plugins you have installed are listed under **Organization plugins**. To find the rest, select **Browse plugins** and open the **Organization** tab, which lists every plugin your administrators have made available to you.\n\nA plugin your administrators set to install automatically is already installed. A plugin they offer for you to choose stays available on the **Organization** tab until you install it.\n\nTo install a plugin from a file, select **Add plugin**, then **Upload plugin**, and choose the plugin's `.zip` file. Claude Desktop shows a notice reminding you to install only plugins you trust, since uploaded plugins are not controlled by Anthropic. To have Claude build one, select **Add plugin**, then **Create with Claude**, and describe the plugin you want. Claude builds it for you, and you install the result.\n\n## Manage installed plugins\n\nOpen an installed plugin to see the skills, slash commands, sub-agents, and hooks it provides, and turn individual components on or off. To remove a plugin, open it and click **Uninstall**. Most plugins you uninstall stay removed for you, including ones your administrators set to install automatically. A plugin your organization requires cannot be removed, and Claude Desktop tells you it is required by your organization if you try.\n\nA plugin you upload or create is added only on the device you are using.\n\n## What plugins add in Claude for Government\n\nA plugin adds its skills, slash commands, sub-agents, and hooks, and its hooks run on your machine at defined points during a session. The connectors you can use are the ones your administrators provide, which appear under **Customize**, then **Connectors**. Connectors declared by a plugin you add yourself are not added to Claude Desktop's connectors, and a local [MCP server](/docs/connectors/overview) declared by a plugin never runs.",
+        "end": 34,
+        "heading_context": [
+          "Plugins in Claude Desktop",
+          "Manage installed plugins"
+        ],
+        "path": "government/desktop/plugins.md",
+        "start": 34,
+        "text": "Open an installed plugin to see the skills, slash commands, sub-agents, and hooks it provides, and turn individual components on or off. To remove a plugin, open it and click **Uninstall**. Most plugins you uninstall stay removed for you, including ones your administrators set to install automatically. A plugin your organization requires cannot be removed, and Claude Desktop tells you it is required by your organization if you try."
+      },
+      "right": {
+        "context_end": 73,
+        "context_start": 59,
+        "context_text": "## Where plugins are added\n\nPlugins are added at the tenant or organization level. Plugins the tenant adds flow to every organization and appear on each organization's **Plugins** card under **From levels above**, as described under [Tool and connector cards](/docs/government/config/settings#tool-and-connector-cards). A tenant administrator can lock the plugin list, which makes it read-only for organizations, following the lock behavior in [How Config works](/docs/government/config/overview#locks). [Group levels](/docs/government/config/overview#group-specific-settings) inherit the plugins of their tenant or organization, so the **Plugins** card is read-only when you view a group.\n\n## Update or remove a plugin\n\nTo update a plugin, upload the new version's archive. Because its name matches the plugin you added, the upload updates that plugin, the preview marks the update before you save, and members who have the plugin receive the new version automatically.\n\nTo remove a plugin, click its remove icon and save the change. Removing a plugin stops delivering it, and there is not currently a way to uninstall a plugin remotely from members' devices, so members who already installed it keep their copy until they remove it themselves, as described under [Tool and connector cards](/docs/government/config/settings#tool-and-connector-cards).\n\n## Connector tool policies for members\n\nYou add and edit connectors on the **Connectors** card, and for each one you choose the products that receive it and set a policy for each of its tools. See [Connectors](/docs/government/connectors/overview) for the three-step wizard.\n\nOn Claude Desktop, that tool policy shapes what members experience. A tool you switch off is blocked, so Claude cannot use it. A tool you switch on is available and asks the member on every use, and members are not offered a lasting approval for it. A tool you do not list is left to the member to turn on or off, and its approval prompts follow the member's own choices, which can include lasting approval.",
+        "end": 67,
+        "heading_context": [
+          "Manage plugins and connectors",
+          "Update or remove a plugin"
+        ],
+        "path": "government/config/plugins-and-connectors.md",
+        "start": 67,
+        "text": "To remove a plugin, click its remove icon and save the change. Removing a plugin stops delivering it, and there is not currently a way to uninstall a plugin remotely from members' devices, so members who already installed it keep their copy until they remove it themselves, as described under [Tool and connector cards](/docs/government/config/settings#tool-and-connector-cards)."
+      }
+    },
+    {
+      "id": "1745e3aa14f24a5946ca9fe5d34b649d86013ab3fe2165c857fea96f327bc20c",
+      "left": {
+        "context_end": 57,
+        "context_start": 41,
+        "context_text": "<Note>\n  For technical details on plugin structure, manifests, and configuration, see the [Claude Code plugins reference](https://code.claude.com/docs/en/plugins-reference).\n</Note>\n\n## Plugins in Cowork\n\nPlugins are fully supported in [Cowork](https://support.claude.com/en/articles/13345190-getting-started-with-cowork), Anthropic's agentic workspace for complex, multi-step knowledge work. In Cowork, Claude runs inside an isolated virtual machine environment, executes tasks in parallel workstreams, and writes outputs directly to your file system — and plugins extend all of that capability.\n\nA sales plugin, for example, could connect Claude to your CRM and knowledge base, teach it your sales process, and give you slash commands for everything from prospect research to call follow-ups. You define what goes in the plugin once, and Claude pulls from that context whenever it's relevant.\n\n## How plugins compose capabilities\n\n| Plugin component   | What it adds                                                      | Example                                                                         |\n| ------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- |\n| **Skills**         | Specialized instructions Claude follows when relevant tasks arise | A \"brand voice\" skill that activates when drafting external communications      |\n| **MCP connectors** | Access to external tools and data                                 | A connector to a CRM that lets Claude read and update deal records              |\n| **Slash commands** | Explicit, user-triggered workflows                                | `/sales:prospect-research` to kick off a structured research workflow           |",
+        "end": 49,
+        "heading_context": [
+          "Plugins overview",
+          "Plugins in Cowork"
+        ],
+        "path": "plugins/overview.md",
+        "start": 49,
+        "text": "A sales plugin, for example, could connect Claude to your CRM and knowledge base, teach it your sales process, and give you slash commands for everything from prospect research to call follow-ups. You define what goes in the plugin once, and Claude pulls from that context whenever it's relevant."
+      },
+      "right": {
+        "context_end": 41,
+        "context_start": 25,
+        "context_text": "<Warning>\n  Exercise caution when installing community plugins. Always review a plugin's permissions, connected services, and data access before use.\n</Warning>\n\n## What makes a good plugin\n\nThe best plugins bundle related capabilities together into a coherent package that solves a specific job function or workflow end-to-end. Rather than exposing a single tool, a good plugin combines skills, connectors, slash commands, and sub-agents so Claude has everything it needs to handle a category of work.\n\nFor example, a sales plugin might bundle a CRM connector, a skill that teaches Claude your sales process, slash commands for common tasks like prospect research and call follow-ups, and a sub-agent that handles competitive analysis in parallel. Together, these components make Claude a specialist — individually, they're just building blocks.\n\nPlugins can include any combination of:\n\n* **Skills** — Task-specific instructions that Claude activates dynamically based on context\n* **MCP connectors** — Connections to external tools and data sources. Plugins can contain any MCP, including remote MCPs, local MCPs, and MCPBs. The MCP configuration within a plugin is highly customizable.\n* **Slash commands** — User-invoked commands for triggering specific workflows\n* **Sub-agents** — Custom agent definitions for delegating complex work\n",
+        "end": 33,
+        "heading_context": [
+          "Submitting your plugin",
+          "What makes a good plugin"
+        ],
+        "path": "plugins/submit.md",
+        "start": 33,
+        "text": "For example, a sales plugin might bundle a CRM connector, a skill that teaches Claude your sales process, slash commands for common tasks like prospect research and call follow-ups, and a sub-agent that handles competitive analysis in parallel. Together, these components make Claude a specialist — individually, they're just building blocks."
+      }
+    },
+    {
+      "id": "6e2615cafe30a79fb26f0fe04d5fd0429983161830d39ca82e61c2c56eb098e8",
+      "left": {
+        "context_end": 29,
+        "context_start": 13,
+        "context_text": "</Note>\n\n## Connect Gmail\n\n1. In claude.ai, go to **Customize > Connectors**.\n2. Find Gmail and click **Connect**.\n3. Sign in to your Google account and grant the requested permissions.\n\nOn Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started).\n\n## How to use Gmail integration\n\n### 1. Ask a question\n\nSimply ask Claude a question that needs email information. Claude automatically detects when email data is needed.\n\n**Example questions:**",
+        "end": 21,
+        "heading_context": [
+          "Gmail integration",
+          "Connect Gmail"
+        ],
+        "path": "connectors/google/gmail.md",
+        "start": 21,
+        "text": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started)."
+      },
+      "right": {
+        "context_end": 29,
+        "context_start": 13,
+        "context_text": "</Note>\n\n## Connect Google Calendar\n\n1. In claude.ai, go to **Customize > Connectors**.\n2. Find Google Calendar and click **Connect**.\n3. Sign in to your Google account and grant the requested permissions.\n\nOn Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started).\n\n## How to use Calendar integration\n\n### 1. Ask about your schedule\n\nSimply ask Claude questions about your calendar. Claude automatically detects when calendar data is needed.\n\n**Example questions:**",
+        "end": 21,
+        "heading_context": [
+          "Google Calendar integration",
+          "Connect Google Calendar"
+        ],
+        "path": "connectors/google/calendar.md",
+        "start": 21,
+        "text": "On Team and Enterprise plans, an Owner or Primary Owner must enable the integration for your organization before it appears in your connector list. For the full walkthrough, including troubleshooting, see [Get started with connectors](/docs/connectors/getting-started)."
+      }
+    },
+    {
+      "id": "002f42fa853714eb974467a8659afc9964de28d62570351cfcff8aee98e0a693",
+      "left": {
+        "context_end": 97,
+        "context_start": 81,
+        "context_text": "</CodeGroup>\n\nSave and restart the desktop app to connect.\n\n### See it in action\n\nOnce your local server is connected, prompt Claude to use it. For example, with the customer segmentation server, ask Claude to show you recent customer data.\n\nClaude will prompt you for permission to display the App. Click \"Always allow\", and you'll see the MCP App render inline in the conversation.\n\n## Build your own MCP App\n\nReady to add an MCP App to your own MCP server? Here are the key resources:\n\n* [MCP Apps Quickstart](https://modelcontextprotocol.github.io/ext-apps/api/documents/Quickstart.html) - Step-by-step guide to building your first MCP App\n* [SDK API Documentation](https://modelcontextprotocol.github.io/ext-apps/api/index.html) - Full API reference\n* [Example implementations](https://github.com/modelcontextprotocol/ext-apps/tree/main/examples) - Vanilla JS, React, Vue, Svelte, and more",
+        "end": 89,
+        "heading_context": [
+          "Get started with MCP Apps",
+          "Try an example MCP App",
+          "See it in action"
+        ],
+        "path": "connectors/building/mcp-apps/getting-started.md",
+        "start": 89,
+        "text": "Claude will prompt you for permission to display the App. Click \"Always allow\", and you'll see the MCP App render inline in the conversation."
+      },
+      "right": {
+        "context_end": 88,
+        "context_start": 72,
+        "context_text": "### Viewing connection status\n\n1. Click Claude in your Slack sidebar\n2. Go to the \"Home\" tab\n3. View your connection details\n\n### Disconnecting\n\n**Claude app**: Go to Claude's Home tab and click the red \"Disconnect\" button.\n\n**Slack connector**: Go to [claude.ai/customize/connectors](https://claude.ai/customize/connectors), find Slack, and select \"Disconnect.\"\n\n<Note>\n  Disconnecting removes your account connection and deletes past conversations within 30 days.\n</Note>\n\n## Privacy & data",
+        "end": 80,
+        "heading_context": [
+          "Slack integration",
+          "Managing connections",
+          "Disconnecting"
+        ],
+        "path": "connectors/slack/index.md",
+        "start": 80,
+        "text": "**Claude app**: Go to Claude's Home tab and click the red \"Disconnect\" button."
+      }
+    },
+    {
+      "id": "00202bd2f1ef5c73d995efc543320972668c3923e3cb657753c0885f3090c392",
+      "left": {
+        "context_end": 358,
+        "context_start": 342,
+        "context_text": "    export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)\n    docker compose up -d cloudflared\n    ```\n\n    Revoke the API key and run `unset API_TOKEN` once rotation completes. For a multi-host deployment, setup writes the new token only to the `data/` directory on the host where it ran, so copy the updated `data/` directory (at minimum `data/tunnel-token`) to every other host that runs a replica. Then repeat the last two commands on each of those hosts so every replica restarts with the new token.\n  </Tab>\n</Tabs>\n\n**Server certificate.** The certificate the proxy presents is valid for 90 days, and you are responsible for renewing it before it expires. Renewal is local. It signs a new certificate with the CA already stored in your deployment, makes no API calls, and needs no API key. The proxy reloads the certificate file automatically, so no restart is required.\n\n<Tabs>\n  <Tab title=\"Helm\">\n    The chart deploys a CronJob that runs daily and renews the certificate once it is within 30 days of expiry. Monitor the CronJob and the certificate's expiry date to confirm renewal completes.\n  </Tab>\n\n  <Tab title=\"Docker Compose\">\n    Run the renewal from the deployment directory. With `--renew-before=720h` the command does nothing while more than 30 days of validity remain, so it is safe to run on a schedule such as a daily cron entry.",
+        "end": 350,
+        "heading_context": [
+          "Set up an MCP tunnel",
+          "Rotate credentials"
+        ],
+        "path": "connectors/mcp-tunnels/setup.md",
+        "start": 350,
+        "text": "**Server certificate.** The certificate the proxy presents is valid for 90 days, and you are responsible for renewing it before it expires. Renewal is local. It signs a new certificate with the CA already stored in your deployment, makes no API calls, and needs no API key. The proxy reloads the certificate file automatically, so no restart is required."
+      },
+      "right": {
+        "context_end": 366,
+        "context_start": 350,
+        "context_text": "**Server certificate.** The certificate the proxy presents is valid for 90 days, and you are responsible for renewing it before it expires. Renewal is local. It signs a new certificate with the CA already stored in your deployment, makes no API calls, and needs no API key. The proxy reloads the certificate file automatically, so no restart is required.\n\n<Tabs>\n  <Tab title=\"Helm\">\n    The chart deploys a CronJob that runs daily and renews the certificate once it is within 30 days of expiry. Monitor the CronJob and the certificate's expiry date to confirm renewal completes.\n  </Tab>\n\n  <Tab title=\"Docker Compose\">\n    Run the renewal from the deployment directory. With `--renew-before=720h` the command does nothing while more than 30 days of validity remain, so it is safe to run on a schedule such as a daily cron entry.\n\n    ```bash theme={null}\n    docker compose run --rm setup renew-cert --output=dir:/data --renew-before=720h\n    ```\n  </Tab>\n</Tabs>\n\n## Remove a tunnel",
+        "end": 358,
+        "heading_context": [
+          "Set up an MCP tunnel",
+          "Rotate credentials"
+        ],
+        "path": "connectors/mcp-tunnels/setup.md",
+        "start": 358,
+        "text": "    Run the renewal from the deployment directory. With `--renew-before=720h` the command does nothing while more than 30 days of validity remain, so it is safe to run on a schedule such as a daily cron entry."
+      }
+    },
+    {
+      "id": "9f82abcdff7391141889ac6124b332af2bdc4c261db460e14d1941925060665f",
+      "left": {
+        "context_end": 33,
+        "context_start": 15,
+        "context_text": "Plugin updates are pushed via your GitHub repo. CI mirrors changes to the public marketplace and runs automated screening on each update.\n\n## Update your listing\n\nEdit your description, categories, icon, and other listing metadata from the submissions dashboard at [Organization settings > Directory](https://claude.ai/admin-settings/directory/submissions) in Claude.ai. See [Managing your listing](/docs/connectors/building/managing-your-listing) for what you can edit directly and which changes require review.\n\n## Slugs are permanent\n\nYour directory slug is fixed after publication. It determines your connector's permanent listing URL:\n\n```text theme={null}\nhttps://claude.ai/directory/connectors/SLUG\n```\n\nShare this URL from your own documentation or a \"Connect to Claude\" button to send users directly to your listing. Display names can change via the dashboard; the URL slug cannot.\n\n## Delist your connector\n\nTo voluntarily remove your connector from the directory, email `mcp-review@anthropic.com`.",
+        "end": 29,
+        "heading_context": [
+          "Manage your listing after publishing",
+          "Slugs are permanent"
+        ],
+        "path": "connectors/building/after-publishing.md",
+        "start": 23,
+        "text": "Your directory slug is fixed after publication. It determines your connector's permanent listing URL:\n\n```text theme={null}\nhttps://claude.ai/directory/connectors/SLUG\n```\n\nShare this URL from your own documentation or a \"Connect to Claude\" button to send users directly to your listing. Display names can change via the dashboard; the URL slug cannot."
+      },
+      "right": {
+        "context_end": 90,
+        "context_start": 80,
+        "context_text": "Open your submission's detail page to edit the listing. You can change directly:\n\n* **Listing metadata**: tagline, description, categories, documentation and privacy policy links, support contact, and icon\n* **Company details**: company name and website\n* **Display name**: editable, but changing the name of a published server affects existing users and requires re-review\n\nSave your edits as you go, then submit them for review. Submitted changes show as pending until a reviewer approves them, and you can discard pending changes before they're approved.\n\nThe URL slug is locked: it's permanent after publication, since it determines your listing URL.\n\nFor other edits or escalations, email `mcp-review@anthropic.com`.",
+        "end": 88,
+        "heading_context": [
+          "Managing your directory listing",
+          "Edit your listing"
+        ],
+        "path": "connectors/building/managing-your-listing.md",
+        "start": 88,
+        "text": "The URL slug is locked: it's permanent after publication, since it determines your listing URL."
+      }
+    },
+    {
+      "id": "6c09f530a8e793e4cd028cd31da89d9ecaba21a6ce46bb5e28e4199ce33cfbdc",
+      "left": {
+        "context_end": 59,
+        "context_start": 43,
+        "context_text": "| Comments/Suggestions | ❌         | Not extracted                    |\n\n<Tip>\n  Convert .docx files by opening in Google Docs, clicking \"File,\" then \"Save as Google Docs.\"\n</Tip>\n\n## Key features\n\n* **Live sync**: Documents continue syncing with the latest Google Drive version\n* **Multiple documents**: Add multiple docs if they fit the context window\n* **Permission-based**: You can only sync documents you have permission to view\n\n## Frequently asked questions\n\n<AccordionGroup>\n  <Accordion title=\"Do documents update after I add them?\">\n    Yes, documents continue syncing with the latest Google Drive version.",
+        "end": 51,
+        "heading_context": [
+          "Google Drive integration",
+          "Key features"
+        ],
+        "path": "connectors/google/drive.md",
+        "start": 51,
+        "text": "* **Live sync**: Documents continue syncing with the latest Google Drive version"
+      },
+      "right": {
+        "context_end": 68,
+        "context_start": 50,
+        "context_text": "\n* **Live sync**: Documents continue syncing with the latest Google Drive version\n* **Multiple documents**: Add multiple docs if they fit the context window\n* **Permission-based**: You can only sync documents you have permission to view\n\n## Frequently asked questions\n\n<AccordionGroup>\n  <Accordion title=\"Do documents update after I add them?\">\n    Yes, documents continue syncing with the latest Google Drive version.\n  </Accordion>\n\n  <Accordion title=\"Can I add multiple documents?\">\n    Yes, you can add multiple docs as long as they fit within the context window.\n  </Accordion>\n\n  <Accordion title=\"What happens if I lose access to a document?\">\n    You'll lose document preview access but your conversation history remains.\n  </Accordion>",
+        "end": 60,
+        "heading_context": [
+          "Google Drive integration",
+          "Frequently asked questions"
+        ],
+        "path": "connectors/google/drive.md",
+        "start": 58,
+        "text": "  <Accordion title=\"Do documents update after I add them?\">\n    Yes, documents continue syncing with the latest Google Drive version.\n  </Accordion>"
+      }
+    },
+    {
+      "id": "00c69b9dafbd553c2bd3253baf76c8a7c265fb11e586198516f4b015ee6421db",
+      "left": {
+        "context_end": 28,
+        "context_start": 12,
+        "context_text": "\nAny Claude account (Free, Pro, Max, Team, or Enterprise) can add a custom connector. Go to **Customize > Connectors**, select **Add custom connector**, and enter your server's URL. Custom connectors use the exact same runtime as directory connectors, so what works here will work after publication.\n\n## Test a local server\n\nTo test a server running on your machine, expose it as a public URL with a tunnel such as [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) or `ngrok`, then add the tunnel URL as a custom connector. This is the recommended pattern for iterating on MCP Apps as well.\n\n<Warning>\n  A tunnel exposes your local server to the public internet. Keep authentication enabled on your server while tunneling, and shut the tunnel down when you're done testing.\n</Warning>\n\n## Validate with MCP Inspector\n\nUse the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) to verify protocol compliance, exercise your auth flow, and inspect tool schemas before connecting to Claude.\n\n## Detect Claude as the client\n",
+        "end": 20,
+        "heading_context": [
+          "Testing your connector",
+          "Test a local server"
+        ],
+        "path": "connectors/building/testing.md",
+        "start": 20,
+        "text": "  A tunnel exposes your local server to the public internet. Keep authentication enabled on your server while tunneling, and shut the tunnel down when you're done testing."
+      },
+      "right": {
+        "context_end": 57,
+        "context_start": 41,
+        "context_text": "* resolves to a loopback or link-local address\n* resolves to a mix of public and non-public addresses — every returned address must be globally routable\n* has no `A` record from public DNS — connectors are IPv4-only, so a hostname that only publishes `AAAA` records can't be reached\n\n**Common gotchas:**\n\n* **Works in Claude Code or `curl` but not claude.ai.** The CLI and `curl` connect from your machine, while claude.ai connects from Anthropic's servers. If your hostname resolves differently inside and outside your network (split-horizon DNS), claude.ai may be getting a private IP.\n* **Dynamic DNS providers.** Dynamic DNS hostnames often resolve to a home network behind NAT or carrier-grade NAT.\n* **Internal corporate DNS.** A hostname that resolves on your VPN won't resolve to a routable address from the public internet.\n\n**How to check:** Run `dig +short your-server.example.com` from a machine outside your network, or use a public DNS lookup service. Every returned address must be globally routable.\n\n**How to fix:** Expose your server through a publicly-routable endpoint, such as a cloud host with a public IP, a public reverse proxy, or a tunnel. See [test a local server](/docs/connectors/building/testing#test-a-local-server) for the recommended tunnel setup.\n\n### 2. Firewall or WAF blocks Anthropic's traffic\n\nIf your hostname resolves correctly but a CDN, WAF, bot-management rule, or rate limiter in front of your server blocks the request, the connection fails before your application sees it.",
+        "end": 49,
+        "heading_context": [
+          "Troubleshooting connectors",
+          "\"Couldn't reach the MCP server\"",
+          "1. Hostname resolves to a private IP"
+        ],
+        "path": "connectors/building/troubleshooting.md",
+        "start": 49,
+        "text": "* **Internal corporate DNS.** A hostname that resolves on your VPN won't resolve to a routable address from the public internet."
+      }
+    },
+    {
+      "id": "051fa6b200fc5cc96270a075c474b58f9163dab5983f29f0baeb60a28d9edc5e",
+      "left": {
+        "context_end": 40,
+        "context_start": 32,
+        "context_text": "## Manage installed plugins\n\nOpen an installed plugin to see the skills, slash commands, sub-agents, and hooks it provides, and turn individual components on or off. To remove a plugin, open it and click **Uninstall**. Most plugins you uninstall stay removed for you, including ones your administrators set to install automatically. A plugin your organization requires cannot be removed, and Claude Desktop tells you it is required by your organization if you try.\n\nA plugin you upload or create is added only on the device you are using.\n\n## What plugins add in Claude for Government\n\nA plugin adds its skills, slash commands, sub-agents, and hooks, and its hooks run on your machine at defined points during a session. The connectors you can use are the ones your administrators provide, which appear under **Customize**, then **Connectors**. Connectors declared by a plugin you add yourself are not added to Claude Desktop's connectors, and a local [MCP server](/docs/connectors/overview) declared by a plugin never runs.",
+        "end": 40,
+        "heading_context": [
+          "Plugins in Claude Desktop",
+          "What plugins add in Claude for Government"
+        ],
+        "path": "government/desktop/plugins.md",
+        "start": 40,
+        "text": "A plugin adds its skills, slash commands, sub-agents, and hooks, and its hooks run on your machine at defined points during a session. The connectors you can use are the ones your administrators provide, which appear under **Customize**, then **Connectors**. Connectors declared by a plugin you add yourself are not added to Claude Desktop's connectors, and a local [MCP server](/docs/connectors/overview) declared by a plugin never runs."
+      },
+      "right": {
+        "context_end": 25,
+        "context_start": 9,
+        "context_text": "> **Who this is for:** Tenant administrators and organization owners who deliver plugins and connectors to the members they manage.\n\nYou add plugins on the **Plugins** card and connectors on the **Connectors** card of the **Config** page in the admin portal. The card controls themselves are described under [Tool and connector cards](/docs/government/config/settings#tool-and-connector-cards), and this page covers the tasks around them, from choosing between a plugin and a connector to keeping plugins up to date. To distribute skills to members, bundle them in a plugin, as described under [Skills for administrators](/docs/government/desktop/skills#skills-for-administrators).\n\n## Plugins versus connectors\n\nA connector gives Claude access to another service, such as a search tool your agency runs, and the **Connectors** card is the way to deliver a connector to members. A plugin is a package that changes how Claude works. It can add skills, slash commands, and sub-agents, and it can carry hooks, which are scripts a plugin author includes to run automatically at defined points during a session, such as when a session starts. For adding a connector, see [Connectors](/docs/government/connectors/overview). For what a plugin can contain across Claude products, see the [Plugins overview](/docs/plugins/overview); the Claude for Government differences are covered below.\n\nA plugin you upload on the **Plugins** card delivers its skills, slash commands, sub-agents, and hooks to members, and its hooks run on the member's machine. In Claude for Government, a connector declared in a plugin you upload here is not connected, so to give members a connector, add it on the **Connectors** card instead.\n\n## Plugin archive formats\n\nThe **Plugins** card accepts a single `.zip` file. The file can be one plugin package or a marketplace archive that holds several plugins, such as the downloaded ZIP of a repository that publishes a set of plugins. A single plugin package can be up to 10 MB, and a marketplace archive can be up to 15 MB.\n\nWhen you upload a marketplace archive, the preview lists the plugins it found, and you select which ones to add. Only plugins whose files are packaged inside the archive are added, so an entry in the marketplace listing that points to a plugin hosted elsewhere is skipped. The plugins you add from one archive are grouped under a **Tag**, prefilled from the marketplace's name, which lets you identify the set later.\n\nTo refresh the set, upload a new version of the same marketplace archive with the same **Tag**. The preview lists any plugin you added from that marketplace before that the new version no longer contains, and you can remove those plugins in the same step.",
+        "end": 17,
+        "heading_context": [
+          "Manage plugins and connectors",
+          "Plugins versus connectors"
+        ],
+        "path": "government/config/plugins-and-connectors.md",
+        "start": 17,
+        "text": "A plugin you upload on the **Plugins** card delivers its skills, slash commands, sub-agents, and hooks to members, and its hooks run on the member's machine. In Claude for Government, a connector declared in a plugin you upload here is not connected, so to give members a connector, add it on the **Connectors** card instead."
+      }
+    },
+    {
+      "id": "bb490a53e3b828c6e483d09137072c42dd03e77760a3475025ef910fcb58b18b",
+      "left": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Plugins overview\n\n> Extend Claude with reusable capability packages that bundle MCP connectors, skills, slash commands, and sub-agents\n\nPlugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit — turning Claude into a specialist tailored to your role, team, and company.\n\n## What plugins do\n\nPlugins let you define how you like work done, which tools and data to pull from, how to handle critical workflows, and what slash commands to expose so your team gets consistent outcomes. Every component is file-based, so plugins are easy to build, edit, and share.\n\nAs your team builds and shares plugins, Claude becomes a cross-functional expert. Best practices get baked into every interaction, so leaders and admins can spend less time enforcing processes and more time improving them.\n\n## Plugin directory",
+        "end": 9,
+        "heading_context": [
+          "Plugins overview"
+        ],
+        "path": "plugins/overview.md",
+        "start": 9,
+        "text": "Plugins are reusable capability packages that extend Claude with custom functionality. They bundle together [MCP connectors](/docs/connectors/overview), [skills](/docs/skills/overview), slash commands, and sub-agents into a single shareable unit — turning Claude into a specialist tailored to your role, team, and company."
+      },
+      "right": {
+        "context_end": 19,
+        "context_start": 3,
+        "context_text": "> Use this file to discover all available pages before exploring further.\n\n# Plugins in Claude Desktop\n\n> Find, install, create, and remove plugins in Claude Desktop for Claude for Government, and understand what plugins add in this deployment.\n\n> **Who this is for:** Anyone who uses Claude Desktop in Claude for Government and wants to find, install, or create plugins.\n\nA plugin is a package that adds capabilities to Claude in a single step, such as skills, slash commands, sub-agents, and hooks. Plugins work in Cowork and in Code. See the [Plugins overview](/docs/plugins/overview) for more on what a plugin can contain.\n\n## Where plugins come from\n\nIn Claude for Government, plugins reach you in four ways:\n\n* Your administrators add plugins for your organization, and some of them install automatically.\n* You upload a plugin file you have.\n* You ask Claude to create a plugin with you.",
+        "end": 11,
+        "heading_context": [
+          "Plugins in Claude Desktop"
+        ],
+        "path": "government/desktop/plugins.md",
+        "start": 11,
+        "text": "A plugin is a package that adds capabilities to Claude in a single step, such as skills, slash commands, sub-agents, and hooks. Plugins work in Cowork and in Code. See the [Plugins overview](/docs/plugins/overview) for more on what a plugin can contain."
+      }
+    },
+    {
+      "id": "e743e6fa9d7fd28a798f5a797efb2313f9a8659ec954bb59972ed0b647a8f693",
+      "left": {
+        "context_end": 17,
+        "context_start": 1,
+        "context_text": "> ## Documentation Index\n> Fetch the complete documentation index at: https://claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Skills overview\n\n> Extend Claude's capabilities with specialized instructions and workflows\n\nSkills are directories containing instructions, scripts, and resources that Claude dynamically loads to handle specific tasks. Each skill has a `SKILL.md` file that defines when it should be activated and what instructions Claude should follow.\n\n## Availability\n\nSkills are available for users on Pro, Max, Team, and Enterprise plans. The Skills feature requires code execution to be enabled.\n\n## How skills work\n\nSkills use progressive disclosure to manage context efficiently:",
+        "end": 9,
+        "heading_context": [
+          "Skills overview"
+        ],
+        "path": "skills/overview.md",
+        "start": 9,
+        "text": "Skills are directories containing instructions, scripts, and resources that Claude dynamically loads to handle specific tasks. Each skill has a `SKILL.md` file that defines when it should be activated and what instructions Claude should follow."
+      },
+      "right": {
+        "context_end": 19,
+        "context_start": 3,
+        "context_text": "> Use this file to discover all available pages before exploring further.\n\n# Skills in Claude Desktop\n\n> What skills are in Claude for Government, where they come from, how to create and manage your own, and how administrators distribute skills to members.\n\n> **Who this is for:** Anyone who uses Claude Desktop in Claude for Government. The last two sections are for administrators who distribute skills to members.\n\nA skill is a set of instructions, with optional scripts and resources, that Claude loads when a task matches it, so you can teach Claude a workflow once and reuse it. See the [Skills overview](/docs/skills/overview) for how skills work.\n\n## Where skills come from\n\nIn Claude for Government, your skills come from three places:\n\n* Skills you create yourself, which are stored on your device.\n* Skills bundled in plugins your administrators deliver, which arrive with the plugin as described in [Plugins in Claude Desktop](/docs/government/desktop/plugins).\n* Skills that ship with Claude Desktop for common document tasks, such as working with spreadsheets and presentations, which Claude loads automatically when a task calls for them.",
+        "end": 11,
+        "heading_context": [
+          "Skills in Claude Desktop"
+        ],
+        "path": "government/desktop/skills.md",
+        "start": 11,
+        "text": "A skill is a set of instructions, with optional scripts and resources, that Claude loads when a task matches it, so you can teach Claude a workflow once and reuse it. See the [Skills overview](/docs/skills/overview) for how skills work."
+      }
+    },
+    {
+      "id": "6ff5efc7e26b52ec12d8e4e6333f661294427d72bc7575cc4934807d4d357ac6",
+      "left": {
+        "context_end": 74,
+        "context_start": 41,
+        "context_text": "  <Step title=\"Review components\">\n    Open the installed plugin to see its skills, connectors, agents, and hooks.\n    Enable or disable individual components as needed.\n  </Step>\n</Steps>\n\nTo install from a file instead, select the upload option on the Plugins page and select the plugin package.\n\n## Use a Git repository as a marketplace\n\nA Git repository that contains plugin packages can serve as a marketplace. This is the typical way teams distribute their own plugins without publishing to the public catalog. Repositories on GitHub (including GitHub Enterprise) are supported; public repositories on GitLab and Bitbucket also work.\n\n<Steps>\n  <Step title=\"Add the repository\">\n    On the Plugins page, select **Add marketplace** and enter the repository's\n    URL. Cowork accepts the standard `https://github.com/owner/repo` form and\n    the `owner/repo` shorthand for GitHub.\n  </Step>\n\n  <Step title=\"Install plugins from it\">\n    Plugins defined in the repository appear alongside plugins from other\n    marketplaces. Install them the same way.\n  </Step>\n</Steps>\n\nClick **Update** on a marketplace to pull the latest plugins from its repository.\n\nFor administrator-managed marketplaces, see [MCP, plugins, skills, and hooks](/docs/cowork/3p/extensions) in the deployment guide.\n\n## Limits\n\nThe following are the default limits for plugin packages and marketplaces.\n\n| Limit                              | Value  |",
+        "end": 66,
+        "heading_context": [
+          "Install plugins",
+          "Install a plugin"
+        ],
+        "path": "cowork/guide/plugins.md",
+        "start": 49,
+        "text": "## Use a Git repository as a marketplace\n\nA Git repository that contains plugin packages can serve as a marketplace. This is the typical way teams distribute their own plugins without publishing to the public catalog. Repositories on GitHub (including GitHub Enterprise) are supported; public repositories on GitLab and Bitbucket also work.\n\n<Steps>\n  <Step title=\"Add the repository\">\n    On the Plugins page, select **Add marketplace** and enter the repository's\n    URL. Cowork accepts the standard `https://github.com/owner/repo` form and\n    the `owner/repo` shorthand for GitHub.\n  </Step>\n\n  <Step title=\"Install plugins from it\">\n    Plugins defined in the repository appear alongside plugins from other\n    marketplaces. Install them the same way.\n  </Step>\n</Steps>\n\nClick **Update** on a marketplace to pull the latest plugins from its repository."
+      },
+      "right": {
+        "context_end": 63,
+        "context_start": 27,
+        "context_text": "| Equity research           | Write earnings updates and initiating coverage reports. Track catalysts and screen for new ideas.                                                                           |\n| Private equity            | Source and screen deals, run due diligence checklists, draft IC memos, and monitor portfolio company KPIs.                                                                  |\n| Wealth management         | Prep for client meetings, build financial plans, rebalance portfolios, and identify tax-loss harvesting opportunities.                                                      |\n\nThe repository also includes partner-built plugins from LSEG and S\\&P\nGlobal, which bring their financial data and analytics directly into\nCowork.\n\n## Add the marketplace\n\n<Steps>\n  <Step title=\"Open Cowork\">\n    Open the Claude Desktop app and select the Cowork tab in the mode\n    selector.\n  </Step>\n\n  <Step title=\"Open plugin browser\">\n    Select \"Customize\" on the left sidebar, then \"Browse plugins\".\n  </Step>\n\n  <Step title=\"Add the marketplace\">\n    Select \"Personal\", click the \"+\" button, then select \"Add\n    marketplace from GitHub\". Enter the repository URL:\n    `https://github.com/anthropics/financial-services`\n  </Step>\n</Steps>\n\nOnce added, you'll see the available financial services plugins in your\nmarketplace.\n\n## Install plugins\n\n<Steps>\n  <Step title=\"Browse the marketplace\">\n    From your plugin marketplace, browse the available financial\n    services plugins.\n  </Step>",
+        "end": 55,
+        "heading_context": [
+          "Install financial services plugins for Cowork",
+          "What's included"
+        ],
+        "path": "office-agents/fsi-plugins.md",
+        "start": 35,
+        "text": "## Add the marketplace\n\n<Steps>\n  <Step title=\"Open Cowork\">\n    Open the Claude Desktop app and select the Cowork tab in the mode\n    selector.\n  </Step>\n\n  <Step title=\"Open plugin browser\">\n    Select \"Customize\" on the left sidebar, then \"Browse plugins\".\n  </Step>\n\n  <Step title=\"Add the marketplace\">\n    Select \"Personal\", click the \"+\" button, then select \"Add\n    marketplace from GitHub\". Enter the repository URL:\n    `https://github.com/anthropics/financial-services`\n  </Step>\n</Steps>\n\nOnce added, you'll see the available financial services plugins in your\nmarketplace."
+      }
+    },
+    {
+      "id": "2e2fe67780ee210cc444c9f7342435984c6cc035dd6492f53dbb98fcd71e6904",
+      "left": {
+        "context_end": 292,
+        "context_start": 274,
+        "context_text": "Prefer controls with visible options (segmented buttons, toggle chips, inline tabs) over menus and dropdowns. Menus conflict with the host container and are harder to use on mobile.\n\n## Accessibility\n\nMaintain high contrast standards (WCAG AA minimum). Support keyboard navigation and provide text alternatives for visual content. Test with assistive technologies. Your app must be usable by everyone.\n\n## Style variables\n\nMCP Apps automatically receive style variables from the host client. Reference these CSS custom properties to create interfaces that feel native to Claude.\n\n**Color tokens** cover backgrounds, text, and borders. Semantic accent colors signal status. All tokens automatically adapt to light and dark mode.\n\n|                              | Light mode      | Dark mode       |\n| :--------------------------- | :-------------- | :-------------- |\n| **Background**               |                 |                 |\n| `color-background-primary`   | `#FFFFFF`       | `#30302E`       |\n| `color-background-secondary` | `#F5F4ED`       | `#262624`       |\n| `color-background-tertiary`  | `#FAF9F5`       | `#141413`       |\n| `color-background-inverse`   | `#141413`       | `#FAF9F5`       |",
+        "end": 284,
+        "heading_context": [
+          "Design guidelines",
+          "Style variables"
+        ],
+        "path": "connectors/building/mcp-apps/design-guidelines.md",
+        "start": 282,
+        "text": "MCP Apps automatically receive style variables from the host client. Reference these CSS custom properties to create interfaces that feel native to Claude.\n\n**Color tokens** cover backgrounds, text, and borders. Semantic accent colors signal status. All tokens automatically adapt to light and dark mode."
+      },
+      "right": {
+        "context_end": 83,
+        "context_start": 59,
+        "context_text": "      },\n    },\n  ],\n}));\n```\n\n## Apply the host's style variables\n\nClaude passes a [`hostContext`](https://modelcontextprotocol.github.io/ext-apps/api/interfaces/app.McpUiHostContext.html) object to your widget during the [`connect()`](https://modelcontextprotocol.github.io/ext-apps/api/classes/app.App.html#connect) handshake. The fields relevant to theming are:\n\n| Field              | Contents                                                                                                                                                   |\n| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `theme`            | `\"light\"` or `\"dark\"`                                                                                                                                      |\n| `styles.variables` | CSS custom properties: `--color-background-*`, `--color-text-*`, `--color-border-*`, `--color-ring-*`, `--font-*`, `--border-radius-*`, `--border-width-*` |\n| `styles.css.fonts` | `@font-face` rules for Anthropic Sans, served from `https://assets.claude.ai`                                                                              |\n\nThe [Style variables](/docs/connectors/building/mcp-apps/design-guidelines#style-variables) section of the design guidelines lists every variable and its light- and dark-mode value.\n\n### Read `hostContext` and listen for changes\n\nThe [`App`](https://modelcontextprotocol.github.io/ext-apps/api/classes/app.App.html) class exposes the initial context via [`getHostContext()`](https://modelcontextprotocol.github.io/ext-apps/api/classes/app.App.html#gethostcontext) once `connect()` resolves, and delivers subsequent updates (such as the user toggling dark mode) through the [`hostcontextchanged`](https://modelcontextprotocol.github.io/ext-apps/api/types/app.AppEventMap.html) event. Register the listener before you connect so you don't miss an early update.\n\nThe SDK provides three helpers that do the DOM work for you, plus React hooks that wrap them:\n\n* [`applyDocumentTheme(theme)`](https://modelcontextprotocol.github.io/ext-apps/api/functions/app.applyDocumentTheme.html) sets `<html data-theme>` and the root `color-scheme`, so `[data-theme=\"dark\"]` selectors and `light-dark()` values resolve correctly.",
+        "end": 75,
+        "heading_context": [
+          "Blend your MCP App with Claude's theme",
+          "Apply the host's style variables"
+        ],
+        "path": "connectors/building/mcp-apps/transparent-theming.md",
+        "start": 67,
+        "text": "Claude passes a [`hostContext`](https://modelcontextprotocol.github.io/ext-apps/api/interfaces/app.McpUiHostContext.html) object to your widget during the [`connect()`](https://modelcontextprotocol.github.io/ext-apps/api/classes/app.App.html#connect) handshake. The fields relevant to theming are:\n\n| Field              | Contents                                                                                                                                                   |\n| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `theme`            | `\"light\"` or `\"dark\"`                                                                                                                                      |\n| `styles.variables` | CSS custom properties: `--color-background-*`, `--color-text-*`, `--color-border-*`, `--color-ring-*`, `--font-*`, `--border-radius-*`, `--border-width-*` |\n| `styles.css.fonts` | `@font-face` rules for Anthropic Sans, served from `https://assets.claude.ai`                                                                              |\n\nThe [Style variables](/docs/connectors/building/mcp-apps/design-guidelines#style-variables) section of the design guidelines lists every variable and its light- and dark-mode value."
+      }
+    },
+    {
+      "id": "00532f35f0bffbbe2d3b5d3e1c552633abfaf09c0cfa494c0d50e74aeb977a9d",
+      "left": {
+        "context_end": 37,
+        "context_start": 21,
+        "context_text": "## Platform differences\n\nWhile the SDK handles most cross-platform concerns automatically, some behaviors vary between hosts.\n\n### Domain handling\n\nThe [`Resource._meta.ui.domain`](https://modelcontextprotocol.github.io/ext-apps/api/interfaces/app.McpUiResourceMeta.html#domain) field format and validation rules are determined by each host platform. For example, hosts may use hash-based subdomains, URL-derived patterns, or other formats.\n\nFor Claude, compute the `Resource._meta.ui.domain` value by running this command, replacing `https://example.com/mcp` with your server URL:\n\n```shell theme={null}\nnode -e 'const yourServerUrl = \"https://example.com/mcp\"; console.log(require(\"crypto\").createHash(\"sha256\").update(yourServerUrl).digest(\"hex\").slice(0,32) + \".claudemcpcontent.com\")'\n```\n\nExample output for `https://example.com/mcp`:\n\n```",
+        "end": 29,
+        "heading_context": [
+          "Building cross-platform MCP Apps",
+          "Platform differences",
+          "Domain handling"
+        ],
+        "path": "connectors/building/mcp-apps/cross-compatibility.md",
+        "start": 29,
+        "text": "For Claude, compute the `Resource._meta.ui.domain` value by running this command, replacing `https://example.com/mcp` with your server URL:"
+      },
+      "right": {
+        "context_end": 187,
+        "context_start": 171,
+        "context_text": "## Special considerations\n\nThe election above covers the common case. A production widget should also handle the following.\n\n### Channel scope and `ui.domain`\n\n`BroadcastChannel` is same-origin only. How far that origin extends depends on whether you set [`_meta.ui.domain`](https://modelcontextprotocol.github.io/ext-apps/api/interfaces/app.McpUiResourceMeta.html#domain) on your resource:\n\n* **Without `ui.domain`** (the default), Claude derives the iframe origin from the conversation and connector, so the broadcast is scoped to a single conversation.\n* **With a fixed `ui.domain`**, the origin is shared across every conversation and tab for your connector. A fixed channel name would let a widget in one conversation supersede a widget in another. Neither `hostContext` nor the tool-call arguments include a Claude-provided conversation ID, so if you need both a fixed domain and per-conversation elections, generate your own scope key on the server (for example, a UUID minted once per client connection) and return it in `structuredContent` for the widget to append to the channel name.\n\n### Fall back if the server key is delayed\n\nThe main snippet above waits for the `toolresult` event before announcing. If you want the widget to participate in the election even when that event is slow to arrive, replace that listener with one that resolves a promise, and race the promise against a short timeout after `connect()`:\n\n```ts theme={null}\nlet resolveServerKey!: (k: { orderKey: number; seq?: number }) => void;",
+        "end": 179,
+        "heading_context": [
+          "Supersede older widget instances",
+          "Special considerations",
+          "Channel scope and `ui.domain`"
+        ],
+        "path": "connectors/building/mcp-apps/instance-supersession.md",
+        "start": 179,
+        "text": "* **Without `ui.domain`** (the default), Claude derives the iframe origin from the conversation and connector, so the broadcast is scoped to a single conversation."
+      }
+    },
+    {
+      "id": "001703eaf9890ec55179db9211398b97f26ed9585fe326b82cb0b603f1e38430",
+      "left": {
+        "context_end": 304,
+        "context_start": 288,
+        "context_text": "| `Chat.Create`               | Start 1:1 and group Teams chats                                                                               |\n\nSending drafts and forwarding mail also require a mail read scope (one of `Mail.Read`, `Mail.ReadWrite`, or `Mail.Read.Shared`) for the pre-send checks; the standard read set already includes one.\n\nEvery write tool requires user approval on each call by default. Administrators can change a tool's approval state with [`toolPolicy`](/docs/third-party/claude-desktop/configuration#managedmcpservers), except for the send tools (`outlook_send_mail`, `outlook_send_draft`, `outlook_forward_mail`, `outlook_create_event`, `outlook_update_event`, `teams_send_chat_message`, `teams_send_channel_message`, `teams_reply_channel_message`): an `allow` setting for them resolves to `ask`, so they always require approval on each call.\n\n### How users sign in\n\nAfter the configuration is deployed, the connector appears in **Customize → Connectors** in Claude Desktop. Sign-in starts when the user selects **Connect**.\n\nOn both Windows and macOS, sign-in goes through the device's native authentication broker when the device is set up for it: a system account-picker dialog appears instead of the browser, and the issued tokens carry the device identity claim that device-based Conditional Access policies (such as *Require compliant device*) evaluate. When the broker is unavailable, sign-in opens the system browser instead. The requirements for each platform are listed below.\n\nThe [`microsoftAuthBroker`](/docs/third-party/claude-desktop/configuration#microsoftauthbroker) configuration key controls whether sign-in uses the broker or the browser. `auto` (the default) uses the broker where it is available and the browser otherwise, `disabled` always uses the browser, and `required` makes sign-in fail when the broker is unavailable instead of opening the browser, so the refresh token stays held by the broker. Set `required` only after every device that receives the configuration is on Claude Desktop 1.49585.0 or later, because earlier versions read `required` as `disabled` and fall back to browser-only sign-in. Linux has no broker, so `required` is not supported there.\n\nBrowser sign-in works on tenants without device-based Conditional Access policies. It satisfies device policies only when the browser itself carries the device identity: on Windows, a browser signed in with the work account on an Entra-joined device (such as Microsoft Edge) provides this; on macOS, deploy Microsoft's Enterprise SSO browser integration, or use brokered sign-in instead.\n\n<AccordionGroup>",
+        "end": 296,
+        "heading_context": [
+          "Connect to Microsoft 365",
+          "Local connector",
+          "How users sign in"
+        ],
+        "path": "third-party/claude-desktop/connectors-m365.md",
+        "start": 296,
+        "text": "After the configuration is deployed, the connector appears in **Customize → Connectors** in Claude Desktop. Sign-in starts when the user selects **Connect**."
+      },
+      "right": {
+        "context_end": 334,
+        "context_start": 318,
+        "context_text": "    A missing broker redirect URI does not trigger the fallback on Windows. The broker shows Entra error `AADSTS50011` in its own sign-in dialog, and closing that dialog counts as canceling, so every sign-in attempt ends at the same error until you register the URI above. To have users sign in through the browser instead of the broker, set [`microsoftAuthBroker`](/docs/third-party/claude-desktop/configuration#microsoftauthbroker) to `disabled` in the managed configuration. Tokens from browser sign-in carry no device identity claim unless the browser itself provides one (see above), so device-based Conditional Access policies block them.\n  </Accordion>\n\n  <Accordion title=\"Requirements for brokered sign-in on macOS\">\n    Brokered sign-in on macOS requires Claude Desktop version 1.19367.0 or later.\n\n    * The Mac is enrolled in an MDM (Intune, Jamf, or similar), registered in Entra ID, and marked compliant. For non-Intune MDMs, use the partner device-compliance integration that reports compliance to Intune and Entra.\n    * **Intune Company Portal** is installed; it provides the broker.\n    * An **Extensible SSO** configuration profile of type **Redirect**, pointed at the Microsoft Enterprise SSO plug-in, is deployed through MDM. The broker is unavailable without it.\n    * The broker redirect URI is registered on the local-mode app under **Mobile and desktop applications** (it appears under the **iOS / macOS** section after saving):\n\n    ```text theme={null}\n    msauth.com.anthropic.claudefordesktop://auth\n    ```\n\n    If the app registration also lists `msauth.com.anthropic.claudefordesktop.helper://auth`, remove that entry. Claude Desktop does not use it.\n",
+        "end": 326,
+        "heading_context": [
+          "Connect to Microsoft 365",
+          "Local connector",
+          "How users sign in"
+        ],
+        "path": "third-party/claude-desktop/connectors-m365.md",
+        "start": 326,
+        "text": "    * An **Extensible SSO** configuration profile of type **Redirect**, pointed at the Microsoft Enterprise SSO plug-in, is deployed through MDM. The broker is unavailable without it."
+      }
+    },
+    {
+      "id": "0100aa918443cbc94eb4278e2fa5a8eba8b583e1e622b78d6f814d28de8c28f8",
+      "left": {
+        "context_end": 55,
+        "context_start": 39,
+        "context_text": "| Privacy-sensitive operations that should not leave the user's machine                        |                                                                |\n| One-click install with bundled Node.js runtime, no dependencies to manage                    |                                                                |\n| No cloud infrastructure, VPN configuration, or firewall rules                                |                                                                |\n| Organization-level admin controls (custom uploads, allowlists)                               |                                                                |\n| Full control over authentication, authorization, and audit logs                              |                                                                |\n\n**Key difference:** MCPBs run on the user's machine via stdio with access to local and internal resources. Remote connectors run on your servers via HTTPS and are accessed through Anthropic's infrastructure.\n\nOrganizations commonly build MCPBs as secure proxies to internal MCP servers, for internal documentation access, and to connect development tools while preserving their security architecture.\n\nFor remote connector guidance, see [building custom connectors](/docs/connectors/building/index).\n\n## Choose a language\n\nNode.js is strongly recommended:\n\n* Ships with Claude Desktop on macOS and Windows, so users need no separate runtime",
+        "end": 47,
+        "heading_context": [
+          "Build a desktop extension with MCPB",
+          "Local (MCPB) vs remote: which to build"
+        ],
+        "path": "connectors/building/mcpb.md",
+        "start": 47,
+        "text": "Organizations commonly build MCPBs as secure proxies to internal MCP servers, for internal documentation access, and to connect development tools while preserving their security architecture."
+      },
+      "right": {
+        "context_end": 38,
+        "context_start": 22,
+        "context_text": "## Types of connectors\n\n### Prebuilt integrations\n\nAnthropic provides first-party integrations with popular services like Google Drive, Gmail, Google Calendar, GitHub, Slack, and Microsoft 365. These are ready to use with no setup beyond authentication. See [Getting started](/docs/connectors/getting-started) for setup instructions.\n\n### Remote MCP servers\n\n[Remote MCP servers](/docs/connectors/custom/remote-mcp) communicate with Claude over the internet, giving it access to cloud-hosted tools and data. You can connect to existing remote MCP servers or build your own for any tool or service.\n\n### MCP Apps\n\n[MCP Apps](/docs/connectors/building/mcp-apps/getting-started) allow MCP servers to display interactive UI elements in conversational MCP clients. Rather than only returning text, an MCP App can render charts, maps, forms, and other visual components directly in the chat. See the [design guidelines](/docs/connectors/building/mcp-apps/design-guidelines) and [cross-platform compatibility](/docs/connectors/building/mcp-apps/cross-compatibility) docs for building MCP Apps.\n\n### MCP Bundles\n\n[MCP Bundles (MCPB)](/docs/connectors/custom/desktop-extensions) package MCP servers with their dependencies for distribution as desktop extensions. MCPB handles cross-platform compatibility, dependency management, code signing, and centralized version updates — making it suitable for enterprise deployment of local MCP servers to Claude Desktop.",
+        "end": 30,
+        "heading_context": [
+          "Connectors overview",
+          "Types of connectors",
+          "Remote MCP servers"
+        ],
+        "path": "connectors/overview.md",
+        "start": 30,
+        "text": "[Remote MCP servers](/docs/connectors/custom/remote-mcp) communicate with Claude over the internet, giving it access to cloud-hosted tools and data. You can connect to existing remote MCP servers or build your own for any tool or service."
+      }
+    },
+    {
+      "id": "000c89288870bf5153ce62a3031acd4338e3c736c56ded97c1fe1d5e60820a4a",
+      "left": {
+        "context_end": 78,
+        "context_start": 65,
+        "context_text": "* Transfer money, cryptocurrency, or other financial assets\n* Generate images, video, or audio via AI models (design tools that produce diagrams, charts, or UI mockups are allowed)\n\n## Submission requirements\n\n* **Test credentials** are required and must be a fully populated account.\n* **Allowed link URIs** are recommended if your server calls `ui/open-link`. Declared HTTPS origins and custom URI schemes open without a confirmation prompt; anything else still prompts the user. See [Allowed link URIs](/docs/connectors/building/submission#allowed-link-uris).\n* **Public documentation** is required by your publish date—a blog post or help-center article is sufficient. You can share docs privately with Anthropic during review.\n* **Plugins** must link a public GitHub repo; closed-source is not accepted.\n* **MCPB** open-source and \"spec will evolve\" clauses in the [Software Directory Terms](https://support.claude.com/en/articles/13145338-anthropic-software-directory-terms) are required and not waivable.\n\n## Before you submit\n\nRun `claude plugin validate` on plugins. For MCP servers, exercise every tool through the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) and as a [custom connector in Claude](/docs/connectors/building/testing).",
+        "end": 73,
+        "heading_context": [
+          "Pre-submission checklist",
+          "Submission requirements"
+        ],
+        "path": "connectors/building/review-criteria.md",
+        "start": 73,
+        "text": "* **Plugins** must link a public GitHub repo; closed-source is not accepted."
+      },
+      "right": {
+        "context_end": 92,
+        "context_start": 80,
+        "context_text": "\nTo submit please use one of our in-app submission forms:\n\n* **Claude.ai** — [https://claude.ai/admin-settings/directory/submissions/plugins/new](https://claude.ai/admin-settings/directory/submissions/plugins/new)\n* **Console** — [https://platform.claude.com/plugins/submit](https://platform.claude.com/plugins/submit)\n\nAfter you submit on claude.ai, the **Directory** page in your organization settings ([claude.ai/admin-settings/directory/submissions](https://claude.ai/admin-settings/directory/submissions)) lists your submissions with their review status.\n\nAfter your plugin is published, updates pushed to your GitHub repo are picked up automatically—CI mirrors changes to the public marketplace and runs automated screening on each update. You do not need to re-submit the form for updates.\n\n<Note>\n  Need help building your plugin? See the [Claude Code plugin guide](https://code.claude.com/docs/en/plugins) for a complete walkthrough of plugin structure, manifests, and testing, or the [plugins reference](https://code.claude.com/docs/en/plugins-reference) for full technical specifications.\n</Note>",
+        "end": 88,
+        "heading_context": [
+          "Submitting your plugin",
+          "Submitting your plugin",
+          "Before you start"
+        ],
+        "path": "plugins/submit.md",
+        "start": 88,
+        "text": "After your plugin is published, updates pushed to your GitHub repo are picked up automatically—CI mirrors changes to the public marketplace and runs automated screening on each update. You do not need to re-submit the form for updates."
+      }
+    },
+    {
+      "id": "006f35b6cfb8259ce4b35cd99e43c9f83b983a9d5713bc201112de4d4669ad1f",
+      "left": {
+        "context_end": 83,
+        "context_start": 71,
+        "context_text": "Directory connectors are eligible for **Suggested Connectors**—Claude can recommend your connector in-chat when it's relevant to the user's task. Custom connectors are never suggested. Every directory entry is automatically eligible; there is no separate opt-in.\n\n## Use both: directory plus elevated custom\n\nA supported pattern is to list a connector in the directory with safe, broadly-applicable defaults, **and** provide enterprise customers a separate URL to add as a custom connector with elevated permissions or tenant-specific configuration. Document both paths in your own product docs.\n\n## Per-tenant URLs\n\nIf your server URL varies per tenant (for example, `{tenant}.mcp.example.com`), submit one directory listing with a URL pattern. Each user enters their own URL when they connect. See [Servers with per-customer URLs](/docs/connectors/building/authentication#servers-with-per-customer-urls) for how this choice limits your authentication options.\n\n## What the directory is not\n\nThe Anthropic Directory is independent of the open [MCP Registry](https://registry.modelcontextprotocol.io) and the `modelcontextprotocol/servers` GitHub repository. Publishing to those does **not** surface your server in Claude. Submit through the [directory submission form](/docs/connectors/building/submission) to appear in Claude products.",
+        "end": 79,
+        "heading_context": [
+          "Directory connectors vs custom connectors",
+          "Per-tenant URLs"
+        ],
+        "path": "connectors/building/directory-vs-custom.md",
+        "start": 79,
+        "text": "If your server URL varies per tenant (for example, `{tenant}.mcp.example.com`), submit one directory listing with a URL pattern. Each user enters their own URL when they connect. See [Servers with per-customer URLs](/docs/connectors/building/authentication#servers-with-per-customer-urls) for how this choice limits your authentication options."
+      },
+      "right": {
+        "context_end": 55,
+        "context_start": 39,
+        "context_text": "\n* **[Organization settings > Connectors](https://claude.ai/admin-settings/connectors)** shows a **Requested by your team** section above the connector list.\n* **[Organization settings > Notifications](https://claude.ai/admin-settings/notifications)** lists each requested connector on the **Requests** tab, and the **Notifications** item in the admin sidebar shows a count badge while requests are pending.\n\nFrom either location you can enable the connector for your organization or dismiss the request. Claude shows the requesting member the outcome the next time they open the connectors directory.\n\n## When a connector's endpoint changes\n\nOccasionally a provider updates the endpoint URL behind its directory listing, for example moving a server from `https://mcp.example.com/sse` to `https://mcp.example.com/mcp`. This is a routine change on the provider's side. Here is what you may notice in Claude:\n\n* **Your existing connection keeps working.** Connectors you added before the change keep using the endpoint they were installed with, and your authentication is unaffected.\n* **It appears as a custom connector.** Because your connector no longer matches the updated directory listing, it shows under \"Custom\" in [Customize > Connectors](https://claude.ai/customize/connectors) instead of as a named directory connector.\n* **The directory listing shows as not installed.** Adding the connector from the directory again without removing the original gives you two connections: your original one and a new one on the updated endpoint.\n\nTo move to the new endpoint, remove the connector and re-add it from the directory. Claude prompts you to authenticate with the service again.\n\n## Submitting to the directory",
+        "end": 47,
+        "heading_context": [
+          "Connectors directory",
+          "When a connector's endpoint changes"
+        ],
+        "path": "connectors/directory.md",
+        "start": 47,
+        "text": "Occasionally a provider updates the endpoint URL behind its directory listing, for example moving a server from `https://mcp.example.com/sse` to `https://mcp.example.com/mcp`. This is a routine change on the provider's side. Here is what you may notice in Claude:"
+      }
+    },
+    {
+      "id": "cbe2799f97d41ba9670a62a9d53a366f0ff57c588e15817c8bee34c777ce4f6f",
+      "left": {
+        "context_end": 31,
+        "context_start": 9,
+        "context_text": "Skills are directories containing instructions, scripts, and resources that Claude dynamically loads to handle specific tasks. Each skill has a `SKILL.md` file that defines when it should be activated and what instructions Claude should follow.\n\n## Availability\n\nSkills are available for users on Pro, Max, Team, and Enterprise plans. The Skills feature requires code execution to be enabled.\n\n## How skills work\n\nSkills use progressive disclosure to manage context efficiently:\n\n1. **Metadata loading**: Claude reads skill names and descriptions at startup (\\~100 tokens each)\n2. **Activation**: When a task matches a skill's description, Claude loads the full `SKILL.md` content\n3. **Resource loading**: Additional files (scripts, references) are loaded only when needed\n\nThis approach prevents context window overload while providing specialized capabilities on demand.\n\n## Types of skills\n\n* **Anthropic skills**: Pre-built skills for document creation (Excel, Word, PowerPoint, PDF) that activate automatically when relevant.\n* **Partner skills**: Skills from partners like Notion, Figma, and Atlassian designed for seamless MCP connector integration.\n* **Organization-provisioned skills**: Skills deployed organization-wide by Team and Enterprise administrators.\n* **Custom skills**: Skills you create for specialized workflows—generating emails, applying brand guidelines, integrating with tools like JIRA or Linear, and more!\n",
+        "end": 23,
+        "heading_context": [
+          "Skills overview",
+          "How skills work"
+        ],
+        "path": "skills/overview.md",
+        "start": 17,
+        "text": "Skills use progressive disclosure to manage context efficiently:\n\n1. **Metadata loading**: Claude reads skill names and descriptions at startup (\\~100 tokens each)\n2. **Activation**: When a task matches a skill's description, Claude loads the full `SKILL.md` content\n3. **Resource loading**: Additional files (scripts, references) are loaded only when needed\n\nThis approach prevents context window overload while providing specialized capabilities on demand."
+      },
+      "right": {
+        "context_end": 55,
+        "context_start": 32,
+        "context_text": "<Warning>\n  Custom connectors can introduce security risks. Before enabling one,\n  review [Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)\n  for guidance on what to consider.\n</Warning>\n\n## Skills\n\nSkills you've enabled in your Claude settings are available in all\nClaude for M365 add-ins. Claude applies relevant Skills automatically\nbased on what you're doing.\n\nYou can also invoke a Skill directly: type `/` in the sidebar to see\nSkills available for the app you're in, then select one, such as\n`/deck-check` in PowerPoint. Skills that aren't relevant to the current\napp are excluded from this list.\n\nSee [Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)\nfor details on enabling and managing Skills.\n\n## Related\n\nSee the per-app guides for setup and feature details.\n",
+        "end": 47,
+        "heading_context": [
+          "Connectors and Skills",
+          "Skills"
+        ],
+        "path": "office-agents/connectors-and-skills.md",
+        "start": 40,
+        "text": "Skills you've enabled in your Claude settings are available in all\nClaude for M365 add-ins. Claude applies relevant Skills automatically\nbased on what you're doing.\n\nYou can also invoke a Skill directly: type `/` in the sidebar to see\nSkills available for the app you're in, then select one, such as\n`/deck-check` in PowerPoint. Skills that aren't relevant to the current\napp are excluded from this list."
+      }
+    },
+    {
+      "id": "421acd2bc509226ec2e5135aff4c902120646090c56c3015efe5ef2712d55586",
+      "left": {
+        "context_end": 82,
+        "context_start": 60,
+        "context_text": "\n### Data access\n\n* Claude accesses only data from your connected Google account\n* Access occurs only when you explicitly request it\n* Minimum information is retrieved to answer your question\n* Your existing Gmail permissions are mirrored\n\n## Limitations\n\n<Warning>\n  * Claude cannot create, send, or modify emails\n  * Embedded images in emails are not visible to Claude\n  * Only emails you have access to can be searched\n</Warning>\n\n## Related topics\n\n<Columns cols={2}>\n  <Card title=\"Google Calendar\" icon=\"calendar\" href=\"/docs/connectors/google/calendar\">\n    Access your calendar information.\n  </Card>\n",
+        "end": 74,
+        "heading_context": [
+          "Gmail integration",
+          "Privacy and data handling",
+          "Data access"
+        ],
+        "path": "connectors/google/gmail.md",
+        "start": 68,
+        "text": "## Limitations\n\n<Warning>\n  * Claude cannot create, send, or modify emails\n  * Embedded images in emails are not visible to Claude\n  * Only emails you have access to can be searched\n</Warning>"
+      },
+      "right": {
+        "context_end": 79,
+        "context_start": 57,
+        "context_text": "\n### Data access\n\n* Claude accesses only data from your connected Google account\n* Access occurs only when you explicitly request it\n* Minimum information is retrieved to answer your question\n* Your existing calendar permissions are mirrored\n\n## Limitations\n\n<Warning>\n  * Claude cannot create, modify, or delete calendar events\n  * Claude cannot send calendar invitations\n  * Only calendars you have access to can be searched\n</Warning>\n\n## Related topics\n\n<Columns cols={2}>\n  <Card title=\"Gmail\" icon=\"envelope\" href=\"/docs/connectors/google/gmail\">\n    Search and analyze your emails.\n  </Card>\n",
+        "end": 71,
+        "heading_context": [
+          "Google Calendar integration",
+          "Privacy and data handling",
+          "Data access"
+        ],
+        "path": "connectors/google/calendar.md",
+        "start": 65,
+        "text": "## Limitations\n\n<Warning>\n  * Claude cannot create, modify, or delete calendar events\n  * Claude cannot send calendar invitations\n  * Only calendars you have access to can be searched\n</Warning>"
+      }
+    }
+  ],
+  "schema_version": 1
+}

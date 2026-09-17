@@ -5,6 +5,8 @@ generation while preserving this lexical baseline and its editorial evaluation.
 The [extraction follow-up](extraction-followup.md) closes the known coverage gap.
 The [editorial judge pilot](judge-pilot.md) tests model judgment on a bounded
 packet of known cases and newly sampled candidates.
+The [judgment refinement](judge-v2/README.md) compares the original rubric with
+two revisions and records the rejected overcorrection.
 
 This working prototype flags exact and near-exact prose overlap in the pinned
 Claude Docs snapshot. It addresses the audit's recommendation to

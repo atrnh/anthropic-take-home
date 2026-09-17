@@ -1,0 +1,55 @@
+{
+  "assessor": "parent agent, not human ground truth",
+  "method": "Assessed target text and supplied context before either control or revised judge ran.",
+  "packet_sha256": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134",
+  "cases": [
+    {
+      "id": "002f42fa853714eb974467a8659afc9964de28d62570351cfcff8aee98e0a693",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Displaying an MCP App after permission and disconnecting a Slack account are different actions and outcomes."
+    },
+    {
+      "id": "00202bd2f1ef5c73d995efc543320972668c3923e3cb657753c0885f3090c392",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "The certificate lifecycle explanation and Docker Compose renewal command scheduling instructions supply complementary details."
+    },
+    {
+      "id": "00c69b9dafbd553c2bd3253baf76c8a7c265fb11e586198516f4b015ee6421db",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "The public-tunnel security warning and the internal DNS reachability diagnosis describe different risks and remedies."
+    },
+    {
+      "id": "00532f35f0bffbbe2d3b5d3e1c552633abfaf09c0cfa494c0d50e74aeb977a9d",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Computing a ui.domain value and explaining broadcast scope without one answer different implementation questions."
+    },
+    {
+      "id": "001703eaf9890ec55179db9211398b97f26ed9585fe326b82cb0b603f1e38430",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "The Desktop sign-in entry point and macOS broker SSO profile prerequisite serve different setup tasks."
+    },
+    {
+      "id": "0100aa918443cbc94eb4278e2fa5a8eba8b583e1e622b78d6f814d28de8c28f8",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "MCPB internal proxy use cases and the remote MCP transport overview describe different deployment models."
+    },
+    {
+      "id": "000c89288870bf5153ce62a3031acd4338e3c736c56ded97c1fe1d5e60820a4a",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Public repository eligibility and automatic post-publication update handling concern different lifecycle stages."
+    },
+    {
+      "id": "006f35b6cfb8259ce4b35cd99e43c9f83b983a9d5713bc201112de4d4669ad1f",
+      "classification": "RELATED_BUT_DISTINCT",
+      "duplicate": false,
+      "rationale": "Tenant-specific listing URLs and a provider changing its endpoint URL are different situations."
+    }
+  ]
+}

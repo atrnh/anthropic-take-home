@@ -1,0 +1,76 @@
+{
+  "date_utc": "2026-09-17",
+  "execution": "native Codex subagents; instruction-limited inputs, not enforced filesystem isolation",
+  "metadata_evidence": "Spawn requests specify model and effort; return metadata and agent reports do not expose realized settings.",
+  "tokens_and_cost": "unobservable",
+  "sequence": "Control and v2 received identical packet; v3 was written after inspecting v2 results. Each judge was instructed not to read previous outputs or labels; exclusive access was not enforced or independently verified.",
+  "faq_policy": "Human question pending; v2 and v3 explicitly defer the known summary/FAQ pattern. Historical labels stay unchanged.",
+  "runs": [
+    {
+      "name": "control",
+      "agent_id": "/root/judge_v1_control",
+      "requested_model": "gpt-5.6-terra",
+      "requested_reasoning_effort": "high",
+      "observed_model": "unobservable",
+      "observed_reasoning_effort": "unobservable",
+      "attempts": 1,
+      "fork_turns": "none",
+      "allowed_inputs": [
+        "../judge-prompt.md",
+        "judge-packet.json"
+      ],
+      "output_repairs": false,
+      "hashes": {
+        "../judge-prompt.md": "328dcefac33bed78818e5012c11c91ab7343404f8f677a88ea68872a7946c816",
+        "judge-packet.json": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134",
+        "control-manifest.json": "c5879ed796d29036f7fd25b24b2bffee5602345f9e003b8be7c1f979fb4a0922",
+        "control-decisions.json": "976bbe818024280924a356794dd24217e726cc26a3546080c178badb8f60287e",
+        "control-metrics.json": "5eed09127252159b611e9891e0ad5a11091bfd48fc5a279a3b5889512a2f1d6f"
+      }
+    },
+    {
+      "name": "v2",
+      "agent_id": "/root/judge_v2_blind",
+      "requested_model": "gpt-5.6-terra",
+      "requested_reasoning_effort": "high",
+      "observed_model": "unobservable",
+      "observed_reasoning_effort": "unobservable",
+      "attempts": 1,
+      "fork_turns": "none",
+      "allowed_inputs": [
+        "prompt.md",
+        "judge-packet.json"
+      ],
+      "output_repairs": false,
+      "hashes": {
+        "prompt.md": "25db04ad78af868c8c871268d0bb2ba883135fa678e3ff5f7b250ba76bd90da6",
+        "judge-packet.json": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134",
+        "judge-manifest.json": "4b54d61e650aa19de67366a5998cbb733ea2b502e6e5e931446a10db64ac90d9",
+        "judge-decisions.json": "22036ae7ce9318c1e6db9315ade48623ee2e9445ba0c04ef3a51719638089fc5",
+        "judge-metrics.json": "5f49fe93d5d54d0550b8e312e60b869e1edc7ccbffbd3f6c430a9f13bdff6b8a"
+      }
+    },
+    {
+      "name": "v3",
+      "agent_id": "/root/judge_v3_blind",
+      "requested_model": "gpt-5.6-terra",
+      "requested_reasoning_effort": "high",
+      "observed_model": "unobservable",
+      "observed_reasoning_effort": "unobservable",
+      "attempts": 1,
+      "fork_turns": "none",
+      "allowed_inputs": [
+        "prompt-v3.md",
+        "judge-packet.json"
+      ],
+      "output_repairs": false,
+      "hashes": {
+        "prompt-v3.md": "adfe69f9ac0f572bc8c8167992d0b82f3e236ec65266181a1d87ddbfb3d3b6be",
+        "judge-packet.json": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134",
+        "v3-manifest.json": "5a5007ece37afcfc346f473cd573e0cddb26d1ae784494a4b5c725ffc9e97648",
+        "v3-decisions.json": "637d56d316da02232b42dc8f4a1a2f9c786db3694689d554636249c0eb3fdbd3",
+        "v3-metrics.json": "c9ae19815260ef83e1299385212ad40035f674073b65be6602b4518b3ec00509"
+      }
+    }
+  ]
+}

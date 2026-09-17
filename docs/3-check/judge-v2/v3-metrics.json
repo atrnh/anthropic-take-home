@@ -1,0 +1,148 @@
+{
+  "known": {
+    "abstentions": 1,
+    "conditional_recall": {
+      "denominator": 5,
+      "numerator": 5,
+      "value": 1.0
+    },
+    "counts": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 10,
+      "TP": 5
+    },
+    "coverage": {
+      "denominator": 16,
+      "numerator": 15,
+      "value": 0.9375
+    },
+    "outcomes": [
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "development-conflicting-organization-management-claims",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "development-context-specific-install-procedures",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "NECESSARY_REPETITION",
+        "example_id": "development-government-unconnected-plugin-connectors",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "development-marketplace-generic-versus-finance",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "development-member-uninstall-versus-admin-removal",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "development-plugin-definition-overview-cowork",
+        "needs_review": false,
+        "outcome": "TP"
+      },
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "development-plugin-definition-overview-government",
+        "needs_review": false,
+        "outcome": "TP"
+      },
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "development-sales-plugin-example",
+        "needs_review": false,
+        "outcome": "TP"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "evaluation-authentication-reference-versus-lazy-auth",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "evaluation-drive-live-sync-faq",
+        "needs_review": true,
+        "outcome": "ABSTAIN"
+      },
+      {
+        "classification": "NECESSARY_REPETITION",
+        "example_id": "evaluation-google-owner-enable-prerequisite",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "NECESSARY_REPETITION",
+        "example_id": "evaluation-google-service-limitations",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "evaluation-permanent-directory-slug",
+        "needs_review": false,
+        "outcome": "TP"
+      },
+      {
+        "classification": "ACTIONABLE_DUPLICATE",
+        "example_id": "evaluation-skill-definition-overview-government",
+        "needs_review": false,
+        "outcome": "TP"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "evaluation-skill-loading-versus-m365-use",
+        "needs_review": false,
+        "outcome": "TN"
+      },
+      {
+        "classification": "RELATED_BUT_DISTINCT",
+        "example_id": "evaluation-style-reference-versus-theming-procedure",
+        "needs_review": false,
+        "outcome": "TN"
+      }
+    ],
+    "precision": {
+      "denominator": 5,
+      "numerator": 5,
+      "value": 1.0
+    },
+    "recall": {
+      "denominator": 6,
+      "numerator": 5,
+      "value": 0.8333333333333334
+    }
+  },
+  "new_sample": {
+    "abstentions": 0,
+    "classification_counts": {
+      "ACTIONABLE_DUPLICATE": 0,
+      "NECESSARY_REPETITION": 0,
+      "RELATED_BUT_DISTINCT": 8
+    }
+  },
+  "provenance": {
+    "judgments_sha256": "637d56d316da02232b42dc8f4a1a2f9c786db3694689d554636249c0eb3fdbd3",
+    "manifest_sha256": "5a5007ece37afcfc346f473cd573e0cddb26d1ae784494a4b5c725ffc9e97648",
+    "packet_sha256": "e3044101883387aa5313636a7c726fc11e3d0cd7452a5c9162212f4670837134"
+  },
+  "schema_version": 1,
+  "scope": {
+    "known": "direct editorial judge evaluation on frozen full-span examples",
+    "new_sample": "classification distribution only; no independent labels",
+    "retrieval_end_to_end": false
+  }
+}

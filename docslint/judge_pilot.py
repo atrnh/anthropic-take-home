@@ -112,12 +112,15 @@ def strata(rows: list[tuple[int, int]], count: int = 4) -> list[list[tuple[int, 
     return result
 
 
-def prepare(output_dir: Path, project: Path | None = None) -> tuple[Path, Path]:
+def prepare(output_dir: Path, project: Path | None = None, *,
+            prompt_path: Path | None = None, sample_offset: int = 0) -> tuple[Path, Path]:
     project = project or Path(__file__).resolve().parents[1]
+    if type(sample_offset) is not int or sample_offset < 0:
+        raise ValueError("sample_offset must be a nonnegative integer")
     corpus = project / "corpus"
     examples_path = project / "docs/3-check/examples.json"
     results_path = project / "docs/3-check/results.json"
-    prompt_path = project / "docs/3-check/judge-prompt.md"
+    prompt_path = prompt_path or project / "docs/3-check/judge-prompt.md"
     snapshot, items = load_corpus(corpus, 10, include_lists=True)
     examples_raw = examples_path.read_bytes()
     examples = json.loads(examples_raw)
@@ -136,7 +139,11 @@ def prepare(output_dir: Path, project: Path | None = None) -> tuple[Path, Path]:
     groups = strata(queue)
     selected = []
     for number, group in enumerate(groups, 1):
-        chosen = sorted(group, key=lambda pair: pair_hash(items[pair[0]], items[pair[1]]))[:2]
+        chosen = sorted(group, key=lambda pair: pair_hash(items[pair[0]], items[pair[1]]))[
+            sample_offset:sample_offset + 2
+        ]
+        if len(chosen) != 2:
+            raise ValueError(f"Stratum {number} cannot supply two candidates at offset {sample_offset}")
         selected.extend((pair, number) for pair in chosen)
     if len(examples) != 16 or len(selected) != 8:
         raise ValueError("Pilot requires 16 frozen examples and 8 sampled candidates")
@@ -205,6 +212,8 @@ def prepare(output_dir: Path, project: Path | None = None) -> tuple[Path, Path]:
             "packages": {name: version(name) for name in ("scikit-learn", "numpy", "scipy")},
         },
     }
+    if sample_offset:
+        manifest["selection"]["sample_offset"] = sample_offset
     output_dir.mkdir(parents=True, exist_ok=True)
     packet_path = output_dir / "judge-packet.json"
     manifest_path = output_dir / "judge-manifest.json"
@@ -225,8 +234,15 @@ def _text(value: object, name: str) -> str:
     return value
 
 
-def _load_bound_inputs(packet_path: Path, manifest_path: Path,
-                       project: Path) -> tuple[dict, dict, dict[str, dict], dict[str, str]]:
+def nonnegative_int(value: str) -> int:
+    number = int(value)
+    if number < 0:
+        raise argparse.ArgumentTypeError("must be nonnegative")
+    return number
+
+
+def _load_bound_inputs(packet_path: Path, manifest_path: Path, project: Path, *,
+                       prompt_path: Path | None = None) -> tuple[dict, dict, dict[str, dict], dict[str, str]]:
     packet_raw = packet_path.read_bytes()
     manifest_raw = manifest_path.read_bytes()
     packet = json.loads(packet_raw)
@@ -248,7 +264,7 @@ def _load_bound_inputs(packet_path: Path, manifest_path: Path,
     results_path = project / "docs/3-check/results.json"
     if manifest.get("results_sha256") != sha256(results_path.read_bytes()):
         raise ValueError("Baseline results hash mismatch")
-    prompt_path = project / "docs/3-check/judge-prompt.md"
+    prompt_path = prompt_path or project / "docs/3-check/judge-prompt.md"
     if manifest.get("prompt_sha256") != sha256(prompt_path.read_bytes()):
         raise ValueError("Prompt hash mismatch")
     corpus_manifest = json.loads((corpus / "manifest.json").read_text())
@@ -318,9 +334,11 @@ def _load_bound_inputs(packet_path: Path, manifest_path: Path,
 
 
 def evaluate(packet_path: Path, manifest_path: Path, judgments_path: Path,
-             project: Path | None = None) -> dict:
+             project: Path | None = None, *, prompt_path: Path | None = None) -> dict:
     project = project or Path(__file__).resolve().parents[1]
-    packet, _, records, provenance = _load_bound_inputs(packet_path, manifest_path, project)
+    packet, _, records, provenance = _load_bound_inputs(
+        packet_path, manifest_path, project, prompt_path=prompt_path
+    )
     judgments_raw = judgments_path.read_bytes()
     judgments = json.loads(judgments_raw)
     if not isinstance(judgments, dict) or set(judgments) != {"cases"} or not isinstance(judgments["cases"], list):
@@ -403,16 +421,23 @@ def main() -> None:
     commands = parser.add_subparsers(dest="command", required=True)
     prepare_parser = commands.add_parser("prepare")
     prepare_parser.add_argument("--output-dir", required=True, type=Path)
+    prepare_parser.add_argument("--prompt", type=Path)
+    prepare_parser.add_argument("--sample-offset", type=nonnegative_int, default=0)
     evaluate_parser = commands.add_parser("evaluate")
     evaluate_parser.add_argument("--packet", required=True, type=Path)
     evaluate_parser.add_argument("--manifest", required=True, type=Path)
     evaluate_parser.add_argument("--judgments", required=True, type=Path)
+    evaluate_parser.add_argument("--prompt", type=Path)
     args = parser.parse_args()
     if args.command == "prepare":
-        packet, manifest = prepare(args.output_dir)
+        packet, manifest = prepare(
+            args.output_dir, prompt_path=args.prompt, sample_offset=args.sample_offset
+        )
         print(json.dumps({"packet": str(packet), "manifest": str(manifest)}, sort_keys=True))
     else:
-        print(json.dumps(evaluate(args.packet, args.manifest, args.judgments), indent=2, sort_keys=True))
+        print(json.dumps(evaluate(
+            args.packet, args.manifest, args.judgments, prompt_path=args.prompt
+        ), indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
