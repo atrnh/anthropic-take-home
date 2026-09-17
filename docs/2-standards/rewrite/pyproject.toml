@@ -1,0 +1,13 @@
+[project]
+name = "plugin-install-rewrite"
+version = "0.1.0"
+description = "A small Jinja2 and Markdown build for the plugin installation rewrite"
+requires-python = ">=3.11"
+dependencies = [
+    "jinja2>=3.1.6,<4",
+    "markdown>=3.7,<4",
+    "python-frontmatter>=1.1,<2",
+]
+
+[tool.uv]
+package = false

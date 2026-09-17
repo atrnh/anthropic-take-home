@@ -11,11 +11,11 @@
   .chooser { position: sticky; top: 0; background: #faf9f6; padding: .7rem 0; z-index: 1; border-bottom: 1px solid #d6d1c9; }
   #selection-status { margin: .4rem 0 0; font-size: .9rem; }
   [id] { scroll-margin-top: 145px; }
-  .help { border-left: 3px solid #b9ae9c; padding: 1px 20px; margin: 1.8rem 0; background: #f1eee7; }
-  .help h3 { margin-top: 1rem; }
+  .help, .callout { border-left: 3px solid #b9ae9c; padding: 1px 20px; margin: 1.8rem 0; background: #f1eee7; }
+  .help h2 { margin-top: 1rem; }
   .help p { padding-bottom: .3rem; }
   blockquote { margin-left: 0; padding-left: 1rem; border-left: 2px solid #aaa; }
-  .variant { border-top: 1px solid #d6d1c9; margin-top: 2rem; }
+  .variant { margin-top: 2rem; }
   :focus-visible { outline: 3px solid #245b74; outline-offset: 4px; }
   code { font-size: .9em; }
   [hidden] { display: none !important; }
@@ -28,31 +28,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const status = document.querySelector('#selection-status');
   const variants = [...document.querySelectorAll('.variant')];
   const ids = variants.map(section => section.id);
-  const labels = {cowork: 'Cowork — general guide', government: 'Cowork — Claude for Government'};
-  const contextFromHash = () => ids.find(id => location.hash === '#' + id || location.hash.startsWith('#' + id + '-'));
+  const labels = Object.fromEntries([...select.options].map(option => [option.value, option.textContent]));
+  const contextFromHash = () => [...ids].sort((a, b) => b.length - a.length).find(id => location.hash === '#' + id || location.hash.startsWith('#' + id + '-'));
   function render() {
     const requested = new URL(location.href).searchParams.get('instructions');
     const hashContext = contextFromHash();
-    let selected = requested === null ? (hashContext || '') : requested;
+    let selected = requested === null ? (hashContext || select.dataset.default) : requested;
     let message = '';
     if (![...ids, '', 'all'].includes(selected)) {
       selected = '';
-      message = 'This link names an unknown guide. Use How to check, then choose your instructions.';
+      message = 'This link names an unknown guide. Use “Which guide should I use?”, then choose your instructions.';
     } else if (ids.includes(selected) && hashContext && selected !== hashContext) {
       selected = '';
-      message = 'This link names two different guides. Use How to check, then choose your instructions.';
+      message = 'This link names two different guides. Use “Which guide should I use?”, then choose your instructions.';
     }
     select.value = selected;
     variants.forEach(section => { section.hidden = selected !== 'all' && section.id !== selected; });
-    status.textContent = message || (selected === 'all' ? 'Showing both labeled guides.' : selected ? 'Showing ' + labels[selected] + '.' : 'Use How to check below, then choose a guide.');
+    status.textContent = message || (selected === 'all' ? 'Showing all labeled guides.' : selected ? 'Showing ' + labels[selected] + '.' : 'Use “Which guide should I use?” above, then choose a guide.');
     if (hashContext && (selected === hashContext || selected === 'all')) {
       document.getElementById(location.hash.slice(1))?.scrollIntoView();
     }
   }
   select.addEventListener('change', () => {
     const url = new URL(location.href);
-    if (select.value) url.searchParams.set('instructions', select.value);
-    else url.searchParams.delete('instructions');
+    url.searchParams.set('instructions', select.value);
     const hashContext = contextFromHash();
     if (hashContext && select.value !== 'all' && hashContext !== select.value) url.hash = '';
     history.pushState(null, '', url);

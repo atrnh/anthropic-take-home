@@ -1,48 +1,48 @@
-## Cowork — Claude for Government
+---
+label: Claude Desktop (Government)
+---
 
 Use these instructions in Claude Desktop when your organization provides
 Claude for Government.
 
-Plugins add skills, commands, agents, and hooks. Hooks run on your device.
-Connectors declared by a plugin you add yourself are not added to Claude Desktop,
-and a local MCP server declared by a plugin never runs. Your administrators
-provide connectors separately under **Customize**, then **Connectors**.
+<aside class="callout" aria-label="Connector and local server restrictions" markdown="1">
+
+**Before you install**
+
+Local MCP servers included in a plugin will never run, even for plugins you install
+yourself.
+
+Connectors declared by a plugin you add yourself are not added to Claude Desktop.
+Your administrators provide connectors separately under **Customize**, then
+**Connectors**.
+
+</aside>
 
 ### Install a plugin your organization provides {#government-organization}
 
-Installing a plugin does not add its bundled connectors. Your administrators
-provide connectors separately.
+Use this method for plugins your administrators make available. Plugins set to
+install automatically are already installed.
 
 1. Open **Customize** in the sidebar, then **Plugins**.
-2. Check **Organization plugins** to see the organization plugins already installed.
-3. If the plugin is not installed, select **Browse plugins**, then the **Organization** tab.
-4. Find the plugin your administrators have made available and install it.
-5. Open the installed plugin to inspect its components. Turn individual components on or off as needed.
+2. Check **Organization plugins** to see which plugins are already installed.
+3. If the plugin is not installed, select **Browse plugins**, open the **Organization** tab, and install the plugin your administrators have made available.
+4. Open the installed plugin to inspect its components. Turn individual components on or off as needed.
 
-The plugin appears under **Organization plugins**. If your administrators set it
-to install automatically, it is already installed and you do not need to install
-it again.
+The plugin is listed under **Organization plugins**.
 
 ### Install from a file {#government-file}
 
-Install only plugins you trust. Uploaded plugins are not controlled by Anthropic.
-A plugin you upload is added only on the device you are using. Its bundled
-connectors are not added, and its declared local MCP servers do not run.
+Use this method when someone has shared a plugin package with you. Install only
+plugins you trust: uploaded plugins are not controlled by Anthropic. A plugin you
+upload is added only on the device you are using.
 
 1. Open **Customize** in the sidebar, then **Plugins**.
 2. Select **Add plugin**, then **Upload plugin**.
-3. Choose the plugin's `.zip` file. Claude Desktop displays a notice about trusting uploaded plugins.
-4. Open the installed plugin to inspect its skills, commands, agents, and hooks. Turn individual components on or off as needed.
+3. Choose the plugin's `.zip` file. Review the trust notice and follow its instructions to finish the upload.
+4. Open the installed plugin to inspect its components. Turn individual components on or off as needed.
 
 The plugin is installed on this device. Its declared connectors are not added;
 use the connectors your administrators provide separately.
-
-### Looking for a marketplace? {#government-marketplace}
-
-Claude for Government does not include a public plugin marketplace. You can add
-your own from **Browse plugins**, but your organization's network controls
-determine whether it can be downloaded. Ask your administrator which marketplace
-you can use and how to add it.
 
 ### Next steps {#government-next}
 
