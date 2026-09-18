@@ -29,8 +29,5 @@ them are included.
 The declared [six-hour checkpoint](log.md#17-september-six-hour-checkpoint) is
 17 September 2026 at approximately 10:35 a.m. PDT, measured as human attention.
 The audit, standards and rewrite, initial checker experiments, and adoption draft
-existed by that checkpoint.
-
-Everything else came later, including the controlled judge refinements, the packaged
-review report, the portable rewrite build, the revised adoption playbook, the restructured
-checker README and SHARE-01 revisions, transcript and log updates, and repository cleanup.
+existed by that checkpoint. Everything else is submission cleanup and reviewing/refining
+deliverables.

@@ -9,9 +9,9 @@ complete workflow for each context and a chooser to pick between them.
 
 ![The rewritten Install a plugin page, showing the "Which guide should I use?" help and the instructions chooser](images/rewrite-preview.png)
 
-To try the chooser, download [`rewrite/build/page.html`](rewrite/build/page.html) and
-open it in a browser. It's a single self-contained file. GitHub shows its source rather
-than the page.
+The rewrite is a single self-contained HTML page. To view it, download
+[`rewrite/build/page.html`](rewrite/build/page.html) and open it in a browser. It is a
+functional prototype, so don't take any visual design choices as prescriptive.
 
 ## What's here
 
