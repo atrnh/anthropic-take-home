@@ -79,7 +79,10 @@ Extend Claude
     └── Update integrations and manage listings
 ```
 
-This is a navigation proposal, not a demand to move every URL. Most builder and specialist references keep their addresses. Keep existing Cowork, Government, Claude Tag, Science, M365, and managed-Desktop entry points as additional routes to these tasks. Science also retains its useful resource catalog. A reader entering through Microsoft 365 should not need to know the term "connector" first.
+Most builder and specialist references keep their addresses. Keep existing Cowork,
+Government, Claude Tag, Science, M365, and managed-Desktop entry points as additional
+routes to these tasks. Science also retains its useful resource catalog. A reader entering
+through Microsoft 365 should not need to know the term "connector" first.
 
 ## Give new destinations explicit scope
 
