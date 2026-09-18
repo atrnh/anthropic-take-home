@@ -6,7 +6,7 @@ side by side, with source lines and surrounding context. The editor decides what
 to merge, shorten, or keep.
 
 The package implements candidate discovery for the
-[SHARE-01 shared-explanation rule](../2-standards/style-guide.md). It includes a
+[SHARE-01 shared-explanation rule](../2-standards/style-guide.md#share-01-give-each-explanation-one-home). It includes a
 runnable checker, a searchable report, worked examples, and saved evaluation
 results. It is ready for informal local review. Its broader queue has not been
 validated for routine editorial alerts or a required CI check.
