@@ -1,30 +1,51 @@
 # Adoption
 
-Adoption is like a political campaign: I'm asking people to buy into something
-that changes how they work, that they'll live with long after the decision is
-made, and that many of them didn't ask for. I'd start door to door, meeting
-individuals from product teams to understand what they're working on, who writes
-the docs, and what gets in their way. The goal is to get to know people, not to
-persuade. Then I'd work with a willing team on a real update, using the plugin
-rewrite and how-to template and trying the duplicate-prose check as an advisory
-review. That gives us something concrete to improve together. A short pitch helps
-the idea travel, but an endorsement from someone already using it carries more
-weight than another announcement from me.
+This approach draws from my own playbook of strategies that I've leaned on in the
+past. But the fun is in knowing when to set it aside—sometimes the right move is the one
+that exists outside the box. Consider this a strategy guide rather than a plan.
 
-Make adoption easy. Developer and writer experience should factor into every
-decision. Put the template and review criteria where contributors already work,
-provide a quickstart and how-to guides for common tasks, and automate boring
-migration work when that saves people effort. Keep the checker advisory while
-we measure whether its findings justify the time spent reviewing them. Authors
-need an easy way to dismiss a bad flag or explain a necessary exception. The
-standard and its maintainers earn trust through reliability: try to get things
-right, fix breakages quickly, and respond to feedback.
+<hr/>
 
-When a team ignores me, I'd start by finding out why. Is the check noisy, is the
-owner unclear, are they under deadline pressure, or does the standard miss a
-legitimate need? Fix the tool or negotiate a scoped exception when that's the
-problem. A lack or loss of trust usually needs to be won back through useful
-work, so they know engagement is worth the time. If a reader-facing problem
-persists, document its impact and ask the responsible product owner to agree on
-a fix and a date. Escalate the unresolved reader impact when necessary, rather
-than treating compliance itself as the goal.
+Adoption is like a political campaign: I'm asking people to buy into something that
+changes how they work, that they'll live with long after the decision is made, and that
+many of them didn't ask for.
+
+## Solidify platform and messaging
+
+Come up with a one sentence pitch that allows someone to instantly understand the platform's
+value. Do the same for every feature/benefit/solution (or at least the ones that people
+would actually care about). Messages have an easier time traveling when they're short,
+memorable, and easy to understand.
+
+This isn't always the first step, but it should definitely be worked out before larger
+communications go out.
+
+## Start door to door
+
+Meet with individuals from product teams and talk to them. The goal is to get to know
+people, not to persuade. Understand where they're at, what they're working on, what
+they like and don't like, how they usually do things, who writes documentation, etc. This
+happens via lots of direct contact, casual Slack messages, etc.
+
+## Collect endorsements
+
+Demonstrate value to a small handful of people first. A new platform is much more credible
+if people are actually using it and others will be more willing to come on board when they
+hear "you should use this, it's fine" from someone besides the person who built it.
+
+## Lower the cost of voting
+
+Make adoption easy. Developer/writer experience should factor into every decision. Build
+internal tooling that automates boring stuff: codemods, linters, skills that migrate
+existing materials for you, etc. Platform docs better have a quickstart/tutorial and
+how-to guides for the most common tasks—not just reference documentation.
+
+## Govern responsibly
+
+The platform as well as its maintainers earn trust through reliability. Try to get things
+right the first time around. When things break, they get fixed fast. Be responsive to
+feedback.
+
+This is usually how I win over teams that ignore me. It usually comes down to a lack or
+loss of trust that needs to be won over again. They need to know that engagement is worth
+the time and effort.
