@@ -1,24 +1,8 @@
-# Adoption
-
-This approach draws from my own playbook of strategies that I've leaned on in the
-past. But the fun is in knowing when to set it aside—sometimes the right move is the one
-that exists outside the box. Consider this a strategy guide rather than a plan.
-
-<hr/>
+# Adoption playbook
 
 Adoption is like a political campaign: I'm asking people to buy into something that
 changes how they work, that they'll live with long after the decision is made, and that
 many of them didn't ask for.
-
-## Solidify platform and messaging
-
-Come up with a one sentence pitch that allows someone to instantly understand the platform's
-value. Do the same for every feature/benefit/solution (or at least the ones that people
-would actually care about). Messages have an easier time traveling when they're short,
-memorable, and easy to understand.
-
-This isn't always the first step, but it should definitely be worked out before larger
-communications go out.
 
 ## Start door to door
 
@@ -29,23 +13,39 @@ happens via lots of direct contact, casual Slack messages, etc.
 
 ## Collect endorsements
 
-Demonstrate value to a small handful of people first. A new platform is much more credible
-if people are actually using it and others will be more willing to come on board when they
+Demonstrate value to a small handful of people first. A new platform[^1] is much more credible
+if people are actually using it. Others will be more willing to come on board when they
 hear "you should use this, it's fine" from someone besides the person who built it.
+
+## Solidify messaging
+
+Come up with a one sentence pitch that allows someone to instantly understand the platform's
+value. Do the same for every feature/benefit/solution (or at least the ones that people
+would actually care about). Messages have an easier time traveling when they're short,
+memorable, and easy to understand. Work this out before larger communications go out.
 
 ## Lower the cost of voting
 
-Make adoption easy. Developer/writer experience should factor into every decision. Build
-internal tooling that automates boring stuff: codemods, linters, skills that migrate
-existing materials for you, etc. Platform docs better have a quickstart/tutorial and
-how-to guides for the most common tasks—not just reference documentation.
+Make adoption easy. Developer/writer experience should be just as important as reader
+experience. Build internal tooling that automates boring stuff and improves quality of
+life: codemods, linters, skills, Git hooks, PR checks, etc. Developer/writer-facing
+platform docs must have a quickstart/tutorial and how-to guides for the most common
+tasks—not just reference documentation.
 
 ## Govern responsibly
 
-The platform as well as its maintainers earn trust through reliability. Try to get things
-right the first time around. When things break, they get fixed fast. Be responsive to
-feedback.
+Uphold the social contract between the platform team and its users. Product teams cede
+some freedom and control to the platform; in return, it must be fast, reliable, and
+responsive to the teams' needs.
 
-This is usually how I win over teams that ignore me. It usually comes down to a lack or
-loss of trust that needs to be won over again. They need to know that engagement is worth
-the time and effort.
+**When a team ignores me**, something has lost their trust: maybe checks are too noisy to
+be reliable; maybe there's uncertainty about document ownership or a standard that
+doesn't fit their content; maybe it's something else entirely, or it's me. Diagnose where
+the disconnect is happening and fix it. Follow through until engaging feels worth their time.
+
+Trust runs both ways. When a team holds firm against my recommendation, I assume they know
+something I don't. My job is informed consent: the people a decision affects should
+understand its risks before it's made. The bigger the blast radius, the wider that circle
+gets, sometimes up to the product owner or other stakeholders.
+
+[^1]: I'm assuming a documentation platform with structure, checks, standards, tooling, etc.
