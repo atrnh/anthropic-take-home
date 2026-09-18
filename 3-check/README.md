@@ -6,19 +6,20 @@ requires. It retrieves similar passages from the Claude Docs snapshot and shows
 them side by side, with source lines and surrounding context. The editor decides
 what to merge, shorten, or keep.
 
-The [usage guide](usage.md)
-covers setup and the report, and the [worked example](worked-example.md) walks through a human review of the retrieval report.
+The [usage guide](usage.md) covers setup and the report, and the
+[worked example](worked-example.md) walks through a human review of the retrieval
+report.
 
-The project began as a checker meant to flag duplicates for an editor to fix, but I also
-wanted to see if an agent could reliably decide which duplicates should be consolidated
-and propose the right edit. I got varied results, but they are still promising enough to
-give a human editor useful information.
+The project began as a checker meant to flag duplicates for an editor to fix, but I
+also wanted to see if a model could reliably decide which duplicates should be
+consolidated and propose the right edit. I got varied results, but they are still
+promising enough to give a human editor useful information.
 
 ## What the workflow does
 
-The input is the checked-in [54-page snapshot](../corpus/manifest.json) (fetched
-Sept. 14, 2026). The loader verifies each file against its recorded hash. Source links in
-the report point to that snapshot, not to live documentation.
+The input is the checked-in [54-page snapshot](../corpus/manifest.json), fetched
+14 September 2026. The loader verifies each file against its recorded hash. Source
+links in the report point to that snapshot, not to live documentation.
 
 The extractor takes prose paragraphs, unordered list items, and contiguous
 numbered checklists of at least 10 words. TF-IDF weights words by how distinctive
@@ -34,31 +35,31 @@ documents. Similarity measures wording overlap, not whether an edit is warranted
 
 ## How it evolved
 
-
-| Stage                    | Question                                                      | What happened                                                          | What changed                                         |
-| ------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------- |
-| 1. Exact-wording checker | Can shared wording flag duplicates?                           | 18 pairs, 3 useful; 0 of 6 known duplicates found                      | Split retrieval from judgment                        |
-| 2. Better retrieval      | Can a ranked search reach the known duplicates?               | TF-IDF found 5 of 6; the sixth was never extracted                     | Extract list items and shorter passages; 6 of 6      |
-| 3. Model judgment, v1–v5 | Can a model tell useful consolidation from needed repetition? | Unstable verdicts; right labels with wrong edits; wrong labels exposed | Clarified the editorial policy with human review     |
-| 4. Fresh cases           | Does any of it hold on new examples?                          | Two retrieval misses; the judge still varied between runs              | Extract numbered checklists; retrieve 20 neighbors   |
-| Current workflow         |                                                               | Every candidate goes to an editor                                      | Model advice is optional and can't remove candidates |
+| Stage | Question | What happened | What changed |
+| --- | --- | --- | --- |
+| 0. Evaluation set | Which pairs count as known duplicates? | An agent labeled 16 pairs: 6 duplicates, 10 to keep | Became the benchmark for every later stage |
+| 1. Exact-wording checker | Can shared wording flag duplicates? | 18 pairs, 3 useful; 0 of 6 known duplicates found | Split retrieval from judgment |
+| 2. Better retrieval | Can a ranked search reach the known duplicates? | TF-IDF found 5 of 6; the sixth was never extracted | Extract list items and shorter passages; 6 of 6 |
+| 3. Model judgment, v1–v5 | Can a model tell useful consolidation from needed repetition? | Unstable verdicts; right labels with wrong edits; wrong labels exposed | Clarified the editorial policy with human review |
+| 4. Fresh cases | Does any of it hold on new examples? | Two retrieval misses; the judge still varied between runs | Extract numbered checklists; retrieve 20 neighbors |
+| Current workflow | | Every candidate goes to an editor | Model advice is optional and can't remove candidates |
 
 ### Stage 0: evaluation set
 
-An agent picked 16 passage pairs. It labeled each one as a duplicate or not, using
-findings from the [audit](../1-audit/README.md) and the surrounding source text. The
-result was 6 duplicates and 10 negatives.
+An agent picked 16 passage pairs and, without seeing any checker output, labeled
+each one as a duplicate or not, using findings from the [audit](../1-audit/README.md)
+and the surrounding source text. The result was 6 duplicates and 10 negatives.
 
 These were an agent's judgments, not verified answers. I re-evaluated five cases
 during [Stage 3](#stage-3-can-a-model-judge-the-overlap).
 
 ### Stage 1: exact wording finds the wrong things
 
-The [first checker](pilot/README.md) was the naive attempt: it compared three-word sequences between
-paragraphs of 15 words or more and flagged pairs that shared at least half of
-them. It found 18 pairs. After review, 3 were actionable and 15 were false
-positives, mostly necessary warnings and prerequisites that each page needs
-locally. It also missed all six duplicates in the evaluation set.
+The [first checker](pilot/README.md) was a naive first attempt. It compared
+three-word sequences between paragraphs of 15 words or more and flagged pairs that
+shared at least half of them. It found 18 pairs. After review, 3 were actionable
+and 15 were false positives, mostly necessary warnings and prerequisites that each
+page needs locally. It also missed all six duplicates in the evaluation set.
 
 Raising the threshold wouldn't help, because the most exact matches were the
 necessary notices. That separated two jobs: *retrieval*, reaching real duplicates
@@ -81,29 +82,32 @@ retrieved all 6.
 
 ### Stage 3: can a model judge the overlap?
 
-GPT-5.6-Terra at high reasoning effort was used as the judge. It received each pair's source passages and neighboring context, without
-labels or similarity scores. It could propose consolidation, keep necessary
-repetition, call the content related but distinct, or defer. Each run also mixed
-in eight newly sampled candidates from the queue.
+The judge was GPT-5.6-Terra at high reasoning effort. It received each pair's
+source passages and neighboring context, without labels or similarity scores. It
+could propose consolidation, keep necessary repetition, call the content related
+but distinct, or defer. Each run also mixed in eight newly sampled candidates from
+the queue; none turned out to be a duplicate.
 
-| Version                                     | Change                                    | Result on the 6 duplicates                                 | Lesson                                                  |
-| ------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
-| [v1](pilot/judge-pilot.md)                  | Original rubric                           | 5 found; 1 false positive; kept Drive                              | Promising labels, unreliable edits                      |
-| [v2](pilot/judge-v2/README.md#what-changed) | Justify every reader task and destination | 0 found; deferred Drive                                            | Protecting local use became a reason to keep everything |
-| [v3](pilot/judge-v2/prompt-v3.md)           | Allow partial consolidation               | 5 found; deferred Drive                                            | Recovered findings; still chose homes by length         |
-| [v4](pilot/judge-v2/prompt-v4.md)           | Case-by-case FAQ policy                   | Kept Drive; disagreed with 4 other labels                          | Its "errors" exposed label disagreements                |
-| [v5](pilot/judge-v5/README.md)              | Revised labels and policy; two runs       | 3 and 4 of 6; no false positives                                   | Clearer expectations, still unstable                    |
+| Version | Change | Result on the 16 cases | Lesson |
+| --- | --- | --- | --- |
+| [v1](pilot/judge-pilot.md) | Original rubric | 5 of 6 duplicates; 1 false positive; kept Drive | Matched on wording; ignored local requirements |
+| [v2](pilot/judge-v2/README.md#what-changed) | Justify every reader task and destination | 0 duplicates; deferred Drive | Protecting local use became a reason to keep everything |
+| [v3](pilot/judge-v2/prompt-v3.md) | Allow partial consolidation | 5 of 6 duplicates; deferred Drive | Recovered findings; still chose homes by length |
+| [v4](pilot/judge-v2/prompt-v4.md) | Case-by-case FAQ policy | Kept Drive; disagreed with 4 other labels | Some of its "errors" were label errors |
+| [v5](pilot/judge-v5/README.md) | Revised labels and policy; two runs | 3 and 4 of 6 duplicates; no false positives | Clearer expectations, still unstable |
 
 #### v1
 
-The first run matched 14 of 16 labels.
+The first run matched 14 of 16 labels. Its one miss was Drive: it kept both the
+feature bullet and the FAQ answer, and I later agreed with it.
 
 Its false positive was the identical owner-enablement prerequisite on the Gmail and
-Calendar pages: it offered to remove one copy, although each connection procedure needs
-it. It made the same mistake with the slug duplication, which it recognized correctly but
-proposed fixing by deleting the one-line locked-slug warning beside the listing's editing
-instructions. Twice, v1 matched on identical wording and ignored the local requirements
-its rubric told it to protect. v2 was written to address that.
+Calendar pages: it offered to remove one copy, although each connection procedure
+needs it. It made the same mistake with the slug duplication, which it recognized
+correctly but proposed fixing by deleting the one-line locked-slug warning beside
+the listing's editing instructions. Twice, v1 matched on identical wording and
+ignored the local requirements its rubric told it to protect. v2 was written to
+address that.
 
 #### v2
 
@@ -112,52 +116,57 @@ destination. It overcorrected: it treated different page tasks as reasons to kee
 whole explanations, and missed both Government plugin definitions, the skill
 definition, the sales example, and the slug. I rejected it.
 
+Until I set a policy for Drive-style repetition, the v2 and v3 rubrics told the
+judge to defer short feature-summary and FAQ repetition, so both deferred Drive.
+
 #### v3
 
 v3 went back to v1 with one narrow change: shorten the shared portion of a
-passage and keep what's needed locally. It recovered the other five duplicates,
-rejected all ten negatives, and put the slug explanation under listing
-management. But it still chose the sales example's destination because that
-example was longer, and length doesn't establish ownership. One run also
-couldn't show it was better than the v1 control, so the
+passage and keep what's needed locally. It found five of the six duplicates, all
+but the deferred Drive, rejected all ten negatives, and put the slug explanation
+under listing management. But it still chose the sales example's destination
+because that example was longer, and length doesn't establish ownership. A single
+run also couldn't show it was better than v1, so the
 [comparison](pilot/judge-v2/README.md#results-and-decision) keeps both results.
 
 #### v4
 
-v4 added a rule I decided after v3: brief repetition that helps readers scan or find a
-quick answer can stay, but longer repeated explanations should still be merged. With that
-rule, v4 correctly kept Drive.
+v4 added a rule I decided after v3: brief repetition that helps readers scan or
+find a quick answer can stay, but longer repeated explanations should still be
+merged. With that rule, v4 correctly kept Drive.
 
-It disagreed with the labels on four other cases. It kept two Government definitions and
-the slug, which the labels said to merge, and it wanted to merge a financial-services
-marketplace procedure, which the labels said to keep. At first that looked like v4 had
-gotten worse. So I reviewed those four cases myself instead of trusting the labels.
+It disagreed with the labels on four other cases. It kept two Government
+definitions and the slug, which the labels said to merge, and it wanted to merge a
+financial-services marketplace procedure, which the labels said to keep. At first
+that looked like v4 had gotten worse. So I reviewed those four cases myself
+instead of trusting the labels.
 
-The judge was right about the marketplace procedure: it should be merged. It was wrong
-about the other three, but the labels hadn't said how to merge them either. The Government
-pages, for example, contained general information that belonged in the overview pages
-first.
+The judge was right about the marketplace procedure: it should be merged. It was
+wrong about the other three, but the labels hadn't said how to merge them either.
+The Government pages, for example, contained general information that belonged in
+the overview pages first.
 
 That review settled two principles, which I added to
 [SHARE-01](../2-standards/style-guide.md#share-01-give-each-explanation-one-home):
 
-- **A page's location doesn't decide who a fact applies to.** General information in a
-  Government guide can belong in the general overview.
-- **Unique information can be a reason to merge, not only to keep.** The shared home may
-  need facts from both passages before the other page can shrink to a link.
+- **A page's location doesn't decide who a fact applies to.** General information
+  in a Government guide can belong in the general overview.
+- **Unique information can be a reason to merge, not only to keep.** The shared
+  home may need facts from both passages before the other page can shrink to a
+  link.
 
 I recorded these decisions as a new
 [adjudicated set](pilot/judge-v5/examples-adjudicated.json) and left the historical
-scores unchanged. Five of its 16 cases carry my decisions; the other eleven keep the
-agent's labels.
+scores unchanged. Five of its 16 cases carry my decisions; the other eleven keep
+the agent's labels.
 
 #### v5
 
-v5 built those decisions into one revision, then stayed frozen for two runs
-on the familiar cases. The runs found 3 and 4 of 6 duplicates with no false
-positives. Both missed the slug, and they disagreed on the Government definitions
-and the marketplace procedure. I didn't keep revising the prompt or retrying
-until the scores looked better.
+v5 built those decisions into one revision, then stayed frozen for two runs on the
+16 original cases. The runs found 3 and 4 of 6 duplicates with no false positives.
+Both missed the slug, and they disagreed on the Government definitions and the
+marketplace procedure. I didn't keep revising the prompt or retrying until the
+scores looked better.
 
 ### Stage 4: fresh cases
 
@@ -191,24 +200,26 @@ elsewhere, to selected pairs, but they never remove candidates or approve change
 
 ## Caveats
 
-- **Extractor implementation is bad.** I deferred reviewing/refining how the extractor is
-  written so it skips code, tables, MDX step containers, and probably more. Also, the
-  10-word minimum can exclude short explanations.
-- **Recall.** The retrieval changes were tuned on the same 9 known duplicates they now
-  find, so 6 of 6 and 3 of 3 don't establish general recall. TF-IDF can miss paraphrases
-  with little shared wording.
-- **Precision and effort.** The 13,786-pair queue is an exploration list, not a list of
-  confirmed defects. Its precision and review time are unmeasured.
+- **The extractor is rough.** I deferred refining it, so it skips code, tables,
+  navigation cards, MDX step containers, and likely other structures. The 10-word
+  minimum can also exclude short explanations.
+- **Recall.** The retrieval changes were tuned on the same 9 known duplicates they
+  now find, so 6 of 6 and 3 of 3 don't establish general recall. TF-IDF can miss
+  paraphrases with little shared wording.
+- **Precision and effort.** The 13,786-pair queue is an exploration list, not a
+  list of confirmed defects. Its precision and review time are unmeasured.
 - **Judge accuracy.** Each set is small and purposefully chosen. v1–v4 had one run
   each. The work clarified the policy and exposed failure modes, but didn't show a
   repeatable improvement over v1.
-- **Not production-ready.** This is a prototype built on *this exact repository*, so it's
-  not portable at all and relies on a hardcoded path to the snapshots.
-- **Nice as a utility, not ready as a source for automated alerts.** I'd require at least
-  90% actionable findings on a fresh, fully reviewed queue and recovery of at least 80% of
-  a fresh set of confirmed duplicates. Adoption would also need measured review time and
-  checks that proposed edits preserve information, choose the right destination, and keep
-  local requirements.
+- **Not production-ready.** This is a prototype built around this repository. It
+  accepts another snapshot only with a hash manifest, the extractor is tuned to
+  this snapshot's Markdown, and the fetch script isn't a portable way to refresh
+  the snapshot.
+- **Nice as a utility, not ready as a source for automated alerts.** I'd require at
+  least 90% actionable findings on a fresh, fully reviewed queue and recovery of at
+  least 80% of a fresh set of confirmed duplicates. Adoption would also need
+  measured review time and checks that proposed edits preserve information, choose
+  the right destination, and keep local requirements.
 
 ## Maintenance
 
@@ -216,17 +227,17 @@ A documentation-platform maintainer owns the code and an editor owns the
 labeling policy, with domain owners resolving applicability questions. Checker
 changes need the [verification checks](usage.md#verify-the-workflow) and a review
 of changed outcomes. A new snapshot needs a dated manifest and deliberately
-re-anchored evaluation cases, with earlier evidence preserved. Investigate unexpected drops in extracted passages, unfamiliar Markdown structures, or missed
+re-anchored evaluation cases, with earlier evidence preserved. Investigate
+unexpected drops in extracted passages, unfamiliar Markdown structures, or missed
 known duplicates. Any alerting pilot should review every finding, sample
 unflagged prose, and pause when it misses the targets.
 
 ## Files
 
 - [run.py](run.py) builds the queue with [docslint](docslint/) and renders the
-[static report](report.html).
+  [static report](report.html).
 - The [pilot archive](pilot/README.md) keeps each experiment reproducible with its
-original conclusions, which describe that stage rather than the current
-workflow.
+  original conclusions, which describe that stage rather than the current
+  workflow.
 - [Frozen queue](pilot/review-queue.json) and
-[coverage results](pilot/candidate-coverage.md) for the current configuration.
-
+  [coverage results](pilot/candidate-coverage.md) for the current configuration.
