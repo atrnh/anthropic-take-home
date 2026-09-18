@@ -109,11 +109,15 @@ must retain labeled instructions.
 Keep one canonical explanation for a concept or behavior and link to it from other
 pages. Retain local prerequisites, warnings, and brief answers needed to complete
 the task. Before consolidating, account for every unique fact and context qualifier
-in both passages. Part 3's [duplicate-prose workflow](../3-check/README.md) finds
+in both passages. Choose the home by whom the explanation applies to, not by which
+page it happens to appear on or which version is longer. When a specialized page
+adds facts that apply generally, merge them into the canonical explanation before
+shortening the specialized page. Part 3's [duplicate-prose workflow](../3-check/README.md) finds
 candidates for this rule.
 
-- **Do:** Link to the plugin definition while keeping Government connector
-  restrictions beside installation steps.
+- **Do:** Merge general facts from the Government plugin introduction into the
+  plugin overview, then link to it while keeping Government connector restrictions
+  beside installation steps.
 - **Don't:** Copy the full definition into each product guide, or remove a local
   prerequisite solely because its wording repeats.
 - **Check:** Machine: retrieve overlapping passages for comparison. Human: decide
