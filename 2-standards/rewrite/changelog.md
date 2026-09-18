@@ -1,20 +1,11 @@
 # Rewrite decisions and evidence
 
-## Scope and challenge alignment
+## Design decisions
 
-The challenge's Part 2 asks for a style-guide excerpt, a content-type template,
-and one existing page rewritten to that standard, with before/after and reasons.
-This package demonstrates those deliverables with **Install a plugin**. It is a
-worked draft for review, not completion of the entire take-home.
-
-Ashley confirmed on 2026-09-15 that readers cannot be expected to know their setup,
-that the chooser needs a short How to check explanation, and that one complete
-task-page example is sufficient. A variant is separately authored content; the
-selector is its presentation. This example does not build a new docs platform.
-
-The [project log](../../log.md#17-september-six-hour-checkpoint) records the
-declared six-hour checkpoint. The original rewrite preceded that checkpoint;
-the portable build and repository cleanup came later.
+Readers cannot be expected to know their setup, so the chooser needs a short
+How to check explanation. A variant is separately authored content; the chooser
+is only its presentation. One complete task page is enough to demonstrate the
+standard; this example does not build a new docs platform.
 
 ## Source provenance
 
@@ -43,7 +34,7 @@ their account. The choice stays visible and can be changed.
 | Put Government connector behavior before its procedures. | Installing a package does not make bundled connectors available in that context. | PROC-02 |
 | Repeat the starting location in each method. | Readers can use a method without borrowing steps from another section. | PROC-01 |
 | Add an observable result to each method. | Distinguish successful installation from usable external-service credentials. | PROC-03 |
-| Distinguish pinned-source wording from Ashley’s current-product updates in the method record below. | Keep the evidence for exact controls visible; flag unverified labels before publication. | UI-01 |
+| Distinguish pinned-source wording from my current-product updates in the method record below. | Keep the evidence for exact controls visible; flag unverified labels before publication. | UI-01 |
 | Give variants distinct stable IDs and shareable URLs. | Deep links reveal the correct instructions; unknown context never defaults to another workflow. | NAV-01 |
 | Preserve the exact source and record every original section below. | Removing prose from this page must not lose unique content. | EVID-01 |
 
@@ -70,7 +61,7 @@ that discussion; the source lacks a complete marketplace installation procedure.
 
 - Confirm the chooser labels and identification help with members who do not know
   their setup. The current fallback is honest but may require contacting someone.
-- Confirm Ashley’s current general-UI labels against the target release, including
+- Confirm my current general-UI labels against the target release, including
   file upload and connector authentication. The pinned Cowork source predates
   these label changes; it does not establish every prompt in the revised steps.
 - Confirm the Government organization-install control label and any action required
@@ -78,7 +69,7 @@ that discussion; the source lacks a complete marketplace installation procedure.
   exact controls. The rewrite says to install the organization plugin and follow
   the upload notice; it does not name an unsupported confirmation button.
 - Confirm the marketplace entry path. The pinned financial-services guide uses
-  different UI wording; the general variant now follows Ashley’s local-product
+  different UI wording; the general variant now follows my local-product
   knowledge, pending release-specific verification.
 
 ## Verification
@@ -127,14 +118,14 @@ SCOPE-01, SCOPE-02, PROC-02, and NAV-01. Procedure numbering, spelling, bold UI
 labels, and the Government file method's inspection/result were also corrected.
 
 The earlier verification entries describe earlier revisions. The current general
-procedures include Ashley's subsequent edits, so the earlier statement that the
+procedures include my subsequent edits, so the earlier statement that the
 workflows were unchanged does not apply to this revision.
 
 | Method | Evidence and current status |
 | --- | --- |
-| General marketplace | Pinned Cowork **Install a plugin** establishes the workflow. Ashley's 2026-09-17 local Claude Desktop knowledge supplies **Discover**, partner recommendations, **Add**, and **Yours**. These differ from the snapshot and have not been independently checked against a specified app version or plan. |
-| General Git marketplace | Pinned Cowork **Use a Git repository as a marketplace** establishes repository support. Ashley supplies the **Add** dropdown, **Add from a repository**, **URL**, **Sync**, and **Yours** path. Release-specific validation remains open. |
-| General file upload | Pinned Cowork **Install a plugin** establishes package upload. Ashley supplies **Upload a plugin**, **Upload**, and **Yours**. The exact upload and sign-in sequence remains a publication check. |
+| General marketplace | Pinned Cowork **Install a plugin** establishes the workflow. My 2026-09-17 local Claude Desktop knowledge supplies **Discover**, partner recommendations, **Add**, and **Yours**. These differ from the snapshot and have not been independently checked against a specified app version or plan. |
+| General Git marketplace | Pinned Cowork **Use a Git repository as a marketplace** establishes repository support. I supplied the **Add** dropdown, **Add from a repository**, **URL**, **Sync**, and **Yours** path. Release-specific validation remains open. |
+| General file upload | Pinned Cowork **Install a plugin** establishes package upload. I supplied **Upload a plugin**, **Upload**, and **Yours**. The exact upload and sign-in sequence remains a publication check. |
 | Government organization plugin | Pinned Government **Find and install plugins** establishes **Customize**, **Plugins**, **Organization plugins**, **Browse plugins**, **Organization**, and automatic installation. The unsupported **Add** label was removed. **Manage installed plugins** supports opening and inspecting the result. |
 | Government file upload | Pinned Government **Find and install plugins** establishes **Add plugin**, **Upload plugin**, ZIP selection, and a trust notice; **Manage installed plugins** establishes inspection and device-local scope. The procedure refers to the notice without inventing its controls. The exact confirmation sequence remains unverified. |
 
