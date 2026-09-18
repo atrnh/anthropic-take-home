@@ -127,8 +127,8 @@ Government, and ZIP upload, or imply that every combination exists.
 
 Readers cannot be expected to identify their setup unaided. Put a short **How to
 check** explanation next to the chooser, with an administrator-question fallback
-when the available sources establish no reliable self-service check. Ashley
-confirmed this direction on 2026-09-15. Demonstrate one complete task page before
+when the available sources establish no reliable self-service check. I settled
+on this direction on 2026-09-15. Demonstrate one complete task page before
 expanding the presentation system; see the [worked rewrite](../2-standards/rewrite/README.md).
 
 Explicit context in an incoming link wins over a saved preference, and the page
