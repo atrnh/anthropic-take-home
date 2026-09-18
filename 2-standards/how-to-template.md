@@ -10,12 +10,9 @@ beside the chooser. Give readers who are unsure a way to identify their context
 or ask the responsible person. Do not infer one environment from the absence of
 another.}
 
-{`source/page.md` owns the shared H1, introduction, chooser, and Jinja loops.
-It renders each discovered variant below.}
-
-<!-- Create one source/variants/{context}.md file for each complete workflow.
-The filename becomes its URL value and section ID. The frontmatter label becomes
-the rendered H2. Do not put an H2 in a variant body. -->
+<!-- Write each complete workflow as its own variant file. Its label becomes the
+workflow's H2, so do not put an H2 in the variant body. The rewrite README
+explains how variants are assembled into the page. -->
 
 ```yaml
 ---
@@ -59,13 +56,4 @@ Personal product knowledge used in place of a pinned source, including date and 
 Source conflicts, incomplete procedures, and unverified UI labels:
 Disposition of content removed from the original:
 Stable context and method IDs:
-
-Assembly:
-- `source/page.md` contains shared Markdown and Jinja loops.
-- `source/variants/` contains independently authored Markdown variants with YAML
-  `label` and optional boolean `default`. The build discovers variants in filename
-  order. Only one variant can be the default.
-- `source/templates/page.html` is the HTML wrapper.
-- `source/templates/preview-head.html` contains preview styles and chooser behavior.
-- Build and review `build/page.md` and `build/page.html`. Do not edit them directly.
 -->
