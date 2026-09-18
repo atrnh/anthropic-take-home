@@ -19,7 +19,8 @@
   #selection-status { margin: .4rem 0 0; font-size: .9rem; }
   [id] { scroll-margin-top: 145px; }
   .help, .callout { border-left: 3px solid #b9ae9c; padding: 1px 20px; margin: 1.8rem 0; background: #f1eee7; }
-  .help h2 { margin-top: 1rem; }
+  .help summary { cursor: pointer; margin: 1rem 0; }
+  .help summary h2 { display: inline; margin: 0; font-size: 1.15rem; }
   .help p { padding-bottom: .3rem; }
   blockquote { margin-left: 0; padding-left: 1rem; border-left: 2px solid #aaa; }
   .variant { margin-top: 2rem; }
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chooser = document.querySelector('.chooser');
   const select = document.querySelector('#instructions');
   const status = document.querySelector('#selection-status');
+  const help = document.querySelector('.help');
   const variants = [...document.querySelectorAll('.variant')];
   const ids = variants.map(section => section.id);
   const labels = Object.fromEntries([...select.options].map(option => [option.value, option.textContent]));
@@ -51,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     select.value = selected;
     variants.forEach(section => { section.hidden = selected !== 'all' && section.id !== selected; });
-    status.textContent = message || (selected === 'all' ? 'Showing all labeled guides.' : selected ? 'Showing ' + labels[selected] + '.' : 'Use “Which guide should I use?” above, then choose a guide.');
+    status.textContent = message || (selected === 'all' ? 'Showing all labeled guides.' : selected ? 'Showing ' + labels[selected] + '.' : 'Use “Which guide should I use?” below, then choose a guide.');
+    if (!selected) help.open = true;
     if (hashContext && (selected === hashContext || selected === 'all')) {
       document.getElementById(location.hash.slice(1))?.scrollIntoView();
     }
@@ -75,26 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <body>
   <main>
     <h1 id="install-a-plugin">Install a plugin</h1>
-<p>Add a plugin to extend what Claude can do in Cowork and Code. A
-<a href="https://claude.com/docs/plugins/overview">plugin</a> packages capabilities such as skills,
-commands, and other tools so you can install them together.</p>
-<p>The available plugins and installation behavior depend on how your organization
-provides Claude. Choose the guide that matches the Claude account you are using
-for this task.</p>
-<div class="help">
-<h2 id="which-guide-should-i-use">Which guide should I use?</h2>
-<p>If you are using Claude as an individual, start with the <strong>Claude Desktop (General)</strong>
-guide.</p>
-<p>If you access Claude through an organization that is using Claude for Government, select
-the <strong>Claude Desktop (Government)</strong> guide. If you are not sure, ask your administrator or
-the person who manages Claude:</p>
-<blockquote>
-<p>Which plugin installation guide applies to my Claude account: Claude Desktop
-(General), Claude Desktop (Government), or another setup?</p>
-</blockquote>
-<p>You can also choose <strong>Show all guides</strong> to compare the instructions.
-If neither guide matches your setup, ask that person for the relevant instructions.</p>
-</div>
+<p>Add a plugin in Claude Desktop to extend what Claude can do in Cowork and Code. A
+plugin packages capabilities such as skills, commands, connectors, and hooks so you
+can install them together. The <a href="https://claude.com/docs/plugins/overview">plugins overview</a>
+explains how plugins work across Claude products. To install plugins in the Claude
+Code CLI, see <a href="https://code.claude.com/docs/en/discover-plugins">Discover and install prebuilt plugins</a>.</p>
+<p>The steps depend on how you get access to Claude. Choose the guide that matches
+the Claude account you are using for this task.</p>
 <div class="chooser" hidden>
 <label for="instructions">Instructions for</label>
 <select id="instructions" data-default="cowork">
@@ -109,83 +99,109 @@ If neither guide matches your setup, ask that person for the relevant instructio
 <p id="selection-status" role="status" aria-live="polite"></p>
 </div>
 
+<details class="help">
+<summary>
+<h2 id="which-guide-should-i-use">Which guide should I use?</h2>
+</summary>
+<p>If your organization provides Claude for Government, use the
+<strong>Claude Desktop (Government)</strong> guide.</p>
+<p>Otherwise, if you use Claude on your own or through a Team or Enterprise plan,
+use the <strong>Claude Desktop (General)</strong> guide.</p>
+<p>If you are not sure which applies, ask your administrator or the person who
+manages Claude:</p>
+<blockquote>
+<p>Which plugin installation guide applies to my Claude account: Claude Desktop
+(General), Claude Desktop (Government), or another setup?</p>
+</blockquote>
+<p>You can also choose <strong>Show all guides</strong> to compare the instructions.
+If neither guide matches your setup, ask that person for the relevant instructions.</p>
+</details>
 <div class="variant" id="cowork">
 <h2 id="cowork-heading">Claude Desktop (General)</h2>
-<p>Use these instructions in Claude Desktop.</p>
+<p>Use these instructions in Claude Desktop unless your organization provides Claude
+for Government.</p>
+<p>On Team and Enterprise plans, your installation may already include plugins
+from your administrators. Follow this guide to install more.</p>
 <aside aria-label="Plugin security" class="callout">
-<p><strong>Before you install</strong></p>
-<p>Install plugins only from sources you trust. Review a plugin's contents,
-permissions, connected services, and data access before installing it. See
+<p><strong>Install only plugins you trust</strong></p>
+<p>Review a plugin's components before you install it. Connectors give Claude access
+to external services, and hooks run scripts at defined points in a session.
+You can open a marketplace plugin before installing it. An uploaded plugin is
+installed when you upload it, so review the package's contents first. See
 <a href="https://claude.com/docs/plugins/submit#security">plugin security guidance</a>.</p>
 </aside>
 <h3 id="cowork-marketplace">Install from a marketplace</h3>
-<p>Use this method to install a plugin from a marketplace already available in Claude Desktop.</p>
+<p>Use this method to install a plugin from a marketplace already available in Claude Desktop,
+including Anthropic's official marketplace.</p>
 <ol>
 <li>Open <strong>Customize</strong> in the sidebar, then <strong>Plugins</strong>.</li>
-<li>Under the <strong>Discover</strong> tab, you'll see curated plugin recommendations from Anthropic's
-   official catalog and other partners.</li>
-<li>Select a plugin to open it and inspect its components. Click <strong>Add</strong> to install it.</li>
+<li>On the <strong>Discover</strong> tab, select a plugin to open it and review its components.</li>
+<li>Click <strong>Add</strong> to install it.</li>
 <li>If a bundled connector asks you to sign in, complete the sign-in.</li>
-<li>Open the installed plugin to inspect its components. Enable or disable individual components as needed.</li>
 </ol>
-<p>The plugin you installed will be listed in the <strong>Yours</strong> tab.</p>
-<h3 id="cowork-git">Install from a Git marketplace or URL</h3>
-<p>Use this method when someone has shared a repository of plugins with you. Cowork
-supports GitHub, including GitHub Enterprise, and public GitLab and Bitbucket
-repositories.</p>
+<p>The plugin is listed on the <strong>Yours</strong> tab. To turn individual components on or off,
+open the plugin there.</p>
+<h3 id="cowork-git">Install from a Git repository</h3>
+<p>Use this method when someone has shared a repository of plugins with you. Claude
+Desktop supports GitHub and GitHub Enterprise repositories, and public GitLab and
+Bitbucket repositories. See the <a href="https://claude.com/docs/cowork/guide/plugins#limits">marketplace
+limits</a>.</p>
 <ol>
 <li>Open <strong>Customize</strong> in the sidebar, then <strong>Plugins</strong>.</li>
 <li>Open the <strong>Add</strong> dropdown and select <strong>Add marketplace</strong>.</li>
-<li>In the <strong>Add marketplace</strong> window that appears, select <strong>Add from a repository</strong>.</li>
+<li>In the <strong>Add marketplace</strong> window, select <strong>Add from a repository</strong>.</li>
 <li>Under <strong>URL</strong>, enter the repository URL. For GitHub, you can also enter <code>owner/repo</code>.</li>
 <li>Click <strong>Sync</strong> to add the marketplace and sync its plugins.</li>
-<li>This should take you to a list of the marketplace's plugins. Select a plugin to open it
-   and inspect its components. Click <strong>Add</strong> to install it.</li>
+<li>From the marketplace's list of plugins, select a plugin to open it and review its
+   components.</li>
+<li>Click <strong>Add</strong> to install it.</li>
 <li>If a bundled connector asks you to sign in, complete the sign-in.</li>
-<li>Open the plugin to inspect its components. Enable or disable individual components as needed.</li>
 </ol>
-<p>The repository's plugins appear alongside plugins from other marketplaces. The plugin you
-installed will be listed in the <strong>Yours</strong> tab.</p>
+<p>The repository's plugins appear alongside plugins from other marketplaces. The
+plugin you installed is listed on the <strong>Yours</strong> tab. To turn individual components
+on or off, open the plugin there.</p>
 <h3 id="cowork-file">Install from a file</h3>
-<p>Use this method when someone has shared a plugin package with you. To do this, you will
-need to upload the plugin package. Check the <a href="https://claude.com/docs/cowork/guide/plugins#limits">package
-limits</a> before uploading it.</p>
+<p>Use this method when someone has shared a plugin package with you. Check the
+<a href="https://claude.com/docs/cowork/guide/plugins#limits">package limits</a> before
+uploading it.</p>
 <ol>
 <li>Open <strong>Customize</strong> in the sidebar, then <strong>Plugins</strong>.</li>
 <li>Open the <strong>Add</strong> dropdown and select <strong>Upload a plugin</strong>.</li>
 <li>Select the plugin package to upload, then click <strong>Upload</strong>.</li>
-<li>Open the installed plugin to inspect its components. Enable or disable individual components as needed.</li>
+<li>If a bundled connector asks you to sign in, complete the sign-in.</li>
 </ol>
-<p>The plugin you installed will be listed in the <strong>Yours</strong> tab.</p>
+<p>The plugin is listed on the <strong>Yours</strong> tab. Open it to review its components and
+turn individual components on or off.</p>
 <h3 id="cowork-next">Next steps</h3>
 <ul>
 <li><a href="https://claude.com/docs/cowork/guide/plugins#update-and-remove-plugins">Update or remove a plugin</a>.</li>
 <li><a href="https://claude.com/docs/cowork/3p/extensions">Provision plugins for an organization</a>.</li>
-<li><a href="https://claude.com/docs/plugins/submit">Submit a plugin to the public directory</a>.</li>
+<li><a href="https://claude.com/docs/plugins/submit">Submit a plugin to the official marketplace</a>.</li>
 </ul>
 </div>
 <div class="variant" id="government">
 <h2 id="government-heading">Claude Desktop (Government)</h2>
 <p>Use these instructions in Claude Desktop when your organization provides
-Claude for Government.</p>
+Claude for Government. Plugins your administrators set to install automatically
+are already installed.</p>
 <aside aria-label="Connector and local server restrictions" class="callout">
-<p><strong>Before you install</strong></p>
-<p>Local MCP servers included in a plugin will never run, even for plugins you install
-yourself.</p>
+<p><strong>Plugin connectors and local servers don't run</strong></p>
 <p>Connectors declared by a plugin you add yourself are not added to Claude Desktop.
 Your administrators provide connectors separately under <strong>Customize</strong>, then
 <strong>Connectors</strong>.</p>
+<p><a href="https://claude.com/docs/connectors/overview">Local MCP servers</a> declared by a
+plugin never run.</p>
 </aside>
 <h3 id="government-organization">Install a plugin your organization provides</h3>
-<p>Use this method for plugins your administrators make available. Plugins set to
-install automatically are already installed.</p>
+<p>Use this method for plugins your administrators make available.</p>
 <ol>
 <li>Open <strong>Customize</strong> in the sidebar, then <strong>Plugins</strong>.</li>
-<li>Check <strong>Organization plugins</strong> to see which plugins are already installed.</li>
-<li>If the plugin is not installed, select <strong>Browse plugins</strong>, open the <strong>Organization</strong> tab, and install the plugin your administrators have made available.</li>
-<li>Open the installed plugin to inspect its components. Turn individual components on or off as needed.</li>
+<li>Look under <strong>Organization plugins</strong> to see which plugins are already installed.</li>
+<li>If the plugin you want isn't listed, select <strong>Browse plugins</strong>, open the
+   <strong>Organization</strong> tab, and install it.</li>
 </ol>
-<p>The plugin is listed under <strong>Organization plugins</strong>.</p>
+<p>The plugin is listed under <strong>Organization plugins</strong>. To turn individual components
+on or off, open the plugin there.</p>
 <h3 id="government-file">Install from a file</h3>
 <p>Use this method when someone has shared a plugin package with you. Install only
 plugins you trust: uploaded plugins are not controlled by Anthropic. A plugin you
@@ -193,16 +209,23 @@ upload is added only on the device you are using.</p>
 <ol>
 <li>Open <strong>Customize</strong> in the sidebar, then <strong>Plugins</strong>.</li>
 <li>Select <strong>Add plugin</strong>, then <strong>Upload plugin</strong>.</li>
-<li>Choose the plugin's <code>.zip</code> file. Review the trust notice and follow its instructions to finish the upload.</li>
-<li>Open the installed plugin to inspect its components. Turn individual components on or off as needed.</li>
+<li>Choose the plugin's <code>.zip</code> file. Review the trust notice and follow its
+   instructions to finish the upload.</li>
 </ol>
-<p>The plugin is installed on this device. Its declared connectors are not added;
-use the connectors your administrators provide separately.</p>
+<p>The plugin is installed on this device. Open it to review its components and turn
+individual components on or off. Its declared connectors are not added; use the
+connectors your administrators provide.</p>
+<h3 id="government-other">Other ways to get plugins</h3>
+<p>Claude for Government does not include a public plugin marketplace. You can add
+a marketplace of your own from <strong>Browse plugins</strong>, but your deployment's network
+controls determine whether it can be downloaded. You can also ask Claude to
+create a plugin with you. See
+<a href="https://claude.com/docs/government/desktop/plugins#where-plugins-come-from">where plugins come from</a>.</p>
 <h3 id="government-next">Next steps</h3>
 <ul>
+<li><a href="https://claude.com/docs/government/desktop/plugins#manage-installed-plugins">Update or remove a plugin</a>.</li>
 <li><a href="https://claude.com/docs/government/desktop/plugins#find-and-install-plugins">Create a plugin with Claude</a>.</li>
-<li><a href="https://claude.com/docs/government/desktop/plugins#manage-installed-plugins">Manage installed plugins</a>.</li>
-<li><a href="https://claude.com/docs/government/config/plugins-and-connectors">Distribute plugins to an organization</a>.</li>
+<li><a href="https://claude.com/docs/government/config/plugins-and-connectors">Provision plugins for an organization</a>.</li>
 </ul>
 </div>
   </main>

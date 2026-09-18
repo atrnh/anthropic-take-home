@@ -12,7 +12,8 @@
   #selection-status { margin: .4rem 0 0; font-size: .9rem; }
   [id] { scroll-margin-top: 145px; }
   .help, .callout { border-left: 3px solid #b9ae9c; padding: 1px 20px; margin: 1.8rem 0; background: #f1eee7; }
-  .help h2 { margin-top: 1rem; }
+  .help summary { cursor: pointer; margin: 1rem 0; }
+  .help summary h2 { display: inline; margin: 0; font-size: 1.15rem; }
   .help p { padding-bottom: .3rem; }
   blockquote { margin-left: 0; padding-left: 1rem; border-left: 2px solid #aaa; }
   .variant { margin-top: 2rem; }
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chooser = document.querySelector('.chooser');
   const select = document.querySelector('#instructions');
   const status = document.querySelector('#selection-status');
+  const help = document.querySelector('.help');
   const variants = [...document.querySelectorAll('.variant')];
   const ids = variants.map(section => section.id);
   const labels = Object.fromEntries([...select.options].map(option => [option.value, option.textContent]));
@@ -44,7 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     select.value = selected;
     variants.forEach(section => { section.hidden = selected !== 'all' && section.id !== selected; });
-    status.textContent = message || (selected === 'all' ? 'Showing all labeled guides.' : selected ? 'Showing ' + labels[selected] + '.' : 'Use “Which guide should I use?” above, then choose a guide.');
+    status.textContent = message || (selected === 'all' ? 'Showing all labeled guides.' : selected ? 'Showing ' + labels[selected] + '.' : 'Use “Which guide should I use?” below, then choose a guide.');
+    if (!selected) help.open = true;
     if (hashContext && (selected === hashContext || selected === 'all')) {
       document.getElementById(location.hash.slice(1))?.scrollIntoView();
     }

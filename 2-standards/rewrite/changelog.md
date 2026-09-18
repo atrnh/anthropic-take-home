@@ -47,15 +47,16 @@ their account. The choice stays visible and can be changed.
 | Install a plugin | Marketplace and file methods become separate complete procedures in the Cowork source. |
 | Use a Git repository as a marketplace | Retain repository support, URL/shorthand, and full installation path. Marketplace update action remains at the existing source section and belongs to future management content. |
 | Limits | Link to the existing limits reference before file upload. All limit values and the preview-size caveat remain in the pinned before/source; they are not silently deleted or generalized across variants. |
-| Plugins managed by your organization | Link administrator provisioning as a separate task. Required-plugin behavior remains in the pinned Cowork source and that destination; the current rewrite omits the member-facing summary. |
+| Plugins managed by your organization | Link administrator provisioning as a separate task. The General variant tells Team and Enterprise readers that administrators may have installed plugins already. The required-plugin label and removal rule remain in the pinned source and the linked management section. |
 | Update and remove plugins | Link to the existing section, preserving the local-edit overwrite warning and organization-managed removal rule there. |
 | Related | Retain concept, public submission, and administrator destinations as contextual links. |
 
 The Government snapshot supplies the second variant and is preserved alongside
 the Cowork before page. Its create-with-Claude and management tasks remain linked.
-Government marketplace availability and network restrictions remain in the pinned
-Government source under **Where plugins come from**. The current rewrite omits
-that discussion; the source lacks a complete marketplace installation procedure.
+Government marketplace availability and network restrictions are summarized under
+**Other ways to get plugins**, with a link to **Where plugins come from**. The
+source lacks a complete marketplace installation procedure, so the rewrite does
+not supply one.
 
 ## Open product checks before publication
 
@@ -68,6 +69,8 @@ that discussion; the source lacks a complete marketplace installation procedure.
   after its upload trust notice. The source establishes the task but omits those
   exact controls. The rewrite says to install the organization plugin and follow
   the upload notice; it does not name an unsupported confirmation button.
+- Confirm what happens when a private GitHub repository is synced, and which
+  package formats the general file upload accepts. The rewrite states neither.
 - Confirm the marketplace entry path. The pinned financial-services guide uses
   different UI wording; the general variant now follows my local-product
   knowledge, pending release-specific verification.
@@ -134,3 +137,36 @@ Installation does not establish that bundled connectors are available. Snapshot
 content is unchanged. This audit checks editorial structure and records evidence
 limits; it does not establish that either installation flow matches every current
 Claude Desktop release.
+
+### Deep-quality revisions, 2026-09-18
+
+A reader-simulation review found that the routing help served uncertain readers
+at everyone's expense and that the two variants differed in wording where the
+product may not differ. Changes:
+
+- The routing help is a **Which guide should I use?** disclosure below the
+  chooser. It opens automatically when no guide is selected, including unknown
+  or contradictory links. It now routes Government first, then individual, Team,
+  and Enterprise readers to the general guide, supported by the Cowork source's
+  Team and Enterprise section.
+- The introduction scopes the page to Claude Desktop, points other products to
+  the plugins overview, and links Claude Code CLI readers to
+  [Discover and install prebuilt plugins](https://code.claude.com/docs/en/discover-plugins)
+  (live page checked 2026-09-18).
+- Both variants share one skeleton: applicability, a distinctly titled callout,
+  methods that start from **Customize**, then **Plugins**, and a result naming
+  where the plugin is listed. Component on/off wording, tense, and next-step
+  labels match across variants.
+- The general security callout says what to review (connectors and hooks, from
+  the Cowork component table) and that an upload installs immediately.
+- The general marketplace method no longer inspects twice; the Git method is
+  titled **Install from a Git repository**, drops "should", links marketplace
+  limits, and no longer implies GitHub repositories must be public. The file
+  method gains the conditional connector sign-in step used by the other methods.
+- The Government callout states the local MCP server restriction without the
+  misleading "even" qualifier and links connector documentation.
+
+Verified on 2026-09-18: `uv run verify.py` passes; the preview shows the chooser
+above the collapsed help, and clearing the selection opens the help with a
+status message pointing to it. Server-based link checks were not rerun.
+
