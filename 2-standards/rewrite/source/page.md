@@ -18,8 +18,8 @@ If you access Claude through an organization that is using Claude for Government
 the **Claude Desktop (Government)** guide. If you are not sure, ask your administrator or
 the person who manages Claude:
 
-> Which plugin installation guide applies to my Claude account: the general
-> Cowork guide, Claude for Government, or another setup?
+> Which plugin installation guide applies to my Claude account: Claude Desktop
+> (General), Claude Desktop (Government), or another setup?
 
 You can also choose **Show all guides** to compare the instructions.
 If neither guide matches your setup, ask that person for the relevant instructions.
