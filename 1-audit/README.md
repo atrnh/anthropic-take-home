@@ -7,11 +7,11 @@
 Claude Docs lists connectors, skills, and plugins as products, but they aren't. The main
 site navigation gets it right: they're capabilities that work across many products.
 
-Organize the docs the same way. Lead with **Skills**, **Plugins**, and **Connectors**
-belong together, with tasks under each: use a skill, install a plugin, connect a service.
+Organize the docs the same way. Group **Skills**, **Plugins**, and **Connectors**
+together, with tasks under each: use a skill, install a plugin, connect a service.
 Add **Administer extensions** and **Build and publish** for readers doing that work.
 Product landing pages stay as entrances to the same pages, so most URLs don't need to
-move. The [proposedIA](proposed-ia.md) maps the full slice.
+move. The [proposed IA](proposed-ia.md) maps the full slice.
 
 ### Give each page one clear job
 

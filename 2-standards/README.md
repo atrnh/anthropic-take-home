@@ -4,7 +4,10 @@ Start with the [style-guide excerpt](style-guide.md) for rules on writing task
 pages with context-dependent instructions. The [how-to template](how-to-template.md)
 provides the page structure.
 
-Continue reading to learn how to view the [plugin installation rewrite](rewrite/README.md).
+The [worked rewrite README](rewrite/README.md) collects the
+[before](rewrite/snapshots/cowork--guide--plugins.md),
+[after](rewrite/build/page.md), [interactive preview](rewrite/build/page.html),
+and [what changed and why](rewrite/changelog.md).
 
 > [!NOTE]
 > The plugin installation instructions don't match the version of Claude Desktop I have on

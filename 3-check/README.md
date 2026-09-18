@@ -4,6 +4,20 @@ This local workflow finds passages worth comparing and presents them side by sid
 for an editor. It uses TF-IDF word similarity to retrieve candidates. Similarity
 is not a duplicate verdict, and optional model advice never removes a candidate.
 
+## Saved results and evaluation
+
+Review the checked-in evidence without running the workflow:
+
+- [Original corpus results](pilot/results.json) and [reviewed findings](pilot/README.md#review-policy-and-results), including three actionable pairs and 15 false positives.
+- [Cases the checker got wrong](pilot/README.md#cases-it-got-wrong), including necessary local prerequisites and availability notices.
+- [Evaluation targets](pilot/README.md#acceptance-threshold-and-next-experiment) and [degradation and maintenance plan](pilot/README.md#detect-degradation-and-keep-it-current).
+- [Frozen candidate queue](pilot/review-queue.json) and [coverage analysis](pilot/candidate-coverage.md) for the broader retrieval used by this workflow.
+
+The check retrieves candidates for the [SHARE-01 shared-explanation rule](../2-standards/style-guide.md); an editor determines conformance.
+The 90% actionable-finding target applies to future editorial alerts. The current
+13,786-pair exploration queue does not meet a measured precision target and should
+not be treated as a list of confirmed defects.
+
 ## Start here
 
 You need [uv](https://docs.astral.sh/uv/getting-started/installation/) and a browser.
@@ -16,7 +30,7 @@ uv run 3-check/run.py
 The command uses the checked-in, 54-page Claude Docs snapshot. On the first run,
 uv prepares the script's Python environment and dependencies. No model account or
 API key is needed. Open the printed `review.html` path in your browser, or open
-[the generated report](output.local/review.html) after the command finishes.
+`3-check/output.local/review.html` after the command finishes.
 
 The default run creates `3-check/output.local/` with:
 
@@ -59,8 +73,9 @@ uv run 3-check/run.py --corpus /path/to/snapshot --output-dir /tmp/other-review
 The input is a pinned Markdown snapshot, not an arbitrary directory of files. It
 must contain `manifest.json` with `fetched_at`, `page_count`, and a `pages` list;
 each page needs a relative `path` and its file's `sha256`. The loader verifies the
-hashes before processing. The existing [fetch script](docslint/fetch_corpus.py)
-documents how this repository's snapshot was obtained. This package normally runs
+hashes before processing. The historical [fetch script](docslint/fetch_corpus.py)
+records how this snapshot was obtained. It references a local path and an
+untracked URL list, so it is not a portable refresh command. This package normally runs
 inside this repository, where the default `corpus/` remains at the repository root.
 
 The default selects each passage's top 20 positive-score neighbors, then combines

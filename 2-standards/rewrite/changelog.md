@@ -12,9 +12,9 @@ that the chooser needs a short How to check explanation, and that one complete
 task-page example is sufficient. A variant is separately authored content; the
 selector is its presentation. This example does not build a new docs platform.
 
-The supplied challenge sets an approximately six-hour budget and asks candidates
-to mark what existed at that point if they exceed it. This session cannot establish
-the cumulative six-hour boundary; no retrospective timing claim is made here.
+The [project log](../../log.md#17-september-six-hour-checkpoint) records the
+declared six-hour checkpoint. The original rewrite preceded that checkpoint;
+the portable build and repository cleanup came later.
 
 ## Source provenance
 

@@ -340,6 +340,20 @@ are ready to publish.
   This is my declared checkpoint, using the human-attention basis established
   above. Work after this point falls beyond the six-hour budget.
 
+## 17 September: submission cleanup after the checkpoint
+
+The four deliverables now live at the repository root, with their entry points
+linked from the main README. The obsolete roadmap and a tracked Python cache
+were removed. The saved corpus and frozen checker evidence were preserved.
+The checker runs from its new location, and the rewrite and checker checks pass.
+
+The earlier adoption section records the initial draft. The current response
+incorporates the later campaign-style rewrite and has been condensed to three
+paragraphs, with the template and advisory check tied to a willing team's update.
+SHARE-01 now makes the audit's shared-explanation rule explicit in the style guide.
+These edits, the portable rewrite build, and the packaged checker workflow are
+post-checkpoint work. The root README distinguishes them from the earlier artifacts.
+
 ## Conversation sources
 
 The original source snapshots were exported on 15 September 2026. On 16
