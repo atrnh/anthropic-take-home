@@ -17,6 +17,22 @@ Download or open `build/page.html` in a browser. It includes its styles and
 script, so you can share that file on its own. No build tools or server are needed.
 GitHub's file viewer shows the HTML source; download the file to view the page.
 
+## Try the chooser
+
+The chooser supports `?instructions=cowork`, `?instructions=government`, and
+`?instructions=all`. For example,
+[the Government file-install procedure](http://127.0.0.1:8765/page.html?instructions=government#government-file)
+opens the matching instructions while the
+[preview server](#set-up-and-preview) is running.
+Unknown or contradictory context asks the reader to choose. Without JavaScript,
+both labeled workflows remain readable and the chooser stays hidden. Print also
+shows both guides.
+
+This demonstrates a local chooser, not a site-wide preference system. It has no
+tracking, saved account settings, production redirects, or deployed URLs. The
+task page links to existing documentation for adjacent tasks and references;
+their eventual consolidation is described in the audit example.
+
 ## Set up and preview
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run:
@@ -116,18 +132,3 @@ Cowork is the default on a plain page URL. An explicit `instructions` query or
 a variant fragment takes precedence. With no configured default, the page asks
 the reader to choose. Unknown or contradictory URLs also ask the reader to choose.
 Selecting **Choose a guide** keeps that choice in the URL as `?instructions=`.
-
-## Try the chooser
-
-The chooser supports `?instructions=cowork`, `?instructions=government`, and
-`?instructions=all`. For example,
-[the Government file-install procedure](http://127.0.0.1:8765/page.html?instructions=government#government-file)
-opens the matching instructions while the preview server is running.
-Unknown or contradictory context asks the reader to choose. Without JavaScript,
-both labeled workflows remain readable and the chooser stays hidden. Print also
-shows both guides.
-
-This demonstrates a local chooser, not a site-wide preference system. It has no
-tracking, saved account settings, production redirects, or deployed URLs. The
-task page links to existing documentation for adjacent tasks and references;
-their eventual consolidation is described in the audit example.

@@ -1,42 +1,40 @@
-# Editorial standards and worked rewrite
+# Standards and worked rewrite
 
-Start with the [style-guide excerpt](style-guide.md) for rules on writing task
-pages with context-dependent instructions. The [how-to template](how-to-template.md)
-provides the page structure.
+Claude Docs often write a procedure for one context, such as general Claude Desktop, and
+present it as if it applies everywhere. Readers in other contexts follow the steps, hit a
+dead end, and can't tell why. This excerpt of a style guide sets rules for task pages whose
+steps depend on the reader's context. The worked rewrite applies those rules to
+**Install a plugin**, turning two separate product pages into one task page with a
+complete workflow for each context and a chooser to pick between them.
 
-The [worked rewrite README](rewrite/README.md) collects the
-[before](rewrite/snapshots/cowork--guide--plugins.md),
-[after](rewrite/build/page.md), [interactive preview](rewrite/build/page.html),
-and [what changed and why](rewrite/changelog.md).
+![The rewritten Install a plugin page, showing the "Which guide should I use?" help and the instructions chooser](images/rewrite-preview.png)
 
-> [!NOTE]
-> The plugin installation instructions don't match the version of Claude Desktop I have on
-> my machine. I went ahead and optimistically updated the general installation
-> instructions since I'm familiar with the product. I did not update the Claude for
-> Government instructions, since I can't verify the accuracy of those instructions myself.
+To try the chooser, download [`rewrite/build/page.html`](rewrite/build/page.html) and
+open it in a browser. It's a single self-contained file. GitHub shows its source rather
+than the page.
 
-## View the rewrite in a browser
+## What's here
 
-Open `rewrite/build/page.html` in your browser. The file includes its styles
-and script, so no installation or server is needed.
+- [Style-guide excerpt](style-guide.md): ten rules for task pages with context-dependent
+  instructions. Part 3's [duplicate-prose workflow](../3-check/README.md) finds
+  candidates for SHARE-01, the rule on shared explanations.
+- [How-to template](how-to-template.md): the page skeleton, plus the editorial record
+  each page keeps outside the published text.
+- The rewrite itself:
+  - Before: the [Cowork source](rewrite/snapshots/cowork--guide--plugins.md), which is
+    the page being rewritten, and the
+    [Government source](rewrite/snapshots/government--desktop--plugins.md), which
+    supplies the second workflow.
+  - After: [Markdown](rewrite/build/page.md) and the
+    [interactive preview](rewrite/build/page.html).
+- [What changed and why](rewrite/changelog.md): each change tied to a rule, with every
+  section of the original page accounted for.
 
-## Build it yourself
+## Evidence limits
 
-To rebuild and open a local preview, install
-[uv](https://docs.astral.sh/uv/getting-started/installation/), then run these commands
-from the repository root:
+The General workflow uses UI labels from Claude Desktop as I saw it on 17 September
+2026. They differ from the 14 September snapshot. The Government workflow keeps the
+source's wording because I couldn't verify its current UI. The changelog lists the
+[product checks still open before publication](rewrite/changelog.md#open-product-checks-before-publication).
 
-```sh
-cd 2-standards/rewrite
-uv sync --locked
-uv run build.py serve --open
-```
-
-The last command builds the page, starts a local server, and opens your browser.
-If the browser does not open, visit [the preview](http://127.0.0.1:8765/page.html).
-Stop the server with **Ctrl+C**.
-
-See the [rewrite README](rewrite/README.md) for editing, verification, and alternate
-port instructions. Compare the [original](rewrite/snapshots/government--desktop--plugins.md) [pages](rewrite/snapshots/cowork--guide--plugins.md) with
-the result, and read [the rewrite decisions](rewrite/changelog.md) for what changed
-and why.
+To rebuild, edit, or add a variant, see the [rewrite README](rewrite/README.md).
