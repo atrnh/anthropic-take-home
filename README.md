@@ -5,10 +5,6 @@ The slice is **Skills, Plugins, and Connectors** across Claude Docs, using a
 [54-page snapshot](corpus/manifest.json) fetched on 14 September 2026. Claude Code
 and developer-platform documentation are outside this exercise.
 
-[Open the interactive previews](https://atrnh.github.io/anthropic-take-home/)
-for the [worked rewrite](https://atrnh.github.io/anthropic-take-home/rewrite/)
-and [review report](https://atrnh.github.io/anthropic-take-home/review/).
-
 ## Deliverables
 
 Read the four parts in order, or go straight to the one you want to review. Each
