@@ -1,11 +1,12 @@
-# Publish the committed rewrite preview so reviewers can try it without a download.
-name: Publish rewrite preview
+name: Publish review previews
 
 on:
   push:
     branches: [main]
     paths:
       - 2-standards/rewrite/build/page.html
+      - 3-check/output/**
+      - .github/pages/index.html
       - .github/workflows/pages.yml
   workflow_dispatch:
 
@@ -26,10 +27,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Stage the standalone page
+      - name: Stage the landing page and both previews
         run: |
-          mkdir _site
-          cp 2-standards/rewrite/build/page.html _site/index.html
+          mkdir -p _site/rewrite _site/review
+          cp .github/pages/index.html _site/index.html
+          cp 2-standards/rewrite/build/page.html _site/rewrite/index.html
+          cp -R 3-check/output/. _site/review/
+          mv _site/review/review.html _site/review/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

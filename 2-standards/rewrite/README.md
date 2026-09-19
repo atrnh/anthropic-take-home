@@ -8,12 +8,12 @@ task page presenting different workflows. It is not a published Claude Docs page
 - [Before](snapshots/cowork--guide--plugins.md): exact copy of `corpus/cowork/guide/plugins.md`.
 - [Government source](snapshots/government--desktop--plugins.md): preserved evidence for that variant.
 - [After](build/page.md): assembled Markdown, including both labeled variants.
-- [Interactive preview](https://atrnh.github.io/anthropic-take-home/): a standalone page with a native selector.
+- [Interactive preview](https://atrnh.github.io/anthropic-take-home/rewrite/): a standalone page with a native selector.
 - [What changed and why](changelog.md): source mapping, dispositions, and open checks.
 
 ## View the result
 
-[View it live](https://atrnh.github.io/anthropic-take-home/), or download `build/page.html` and open it in a browser. It
+[View it live](https://atrnh.github.io/anthropic-take-home/rewrite/), or download `build/page.html` and open it in a browser. It
 includes its styles and script, so you can share that file on its own. No build tools
 or server are needed. GitHub's file viewer shows the HTML source, not the page.
 
@@ -21,7 +21,7 @@ or server are needed. GitHub's file viewer shows the HTML source, not the page.
 
 The chooser supports `?instructions=cowork`, `?instructions=government`, and
 `?instructions=all`. For example,
-[the Government file-install procedure](https://atrnh.github.io/anthropic-take-home/?instructions=government#government-file)
+[the Government file-install procedure](https://atrnh.github.io/anthropic-take-home/rewrite/?instructions=government#government-file)
 opens the matching instructions.
 Unknown or contradictory context asks the reader to choose. Without JavaScript,
 both labeled workflows remain readable and the chooser stays hidden. Print also

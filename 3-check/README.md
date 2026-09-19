@@ -6,7 +6,9 @@ requires. It retrieves similar passages from the Claude Docs snapshot and shows
 them side by side, with source lines and surrounding context. The editor decides
 what to merge, shorten, or keep.
 
-The [usage guide](usage.md) covers setup and the report, and the
+[Open the review report](https://atrnh.github.io/anthropic-take-home/review/)
+(opens on GitHub Pages) to explore the saved candidate queue. The [usage guide](usage.md) covers setup
+and regenerating the report, and the
 [worked example](worked-example.md) walks through a human review of the retrieval
 report.
 

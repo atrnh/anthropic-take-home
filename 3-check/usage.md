@@ -3,6 +3,20 @@
 Use this guide to generate and review the candidate queue described in the
 [project overview](README.md).
 
+## View the saved report
+
+[Open the hosted review report](https://atrnh.github.io/anthropic-take-home/review/)
+or open `output/review.html` locally. The checked-in `output/` folder includes
+the queue and source copies used by the hosted report. To refresh it from the
+repository root, run:
+
+```sh
+uv run 3-check/run.py --output-dir 3-check/output
+```
+
+Review and commit the generated changes to publish the updated report. The
+default command below still writes to the ignored `output.local/` folder.
+
 ## Start here
 
 You need [uv](https://docs.astral.sh/uv/getting-started/installation/) and a browser.

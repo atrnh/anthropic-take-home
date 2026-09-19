@@ -99,7 +99,7 @@ def generate(corpus: Path, output: Path, top_k: int = 20, advice_path: Path | No
     summary = {"passages": queue["passage_count"], "candidates": queue["candidate_count"],
                "advisory_notes": len(advice), "queue_sha256": sha256(queue_bytes),
                "report": str(output / "review.html")}
-    (output / "run.json").write_bytes(stable_bytes(summary))
+    (output / "run.json").write_bytes(stable_bytes({**summary, "report": "review.html"}))
     return summary
 
 

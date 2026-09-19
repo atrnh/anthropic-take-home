@@ -34,6 +34,7 @@ def check():
         assert protected.exists()
         result = generate(corpus, output, 1)
         assert result["candidates"] == 1
+        assert json.loads((output / "run.json").read_text())["report"] == "review.html"
         original_queue = (output / "queue.json").read_bytes()
         original_report = (output / "review.html").read_bytes()
         generate(corpus, output, 1)
