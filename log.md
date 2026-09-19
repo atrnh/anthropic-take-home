@@ -13,10 +13,12 @@
 |  | Build and evaluate the duplicate-prose check, compare retrieval methods, and test model-based editorial judgment. [(see details)](#15-september-build-and-evaluate-the-duplicate-prose-check) |
 | Sept. 15–16 | Refine the memo's voice and conceptual argument, clarify each page's purpose, and remove obsolete artifacts. [(see details)](#15-and-16-september-refine-the-memo-and-its-presentation) |
 |  | Draft an adoption approach around a willing team's work, contributor support, and an advisory check. [(see details)](#15-and-16-september-draft-the-adoption-approach) |
-|  | Export the supporting conversations, refresh later discussions, and link the redacted source records. [(see details)](#conversation-sources) |
 | Sept. 17 | Mark the six-hour checkpoint and identify subsequent work as beyond the budget. [(see details)](#17-september-six-hour-checkpoint) |
+|  | Package the deliverables and clean up the submission after the checkpoint. [(see details)](#17-september-submission-cleanup-after-the-checkpoint) |
+| Sept. 18 | Refine the deliverables through review, clarify editorial decisions, and record the reasoning behind accepted and rejected changes. [(see details)](#18-september-refine-the-deliverables-through-review) |
+| Sept. 15–18 | Export the supporting conversations, refresh later discussions, and link the redacted source records. [(see details)](#conversation-sources) |
 
-Reconstructed on 15 September 2026 and updated on 16 September from repository
+Reconstructed on 15 September 2026 and updated through 18 September from repository
 artifacts, committed transcripts,
 additional local Claude and Codex/ChatGPT conversations, and my retrospective in
 the log-writing conversation. Dates use America/Los_Angeles. First-person
@@ -347,17 +349,83 @@ linked from the main README. The obsolete roadmap and a tracked Python cache
 were removed. The saved corpus and frozen checker evidence were preserved.
 The checker runs from its new location, and the rewrite and checker checks pass.
 
-The earlier adoption section records the initial draft. The current response
-incorporates the later campaign-style rewrite and has been condensed to three
+The earlier adoption section records the initial draft. At this point, the response
+incorporated the later campaign-style rewrite and had been condensed to three
 paragraphs, with the template and advisory check tied to a willing team's update.
 SHARE-01 now makes the audit's shared-explanation rule explicit in the style guide.
 These edits, the portable rewrite build, and the packaged checker workflow are
 post-checkpoint work. The root README distinguishes them from the earlier artifacts.
 
+## 18 September: refine the deliverables through review
+
+- Reviewed the deliverables with Claude for both functional correctness and the
+  reader's experience. Asked for more than working links and accurate prose:
+  the documents should have flow, anticipate readers' needs, and reward their
+  attention. Today's work is after the six-hour checkpoint; I have not declared
+  an additional time total.
+- Reworked the [standards introduction](2-standards/README.md) around the
+  problem, the standard, and what the plugin rewrite demonstrates. Added a
+  chooser screenshot, removed duplicate link lists and build instructions, and
+  made the administrator question use the chooser's actual labels.
+- Gave each style rule its own section, moved build mechanics out of the how-to
+  template, and replaced submission-facing scope notes with design decisions.
+  The standards conversation records a rebuilt preview and passing verification.
+- Added a GitHub Pages publishing workflow, but the hosted preview was not
+  deployed. Claude reported that the private repository's plan prevented Pages
+  activation. The workflow remains available for later use.
+- Corrected the audit review's interpretation of "priority": I meant the most
+  important fixes, not the order in which to implement them. Kept aligning the
+  docs with how Claude works as the leading recommendation. Asked why the memo
+  needed another scope preamble, then chose my earlier version over Claude's
+  broader rewrite while retaining targeted accuracy corrections.
+- Narrowed the Government plugin claim to plugins a user uploads themselves,
+  whose declared connectors are not added. Clarified that the skills gap is in
+  the authoring guide, which teaches scripts without mentioning Government's
+  text-only upload requirement. Kept my navigation tree beside the recommendation
+  it illustrates. These changes were committed as `ecef820`.
+- Revised the [adoption playbook](4-adoption/README.md) around the campaign
+  sequence: listen, collect endorsements, develop the message, lower the cost of
+  participation, and govern responsibly. This supersedes the three-paragraph
+  response described in the 17 September entry.
+- Explained why trust is the frame I want for adoption. A noisy check undermines
+  confidence in its output; unclear ownership undermines confidence that engaging
+  will lead anywhere. The response should address what people cannot trust.
+- Drew on a team that resisted my recommendations. I prioritize freedom and
+  informed consent, assume people may know something I do not, and want them to
+  own their decisions. Bringing in stakeholders is about including the people
+  affected in proportion to the decision's consequences, rather than routinely
+  escalating disagreement. Kept this brief instead of adding the full story.
+  The revised playbook was committed as `3b4d123`.
+- Recast the [checker README](3-check/README.md) as the story of its experiments,
+  starting with the independently labeled examples and proceeding through
+  retrieval, judge revisions, and fresh cases. Asked Claude to unpack claims
+  about Drive, the slug warning, local prerequisites, and v4 until the prose
+  explained the actual editorial decisions. These were explanations of earlier
+  experiments, not new judge runs on 18 September.
+- Made the v4 account follow the disagreement and subsequent label review,
+  rather than requiring readers to reconcile an interim score with labels that
+  later changed. Preserved historical scores and distinguished my decisions on
+  five original cases from the agent labels retained for the other eleven.
+- Updated SHARE-01 with the resulting rules: choose an explanation's home by
+  who it applies to, not its current location or length, and merge relevant
+  general facts from a specialized page before shortening that page to a link.
+  Committed this with the narrative rewrite as `9716838`; the follow-up cleanup
+  added Stage 0 to the timeline and corrected portability claims in `d1b7905`.
+- Simplified the root README around the four deliverables and their own evidence
+  links, removing a redundant experiments list. Clarified the post-checkpoint
+  work and committed the introduction as `afd5185`.
+- Obtained a separate content review of the worked plugin page. It raised
+  routing gaps for Team and Enterprise members and inconsistent wording between
+  the variants. That conversation records findings, not an implemented fix;
+  those suggestions still need a decision and source checks where indicated.
+- Exported today's five Claude conversations and linked them below, preserving
+  the accepted edits, rejected rewrites, and my reasoning as well as the work.
+
 ## Conversation sources
 
 The original source snapshots were exported on 15 September 2026. On 16
 September, four exports were refreshed and three conversations were added.
+On 18 September, five Claude project conversations from that day were exported.
 The Claude and Codex exports include user and assistant messages, tool calls,
 and truncated tool results. The ChatGPT architecture discussion contains the
 messages available through the app; its original search results were unavailable.
@@ -383,12 +451,19 @@ the exporters' counts, not counts of human turns.
 - [Add architecture foundation sentence](transcripts/2026-09-16-01a0abf6.md) · Codex/ChatGPT · 6 messages.
 - [Commit all changes](transcripts/2026-09-16-01a0ac9a.md) · Codex/ChatGPT · 10 messages.
 - [Semantic Deduplication Architecture](transcripts/2026-09-15-6aa9d341.md) · ChatGPT · 5 messages.
+- [Standards presentation and preview publishing](transcripts/2026-09-18-aedcab04.md) · Claude · 14 messages.
+- [Adoption, trust, and informed consent](transcripts/2026-09-18-70fa253d.md) · Claude · 15 messages.
+- [Audit priorities and accuracy fixes](transcripts/2026-09-18-302a8a1a.md) · Claude · 22 messages.
+- [Checker narrative, SHARE-01, and repository introduction](transcripts/2026-09-18-b2b3975b.md) · Claude · 44 messages.
+- [Worked rewrite content review](transcripts/2026-09-18-b96dc4b1.md) · Claude · 2 messages.
 
-All 18 supporting conversations referenced here have local exports. The seven
+All 23 supporting conversations referenced here have local exports. The seven
 conversations used for the 16 September update are captured through their
-latest available messages at export time. Other exports retain their original
-15 September snapshots.
+latest available messages at that export time. Today's five Claude exports are
+18 September snapshots; the remaining exports retain their original snapshots.
 
-Artifact status was checked against `main` at `c3af9e6` and the separate
-`codex/duplicate-prose-check` branch at `db76af4`. Dates describe when work
-happened; a later rebase or integration can have a different commit date.
+The original artifact check used `main` at `c3af9e6` and the separate checker
+branch at `db76af4`. The 18 September update was checked against `main` at
+`afd5185`, which includes the packaged checker and subsequent editorial work.
+Earlier unmerged-branch descriptions record their status at that earlier point.
+Dates describe when work happened; later rebases can change commit identifiers.

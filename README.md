@@ -20,7 +20,7 @@ part's README links to its supporting drafts, evidence, and experiments.
 ## Process, AI use, and time
 
 The [project log](log.md) records the decisions, retrospective, and
-[18 exported conversations](log.md#conversation-sources). Exports are redacted
+[23 exported conversations](log.md#conversation-sources). Exports are redacted
 snapshots, not a complete record of every later session. The
 [Claude transcript workflow](.claude/skills/dump-transcript/SKILL.md) and
 [Codex transcript workflow](.agents/skills/dump-transcript/SKILL.md) that produced
