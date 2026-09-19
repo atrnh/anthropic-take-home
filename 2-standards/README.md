@@ -9,7 +9,7 @@ complete workflow for each context and a chooser to pick between them.
 
 ![The rewritten Install a plugin page, showing the "Which guide should I use?" help and the instructions chooser](images/rewrite-preview.png)
 
-The rewrite is a single self-contained HTML page. To view it, download
+The rewrite is a single self-contained HTML page. [View it live](https://atrnh.github.io/anthropic-take-home/), or download
 [`rewrite/build/page.html`](rewrite/build/page.html) and open it in a browser. It is a
 functional prototype, so don't take any visual design choices as prescriptive.
 
@@ -26,7 +26,7 @@ functional prototype, so don't take any visual design choices as prescriptive.
     [Government source](rewrite/snapshots/government--desktop--plugins.md), which
     supplies the second workflow.
   - After: [Markdown](rewrite/build/page.md) and the
-    [interactive preview](rewrite/build/page.html).
+    [interactive preview](https://atrnh.github.io/anthropic-take-home/).
 - [What changed and why](rewrite/changelog.md): each change tied to a rule, with every
   section of the original page accounted for.
 
