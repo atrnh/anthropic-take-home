@@ -12,10 +12,10 @@ part's README links to its supporting drafts, evidence, and experiments.
 
 | Part | Start here | What's included |
 | --- | --- | --- |
-| 1. Audit | [Audit memo](1-audit/README.md) | Prioritized problems, merge and removal decisions with old-URL handling, proposed IA, migration, and measurement. Links to the full disposition ledger and supporting analysis. |
-| 2. Standards | [Standards and worked rewrite](2-standards/README.md) | Style-guide excerpt, how-to template, the original page, the rewritten Markdown and interactive preview, and what changed and why. |
-| 3. System | [Duplicate-prose review workflow](3-check/README.md) | A runnable review queue and report for repeated explanations, the retrieval and model-judgment experiments that shaped it, their limits, and maintenance. The queue is advisory and not yet validated for routine editorial alerts. |
-| 4. Adoption | [Adoption playbook](4-adoption/README.md) | How to earn adoption across teams, lower the cost for contributors, and respond when a team ignores the standard or check. |
+| 1️⃣ Audit | [Audit memo](1-audit/README.md) | Prioritized problems, merge and removal decisions with old-URL handling, proposed IA, migration, and measurement. Links to the full disposition ledger and supporting analysis. |
+| 2️⃣ Standards | [Standards and worked rewrite](2-standards/README.md) | Style-guide excerpt, how-to template, the original page, the rewritten Markdown and interactive preview, and what changed and why. |
+| 3️⃣ System | [Duplicate-prose review workflow](3-check/README.md) | A runnable review queue and report for repeated explanations, the retrieval and model-judgment experiments that shaped it, their limits, and maintenance. The queue is advisory and not yet validated for routine editorial alerts. |
+| 4️⃣ Adoption | [Adoption playbook](4-adoption/README.md) | How to earn adoption across teams, lower the cost for contributors, and respond when a team ignores the standard or check. |
 
 ## Process, AI use, and time
 
