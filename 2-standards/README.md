@@ -2,16 +2,18 @@
 
 Claude Docs often write a procedure for one context, such as general Claude Desktop, and
 present it as if it applies everywhere. Readers in other contexts follow the steps, hit a
-dead end, and can't tell why. This excerpt of a style guide sets rules for task pages whose
-steps depend on the reader's context. The worked rewrite applies those rules to
-**Install a plugin**, turning two separate product pages into one task page with a
-complete workflow for each context and a chooser to pick between them.
+dead end, and can't tell why. This excerpt of a style guide sets rules for task pages
+whose steps depend on the reader's context.
 
-![The rewritten Install a plugin page, showing the "Which guide should I use?" help and the instructions chooser](images/rewrite-preview.png)
+[The worked rewrite](https://atrnh.github.io/anthropic-take-home/) (opens on GitHub Pages)
+applies those rules to **Install a plugin**, turning two separate product pages into one
+task page with a complete workflow for each context and a chooser to pick between them. It
+is a functional prototype, so don't take any visual design choices as prescriptive.
 
-The rewrite is a single self-contained HTML page. [View it live](https://atrnh.github.io/anthropic-take-home/), or download
-[`rewrite/build/page.html`](rewrite/build/page.html) and open it in a browser. It is a
-functional prototype, so don't take any visual design choices as prescriptive.
+<img src="images/rewrite-preview.png" width="400" alt="The rewritten Install a plugin page, showing the &quot;Which guide should I use?&quot; help and the instructions chooser">
+
+To view the rewrite offline, download [`rewrite/build/page.html`](rewrite/build/page.html)
+and open it in a browser.
 
 ## What's here
 
